@@ -7,7 +7,7 @@ export class SaVItemSheet extends ItemSheet {
   /** @override */
 	static get defaultOptions() {
 	  return mergeObject(super.defaultOptions, {
-			classes: ["scum-and-villainy", "sheet", "item"],
+			classes: ["band-of-blades", "sheet", "item"],
 			width: 900,
 			height: 'auto',
       tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
@@ -33,7 +33,7 @@ export class SaVItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = "systems/scum-and-villainy/templates/items";
+    const path = "systems/band-of-blades/templates/items";
     let simple_item_types = ["background", "heritage", "vice", "crew_reputation", "ship_size"];
     let template_name = `${this.item.data.type}`;
 

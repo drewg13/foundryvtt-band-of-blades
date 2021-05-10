@@ -55,17 +55,17 @@ export default {
   renderTileHUD: async (_hud, html, tile) => {
     log("Render")
     let t = canvas.tiles.get(tile._id);
-    if (!t.data.flags['scum-and-villainy'].clocks) {
+    if (!t.data.flags['band-of-blades'].clocks) {
       return;
     }
 
-    const buttonHTML = await renderTemplate('systems/scum-and-villainy/templates/sav-clock-buttons.html');
+    const buttonHTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-buttons.html');
     html.find("div.left").append(buttonHTML).click(async (event) => {
       log("HUD Clicked")
       // re-get in case there has been an update
       t = canvas.tiles.get(tile._id);
 
-      const oldClock = new SaVClock(t.data.flags['scum-and-villainy'].clocks);
+      const oldClock = new SaVClock(t.data.flags['band-of-blades'].clocks);
       let newClock;
 
       const target = event.target.classList.contains("control-icon")

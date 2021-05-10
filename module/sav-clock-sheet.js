@@ -23,7 +23,7 @@ export class SaVClockSheet extends ActorSheet {
       super.defaultOptions,
       {
         classes: ["clocks", "sheet", `clocks-system-${game.data.system.id}`, "actor", "npc"],
-        template: "systems/scum-and-villainy/templates/sav-clock-sheet.html",
+        template: "systems/band-of-blades/templates/sav-clock-sheet.html",
         width: 360,
         height: 550,
         ...supportedSystem.sheetDefaultOptions

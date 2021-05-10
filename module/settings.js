@@ -3,7 +3,7 @@ export const registerSystemSettings = function() {
   /**
    * Track the system version upon which point a migration was last applied
    */
-  game.settings.register("scum-and-villainy", "systemMigrationVersion", {
+  game.settings.register("band-of-blades", "systemMigrationVersion", {
     name: "System Migration Version",
     scope: "world",
     config: false,
@@ -11,7 +11,7 @@ export const registerSystemSettings = function() {
     default: 0
   });
   
-  game.settings.register("scum-and-villainy", "defaultClockTheme", {
+  game.settings.register("band-of-blades", "defaultClockTheme", {
     name: "BITD.ClockSettingDefaultTheme",
     scope: "world",
     config: true,

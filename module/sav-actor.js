@@ -18,28 +18,28 @@ export class SaVActor extends Actor {
 
     switch ( data.type ) {
       case "universe": {
-  	    icon = "systems/scum-and-villainy/styles/assets/icons/galaxy.png";
+  	    icon = "systems/band-of-blades/styles/assets/icons/galaxy.png";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;
   	    break;
   	  }
   	  case "ship": {
-  	    icon = "systems/scum-and-villainy/styles/assets/icons/ufo.png";
+  	    icon = "systems/band-of-blades/styles/assets/icons/ufo.png";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;
   	    break;
   	  }
   	  case "character": {
-  	    icon = "systems/scum-and-villainy/styles/assets/icons/astronaut-helmet.png";
+  	    icon = "systems/band-of-blades/styles/assets/icons/astronaut-helmet.png";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;
   	    break;
   	  }
   	  case "\uD83D\uDD5B clock": {
-  	    icon = "systems/scum-and-villainy/themes/blue/4clock_0.webp";
+  	    icon = "systems/band-of-blades/themes/blue/4clock_0.webp";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;
@@ -92,7 +92,7 @@ export class SaVActor extends Actor {
 	      for (const a in this.data.data.attributes) {
           dice_amount[a] = 0;
 		      // Add +1d to resistance rolls only for Forged item on ship
-		      let actor_flags = this.getFlag("scum-and-villainy", "ship") || [];
+		      let actor_flags = this.getFlag("band-of-blades", "ship") || [];
 		      actor_flags.forEach(i => {
 		        if (i.data.installs.forged_inst === 1) {
 		          dice_amount[a]++;

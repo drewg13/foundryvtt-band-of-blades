@@ -39,11 +39,19 @@
 	--darkblue: #001324;
 }
 @font-face {
-  font-family: 'Exo2';
-  src: url("assets/fonts/Exo2-VariableFont_wght.ttf");
+  font-family: 'Zamolxis';
+  src: url("assets/fonts/Zamolxis-I.ttf");
+}
+@font-face {
+  font-family: 'MajorGuilty';
+  src: url("assets/fonts/MAJOR-__.otf");
+}
+@font-face {
+  font-family: 'Vollkorn';
+  src: url("assets/fonts/Vollkorn-VariableFont_wght.ttf");
 }
 * {
-	font-family: 'Exo2', 'Signika', sans-serif;
+	font-family: 'Vollkorn', 'MajorGuilty', 'Zamolxis', 'Signika', sans-serif;
 }
 * header {
   margin-bottom: 10px;
@@ -1632,4 +1640,4 @@
   font-family: monospace;
 }
 
-/*# sourceMappingURL=sav.css.map */
+/*# sourceMappingURL=bob.css.map */

@@ -55,12 +55,12 @@ Hooks.once("init", async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("scum-and-villainy", SaVActorSheet, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("scum-and-villainy", SaVShipSheet, { types: ["ship"], makeDefault: true });
-  Actors.registerSheet("scum-and-villainy", SaVClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
-  Actors.registerSheet("scum-and-villainy", SaVUniverseSheet, { types: ["universe"], makeDefault: true});
+  Actors.registerSheet("band-of-blades", SaVActorSheet, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", SaVShipSheet, { types: ["ship"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", SaVClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", SaVUniverseSheet, { types: ["universe"], makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("scum-and-villainy", SaVItemSheet, {makeDefault: true});
+  Items.registerSheet("band-of-blades", SaVItemSheet, {makeDefault: true});
   await preloadHandlebarsTemplates();
 
 
@@ -244,7 +244,7 @@ Hooks.once("init", async function() {
 
     // Label for 0
     html += `<label class="clock-zero-label" for="clock-0-${uniq_id}}"><i class="fab fa-creative-commons-zero nullifier"></i></label>`;
-    html += `<div id="sav-clock-${uniq_id}" class="sav-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/scum-and-villainy/themes/blue/${type}clock_${current_value}.webp');">`;
+    html += `<div id="sav-clock-${uniq_id}" class="sav-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/blue/${type}clock_${current_value}.webp');">`;
 
     let zero_checked = (parseInt(current_value) === 0) ? 'checked="checked"' : '';
     html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" name="${parameter_name}" ${zero_checked}>`;
@@ -269,7 +269,7 @@ Hooks.once("init", async function() {
 Hooks.once("ready", async function() {
   //game.savclocks = new SaVClock();
   // Determine whether a system migration is required
-  const currentVersion = game.settings.get("scum-and-villainy", "systemMigrationVersion");
+  const currentVersion = game.settings.get("band-of-blades", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = 1.0;
 
   let needMigration = (currentVersion < NEEDS_MIGRATION_VERSION) || (currentVersion === null);
@@ -295,7 +295,7 @@ Hooks.on("preCreateItem", async (item, data, options, userId) => {
       await SaVHelpers.addDefaultAbilities( data, actor );
     }
 
-    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 46 ) === "systems/scum-and-villainy/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
+    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 46 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
       const icon = data.img;
       const icon_update = {
 	    img: icon,
@@ -327,7 +327,7 @@ Hooks.on("preCreateOwnedItem", async (parent_entity, child_data, options, userId
       await SaVHelpers.addDefaultAbilities( child_data, parent_entity );
     }
 
-    if ( ( ( child_data.type === "class" ) || ( child_data.type === "crew_type" ) ) && ( ( parent_entity.img.slice( 0, 46 ) === "systems/scum-and-villainy/styles/assets/icons/" ) || ( parent_entity.img === "icons/svg/mystery-man.svg" ) ) ) {
+    if ( ( ( child_data.type === "class" ) || ( child_data.type === "crew_type" ) ) && ( ( parent_entity.img.slice( 0, 46 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( parent_entity.img === "icons/svg/mystery-man.svg" ) ) ) {
       const icon = child_data.img;
       const icon_update = {
 	    img: icon,

@@ -41,7 +41,7 @@ export class SaVSheet extends ActorSheet {
 
 	  let items = await SaVHelpers.getAllItemsByType(item_type, game);
     let html = `<div id="items-to-add">`;
-	  let actor_flags = this.actor.getFlag( "scum-and-villainy", "ship" ) || [];
+	  let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
 
 	  let stun_weapons = 0;
 	  actor_flags.forEach(i => {
@@ -234,7 +234,7 @@ async _onFlagAddClick(event) {
     });
 
     if (this.actor.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-	    await this.actor.setFlag("scum-and-villainy", item_type, items_to_add);
+	    await this.actor.setFlag("band-of-blades", item_type, items_to_add);
 	  }
   }
 

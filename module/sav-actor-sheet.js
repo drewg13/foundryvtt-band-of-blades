@@ -11,8 +11,8 @@ export class SaVActorSheet extends SaVSheet {
   static get defaultOptions() {
     //update to foundry.utils.mergeObject
 		return mergeObject(super.defaultOptions, {
-  	  classes: [ "scum-and-villainy", "sheet", "actor" ],
-  	  template: "systems/scum-and-villainy/templates/actor-sheet.html",
+  	  classes: [ "band-of-blades", "sheet", "actor" ],
+  	  template: "systems/band-of-blades/templates/actor-sheet.html",
       width: 800,
       height: 970,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
@@ -34,7 +34,7 @@ export class SaVActorSheet extends SaVSheet {
       data.data = actorData.data;
     }
 
-    let actor_flags = this.actor.getFlag("scum-and-villainy", "ship") || [];
+    let actor_flags = this.actor.getFlag("band-of-blades", "ship") || [];
 
     // Calculate Load
     let loadout = 0;
@@ -160,9 +160,9 @@ export class SaVActorSheet extends SaVSheet {
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
       if( game.majorVersion > 7 ) {
-        await this.document.setFlag("scum-and-villainy", element.data("itemType"), "");
+        await this.document.setFlag("band-of-blades", element.data("itemType"), "");
 	    } else {
-        await this.actor.setFlag("scum-and-villainy", element.data("itemType"), "");
+        await this.actor.setFlag("band-of-blades", element.data("itemType"), "");
       }
       element.slideUp(200, () => this.render(false));
 	  });

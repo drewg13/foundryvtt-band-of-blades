@@ -9,7 +9,7 @@ export class SaVClock {
   }
 
   static get themes () {
-	  const default_t = game.system.savclocks.choices[ game.settings.get( "scum-and-villainy", "defaultClockTheme" ) ];
+	  const default_t = game.system.savclocks.choices[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
 	  let curr_t = game.system.savclocks.choices;
 
 	  if ( curr_t.indexOf( default_t ) !== 0 ) {

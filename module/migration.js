@@ -48,7 +48,7 @@ export const migrateWorld = async function() {
   }
 
   // Set the migration as complete
-  game.settings.set("scum-and-villainy", "systemMigrationVersion", game.system.data.version);
+  game.settings.set("band-of-blades", "systemMigrationVersion", game.system.data.version);
   ui.notifications.info(`SaV System Migration to version ${game.system.data.version} completed!`, {permanent: true});
 };
 

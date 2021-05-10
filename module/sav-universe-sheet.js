@@ -10,8 +10,8 @@ export class SaVUniverseSheet extends SaVSheet {
 	static get defaultOptions() {
     //update to foundry.utils.mergeObject
     return mergeObject(super.defaultOptions, {
-  	  classes: ["scum-and-villainy", "sheet", "actor"],
-  	  template: "systems/scum-and-villainy/templates/universe-sheet.html",
+  	  classes: ["band-of-blades", "sheet", "actor"],
+  	  template: "systems/band-of-blades/templates/universe-sheet.html",
       width: 800,
       height: 'auto',
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content"}]
