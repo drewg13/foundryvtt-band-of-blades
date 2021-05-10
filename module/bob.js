@@ -42,13 +42,8 @@ Hooks.once("init", async function() {
   game.majorVersion = parseInt(versionParts[1]);
   game.minorVersion = parseInt(versionParts[2]);
 
-  if( game.majorVersion > 7 ) {
-    CONFIG.Item.documentClass = SaVItem;
-    CONFIG.Actor.documentClass = SaVActor;
-  } else {
-    CONFIG.Item.entityClass = SaVItem;
-    CONFIG.Actor.entityClass = SaVActor;
-  }
+  CONFIG.Item.documentClass = SaVItem;
+  CONFIG.Actor.documentClass = SaVActor;
 
   // Register System Settings
   registerSystemSettings();
@@ -288,7 +283,7 @@ Hooks.once("ready", async function() {
 Hooks.on("preCreateItem", async (item, data, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
-  if ( ( game.majorVersion > 7 ) && ( actor?.documentName === "Actor" ) ) {
+  if ( ( actor?.documentName === "Actor" ) ) {
     await SaVHelpers.removeDuplicatedItemType(data, actor);
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && !( data.data.def_abilities === "" ) ) {
@@ -319,41 +314,12 @@ Hooks.on("preCreateItem", async (item, data, options, userId) => {
   return true;
 });
 
-Hooks.on("preCreateOwnedItem", async (parent_entity, child_data, options, userId) => {
-  if( game.majorVersion === 7 ) {
-    await SaVHelpers.removeDuplicatedItemType(child_data, parent_entity);
-
-    if ( ( ( child_data.type === "class" ) || ( child_data.type === "crew_type" ) ) && !( child_data.data.def_abilities === "" ) ) {
-      await SaVHelpers.addDefaultAbilities( child_data, parent_entity );
-    }
-
-    if ( ( ( child_data.type === "class" ) || ( child_data.type === "crew_type" ) ) && ( ( parent_entity.img.slice( 0, 46 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( parent_entity.img === "icons/svg/mystery-man.svg" ) ) ) {
-      const icon = child_data.img;
-      const icon_update = {
-	    img: icon,
-	    token: {
-	      img: icon
-	    }
-	  };
-	  await parent_entity.update( icon_update );
-    }
-  }
-  return true;
-});
-
 Hooks.on("createItem", async (item, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   let data = item.data;
-  if ( ( game.majorVersion > 7 ) && (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
+  if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
     await SaVHelpers.callItemLogic(data, actor);
-  }
-  return true;
-});
-
-Hooks.on("createOwnedItem", async (parent_entity, child_data, options, userId) => {
-  if ( ( game.majorVersion === 7 ) && (parent_entity.entity === "Actor") && (parent_entity.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await SaVHelpers.callItemLogic(child_data, parent_entity);
   }
   return true;
 });
@@ -361,15 +327,8 @@ Hooks.on("createOwnedItem", async (parent_entity, child_data, options, userId) =
 Hooks.on("deleteItem", async (item, options, userId) => {
   let actor = item.parent ? item.parent : null;
   let data = item.data;
-  if ( ( game.majorVersion > 7 ) && (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
+  if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
     await SaVHelpers.undoItemLogic(data, actor);
-  }
-  return true;
-});
-
-Hooks.on("deleteOwnedItem", async (parent_entity, child_data, options, userId) => {
-  if ( ( game.majorVersion === 7 ) && (parent_entity.entity === "Actor") && (parent_entity.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await SaVHelpers.undoItemLogic(child_data, parent_entity);
   }
   return true;
 });

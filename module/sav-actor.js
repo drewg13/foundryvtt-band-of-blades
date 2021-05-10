@@ -294,11 +294,7 @@ export class SaVActor extends Actor {
 
     let text = '';
     let attributes, attribute, skill;
-    if( game.majorVersion > 7 ) {
-      attributes = this.data.data.data.attributes;
-    } else {
-      attributes = this.data.data.attributes;
-    }
+    attributes = this.data.data.data.attributes;
 
     for ( attribute in attributes ) {
 

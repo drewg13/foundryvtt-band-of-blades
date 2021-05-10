@@ -9,8 +9,7 @@ export class SaVShipSheet extends SaVSheet {
 
   /** @override */
 	static get defaultOptions() {
-    //update to foundry.utils.mergeObject
-	  return mergeObject(super.defaultOptions, {
+	  return foundry.utils.mergeObject(super.defaultOptions, {
 	    classes: ["band-of-blades", "sheet", "actor"],
 	  	template: "systems/band-of-blades/templates/ship-sheet.html",
 	    width: 700,
@@ -26,11 +25,8 @@ export class SaVShipSheet extends SaVSheet {
 	  data.isGM = game.user.isGM;
 		data.editable = data.options.editable;
     const actorData = data.data;
-
-	  if( game.majorVersion > 7 ) {
-		  data.actor = actorData;
-		  data.data = actorData.data;
-    }
+    data.actor = actorData;
+		data.data = actorData.data;
 
 	  return data;
   }
@@ -45,35 +41,21 @@ export class SaVShipSheet extends SaVSheet {
     // Update Inventory Item
     html.find('.item-body').click(ev => {
       const element = $(ev.currentTarget).parents(".item");
-      let item;
-      if( game.majorVersion > 7 ) {
-			  item = this.document.items.get(element.data("itemId"));
-			} else {
-				item = this.actor.getOwnedItem(element.data("itemId"));
-			}
-      item.sheet.render(true);
+      const item = this.document.items.get(element.data("itemId"));
+			item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-      if( game.majorVersion > 7 ) {
-			  await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
-			} else {
-				await this.actor.deleteOwnedItem(element.data("itemId"));
-			}
-      element.slideUp(200, () => this.render(false));
+      await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
+			element.slideUp(200, () => this.render(false));
     });
 
     // Render XP Triggers sheet
     html.find('.xp-triggers').click(ev => {
-      let itemId = this.actor.items.filter( i => i.type === "crew_type" )[0]?.id;
-	    let item;
-      if( game.majorVersion > 7 ) {
-        item = this.document.items.get(itemId);
-      } else {
-        item = this.actor.getOwnedItem(itemId);
-      }
+      const itemId = this.actor.items.filter( i => i.type === "crew_type" )[0]?.id;
+	    const item = this.document.items.get(itemId);
       item?.sheet.render(true, {"renderContext": "xp"});
     });
 	}
@@ -87,11 +69,7 @@ export class SaVShipSheet extends SaVSheet {
     // Update the Item
     await super._updateObject( event, formData );
     let crew_data;
-		if( game.majorVersion > 7 ) {
-			crew_data = "data.data.crew";
-		} else {
-			crew_data = "data.crew";
-		}
+		crew_data = "data.data.crew";
     if (event.target && event.target.name === crew_data) {
       this.render(true);
     }

@@ -6,7 +6,7 @@ export class SaVItemSheet extends ItemSheet {
 
   /** @override */
 	static get defaultOptions() {
-	  return mergeObject(super.defaultOptions, {
+	  return foundry.utils.mergeObject(super.defaultOptions, {
 			classes: ["band-of-blades", "sheet", "item"],
 			width: 900,
 			height: 'auto',
@@ -22,11 +22,8 @@ export class SaVItemSheet extends ItemSheet {
 	  data.isGM = game.user.isGM;
 		data.editable = data.options.editable;
     const itemData = data.data;
-
-		if( game.majorVersion > 7 ) {
-		  data.item = itemData;
-		  data.data = itemData.data;
-    }
+    data.item = itemData;
+		data.data = itemData.data;
 
 		return data;
   }

@@ -15,11 +15,7 @@ export class SaVHelpers {
     actor.items.forEach(i => {
       let has_double = (item_data.type === i.data.type);
       if (i.data.name === item_data.name || (should_be_distinct && has_double)) {
-        if( game.majorVersion > 7 ) {
-          actor.deleteEmbeddedDocuments("Item", [i.id]);
-        } else {
-          actor.deleteOwnedItem(i.id);
-        }
+        actor.deleteEmbeddedDocuments("Item", [i.id]);
       }
     });
   }
@@ -69,11 +65,7 @@ export class SaVHelpers {
       items_to_add.push( items.find( e => ( e.name === i ) ));
     });
 
-    if( game.majorVersion > 7 ) {
-      actor.createEmbeddedDocuments("Item", items_to_add);
-    } else {
-      actor.createEmbeddedEntity("OwnedItem", items_to_add);
-    }
+    actor.createEmbeddedDocuments("Item", items_to_add);
   }
 
 
@@ -103,13 +95,8 @@ export class SaVHelpers {
             // Add when creating.
             case "addition":
               let prefix = "";
-              if( game.majorVersion > 7 ) {
-                prefix = "data.data.";
-              } else {
-                prefix = "data.";
-              }
-              //update to foundry.utils.mergeObject
-              mergeObject(
+              prefix = "data.data.";
+              foundry.utils.mergeObject(
                 logic_update,
                 {[expression.attribute]: Number(SaVHelpers.getNestedProperty(entity, prefix + expression.attribute)) + expression.value},
                 {insertKeys: true}
@@ -118,8 +105,7 @@ export class SaVHelpers {
 
             // Change name property.
             case "attribute_change":
-              //update to foundry.utils.mergeObject
-              mergeObject(
+              foundry.utils.mergeObject(
                 logic_update,
                 {[expression.attribute]: expression.value},
                 {insertKeys: true}
@@ -128,11 +114,7 @@ export class SaVHelpers {
 
           }
         });
-        if( game.majorVersion > 7 ) {
-          await Actor.updateDocuments( [logic_update] );
-		    } else {
-		      await Actor.update( logic_update );
-        }
+        await Actor.updateDocuments( [logic_update] );
       }
     }
   }
@@ -165,13 +147,8 @@ export class SaVHelpers {
             // Subtract when removing.
             case "addition":
               let prefix = "";
-              if( game.majorVersion > 7 ) {
-                prefix = "data.data.";
-              } else {
-                prefix = "data.";
-              }
-              //update to foundry.utils.mergeObject
-              mergeObject(
+              prefix = "data.data.";
+              foundry.utils.mergeObject(
                 logic_update,
                 {[expression.attribute]: Number(SaVHelpers.getNestedProperty(entity, prefix + expression.attribute)) - expression.value},
                 {insertKeys: true}
@@ -184,8 +161,7 @@ export class SaVHelpers {
               let default_expression_attribute_path = expression.attribute + '_default';
               let default_name = default_expression_attribute_path.split(".").reduce((o, i) => o[i], entity_data);
 
-              //update to foundry.utils.mergeObject
-              mergeObject(
+              foundry.utils.mergeObject(
                 logic_update,
                 {[expression.attribute]: default_name},
 				        {insertKeys: true}
@@ -193,11 +169,7 @@ export class SaVHelpers {
               break;
           }
         });
-		    if( game.majorVersion > 7 ) {
-		      await Actor.updateDocuments( [logic_update] );
-		    } else {
-		      await Actor.update( logic_update );
-        }
+		    await Actor.updateDocuments( [logic_update] );
       }
     }
   }
@@ -227,11 +199,7 @@ export class SaVHelpers {
       name: randomID(),
       type: item_type
     };
-    if( game.majorVersion > 7 ) {
-      return actor.createEmbeddedDocuments("Item", [data]);
-    } else {
-      return actor.createEmbeddedEntity("OwnedItem", data);
-    }
+    return actor.createEmbeddedDocuments("Item", [data]);
   }
 
   /**
@@ -246,11 +214,7 @@ export class SaVHelpers {
     let pack = game.packs.find(e => e.metadata.name === item_type);
     let compendium_content;
 
-    if( game.majorVersion > 7 ) {
-      compendium_content = await pack.getDocuments();
-    } else {
-      compendium_content = await pack.getContent();
-    }
+    compendium_content = await pack.getDocuments();
 
     let compendium_items = compendium_content.map(k => {return k.data}) || [];
     compendium_items = compendium_items.filter(a => game_items.filter(b => a.name === b.name && a.name === b.name).length === 0);
@@ -349,6 +313,4 @@ export class SaVHelpers {
     return text;
 
   }
-
-
 }

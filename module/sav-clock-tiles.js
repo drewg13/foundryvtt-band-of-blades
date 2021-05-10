@@ -9,35 +9,19 @@ const onClick = async () => {
     y: ((canvas.dimensions.sceneRect.height - clock.image.heightTile) / 2) + canvas.dimensions.paddingY
   };
 
-  if( game.majorVersion > 7 ) {
-    const tile = new TileDocument({
-      img: clock.image.img,
-      width: clock.image.widthTile,
-      height: clock.image.heightTile,
-      x: dim.x,
-      y: dim.y,
-      z: 900,
-      rotation: 0,
-      hidden: false,
-      locked: false,
-      flags: clock.flags
-    });
-    await canvas.scene.createEmbeddedDocuments("Tile", [tile.data]);
-  } else {
-    const tile = new Tile({
-      img: clock.image.img,
-      width: clock.image.widthTile,
-      height: clock.image.heightTile,
-      x: dim.x,
-      y: dim.y,
-      z: 900,
-      rotation: 0,
-      hidden: false,
-      locked: false,
-      flags: clock.flags
-    });
-    await canvas.scene.createEmbeddedEntity("Tile", tile.data);
-  }
+  const tile = new TileDocument({
+    img: clock.image.img,
+    width: clock.image.widthTile,
+    height: clock.image.heightTile,
+    x: dim.x,
+    y: dim.y,
+    z: 900,
+    rotation: 0,
+    hidden: false,
+    locked: false,
+    flags: clock.flags
+  });
+  await canvas.scene.createEmbeddedDocuments("Tile", [tile.data]);
 };
 
 export default {
@@ -82,18 +66,11 @@ export default {
       } else {
         return error("ERROR: Unknown TileHUD Button");
       }
-      if( game.majorVersion > 7 ) {
-        await TileDocument.updateDocuments([{
-          _id: t.id,
-          img: newClock.image.img,
-          flags: newClock.flags
-        }], {parent: canvas.scene});
-      } else {
-        await t.update({
-          img: newClock.image.img,
-          flags: newClock.flags
-        });
-      }
+      await TileDocument.updateDocuments([{
+        _id: t.id,
+        img: newClock.image.img,
+        flags: newClock.flags
+      }], {parent: canvas.scene});
     });
   }
 };

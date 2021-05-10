@@ -17,8 +17,8 @@ export const registerSystemSettings = function() {
     config: true,
     type: Number,
     choices: game.system.savclocks.choices,
-	default: 0,
-	icon: "fas fa-palette"
+	  default: 0,
+	  icon: "fas fa-palette"
   });
 
 };

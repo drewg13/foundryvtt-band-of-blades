@@ -16,14 +16,6 @@ export class SaVSheet extends ActorSheet {
 	  html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
 	  html.find(".roll-die-attribute").click(this._onRollAttributeDieClick.bind(this));
 
-
-
-    // This is a workaround until is being fixed in FoundryVTT.
-    if ( this.options.submitOnChange ) {
-      html.on("change", "textarea", this._onChangeInput.bind(this));  // Use delegated listener on the form
-    }
-
-
   }
 
   /* -------------------------------------------- */
@@ -57,7 +49,7 @@ export class SaVSheet extends ActorSheet {
 
     if ( this.actor.data.type === "ship" ) {
 		  main_systems.forEach( m => {
-  	    let actor_items = this.actor.data.items.filter(i => i.data.class === m);
+  	    let actor_items = this.actor.data.items.filter(i => i.data.data.class === m);
 	  	  let total = actor_items.length;
         let lower_m = m.toLowerCase();
 		    if ( total >= this.actor.data.data.systems[lower_m].value ) {
@@ -214,15 +206,9 @@ async _onFlagAddClick(event) {
 		  items_to_add.push(items.find(e => e._id === $(this).val()));
     });
 
-    if( game.majorVersion > 7 ) {
-		  if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-			  await Item.create(items_to_add, {parent: this.document});
-	    }
-		} else {
-			if (this.actor.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-	      await this.actor.createEmbeddedEntity("OwnedItem", items_to_add);
-	    }
-		}
+    if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
+		 await Item.create(items_to_add, {parent: this.document});
+	  }
   }
 
   async addFlagsToSheet(item_type, el) {
@@ -283,17 +269,10 @@ async _onFlagAddClick(event) {
 
 	  const delete_items = rem_items.map( i => i.id );
 
-    if( game.majorVersion > 7 ) {
-		  //delete all items attached to actor, but not in world
-	    await this.document.deleteEmbeddedDocuments("Item", delete_items);
-	    //attach any new items
-	    await this.document.createEmbeddedDocuments("Item", add_items);
-		} else {
-			//delete all items attached to actor, but not in world
-	    await this.actor.deleteEmbeddedEntity("OwnedItem", delete_items);
-	    //attach any new items
-	    await this.actor.createEmbeddedEntity("OwnedItem", add_items);
-		}
+    //delete all items attached to actor, but not in world
+	  await this.document.deleteEmbeddedDocuments("Item", delete_items);
+	  //attach any new items
+	  await this.document.createEmbeddedDocuments("Item", add_items);
   }
 
 /* -------------------------------------------- */
@@ -323,11 +302,7 @@ async _onFlagAddClick(event) {
 		  return;
 	  }
 
-    if( game.majorVersion > 7 ) {
-	    await Item.updateDocuments([update], {parent: this.document});
-	  } else {
-  		await this.actor.updateEmbeddedEntity("OwnedItem", update);
-  	}
+    await Item.updateDocuments([update], {parent: this.document});
   }
 
 /* -------------------------------------------- */

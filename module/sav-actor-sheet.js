@@ -9,8 +9,7 @@ export class SaVActorSheet extends SaVSheet {
 
   /** @override */
   static get defaultOptions() {
-    //update to foundry.utils.mergeObject
-		return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/actor-sheet.html",
       width: 800,
@@ -28,11 +27,8 @@ export class SaVActorSheet extends SaVSheet {
     data.isGM = game.user.isGM;
     data.editable = data.options.editable;
     const actorData = data.data;
-
-    if( game.majorVersion > 7 ) {
-      data.actor = actorData;
-      data.data = actorData.data;
-    }
+    data.actor = actorData;
+    data.data = actorData.data;
 
     let actor_flags = this.actor.getFlag("band-of-blades", "ship") || [];
 
@@ -117,12 +113,7 @@ export class SaVActorSheet extends SaVSheet {
     // Update Inventory Item
     html.find('.item-body').click(ev => {
       const element = $(ev.currentTarget).parents(".item");
-      let item;
-      if( game.majorVersion > 7 ) {
-        item = this.document.items.get(element.data("itemId"));
-      } else {
-        item = this.actor.getOwnedItem(element.data("itemId"));
-      }
+      const item = this.document.items.get(element.data("itemId"));
       item.sheet.render(true);
     });
 
@@ -135,36 +126,23 @@ export class SaVActorSheet extends SaVSheet {
 
 	  // Render XP Triggers sheet
     html.find('.xp-triggers').click(ev => {
-      let itemId = this.actor.items.filter( i => i.type === "class" )[0]?.id;
-      let item;
-      if( game.majorVersion > 7 ) {
-        item = this.document.items.get(itemId);
-      } else {
-        item = this.actor.getOwnedItem(itemId);
-      }
+      const itemId = this.actor.items.filter( i => i.type === "class" )[0]?.id;
+      const item = this.document.items.get(itemId);
       item?.sheet.render(true, {"renderContext": "xp"});
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-      if( game.majorVersion > 7 ) {
-        await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
-      } else {
-        await this.actor.deleteOwnedItem(element.data("itemId"));
-      }
+      await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
       element.slideUp(200, () => this.render(false));
     });
 
 	  // Clear Flag
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-      if( game.majorVersion > 7 ) {
-        await this.document.setFlag("band-of-blades", element.data("itemType"), "");
-	    } else {
-        await this.actor.setFlag("band-of-blades", element.data("itemType"), "");
-      }
-      element.slideUp(200, () => this.render(false));
+      await this.document.setFlag("band-of-blades", element.data("itemType"), "");
+	    element.slideUp(200, () => this.render(false));
 	  });
 	}
 

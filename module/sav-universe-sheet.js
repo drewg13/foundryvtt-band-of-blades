@@ -8,8 +8,7 @@ export class SaVUniverseSheet extends SaVSheet {
 
   /** @override */
 	static get defaultOptions() {
-    //update to foundry.utils.mergeObject
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: ["band-of-blades", "sheet", "actor"],
   	  template: "systems/band-of-blades/templates/universe-sheet.html",
       width: 800,
@@ -24,11 +23,8 @@ export class SaVUniverseSheet extends SaVSheet {
 	  data.isGM = game.user.isGM;
 		data.editable = data.options.editable;
 		const actorData = data.data;
-
-	  if( game.majorVersion > 7 ) {
-		  data.actor = actorData;
-		  data.data = actorData.data;
-    }
+    data.actor = actorData;
+		data.data = actorData.data;
 
 	  return data;
   }
@@ -43,24 +39,15 @@ export class SaVUniverseSheet extends SaVSheet {
     // Update Inventory Item
     html.find('.item-body').click(ev => {
       const element = $(ev.currentTarget).parents(".item");
-      let item;
-			if( game.majorVersion > 7 ) {
-			  item = this.document.items.get(element.data("itemId"));
-			} else {
-				item = this.actor.getOwnedItem(element.data("itemId"));
-			}
-      item.sheet.render(true);
+      const item = this.document.items.get(element.data("itemId"));
+			item.sheet.render(true);
     });
 
     // Delete Inventory Item
     html.find('.item-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-			if( game.majorVersion > 7 ) {
-        await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
-			} else {
-				await this.actor.deleteOwnedItem(element.data("itemId"));
-			}
-      element.slideUp(200, () => this.render(false));
+			await this.document.deleteEmbeddedDocuments("Item", [element.data("itemId")]);
+			element.slideUp(200, () => this.render(false));
     });
 	}
 }
