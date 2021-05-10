@@ -1,0 +1,155 @@
+{
+  "name": "scum-and-villainy",
+  "title": "Scum and Villainy",
+  "description": "Scum and Villainy game system.",
+  "version": "1.5.0",
+  "minimumCoreVersion": "0.7.2",
+  "compatibleCoreVersion": "0.8.2",
+  "templateVersion": 1,
+  "author": "megastruktur, Andrew Garinger [agaringer#6498]",
+  "esmodules": [
+    "module/sav.js"
+  ],
+  "styles": [
+    "styles/sav.css",
+    "styles/hide-ui.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "url": "https://github.com/drewg13/foundryvtt-scum-and-villainy/",
+  "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-scum-and-villainy/master/system.json",
+  "download": "https://github.com/drewg13/foundryvtt-scum-and-villainy/archive/v1.5.0.zip",
+  "packs": [
+    {
+      "name": "class",
+      "label": "Classes",
+      "system": "scum-and-villainy",
+      "path": "./packs/classes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "heritage",
+      "label": "Heritages",
+      "system": "scum-and-villainy",
+      "path": "./packs/heritages.db",
+      "entity": "Item"
+    },
+    {
+      "name": "vice",
+      "label": "Vices",
+      "system": "scum-and-villainy",
+      "path": "./packs/vices.db",
+      "entity": "Item"
+    },
+    {
+      "name": "background",
+      "label": "Backgrounds",
+      "system": "scum-and-villainy",
+      "path": "./packs/backgrounds.db",
+      "entity": "Item"
+    },
+    {
+      "name": "item",
+      "label": "Items",
+      "system": "scum-and-villainy",
+      "path": "./packs/items.db",
+      "entity": "Item"
+    },
+    {
+      "name": "ability",
+      "label": "Abilities",
+      "system": "scum-and-villainy",
+      "path": "./packs/abilities.db",
+      "entity": "Item"
+    },
+    {
+      "name": "crew_reputation",
+      "label": "Crew Reputation",
+      "system": "scum-and-villainy",
+      "path": "./packs/crew_reputation.db",
+      "entity": "Item"
+    },
+    {
+      "name": "crew_type",
+      "label": "Ship Types",
+      "system": "scum-and-villainy",
+      "path": "./packs/crew_types.db",
+      "entity": "Item"
+    },
+    {
+      "name": "crew_upgrade",
+      "label": "Ship Upgrades",
+      "system": "scum-and-villainy",
+      "path": "./packs/crew_upgrades.db",
+      "entity": "Item"
+    },
+    {
+      "name": "crew_ability",
+      "label": "Ship Abilities",
+      "system": "scum-and-villainy",
+      "path": "./packs/crew_abilities.db",
+      "entity": "Item"
+    },
+    {
+      "name": "job_tables",
+      "label": "Job Tables",
+      "system": "scum-and-villainy",
+      "path": "./packs/tables.db",
+      "entity": "RollTable"
+    },
+    {
+      "name": "star_system",
+      "label": "Star Systems",
+      "system": "scum-and-villainy",
+      "path": "./packs/star_systems.db",
+      "entity": "Item"
+    },
+    {
+      "name": "planet",
+      "label": "Planets",
+      "system": "scum-and-villainy",
+      "path": "./packs/planets.db",
+      "entity": "Item"
+    },
+    {
+      "name": "faction",
+      "label": "Factions",
+      "system": "scum-and-villainy",
+      "path": "./packs/factions.db",
+      "entity": "Item"
+    },
+    {
+      "name": "ship_size",
+      "label": "Ship Sizes",
+      "system": "scum-and-villainy",
+      "path": "./packs/size.db",
+      "entity": "Item"
+    },
+    {
+      "name": "wanted",
+      "label": "Wanted Consequences",
+      "system": "scum-and-villainy",
+      "path": "./packs/wanted-consequences.db",
+      "entity": "JournalEntry"
+    },
+    {
+      "name": "wanted_tables",
+      "label": "Wanted Tables",
+      "system": "scum-and-villainy",
+      "path": "./packs/wanted-tables.db",
+      "entity": "RollTable"
+    },
+    {
+	  "name": "friend",
+	  "label": "Friends",
+	  "system": "scum-and-villainy",
+	  "path": "./packs/friends.db",
+	  "entity": "Item"
+    }
+  ]
+}
