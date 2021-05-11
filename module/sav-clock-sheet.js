@@ -145,19 +145,19 @@ export default {
   let t = canvas.tokens.get(token.id);
   let a = game.actors.get(token.actorId);
 
-  if( !a?.data?.flags['scum-and-villainy']?.clocks ) {
+  if( !a?.data?.flags['band-of-blades']?.clocks ) {
     return false;
   }
 
-  const button1HTML = await renderTemplate('systems/scum-and-villainy/templates/sav-clock-button1.html');
-  const button2HTML = await renderTemplate('systems/scum-and-villainy/templates/sav-clock-button2.html');
+  const button1HTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-button1.html');
+  const button2HTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-button2.html');
 
   html.find("div.left").append(button1HTML).click(async (event) => {
     log("HUD Clicked")
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new SaVClock(a.data.flags['scum-and-villainy'].clocks);
+    const oldClock = new SaVClock(a.data.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
@@ -175,7 +175,7 @@ export default {
 
 	  const persistObj = {
         flags: {
-          "scum-and-villainy": {
+          "band-of-blades": {
 		        clocks: {
               progress: newClock.progress,
               size: newClock.size,
@@ -220,7 +220,7 @@ export default {
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new SaVClock(a.data.flags['scum-and-villainy'].clocks);
+    const oldClock = new SaVClock(a.data.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
@@ -238,7 +238,7 @@ export default {
 
 	  const persistObj = {
         flags: {
-          "scum-and-villainy": {
+          "band-of-blades": {
 		        clocks: {
               progress: newClock.progress,
               size: newClock.size,

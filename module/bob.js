@@ -21,21 +21,22 @@ import { SaVClockSheet } from "./sav-clock-sheet.js";
 import ClockTiles from "./sav-clock-tiles.js";
 import ClockSheet from "./sav-clock-sheet.js";
 import { log } from "./sav-clock-util.js";
-import { SaVClock } from "./sav-clock.js";
+
 window.SaVHelpers = SaVHelpers;
-window.SaVClock = SaVClock;
+
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 Hooks.once("init", async function() {
-  console.log(`Initializing Scum and Villainy System`);
+  console.log(`Initializing Band of Blades System`);
 
   game.sav = {
     dice: savRoll
   }
   game.system.savclocks = {
-    choices: ["blue", "red", "yellow", "green"]
+    themes: ["black"],
+    sizes: [ 4, 6, 8 ]
   };
 
   const versionParts = game.data.version.split('.');
@@ -239,7 +240,7 @@ Hooks.once("init", async function() {
 
     // Label for 0
     html += `<label class="clock-zero-label" for="clock-0-${uniq_id}}"><i class="fab fa-creative-commons-zero nullifier"></i></label>`;
-    html += `<div id="sav-clock-${uniq_id}" class="sav-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/blue/${type}clock_${current_value}.webp');">`;
+    html += `<div id="sav-clock-${uniq_id}" class="sav-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/black/${type}clock_${current_value}.svg');">`;
 
     let zero_checked = (parseInt(current_value) === 0) ? 'checked="checked"' : '';
     html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" name="${parameter_name}" ${zero_checked}>`;

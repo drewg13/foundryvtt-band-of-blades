@@ -51,7 +51,7 @@
   src: url("assets/fonts/Vollkorn-VariableFont_wght.ttf");
 }
 * {
-	font-family: 'Vollkorn', 'MajorGuilty', 'Zamolxis', 'Signika', sans-serif;
+	font-family: 'Vollkorn', 'Signika', serif;
 }
 * header {
   margin-bottom: 10px;
@@ -68,16 +68,17 @@
     flex-shrink: 1;
     flex-basis: 0%;
 }
+input[type="checkbox"] {
+  cursor: pointer;
+  transition: filter 0.1s;
+  margin: 0px 5px 5px;
+}
+input[type="checkbox"]:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
 .placeable-hud .control-icon:first-child {
   margin-top: 8px;
-}
-.window-app .window-content {
-	background: linear-gradient(rgba(216, 227, 230, 0.75), rgba(121, 129, 130, 0.75)),
-    url('assets/brushed_metal.jpg') repeat;
-}
-.chat-message {
-	background: linear-gradient(rgba(216, 227, 230, 0.75), rgba(121, 129, 130, 0.75)),
-    url('assets/brushed_metal.jpg') repeat;
 }
 .dice-tooltip .dice-rolls .roll.savd6 {
 	background: url('assets/icons/d6-black.svg');
@@ -135,11 +136,12 @@
 * .black-label {
   background-color: #191813;
   color: #EEEFFF;
-  font-size: 21px;
+  font-size: x-large;
   text-align: center;
   padding: 0px 5px;
   height: 30px !important;
-  text-transform: capitalize;
+  font-family: 'MajorGuilty', 'serif';
+  letter-spacing: 1px;
 }
 * .gray-label {
   background-color: #999;
@@ -258,7 +260,7 @@
   color: red !important;
 }
 * #stress-vice {
-  width: 72px;
+  width: 82px;
 }
 * .big-teeth-section {
   border-top: 3px solid #191813;
@@ -290,6 +292,10 @@
   transition: filter 0.1s;
   cursor: pointer;
 }
+* .big-teeth-section .big-teeth label:hover {
+  filter: brightness(0.8);
+  opacity: 0.9;
+}
 * .big-teeth-section .big-teeth label:last-of-type {
   margin-right: 0px;
 }
@@ -320,12 +326,14 @@
   flex-direction: column;
 }
 * .big-teeth-section .small-teeth-container .small-teeth-wrap label {
+  display: inline-block;
   height: 50px;
   width: 17px;
   background-image: url("assets/teeth/shorttooth-red.png");
   background-repeat: no-repeat;
   background-size: contain;
   margin-right: 5px;
+  margin-left: 5px;
   cursor: not-allowed;
 }
 * .big-teeth-section .small-teeth-container .small-teeth-wrap label:last-of-type {
@@ -636,56 +644,6 @@
   margin-left: 25px;
   position: relative;
 }
-* #harm-armor #character-health-clock .sav-clock {
-  position: relative;
-  padding: 0;
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
-  list-style: none;
-  overflow: hidden;
-  background-size: cover;
-}
-* #harm-armor #character-health-clock .sav-clock label {
-  overflow: hidden;
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  transform-origin: 0% 100%;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #harm-armor #character-health-clock .sav-clock label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* #harm-armor #character-health-clock .sav-clock input {
-  position: absolute;
-  display: none;
-}
-* #harm-armor #character-health-clock .sav-clock input[value="0"] {
-  display: none;
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(3) {
-  transform: rotate(-30deg) skewY(150deg);
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(5) {
-  transform: rotate(30deg) skewY(150deg);
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(7) {
-  transform: rotate(90deg) skewY(150deg);
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(9) {
-  transform: rotate(150deg) skewY(150deg);
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(11) {
-  transform: rotate(210deg) skewY(150deg);
-}
-* #harm-armor #character-health-clock .sav-clock *:nth-child(13) {
-  transform: rotate(270deg) skewY(150deg);
-}
 * #harm-armor #character-armor-uses div {
   display: flex;
   flex-direction: row;
@@ -702,14 +660,18 @@
   font-size: 17px;
   padding-left: 5px;
 }
+* #attributes .attribute-label {
+  font-family: 'MajorGuilty', 'serif';
+  font-size: x-large;
+}
 * #attributes .attribute-label,
 * #attributes .attribute-skill-label {
-  font-weight: bold;
   text-transform: uppercase;
   margin-right: 10px;
+  letter-spacing: 1px;
 }
 * #attributes .attribute-skill-label {
-  letter-spacing: 1px;
+  font-weight: bold;
 }
 * #attributes .attributes-exp {
   position: relative;
@@ -806,26 +768,27 @@
 * #attributes .attributes-container {
   display: flex;
   margin: 3px 0px;
-  display: flex;
   /* Hide the browser's default checkbox */
 }
 * #attributes .attributes-container label {
-  height: 15px;
-  width: 15px;
+  height: 12px;
+  width: 12px;
+  transform: rotate(45deg);
+  border: 2px solid;
   background-color: #191813;
   vertical-align: middle;
-  border: 2px solid #191813;
-  border-radius: 24px;
   transition: filter 0.1s;
   cursor: pointer;
 }
 * #attributes .attributes-container label[for$="-0"] {
   height: 5px;
   width: 5px;
+  clip-path: none;
+  border: 1px solid;
   border-radius: 24px;
   background-image: none !important;
   background-color: red !important;
-  margin-right: 0px;
+  margin-right: 3px;
 }
 * #attributes .attributes-container label:hover {
   filter: brightness(0.7);
@@ -847,7 +810,7 @@
   opacity: 0.7;
 }
 * #attributes .attributes-container * {
-  margin-right: 5px;
+  margin-right: 6px;
 }
 * #systems {
   display: flex;
@@ -1402,8 +1365,8 @@
 * .sav-clock {
   position: relative;
   padding: 0;
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   list-style: none;
   overflow: hidden;
@@ -1432,136 +1395,64 @@
   display: none;
 }
 * .sav-clock.clock-4 *:nth-child(3) {
-  transform: rotate(-45deg) skewY(180deg);
+  transform: rotate(0deg) skewY(180deg);
 }
 * .sav-clock.clock-4 *:nth-child(5) {
-  transform: rotate(45deg) skewY(180deg);
+  transform: rotate(90deg) skewY(180deg);
 }
 * .sav-clock.clock-4 *:nth-child(7) {
-  transform: rotate(135deg) skewY(180deg);
+  transform: rotate(180deg) skewY(180deg);
 }
 * .sav-clock.clock-4 *:nth-child(9) {
-  transform: rotate(225deg) skewY(180deg);
+  transform: rotate(270deg) skewY(180deg);
 }
 * .sav-clock.clock-6 input[value="0"] {
   display: none;
 }
 * .sav-clock.clock-6 *:nth-child(3) {
-  transform: rotate(-30deg) skewY(150deg);
+  transform: rotate(0deg) skewY(150deg);
 }
 * .sav-clock.clock-6 *:nth-child(5) {
-  transform: rotate(30deg) skewY(150deg);
+  transform: rotate(60deg) skewY(150deg);
 }
 * .sav-clock.clock-6 *:nth-child(7) {
-  transform: rotate(90deg) skewY(150deg);
+  transform: rotate(120deg) skewY(150deg);
 }
 * .sav-clock.clock-6 *:nth-child(9) {
-  transform: rotate(150deg) skewY(150deg);
+  transform: rotate(180deg) skewY(150deg);
 }
 * .sav-clock.clock-6 *:nth-child(11) {
-  transform: rotate(210deg) skewY(150deg);
+  transform: rotate(240deg) skewY(150deg);
 }
 * .sav-clock.clock-6 *:nth-child(13) {
-  transform: rotate(270deg) skewY(150deg);
+  transform: rotate(300deg) skewY(150deg);
 }
 * .sav-clock.clock-8 input[value="0"] {
   display: none;
 }
 * .sav-clock.clock-8 *:nth-child(3) {
-  transform: rotate(-22.5deg) skewY(135deg);
+  transform: rotate(0deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(5) {
-  transform: rotate(22.5deg) skewY(135deg);
+  transform: rotate(45deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(7) {
-  transform: rotate(67.5deg) skewY(135deg);
+  transform: rotate(90deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(9) {
-  transform: rotate(112.5deg) skewY(135deg);
+  transform: rotate(135deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(11) {
-  transform: rotate(157.5deg) skewY(135deg);
+  transform: rotate(180deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(13) {
-  transform: rotate(202.5deg) skewY(135deg);
+  transform: rotate(225deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(15) {
-  transform: rotate(247.5deg) skewY(135deg);
+  transform: rotate(270deg) skewY(135deg);
 }
 * .sav-clock.clock-8 *:nth-child(17) {
-  transform: rotate(292.5deg) skewY(135deg);
-}
-* .sav-clock.clock-10 input[value="0"] {
-  display: none;
-}
-* .sav-clock.clock-10 *:nth-child(3) {
-  transform: rotate(-18deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(5) {
-  transform: rotate(18deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(7) {
-  transform: rotate(54deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(9) {
-  transform: rotate(90deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(11) {
-  transform: rotate(126deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(13) {
-  transform: rotate(162deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(15) {
-  transform: rotate(198deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(17) {
-  transform: rotate(234deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(19) {
-  transform: rotate(270deg) skewY(127.5deg);
-}
-* .sav-clock.clock-10 *:nth-child(21) {
-  transform: rotate(306deg) skewY(127.5deg);
-}
-* .sav-clock.clock-12 input[value="0"] {
-  display: none;
-}
-* .sav-clock.clock-12 *:nth-child(3) {
-  transform: rotate(-15deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(5) {
-  transform: rotate(15deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(7) {
-  transform: rotate(45deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(9) {
-  transform: rotate(75deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(11) {
-  transform: rotate(105deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(13) {
-  transform: rotate(135deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(15) {
-  transform: rotate(165deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(17) {
-  transform: rotate(195deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(19) {
-  transform: rotate(225deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(21) {
-  transform: rotate(255deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(23) {
-  transform: rotate(285deg) skewY(123.75deg);
-}
-* .sav-clock.clock-12 *:nth-child(25) {
-  transform: rotate(315deg) skewY(123.75deg);
+  transform: rotate(315deg) skewY(135deg);
 }
 * .sav-clock-name-type > * {
   margin-bottom: 10px;
@@ -1591,7 +1482,6 @@
   background: none;
   border: 1px solid transparent;
   padding: 1px 3px;
-  font-family: "Exo2", "Signika", sans-serif;
   border-radius: 3px;
   color: rgb(25, 24, 19);
   margin: 0;

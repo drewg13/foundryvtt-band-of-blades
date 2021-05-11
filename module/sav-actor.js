@@ -39,7 +39,7 @@ export class SaVActor extends Actor {
   	    break;
   	  }
   	  case "\uD83D\uDD5B clock": {
-  	    icon = "systems/band-of-blades/themes/blue/4clock_0.webp";
+  	    icon = "systems/band-of-blades/themes/black/4clock_0.svg";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;

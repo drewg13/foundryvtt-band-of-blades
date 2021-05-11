@@ -5,12 +5,12 @@ const nextIndexInArray = (arr, el) => {
 
 export class SaVClock {
   static get sizes () {
-      return [4, 6, 8, 10, 12];
+      return game.system.savclocks.sizes;
   }
 
   static get themes () {
-	  const default_t = game.system.savclocks.choices[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
-	  let curr_t = game.system.savclocks.choices;
+	  const default_t = game.system.savclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
+	  let curr_t = game.system.savclocks.themes;
 
 	  if ( curr_t.indexOf( default_t ) !== 0 ) {
 		  curr_t = curr_t.filter( x => x !== default_t );
@@ -44,7 +44,7 @@ export class SaVClock {
 
   get image () {
     return {
-      img: `/systems/scum-and-villainy/themes/${this.theme}/${this.size}clock_${this.progress}.webp`,
+      img: `/systems/band-of-blades/themes/${this.theme}/${this.size}clock_${this.progress}.svg`,
       widthTile: 200,
       heightTile: 200,
 	    widthSheet: 350,
@@ -54,7 +54,7 @@ export class SaVClock {
 
   get flags () {
     return {
-      "scum-and-villainy": {
+      "band-of-blades": {
 	    clocks: {
           theme: this._theme,
           size: this._size,
