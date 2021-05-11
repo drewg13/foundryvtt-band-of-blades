@@ -68,6 +68,10 @@
     flex-shrink: 1;
     flex-basis: 0%;
 }
+* .band-of-blades.sheet .window-header h4.window-title {
+  font-family: 'Zamolxis', 'serif';
+  font-size: xx-large;
+}
 input[type="checkbox"] {
   cursor: pointer;
   transition: filter 0.1s;
@@ -137,11 +141,12 @@ input[type="checkbox"]:hover {
   background-color: #191813;
   color: #EEEFFF;
   font-size: x-large;
-  text-align: center;
   padding: 0px 5px;
   height: 30px !important;
   font-family: 'MajorGuilty', 'serif';
   letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
 }
 * .gray-label {
   background-color: #999;
@@ -260,7 +265,10 @@ input[type="checkbox"]:hover {
   color: red !important;
 }
 * #stress-vice {
-  width: 82px;
+  width: 85px;
+}
+* #corruption {
+  width: 145px;
 }
 * .big-teeth-section {
   border-top: 3px solid #191813;
@@ -288,9 +296,14 @@ input[type="checkbox"]:hover {
   background-image: url("assets/teeth/stresstooth-red.png");
   background-repeat: no-repeat;
   background-size: contain;
-  margin-right: 5px;
   transition: filter 0.1s;
   cursor: pointer;
+}
+* .big-teeth-section .big-teeth label:not(.black-label) {
+  margin-left: 2px;
+}
+* #corruption-blight.big-teeth-section .big-teeth label {
+  background-image: url("assets/teeth/stresstooth-green.png");
 }
 * .big-teeth-section .big-teeth label:hover {
   filter: brightness(0.8);
@@ -308,6 +321,9 @@ input[type="checkbox"]:hover {
 * .big-teeth-section .big-teeth label[for$="-0"]:hover {
   color: red;
 }
+* #corruption-blight.big-teeth-section .big-teeth label[for$="-0"]:hover {
+  color: #40a640;
+}
 * .big-teeth-section .big-teeth label[for$="-0"] i {
   margin-top: 4px;
 }
@@ -320,8 +336,14 @@ input[type="checkbox"]:hover {
 * .big-teeth-section .big-teeth input:checked + label {
   background-image: url("assets/teeth/stresstooth-red.png");
 }
+* #corruption-blight.big-teeth-section .big-teeth input:checked ~ label {
+  background-image: url("assets/teeth/stresstooth-halfgrey.png");
+}
+* #corruption-blight.big-teeth-section .big-teeth input:checked + label {
+  background-image: url("assets/teeth/stresstooth-green.png");
+}
 * .big-teeth-section .small-teeth-container .small-teeth-wrap {
-  display: flex;
+  display: inline-flex;
   /* Hide the browser's default checkbox */
   flex-direction: column;
 }
@@ -332,14 +354,19 @@ input[type="checkbox"]:hover {
   background-image: url("assets/teeth/shorttooth-red.png");
   background-repeat: no-repeat;
   background-size: contain;
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 2px;
   cursor: not-allowed;
+}
+* #corruption-blight.big-teeth-section .small-teeth-container .small-teeth-wrap label {
+  background-image: url("assets/teeth/shorttooth-green.png");
 }
 * .big-teeth-section .small-teeth-container .small-teeth-wrap label:last-of-type {
   margin-right: 0px;
 }
 * .big-teeth-section .small-teeth-container .small-teeth-wrap label[for$="-0"] {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
   width: auto;
   height: auto;
   background-image: none !important;
@@ -357,16 +384,25 @@ input[type="checkbox"]:hover {
 * .big-teeth-section .small-teeth-container .small-teeth-wrap input:checked + label {
   background-image: url("assets/teeth/shorttooth-red.png");
 }
+* #corruption-blight.big-teeth-section .small-teeth-container .small-teeth-wrap input:checked ~ label {
+  background-image: url("assets/teeth/shorttooth-grey.png");
+}
+* #corruption-blight.big-teeth-section .small-teeth-container .small-teeth-wrap input:checked + label {
+  background-image: url("assets/teeth/shorttooth-green.png");
+}
 * .big-teeth-section .small-teeth-container .small-teeth-wrap .small-teeth {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
+* .big-teeth-section #blight-list,
 * .big-teeth-section #trauma-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
 }
+* .big-teeth-section #blight-list label,
 * .big-teeth-section #trauma-list label {
   cursor: pointer;
   font-size: 21px;
@@ -379,16 +415,28 @@ input[type="checkbox"]:hover {
   cursor: pointer;
   /* Hide the browser's default checkbox */
 }
+* .big-teeth-section #blight-list label:hover,
 * .big-teeth-section #trauma-list label:hover {
   filter: brightness(0.8);
   opacity: 0.9;
 }
+* .big-teeth-section #blight-list label:hover {
+  color: #40a640;
+}
+* .big-teeth-section #trauma-list label:hover {
+  color: red;
+}
+* .big-teeth-section #blight-list label input,
 * .big-teeth-section #trauma-list label input {
   display: none;
+}
+* .big-teeth-section #blight-list label input:checked ~ .checkmark {
+  color: #40a640;
 }
 * .big-teeth-section #trauma-list label input:checked ~ .checkmark {
   color: red;
 }
+* .big-teeth-section #blight-list label .checkmark,
 * .big-teeth-section #trauma-list label .checkmark {
   text-decoration: none;
   font-weight: bold;

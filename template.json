@@ -3,10 +3,11 @@
   "types": ["character", "ship", "\uD83D\uDD5B clock", "universe"],
   "character": {
     "alias": "",
-	  "look": "",
-    "description": "",
-    "character_class": "",
-	  "character_class_default": "",
+    "look": "",
+    "notes": "",
+    "item_triggers": {
+      "test": 0
+    },
     "stress": {
       "value": [0],
       "max": 9,
@@ -22,24 +23,28 @@
       "name_default": "BITD.Trauma",
       "list": [0]
     },
+    "corruption": {
+      "value": [0],
+      "max": 6,
+      "max_default": 6,
+      "name_default": "BITD.Corruption",
+      "name": "BITD.Corruption"
+    },
+    "blight": {
+      "max": 4,
+      "max_default": 4,
+      "value": [0],
+      "name": "BITD.Blight",
+      "name_default": "BITD.Blight",
+      "list": [0]
+    },
     "healing-clock": [0],
-    "experience": [0],
-    "coins": [0],
-    "coins_stashed": [0],
-    "special_abilities": [],
     "loadout": {
-  	  "current": 0,
-  	  "planned": [0],
-  	  "heavy": 8,
-  	  "heavy_default": 8,
-  	  "normal": 5,
-  	  "normal_default": 5,
-  	  "light": 3,
-  	  "light_default": 3,
+  	  "heavy": 0,
+  	  "normal": 0,
+  	  "light": 0,
   	  "load_level": ""
   	},
-	  "stun_weapons": 0,
-	  "forged": 0,
     "harm": {
       "light": {
         "one": "",
@@ -59,6 +64,7 @@
     "armor-uses": {
       "armor": 0,
       "heavy": 0,
+      "shield": 0,
       "special": 0
     },
     "attributes": {
@@ -66,23 +72,31 @@
         "exp": [0],
         "label": "BITD.SkillsInsight",
         "skills": {
-          "doctor": {
-            "label": "BITD.SkillsDoctor",
+          "anchor": {
+            "label": "BITD.SkillsAnchor",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
-          "hack": {
-            "label": "BITD.SkillsHack",
+          "research": {
+            "label": "BITD.SkillsResearch",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
           "rig": {
             "label": "BITD.SkillsRig",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
-          "study": {
-            "label": "BITD.SkillsStudy",
+          "scout": {
+            "label": "BITD.SkillsScout",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           }
@@ -92,23 +106,31 @@
         "exp": [0],
         "label": "BITD.SkillsProwess",
         "skills": {
-          "helm": {
-            "label": "BITD.SkillsHelm",
+          "maneuver": {
+            "label": "BITD.SkillsManeuver",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
-          "scramble": {
-            "label": "BITD.SkillsScramble",
+          "shoot": {
+            "label": "BITD.SkillsShoot",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
-          "scrap": {
-            "label": "BITD.SkillsScrap",
+          "skirmish": {
+            "label": "BITD.SkillsSkirmish",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
-          "skulk": {
-            "label": "BITD.SkillsSkulk",
+          "wreck": {
+            "label": "BITD.SkillsWreck",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           }
@@ -118,23 +140,79 @@
         "exp": [0],
         "label": "BITD.SkillsResolve",
         "skills": {
-          "attune": {
-            "label": "BITD.SkillsAttune",
-            "value": [0],
-            "value_default": [0]
-          },
-          "command": {
-            "label": "BITD.SkillsCommand",
-            "value": [0],
-            "value_default": [0]
-          },
           "consort": {
             "label": "BITD.SkillsConsort",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "discipline": {
+            "label": "BITD.SkillsDiscipline",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "marshall": {
+            "label": "BITD.SkillsMarshall",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           },
           "sway": {
             "label": "BITD.SkillsSway",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          }
+        }
+      },
+      "specialist": {
+        "exp": [0],
+        "label": "BITD.SkillsSpecialist",
+        "skills": {
+          "aim": {
+            "label": "BITD.SkillsAim",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "channels": {
+            "label": "BITD.SkillsChannels",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "doctor": {
+            "label": "BITD.SkillsDoctor",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "grit": {
+            "label": "BITD.SkillsGrit",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "scrounge": {
+            "label": "BITD.SkillsScrounge",
+            "max": 3,
+            "max_default": 3,
+            "value": [0],
+            "value_default": [0]
+          },
+          "weave": {
+            "label": "BITD.SkillsWeave",
+            "max": 3,
+            "max_default": 3,
             "value": [0],
             "value_default": [0]
           }
@@ -145,7 +223,7 @@
   "ship": {
     "name": "",
     "look": "",
-    "description": "",
+    "notes": "",
   	"designation": "",
   	"designation_default": "",
     "size": "",

@@ -32,7 +32,7 @@ export class BoBActor extends Actor {
   	    break;
   	  }
   	  case "character": {
-  	    icon = "systems/band-of-blades/styles/assets/icons/astronaut-helmet.png";
+  	    icon = "systems/band-of-blades/styles/assets/icons/rookie.png";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;

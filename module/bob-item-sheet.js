@@ -10,7 +10,6 @@ export class BoBItemSheet extends ItemSheet {
 			classes: ["band-of-blades", "sheet", "item"],
 			width: 900,
 			height: 'auto',
-      tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}]
 		});
   }
 

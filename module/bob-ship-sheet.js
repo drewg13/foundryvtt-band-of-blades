@@ -15,7 +15,7 @@ export class BoBShipSheet extends BoBSheet {
 	    width: 700,
 	    height: 970,
 	    tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
-		  scrollY: [".description"]
+		  scrollY: [".notes"]
 	  });
   }
 
