@@ -1,9 +1,9 @@
-import { SaVClock } from "./sav-clock.js";
-import { log, error } from "./sav-clock-util.js";
+import { BoBClock } from "./bob-clock.js";
+import { log, error } from "./bob-clock-util.js";
 
 const onClick = async () => {
   log('Tool Clicked');
-  const clock = new SaVClock();
+  const clock = new BoBClock();
   const dim = {
     x: ((canvas.dimensions.sceneRect.width - clock.image.widthTile) / 2) + canvas.dimensions.paddingX,
     y: ((canvas.dimensions.sceneRect.height - clock.image.heightTile) / 2) + canvas.dimensions.paddingY
@@ -43,13 +43,13 @@ export default {
       return;
     }
 
-    const buttonHTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-buttons.html');
+    const buttonHTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-buttons.html');
     html.find("div.left").append(buttonHTML).click(async (event) => {
       log("HUD Clicked")
       // re-get in case there has been an update
       t = canvas.tiles.get(tile._id);
 
-      const oldClock = new SaVClock(t.data.flags['band-of-blades'].clocks);
+      const oldClock = new BoBClock(t.data.flags['band-of-blades'].clocks);
       let newClock;
 
       const target = event.target.classList.contains("control-icon")

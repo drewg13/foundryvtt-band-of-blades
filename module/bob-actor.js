@@ -1,11 +1,11 @@
-import { savRoll } from "./sav-roll.js";
-import { SaVHelpers } from "./sav-helpers.js";
+import { bobRoll } from "./bob-roll.js";
+import { BoBHelpers } from "./bob-helpers.js";
 
 /**
  * Extend the basic Actor
  * @extends {Actor}
  */
-export class SaVActor extends Actor {
+export class BoBActor extends Actor {
 
   /** @override */
   static async create(data, options={}) {
@@ -131,7 +131,7 @@ export class SaVActor extends Actor {
 
   rollActionPopup(attribute_name) {
 
-    let attribute_label = SaVHelpers.getAttributeLabel(attribute_name);
+    let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
 
     // Calculate Dice Amount for Attributes
     const base_dice = this.getRollData().dice_amount[attribute_name];
@@ -205,13 +205,13 @@ export class SaVActor extends Actor {
 
   rollSimplePopup(attribute_name, roll_type) {
 
-    let attribute_label = SaVHelpers.getAttributeLabel(attribute_name);
+    let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
 
     // Calculate Dice Amount for Attributes
     const base_dice = this.getRollData().dice_amount[attribute_name];
 
     let total_dice = base_dice;
-    const proper_attribute_name = SaVHelpers.getProperCase(roll_type);
+    const proper_attribute_name = BoBHelpers.getProperCase(roll_type);
 
     new Dialog({
       title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
@@ -281,7 +281,7 @@ export class SaVActor extends Actor {
     }
     dice_amount += additional_dice_amount;
 
-    await savRoll( dice_amount, attribute_name, position, effect );
+    await bobRoll( dice_amount, attribute_name, position, effect );
   }
 
   /* -------------------------------------------- */

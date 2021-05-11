@@ -1,4 +1,4 @@
-export class SaVHelpers {
+export class BoBHelpers {
 
   /**
    * Removes a duplicate item type from charlist.
@@ -50,14 +50,14 @@ export class SaVHelpers {
     let friends = actor.items.filter(a => a.type === "friend").map(e => {return e.data.name}) || [""];
     if ( friends.length > 0 ) { abilities.push( friends ); }
 
-    let items = await SaVHelpers.getAllItemsByType(item_type, game);
+    let items = await BoBHelpers.getAllItemsByType(item_type, game);
 
     if ( actor.data.type === "ship" ) {
-      let all_sizes = await SaVHelpers.getAllItemsByType("ship_size", game);
+      let all_sizes = await BoBHelpers.getAllItemsByType("ship_size", game);
       all_sizes.forEach( s => { items.push( s ); });
     }
 
-    let all_friends = await SaVHelpers.getAllItemsByType("friend", game);
+    let all_friends = await BoBHelpers.getAllItemsByType("friend", game);
     all_friends.forEach( s => { items.push( s ); });
 
     let trim_abil_list = abil_list.filter( x => !abilities.includes( x ) );
@@ -98,7 +98,7 @@ export class SaVHelpers {
               prefix = "data.data.";
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: Number(SaVHelpers.getNestedProperty(entity, prefix + expression.attribute)) + expression.value},
+                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(entity, prefix + expression.attribute)) + expression.value},
                 {insertKeys: true}
               );
               break;
@@ -150,7 +150,7 @@ export class SaVHelpers {
               prefix = "data.data.";
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: Number(SaVHelpers.getNestedProperty(entity, prefix + expression.attribute)) - expression.value},
+                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(entity, prefix + expression.attribute)) - expression.value},
                 {insertKeys: true}
               );
               break;
@@ -268,7 +268,7 @@ export class SaVHelpers {
     } else if (systems.indexOf(attribute_name) !== -1 ) {
       attributes = game.system.model.Actor.ship.systems;
     } else {
-      return SaVHelpers.getProperCase(attribute_name);
+      return BoBHelpers.getProperCase(attribute_name);
     }
 
     for (const a in attributes) {

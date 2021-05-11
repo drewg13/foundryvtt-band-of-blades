@@ -6,23 +6,23 @@
 
 // Import Modules
 import { registerSystemSettings } from "./settings.js";
-import { preloadHandlebarsTemplates } from "./sav-templates.js";
-import { savRoll, simpleRollPopup } from "./sav-roll.js";
-import { SaVHelpers } from "./sav-helpers.js";
-import { SaVActor } from "./sav-actor.js";
-import { SaVItem } from "./sav-item.js";
-import { SaVItemSheet } from "./sav-item-sheet.js";
-import { SaVActorSheet } from "./sav-actor-sheet.js";
-import { SaVShipSheet } from "./sav-ship-sheet.js";
-import { SaVUniverseSheet } from "./sav-universe-sheet.js";
+import { preloadHandlebarsTemplates } from "./bob-templates.js";
+import { bobRoll, simpleRollPopup } from "./bob-roll.js";
+import { BoBHelpers } from "./bob-helpers.js";
+import { BoBActor } from "./bob-actor.js";
+import { BoBItem } from "./bob-item.js";
+import { BoBItemSheet } from "./bob-item-sheet.js";
+import { BoBActorSheet } from "./bob-actor-sheet.js";
+import { BoBShipSheet } from "./bob-ship-sheet.js";
+import { BoBUniverseSheet } from "./bob-universe-sheet.js";
 import * as migrations from "./migration.js";
 /* For Clocks UI */
-import { SaVClockSheet } from "./sav-clock-sheet.js";
-import ClockTiles from "./sav-clock-tiles.js";
-import ClockSheet from "./sav-clock-sheet.js";
-import { log } from "./sav-clock-util.js";
+import { BoBClockSheet } from "./bob-clock-sheet.js";
+import ClockTiles from "./bob-clock-tiles.js";
+import ClockSheet from "./bob-clock-sheet.js";
+import { log } from "./bob-clock-util.js";
 
-window.SaVHelpers = SaVHelpers;
+window.BoBHelpers = BoBHelpers;
 
 
 /* -------------------------------------------- */
@@ -32,9 +32,9 @@ Hooks.once("init", async function() {
   console.log(`Initializing Band of Blades System`);
 
   game.sav = {
-    dice: savRoll
+    dice: bobRoll
   }
-  game.system.savclocks = {
+  game.system.bobclocks = {
     themes: ["black"],
     sizes: [ 4, 6, 8 ]
   };
@@ -43,20 +43,20 @@ Hooks.once("init", async function() {
   game.majorVersion = parseInt(versionParts[1]);
   game.minorVersion = parseInt(versionParts[2]);
 
-  CONFIG.Item.documentClass = SaVItem;
-  CONFIG.Actor.documentClass = SaVActor;
+  CONFIG.Item.documentClass = BoBItem;
+  CONFIG.Actor.documentClass = BoBActor;
 
   // Register System Settings
   registerSystemSettings();
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("band-of-blades", SaVActorSheet, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", SaVShipSheet, { types: ["ship"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", SaVClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", SaVUniverseSheet, { types: ["universe"], makeDefault: true});
+  Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", BoBShipSheet, { types: ["ship"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", BoBUniverseSheet, { types: ["universe"], makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("band-of-blades", SaVItemSheet, {makeDefault: true});
+  Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
   await preloadHandlebarsTemplates();
 
 
@@ -263,7 +263,7 @@ Hooks.once("init", async function() {
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
 Hooks.once("ready", async function() {
-  //game.savclocks = new SaVClock();
+
   // Determine whether a system migration is required
   const currentVersion = game.settings.get("band-of-blades", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = 1.0;
@@ -285,10 +285,10 @@ Hooks.on("preCreateItem", async (item, data, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   if ( ( actor?.documentName === "Actor" ) ) {
-    await SaVHelpers.removeDuplicatedItemType(data, actor);
+    await BoBHelpers.removeDuplicatedItemType(data, actor);
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && !( data.data.def_abilities === "" ) ) {
-      await SaVHelpers.addDefaultAbilities( data, actor );
+      await BoBHelpers.addDefaultAbilities( data, actor );
     }
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 46 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
@@ -320,7 +320,7 @@ Hooks.on("createItem", async (item, options, userId) => {
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await SaVHelpers.callItemLogic(data, actor);
+    await BoBHelpers.callItemLogic(data, actor);
   }
   return true;
 });
@@ -329,7 +329,7 @@ Hooks.on("deleteItem", async (item, options, userId) => {
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await SaVHelpers.undoItemLogic(data, actor);
+    await BoBHelpers.undoItemLogic(data, actor);
   }
   return true;
 });

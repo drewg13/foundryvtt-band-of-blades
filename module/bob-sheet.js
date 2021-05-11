@@ -3,7 +3,7 @@
  * @extends {ActorSheet}
  */
 
-export class SaVSheet extends ActorSheet {
+export class BoBSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
@@ -31,7 +31,7 @@ export class SaVSheet extends ActorSheet {
       input_type = "radio";
     }
 
-	  let items = await SaVHelpers.getAllItemsByType(item_type, game);
+	  let items = await BoBHelpers.getAllItemsByType(item_type, game);
     let html = `<div id="items-to-add">`;
 	  let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
 
@@ -155,7 +155,7 @@ async _onFlagAddClick(event) {
     input_type = "radio";
   }
 
-	let items = await SaVHelpers.getAllActorsByType(item_type, game);
+	let items = await BoBHelpers.getAllActorsByType(item_type, game);
   let html = `<div id="items-to-add">`;
   items.forEach(e => {
 	  if (e.type === item_type) {
@@ -199,7 +199,7 @@ async _onFlagAddClick(event) {
   /* -------------------------------------------- */
 
   async addItemsToSheet(item_type, el) {
-	  let items = await SaVHelpers.getAllItemsByType(item_type, game);
+	  let items = await BoBHelpers.getAllItemsByType(item_type, game);
     let items_to_add = [];
 
     el.find("input:checked").each(function() {
@@ -212,7 +212,7 @@ async _onFlagAddClick(event) {
   }
 
   async addFlagsToSheet(item_type, el) {
-	  let items = await SaVHelpers.getAllActorsByType(item_type, game);
+	  let items = await BoBHelpers.getAllActorsByType(item_type, game);
 	  let items_to_add = [];
 
     el.find("input:checked").each(function() {
@@ -256,7 +256,7 @@ async _onFlagAddClick(event) {
 	  const limiter = $(event.currentTarget).data("limiter");
 
 	  //find all items of type in world
-	  const world_items = await SaVHelpers.getAllItemsByType(item_type, game);
+	  const world_items = await BoBHelpers.getAllItemsByType(item_type, game);
 
 	  //find all items of type attached to actor
 	  let curr_items = this.actor.data.items.filter(i => i.type === item_type);
@@ -298,7 +298,7 @@ async _onFlagAddClick(event) {
 	  } else if (update_type === "is_damaged" ) {
 	  	update = {_id: item_id, data:{is_damaged: update_value}};
 	  } else {
-	  	console.log("update attempted for type undefined in sav-sheet.js onUpdateBoxClick function");
+	  	console.log("update attempted for type undefined in bob-sheet.js onUpdateBoxClick function");
 		  return;
 	  }
 

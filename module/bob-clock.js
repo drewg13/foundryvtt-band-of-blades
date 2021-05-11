@@ -3,14 +3,14 @@ const nextIndexInArray = (arr, el) => {
   return (idx < 0 || idx >= arr.length) ? 0 : idx + 1;
 }
 
-export class SaVClock {
+export class BoBClock {
   static get sizes () {
-      return game.system.savclocks.sizes;
+      return game.system.bobclocks.sizes;
   }
 
   static get themes () {
-	  const default_t = game.system.savclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
-	  let curr_t = game.system.savclocks.themes;
+	  const default_t = game.system.bobclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
+	  let curr_t = game.system.bobclocks.themes;
 
 	  if ( curr_t.indexOf( default_t ) !== 0 ) {
 		  curr_t = curr_t.filter( x => x !== default_t );
@@ -21,13 +21,13 @@ export class SaVClock {
   }
 
   constructor ({ theme, size, progress } = {}) {
-    const isSupportedSize = size && SaVClock.sizes.indexOf(parseInt(size)) >= 0;
-    this._size = isSupportedSize ? parseInt(size) : SaVClock.sizes[0];
+    const isSupportedSize = size && BoBClock.sizes.indexOf(parseInt(size)) >= 0;
+    this._size = isSupportedSize ? parseInt(size) : BoBClock.sizes[0];
 
     const p = (!progress || progress < 0) ? 0 : progress < this._size ? progress : this._size;
     this._progress = p || 0;
 
-    this._theme = theme || SaVClock.themes[0];
+    this._theme = theme || BoBClock.themes[0];
   }
 
   get theme () {
@@ -65,16 +65,16 @@ export class SaVClock {
   }
 
   cycleSize () {
-    return new SaVClock({
+    return new BoBClock({
       theme: this.theme,
-      size: SaVClock.sizes[nextIndexInArray(SaVClock.sizes, this.size)],
+      size: BoBClock.sizes[nextIndexInArray(BoBClock.sizes, this.size)],
       progress: this.progress
     });
   }
 
   cycleTheme () {
-    return new SaVClock({
-      theme: SaVClock.themes[nextIndexInArray(SaVClock.themes, this.theme)],
+    return new BoBClock({
+      theme: BoBClock.themes[nextIndexInArray(BoBClock.themes, this.theme)],
       size: this.size,
       progress: this.progress
     });
@@ -82,7 +82,7 @@ export class SaVClock {
 
   increment () {
     const old = this;
-    return new SaVClock({
+    return new BoBClock({
       theme: old.theme,
       size: old.size,
       progress: old.progress + 1
@@ -91,7 +91,7 @@ export class SaVClock {
 
   decrement () {
     const old = this;
-    return new SaVClock({
+    return new BoBClock({
       theme: old.theme,
       size: old.size,
       progress: old.progress - 1

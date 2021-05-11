@@ -2,7 +2,7 @@
  * Extend the basic ItemSheet
  * @extends {ItemSheet}
  */
-export class SaVItemSheet extends ItemSheet {
+export class BoBItemSheet extends ItemSheet {
 
   /** @override */
 	static get defaultOptions() {

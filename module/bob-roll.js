@@ -5,7 +5,7 @@
  * @param {string} position
  * @param {string} effect
  */
-export async function savRoll(dice_amount, attribute_name = "", position = "risky", effect = "standard") {
+export async function bobRoll( dice_amount, attribute_name = "", position = "risky", effect = "standard") {
 
   let zeromode = false;
 
@@ -30,7 +30,7 @@ export async function savRoll(dice_amount, attribute_name = "", position = "risk
 async function showChatRollMessage(r, zeromode, attribute_name = "", position = "", effect = "") {
 
   let speaker = ChatMessage.getSpeaker();
-  let attribute_label = SaVHelpers.getAttributeLabel(attribute_name);
+  let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
   let rolls = (r.terms)[0].results;
 
   // Retrieve Roll status.
@@ -86,7 +86,7 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
       effect_localize = 'BITD.EffectStandard'
   }
 
-  let result = await renderTemplate("systems/band-of-blades/templates/sav-roll.html", {rolls: rolls, roll_status: roll_status, attribute_label: attribute_label, position: position, position_localize: position_localize, effect: effect, effect_localize: effect_localize, stress_result_display: stress_result_display, vice_result: vice_result, zeromode: zeromode});
+  let result = await renderTemplate("systems/band-of-blades/templates/bob-roll.html", {rolls: rolls, roll_status: roll_status, attribute_label: attribute_label, position: position, position_localize: position_localize, effect: effect, effect_localize: effect_localize, stress_result_display: stress_result_display, vice_result: vice_result, zeromode: zeromode});
 
   let messageData = {
     speaker: speaker,
@@ -273,7 +273,7 @@ export async function simpleRollPopup() {
         label: game.i18n.localize('Roll'),
         callback: async (html) => {
           let diceQty = html.find('[name="qty"]')[0].value;
-          await savRoll(diceQty, "Fortune!", "", "");
+          await bobRoll(diceQty, "Fortune!", "", "");
         },
       },
       no: {

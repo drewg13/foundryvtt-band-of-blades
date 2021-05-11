@@ -1,11 +1,11 @@
 
-import { SaVSheet } from "./sav-sheet.js";
+import { BoBSheet } from "./bob-sheet.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
- * @extends {SaVSheet}
+ * @extends {BoBSheet}
  */
-export class SaVShipSheet extends SaVSheet {
+export class BoBShipSheet extends BoBSheet {
 
   /** @override */
 	static get defaultOptions() {

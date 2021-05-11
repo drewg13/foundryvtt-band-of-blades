@@ -1,6 +1,6 @@
-import { SaVClock } from "./sav-clock.js";
+import { BoBClock } from "./bob-clock.js";
 import { getSystemMapping } from "./systems/index.js";
-import { log, error } from "./sav-clock-util.js";
+import { log, error } from "./bob-clock-util.js";
 
 const DISPLAY_NAME = {
   ALWAYS_FOR_EVERYONE: 50
@@ -15,14 +15,14 @@ const DEFAULT_TOKEN = {
   actorLink: true
 };
 
-export class SaVClockSheet extends ActorSheet {
+export class BoBClockSheet extends ActorSheet {
   static get defaultOptions() {
     const supportedSystem = getSystemMapping(game.data.system.id);
     return foundry.utils.mergeObject(
       super.defaultOptions,
       {
         classes: ["clocks", "sheet", `clocks-system-${game.data.system.id}`, "actor", "npc"],
-        template: "systems/band-of-blades/templates/sav-clock-sheet.html",
+        template: "systems/band-of-blades/templates/bob-clock-sheet.html",
         width: 360,
         height: 550,
         ...supportedSystem.sheetDefaultOptions
@@ -46,7 +46,7 @@ export class SaVClockSheet extends ActorSheet {
   }
 
   getData () {
-    let clock = new SaVClock(this.system.loadClockFromActor({ actor: this.document }));
+    let clock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
     const data = foundry.utils.mergeObject(super.getData(), {
       clock: {
         progress: clock.progress,
@@ -58,8 +58,8 @@ export class SaVClockSheet extends ActorSheet {
           height: clock.image.heightSheet
         },
         settings: {
-          sizes: SaVClock.sizes,
-          themes: SaVClock.themes
+          sizes: BoBClock.sizes,
+          themes: BoBClock.themes
         },
 		    flags: clock.flags
       }
@@ -73,20 +73,20 @@ export class SaVClockSheet extends ActorSheet {
 
     html.find("button[name=minus]").click(async (ev) => {
       ev.preventDefault();
-      let oldClock = new SaVClock(this.system.loadClockFromActor({ actor: this.document }));
+      let oldClock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
       await this.updateClock(oldClock.decrement());
     });
 
     html.find("button[name=plus]").click(async (ev) => {
       ev.preventDefault();
-      let oldClock = new SaVClock(this.system.loadClockFromActor({ actor: this.document }));
+      let oldClock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
       await this.updateClock(oldClock.increment());
     });
 
     html.find("button[name=reset]").click(async (ev) => {
       ev.preventDefault();
-      let oldClock = new SaVClock(this.system.loadClockFromActor({ actor: this.document }));
-      await this.updateClock(new SaVClock({
+      let oldClock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
+      await this.updateClock(new BoBClock({
         theme: oldClock.theme,
         progress: 0,
         size: oldClock.size
@@ -98,8 +98,8 @@ export class SaVClockSheet extends ActorSheet {
     await this.object.update({
       name: form.name
     });
-    let oldClock = new SaVClock(this.system.loadClockFromActor({ actor: this.document }));
-    let newClock = new SaVClock({
+    let oldClock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
+    let newClock = new BoBClock({
       progress: oldClock.progress,
       size: form.size,
       theme: form.theme
@@ -149,15 +149,15 @@ export default {
     return false;
   }
 
-  const button1HTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-button1.html');
-  const button2HTML = await renderTemplate('systems/band-of-blades/templates/sav-clock-button2.html');
+  const button1HTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-button1.html');
+  const button2HTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-button2.html');
 
   html.find("div.left").append(button1HTML).click(async (event) => {
     log("HUD Clicked")
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new SaVClock(a.data.flags['band-of-blades'].clocks);
+    const oldClock = new BoBClock(a.data.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
@@ -220,7 +220,7 @@ export default {
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new SaVClock(a.data.flags['band-of-blades'].clocks);
+    const oldClock = new BoBClock(a.data.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
