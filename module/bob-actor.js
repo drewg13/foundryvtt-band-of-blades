@@ -18,36 +18,35 @@ export class BoBActor extends Actor {
 
     switch ( data.type ) {
       case "universe": {
-  	    icon = "systems/band-of-blades/styles/assets/icons/galaxy.png";
-  	    data.token.actorLink = true;
-        data.token.name = data.name;
-        data.token.displayName = 50;
+        icon = "systems/band-of-blades/styles/assets/icons/galaxy.png";
+        data.token.actorLink = true;
+  	    data.token.name = data.name;
+  	    data.token.displayName = 50;
   	    break;
-  	  }
-  	  case "ship": {
+      }
+      case "ship": {
   	    icon = "systems/band-of-blades/styles/assets/icons/ufo.png";
   	    data.token.actorLink = true;
-        data.token.name = data.name;
-        data.token.displayName = 50;
+  	    data.token.name = data.name;
+  	    data.token.displayName = 50;
   	    break;
-  	  }
-  	  case "character": {
-  	    icon = "systems/band-of-blades/styles/assets/icons/rookie.png";
+      }
+      case "character": {
+  	    icon = "systems/band-of-blades/styles/assets/icons/rookie.svg";
   	    data.token.actorLink = true;
         data.token.name = data.name;
         data.token.displayName = 50;
-  	    break;
-  	  }
-  	  case "\uD83D\uDD5B clock": {
+        break;
+      }
+      case "\uD83D\uDD5B clock": {
   	    icon = "systems/band-of-blades/themes/black/4clock_0.svg";
   	    data.token.actorLink = true;
-        data.token.name = data.name;
-        data.token.displayName = 50;
+  	    data.token.name = data.name;
+  	    data.token.displayName = 50;
   	    break;
   	  }
     }
     data.img = icon;
-
 
     return super.create(data, options);
   }

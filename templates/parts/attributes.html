@@ -33,7 +33,7 @@
 
         {{#multiboxes skill.value}}
 
-        {{#times_from_0 3}}
+        {{#times_from_0 skill.max}}
         <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"
                name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
         <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>

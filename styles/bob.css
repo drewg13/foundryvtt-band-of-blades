@@ -182,7 +182,6 @@ input[type="checkbox"]:hover {
   padding: 3px 5px;
 }
 * .label-stripe {
-  text-transform: uppercase;
   background-color: #191813;
   color: #EEEFFF;
   margin-bottom: 10px;
@@ -190,7 +189,14 @@ input[type="checkbox"]:hover {
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
-  font-weight: bold;
+}
+* .label-stripe span {
+  font-family: 'MajorGuilty', 'serif';
+  font-size: x-large;
+}
+* .label-stripe label {
+  font-family: 'MajorGuilty', 'serif';
+  font-size: x-large;
 }
 * .label-stripe .hoverlink {
   cursor: pointer;
@@ -684,6 +690,10 @@ input[type="checkbox"]:hover {
 * #harm-armor #character-harm table th {
   background-color: #191813;
   color: #EEEFFF;
+  font-family: 'MajorGuilty', 'serif';
+  font-weight: normal;
+  font-size: x-large;
+  min-width: 100px;
 }
 * #harm-armor #character-harm table input[type=text] {
   width: 100%;
@@ -692,10 +702,62 @@ input[type="checkbox"]:hover {
   margin-left: 25px;
   position: relative;
 }
-* #harm-armor #character-armor-uses div {
+* #harm-armor #character-armor-uses div.armor-checkboxes {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+* #harm-armor #character-armor-uses div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+* #harm-armor td.healing-checkboxes {
+  display: flex;
+  justify-content: space-evenly;
+}
+* #harm-armor .healing-checkboxes div {
+  display: flex;
+}
+* #harm-armor .healing-checkboxes input[type=checkbox] {
+  display:none;
+}
+* #harm-armor .healing-checkboxes label {
+  height: 15px;
+  width: 15px;
+  border: 2px solid;
+  background-color: #EEEFFF;
+  vertical-align: middle;
+  transition: filter 0.1s;
+  cursor: pointer;
+  margin: 2px;
+}
+* #harm-armor .healing-checkboxes label:hover {
+  filter: brightness(0.7);
+  opacity: 0.7;
+}
+* #harm-armor .healing-checkboxes input:checked + label {
+  background-color: #191813;
+}
+* #harm-armor #character-armor-uses label {
+  height: 15px;
+  width: 15px;
+  /* border-radius: 50%; */
+  border: 2px solid;
+  background-color: #EEEFFF;
+  vertical-align: middle;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+* #harm-armor #character-armor-uses label:hover {
+  filter: brightness(0.7);
+  opacity: 0.7;
+}
+* #harm-armor #character-armor-uses input {
+  display: none;
+}
+* #harm-armor #character-armor-uses input:checked + label {
+  background-color: #191813;
 }
 * #attributes {
   display: flex;
@@ -831,7 +893,6 @@ input[type="checkbox"]:hover {
 * #attributes .attributes-container label[for$="-0"] {
   height: 5px;
   width: 5px;
-  clip-path: none;
   border: 1px solid;
   border-radius: 24px;
   background-image: none !important;
