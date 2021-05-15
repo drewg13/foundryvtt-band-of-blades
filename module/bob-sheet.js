@@ -71,36 +71,22 @@ export class BoBSheet extends ActorSheet {
 
 	    const nonclass_upgrades = ["Auxiliary", "Gear", "Training", "Upgrades"];
 
-      if (e.type === "crew_upgrade") {
-		    if ( ( ( main_systems.includes( e.data.class ) ) && ( overloaded[ ( e.data.class.charAt(0).toUpperCase() + e.data.class.slice(1) ) ] === 0 ) ) || ( nonclass_upgrades.includes(e.data.class) ) || ( e.data.class === this.actor.data.data.ship_class ) ) {
+      if (e.type === "trait") {
+		    if ( e.data.class === this.actor.data.data.heritage ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
-			    html += `</label>`;
-		    }
-	    } else if (e.type === "crew_ability") {
-		    if (e.data.class === this.actor.data.data.ship_class) {
-			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
-			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "ability") {
-		    if (e.data.class === this.actor.data.data.character_class) {
+		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( e.data.class === "General" ) && ( this.actor.data.data.class !== "Rookie") ) ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "item") {
-		    if ((e.data.class === "Standard") || ((stun_weapons === 1) && (e.data.class === "Non-Lethal")) || (e.data.class === this.actor.data.data.character_class)) {
-			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
-			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
-			    html += `</label>`;
-		    }
-	    } else if (e.type === "friend") {
-		    if ( (e.data.class === this.actor.data.data.character_class) || (e.data.class === this.actor.data.data.ship_class) ) {
+		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( this.actor.data.data.item_triggers.grenadier === 1 ) && ( e.data.class === "Grenadier") ) || ( ( this.actor.data.data.item_triggers.crimson === 1 ) && ( e.data.class === "Crimson") ) || ( ( this.actor.data.data.item_triggers.chemist === 1 ) && ( e.data.class === "Chemist") ) ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
 			    html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
@@ -123,7 +109,7 @@ export class BoBSheet extends ActorSheet {
 
 		if ( perms >= CONST.ENTITY_PERMISSIONS.OWNER ) {
       let dialog = new Dialog({
-        title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.'+item_type)}`,
+        title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.' + BoBHelpers.getProperCase(item_type) )}`,
         content: html,
         buttons: {
           one: {

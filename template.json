@@ -4,28 +4,37 @@
   "character": {
     "alias": "",
     "look": "",
+    "class": "",
+    "class_default": "",
+    "heritage": "",
+    "heritage_default": "",
     "notes": "",
-    "experience": [0],
+    "experience": "0",
     "item_triggers": {
-      "test": 0
+      "grenadier": 0,
+      "grenadier_default": 0,
+      "chemist": 0,
+      "chemist_default": 0,
+      "crimson": 0,
+      "crimson_default": 0
     },
     "stress": {
-      "value": [0],
-      "max": 9,
-      "max_default": 9,
+      "value": "0",
+      "max": 6,
+      "max_default": 6,
       "name_default": "BITD.Stress",
       "name": "BITD.Stress"
     },
     "trauma": {
-      "max": 4,
-      "max_default": 4,
-      "value": [0],
+      "max": 1,
+      "max_default": 1,
+      "value": "0",
       "name": "BITD.Trauma",
       "name_default": "BITD.Trauma",
       "list": [0]
     },
     "corruption": {
-      "value": [0],
+      "value": "0",
       "max": 6,
       "max_default": 6,
       "name_default": "BITD.Corruption",
@@ -34,16 +43,17 @@
     "blight": {
       "max": 4,
       "max_default": 4,
-      "value": [0],
+      "value": "0",
       "name": "BITD.Blight",
       "name_default": "BITD.Blight",
       "list": [0]
     },
-    "healing-clock": [0],
     "loadout": {
   	  "heavy": 0,
   	  "normal": 0,
   	  "light": 0,
+      "utility": 2,
+      "utility_default": 2,
   	  "load_level": ""
   	},
     "harm": {
@@ -76,153 +86,162 @@
     },
     "attributes": {
       "insight": {
-        "exp": [0],
+        "exp": "0",
+        "bonus": 0,
         "label": "BITD.SkillsInsight",
         "skills": {
           "research": {
             "label": "BITD.SkillsResearch",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "rig": {
             "label": "BITD.SkillsRig",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "scout": {
             "label": "BITD.SkillsScout",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           }
         }
       },
       "prowess": {
-        "exp": [0],
+        "exp": "0",
+        "bonus": 0,
         "label": "BITD.SkillsProwess",
         "skills": {
           "maneuver": {
             "label": "BITD.SkillsManeuver",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "shoot": {
             "label": "BITD.SkillsShoot",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "skirmish": {
             "label": "BITD.SkillsSkirmish",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "wreck": {
             "label": "BITD.SkillsWreck",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           }
         }
       },
       "resolve": {
-        "exp": [0],
+        "exp": "0",
+        "bonus": 0,
         "label": "BITD.SkillsResolve",
         "skills": {
           "consort": {
             "label": "BITD.SkillsConsort",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "discipline": {
             "label": "BITD.SkillsDiscipline",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
-          "marshall": {
-            "label": "BITD.SkillsMarshall",
+          "marshal": {
+            "label": "BITD.SkillsMarshal",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           },
           "sway": {
             "label": "BITD.SkillsSway",
             "max": 3,
             "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "value": "0",
+            "value_default": "0"
           }
         }
       },
       "specialist": {
-        "exp": [0],
+        "exp": "0",
         "label": "BITD.SkillsSpecialist",
         "skills": {
           "anchor": {
             "label": "BITD.SkillsAnchor",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0],
-            "uses": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "aim": {
             "label": "BITD.SkillsAim",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "channels": {
             "label": "BITD.SkillsChannels",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "doctor": {
             "label": "BITD.SkillsDoctor",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "grit": {
             "label": "BITD.SkillsGrit",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "scrounge": {
             "label": "BITD.SkillsScrounge",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           },
           "weave": {
             "label": "BITD.SkillsWeave",
-            "max": 3,
-            "max_default": 3,
-            "value": [0],
-            "value_default": [0]
+            "max": 0,
+            "max_default": 0,
+            "value": "0",
+            "value_default": "0",
+            "uses": "0"
           }
         }
       }
@@ -342,128 +361,41 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "ability", "heritage", "background", "vice", "crew_type", "crew_reputation", "crew_upgrade", "crew_ability", "star_system", "planet", "faction", "ship_size", "friend"],
+  "types": ["item", "class", "ability", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
     },
-    "ability": {
-      "description": "",
-      "class": "",
-      "price": 1
-    },
     "logic": {
+      "class": "",
       "logic": ""
     }
   },
   "item": {
     "templates": ["default", "logic"],
-    "class": "",
-    "load": 0
+    "load": 0,
+    "weight": "",
+    "uses": {
+      "value": 0,
+      "max": 0,
+      "max_default": 0
+    }
   },
   "class": {
     "templates": ["default", "logic"],
+    "spec_action": "",
     "def_abilities": "",
 	"experience_clues": ""
   },
   "ability": {
-    "templates": ["ability", "logic"]
-  },
-  "heritage": {
-    "templates": ["default"]
-  },
-  "background": {
-    "templates": ["default"]
-  },
-  "vice": {
-    "templates": ["default"]
-  },
-  "crew_type": {
-    "templates": ["default", "logic"],
-	"def_abilities": "",
-	"experience_clues": ""
-  },
-  "crew_reputation": {
-    "templates": ["default"]
-  },
-  "crew_upgrade": {
-    "templates": ["ability", "logic"],
-	"crew_type": "",
-	"is_damaged": 0
-  },
-  "crew_ability": {
-    "templates": ["ability", "logic"]
-  },
-  "star_system": {
-    "templates": ["default"],
-	"notables": "",
-	"heat": {
-      "value": [0],
-      "max": 8,
-      "max_default": 8,
-      "name_default": "BITD.Heat",
-      "name": "BITD.Heat"
-    },
-	"wanted": {
-      "value": [0],
-      "max": 4,
-      "max_default": 4,
-      "name_default": "BITD.Wanted",
-      "name": "BITD.Wanted"
-    }
-  },
-  "planet": {
-    "templates": ["default", "logic"],
-	"system": "",
-	"scene": "",
-	"notables": "",
-	"rule": "",
-	"wealth": 0,
-	"crime": 0,
-	"tech": 0,
-	"weird": 0
-  },
-  "faction": {
-    "templates": ["default"],
-	"type": "",
-	"tier": 0,
-	"goal": "",
-	"turf": "",
-	"assets": "",
-	"quirks": "",
-	"notables": "",
-	"allies": "",
-	"enemies": "",
-	"situation": "",
-	"goal_clock": {
-      "value": 0,
-      "max": 0,
-      "max_default": 0
-    },
-	"status": {
-      "value": [4],
-      "max": 7,
-      "max_default": 7,
-      "name_default": "BITD.Status",
-      "name": "BITD.Status"
-    },
-	"jobs": {
-      "value": [0],
-      "max": 3,
-      "max_default": 3,
-      "name_default": "BITD.Jobs",
-      "name": "BITD.Jobs"
-    }
-  },
-  "ship_size": {
     "templates": ["default", "logic"]
   },
-  "friend": {
-    "templates": ["default"],
-	"class": "",
-	"status": {
-	  "value": [1]
-	}
+  "heritage": {
+    "templates": ["default", "logic"]
+  },
+  "trait": {
+    "templates": ["default", "logic"],
+    "shortdesc": ""
   }
 }
 }

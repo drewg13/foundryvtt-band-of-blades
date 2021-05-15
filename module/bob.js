@@ -118,28 +118,6 @@ Hooks.once("init", async function() {
   });
 
 
-  Handlebars.registerHelper('crew_vault_coins', (max_coins, options) => {
-
-    let html = options.fn(this);
-    for (let i = 1; i <= max_coins; i++) {
-
-      html += "<input type=\"radio\" id=\"crew-coins-vault-" + i + "\" name=\"data.vault.value\" value=\"" + i + "\"><label for=\"crew-coins-vault-" + i + "\"></label>";
-    }
-
-    return html;
-  });
-
-  Handlebars.registerHelper('crew_experience', (options) => {
-
-    let html = options.fn(this);
-    for (let i = 1; i <= 10; i++) {
-
-      html += '<input type="radio" id="crew-experience-' + i + '" name="data.experience" value="' + i + '" dtype="Radio"><label for="crew-experience-' + i + '"></label>';
-    }
-
-    return html;
-  });
-
   // Enrich the HTML replace /n with <br>
   Handlebars.registerHelper('html', (options) => {
 
@@ -281,17 +259,17 @@ Hooks.once("ready", async function() {
  */
 
 
-Hooks.on("preCreateItem", async (item, data, options, userId) => {
+Hooks.on("preCreateItem", (item, data, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   if ( ( actor?.documentName === "Actor" ) ) {
-    await BoBHelpers.removeDuplicatedItemType(data, actor);
+    BoBHelpers.removeDuplicatedItemType(data, actor);
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && !( data.data.def_abilities === "" ) ) {
-      await BoBHelpers.addDefaultAbilities( data, actor );
+      BoBHelpers.addDefaultAbilities( data, actor );
     }
 
-    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 46 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
+    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
       const icon = data.img;
       const icon_update = {
 	    img: icon,
@@ -299,7 +277,7 @@ Hooks.on("preCreateItem", async (item, data, options, userId) => {
           img: icon
         }
       };
-	    await actor.update( icon_update );
+	    actor.update( icon_update );
       /**  code to replace all attached tokens as well
        const tokens = actor.getActiveTokens();
        let token_update;
@@ -315,27 +293,27 @@ Hooks.on("preCreateItem", async (item, data, options, userId) => {
   return true;
 });
 
-Hooks.on("createItem", async (item, options, userId) => {
+Hooks.on("createItem", (item, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await BoBHelpers.callItemLogic(data, actor);
+    BoBHelpers.callItemLogic(data, actor);
   }
   return true;
 });
 
-Hooks.on("deleteItem", async (item, options, userId) => {
+Hooks.on("deleteItem", (item, options, userId) => {
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    await BoBHelpers.undoItemLogic(data, actor);
+    BoBHelpers.undoItemLogic(data, actor);
   }
   return true;
 });
 
 // getSceneControlButtons
-Hooks.on("renderSceneControls", async (app, html) => {
+Hooks.on("renderSceneControls", (app, html) => {
   let dice_roller = $('<li class="scene-control" title="Dice Roll"><i class="fas fa-dice"></i></li>');
   dice_roller.on( "click", function() {
     simpleRollPopup();
@@ -352,13 +330,13 @@ Hooks.on("getSceneControlButtons", async (controls) => {
   await ClockTiles.getSceneControlButtons(controls);
 });
 
-Hooks.on("renderTileHUD", async (hud, html, tile) => {
-  await ClockTiles.renderTileHUD(hud, html, tile);
+Hooks.on("renderTileHUD", (hud, html, tile) => {
+  ClockTiles.renderTileHUD(hud, html, tile);
 });
 
-Hooks.on("renderTokenHUD", async (hud, html, token) => {
+Hooks.on("renderTokenHUD", (hud, html, token) => {
   let rootElement = document.getElementsByClassName('vtt game')[0];
-  if( await ClockSheet.renderTokenHUD(hud, html, token) ) {
+  if( ClockSheet.renderTokenHUD(hud, html, token) ) {
     rootElement.classList.add('hide-ui');
   } else {
     rootElement.classList.remove('hide-ui');

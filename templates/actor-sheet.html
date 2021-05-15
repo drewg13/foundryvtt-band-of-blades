@@ -44,8 +44,10 @@
 
         <div class="item-block flex-horizontal">
           <div class="item-class-label"><a class="item-add-popup" data-distinct="false" data-item-type="traits">{{localize "BITD.Traits"}}</a></div>
+          <div class="flex-vertical">
           {{#each actor.items as |item id|}}
-            {{#if (eq item.type "traits")}}
+            {{#if (eq item.type "trait")}}
+              <div class="flex-vertical">
               <div class="item flex-horizontal" data-item-id="{{item._id}}">
                 <div class="item-body flex-horizontal">
                   <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
@@ -53,8 +55,11 @@
                 </div>
                 <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
               </div>
+              <div class="short-description">{{item.data.shortdesc}}</div>
+              </div>
             {{/if}}
           {{/each}}
+          </div>
         </div>
 
 		    <div class="item-block flex-horizontal">
@@ -278,15 +283,29 @@
               </div>
             </td>
             <td id="specialist-actions" class="specialist-checkboxes">
-              {{#each actor.items as |item id|}}
-                {{#if (eq item.type "spec_action")}}
-                  {{#times_from_0 4}}
-                  <div>
-                    <input id="action-uses-{{item._id}}-{{actor._id}}" type="checkbox" name="data.attributes.specialist.skills.{{item.name}}.uses.one" {{checked data.attributes.specialist.skills}}>
-                    <label for="action-uses-{{item._id}}-{{actor._id}}"></label>
-                  </div>
-                  {{/times_from_0}}
+              {{#each data.attributes as |attribute attribute_name|}}
+                <div id="attributes-{{attribute_name}}" class="attribute">
+                {{#if (eq attribute "specialist")}}
+                  {{#each attribute.skills as |skill skill_name|}}
+                    <div class="flex-horizontal">
+                      {{#if (gt skill.max 0)}}
+                        <div class="attributes-container">
+                          {{#multiboxes skill.uses}}
+
+                            {{#times_from_0 skill.value}}
+                              <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"
+                                     name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
+                              <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
+                            {{/times_from_0}}
+
+                            <div class="attribute-skill-label">{{localize skill.label}}</div>
+                          {{/multiboxes}}
+                        </div>
+                      {{/if}}
+                    </div>
+                  {{/each}}
                 {{/if}}
+                </div>
               {{/each}}
             </td>
           </tr>
@@ -343,7 +362,6 @@
       <nav class="tabs flex-horizontal">
         <a class="item" data-tab="abilities">{{localize "BITD.Abilities"}}</a>
         <a class="item" data-tab="loadout">{{localize "BITD.Loadout"}}</a>
-		<a class="item" data-tab="friends">{{localize "BITD.Friends"}}</a>
         <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
         <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
       </nav>
@@ -398,7 +416,7 @@
       <div id="loadout" class="tab flex-vertical" data-tab="loadout">
 
 		    <div class="label-stripe{{#if (eq data.loadout.load_level "BITD.OverMax")}}-red{{/if}}">
-          <p>{{localize "BITD.Loadout"}}:  {{data.loadout.current}} / {{localize data.loadout.load_level}}</p>
+          <p><label>{{localize "BITD.Loadout"}}</label>:  {{data.loadout.current}} / {{localize data.loadout.load_level}}</p>
           <p><a class="item-add-popup" data-item-type="item"><i class="fas fa-plus-square"></i></a></p>
         </div>
         <div id="loadout-list">
@@ -418,44 +436,9 @@
         </div>
       </div>
 
-	  {{!-- Friends Tab --}}
-      <div id="friends" class="tab flex-vertical" data-tab="friends">
-
-		<div class="label-stripe">
-		  <p>{{localize "BITD.Friends"}}</p>
-          <p><a class="item-add-popup" data-item-type="friend"><i class="fas fa-plus-square"></i></a></p>
-        </div>
-        <div id="friend-list">
-          {{#each actor.items as |item id|}}
-          {{#if (eq item.type "friend")}}
-			<div class="friend-tracker">
-			{{#multiboxes item.data.status.value}}
-				<input class="update-box" data-utype="status" data-item="{{item._id}}" data-value="0" type="radio" id="friend-{{item._id}}-status-0" value="0" dtype="Radio">
-				<label for="friend-{{item._id}}-status-0"></label>
-				<input class="update-box" data-utype="status" data-item="{{item._id}}" data-value="1" type="radio" id="friend-{{item._id}}-status-1" value="1" dtype="Radio">
-				<label for="friend-{{item._id}}-status-1"></label>
-				<input class="update-box" data-utype="status" data-item="{{item._id}}" data-value="2" type="radio" id="friend-{{item._id}}-status-2" value="2" dtype="Radio">
-				<label for="friend-{{item._id}}-status-2"></label>
-			{{/multiboxes}}
-
-            <div class="item flex-horizontal" data-item-id="{{item._id}}">
-			  <div class="item-body flex-horizontal">
-				<!--<img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>-->
-				<a class="item-name">{{item.name}}</a>
-                <div class="item-description">{{item.data.description}}</div>
-              </div>
-              <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-            </div>
-			</div>
-          {{/if}}
-          {{/each}}
-          <div class="item-class-label"><a class="item-add-popup" data-item-type="friend">{{localize "BITD.AddFriend"}}</a></div>
-        </div>
-      </div>
-
       <div class="tab flex-vertical" data-tab="character-notes">
         <div class="label-stripe">
-          <p>{{localize "BITD.Notes"}}</p>
+          <p><label>{{localize "BITD.Notes"}}</label></p>
         </div>
         {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
         {{#if editable}}

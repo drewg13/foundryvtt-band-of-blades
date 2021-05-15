@@ -40,17 +40,10 @@
       "entity": "Item"
     },
     {
-      "name": "vice",
-      "label": "Vices",
+      "name": "traits",
+      "label": "Traits",
       "system": "band-of-blades",
-      "path": "./packs/vices.db",
-      "entity": "Item"
-    },
-    {
-      "name": "background",
-      "label": "Backgrounds",
-      "system": "band-of-blades",
-      "path": "./packs/backgrounds.db",
+      "path": "./packs/traits.db",
       "entity": "Item"
     },
     {
@@ -66,90 +59,6 @@
       "system": "band-of-blades",
       "path": "./packs/abilities.db",
       "entity": "Item"
-    },
-    {
-      "name": "crew_reputation",
-      "label": "Crew Reputation",
-      "system": "band-of-blades",
-      "path": "./packs/crew_reputation.db",
-      "entity": "Item"
-    },
-    {
-      "name": "crew_type",
-      "label": "Ship Types",
-      "system": "band-of-blades",
-      "path": "./packs/crew_types.db",
-      "entity": "Item"
-    },
-    {
-      "name": "crew_upgrade",
-      "label": "Ship Upgrades",
-      "system": "band-of-blades",
-      "path": "./packs/crew_upgrades.db",
-      "entity": "Item"
-    },
-    {
-      "name": "crew_ability",
-      "label": "Ship Abilities",
-      "system": "band-of-blades",
-      "path": "./packs/crew_abilities.db",
-      "entity": "Item"
-    },
-    {
-      "name": "job_tables",
-      "label": "Job Tables",
-      "system": "band-of-blades",
-      "path": "./packs/tables.db",
-      "entity": "RollTable"
-    },
-    {
-      "name": "star_system",
-      "label": "Star Systems",
-      "system": "band-of-blades",
-      "path": "./packs/star_systems.db",
-      "entity": "Item"
-    },
-    {
-      "name": "planet",
-      "label": "Planets",
-      "system": "band-of-blades",
-      "path": "./packs/planets.db",
-      "entity": "Item"
-    },
-    {
-      "name": "faction",
-      "label": "Factions",
-      "system": "band-of-blades",
-      "path": "./packs/factions.db",
-      "entity": "Item"
-    },
-    {
-      "name": "ship_size",
-      "label": "Ship Sizes",
-      "system": "band-of-blades",
-      "path": "./packs/size.db",
-      "entity": "Item"
-    },
-    {
-      "name": "wanted",
-      "label": "Wanted Consequences",
-      "system": "band-of-blades",
-      "path": "./packs/wanted-consequences.db",
-      "entity": "JournalEntry"
-    },
-    {
-      "name": "wanted_tables",
-      "label": "Wanted Tables",
-      "system": "band-of-blades",
-      "path": "./packs/wanted-tables.db",
-      "entity": "RollTable"
-    },
-    {
-	  "name": "friend",
-	  "label": "Friends",
-	  "system": "band-of-blades",
-	  "path": "./packs/friends.db",
-	  "entity": "Item"
     }
   ]
 }

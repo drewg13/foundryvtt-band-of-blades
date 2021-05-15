@@ -399,7 +399,7 @@ input[type="checkbox"]:hover {
 * .big-teeth-section .small-teeth-container .small-teeth-wrap .small-teeth {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 * .big-teeth-section #blight-list,
 * .big-teeth-section #trauma-list {

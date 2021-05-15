@@ -7,17 +7,22 @@ export class BoBHelpers {
    * @param {Document} actor
    */
   static removeDuplicatedItemType(item_data, actor) {
-
-    let distinct_types = ["crew_reputation", "class", "background", "vice", "heritage", "ship_size", "crew_type"];
+    let dupe_list = [];
+    let distinct_types = ["class", "heritage"];
     let should_be_distinct = distinct_types.includes(item_data.type);
     // If the Item has the exact same name - remove it from list.
     // Remove Duplicate items from the array.
-    actor.items.forEach(i => {
+    actor.items.forEach( i => {
       let has_double = (item_data.type === i.data.type);
-      if (i.data.name === item_data.name || (should_be_distinct && has_double)) {
-        actor.deleteEmbeddedDocuments("Item", [i.id]);
+      if (i.name === item_data.name || (should_be_distinct && has_double)) {
+        console.log(i);
+        console.log(item_data)
+        dupe_list.push (i.id);
       }
     });
+    console.log(dupe_list)
+    actor.deleteEmbeddedDocuments("Item", dupe_list);
+    console.log(actor.data)
   }
 
   /**
@@ -26,10 +31,9 @@ export class BoBHelpers {
    * @param {Object} item_data
    * @param {Document} actor
    */
-  static async addDefaultAbilities(item_data, actor) {
+  static addDefaultAbilities(item_data, actor) {
 
     let def_abilities = item_data.data.def_abilities || {};
-    
     let abil_list = def_abilities.split(', ');
     let item_type = "";
     let items_to_add = [];
@@ -47,18 +51,12 @@ export class BoBHelpers {
       if ( size.length > 0 ) { abilities.push( size ); }
     }
 
-    let friends = actor.items.filter(a => a.type === "friend").map(e => {return e.data.name}) || [""];
-    if ( friends.length > 0 ) { abilities.push( friends ); }
-
-    let items = await BoBHelpers.getAllItemsByType(item_type, game);
+    let items = BoBHelpers.getAllItemsByType(item_type, game);
 
     if ( actor.data.type === "ship" ) {
-      let all_sizes = await BoBHelpers.getAllItemsByType("ship_size", game);
+      let all_sizes = BoBHelpers.getAllItemsByType("ship_size", game);
       all_sizes.forEach( s => { items.push( s ); });
     }
-
-    let all_friends = await BoBHelpers.getAllItemsByType("friend", game);
-    all_friends.forEach( s => { items.push( s ); });
 
     let trim_abil_list = abil_list.filter( x => !abilities.includes( x ) );
     trim_abil_list.forEach(i => {
@@ -72,9 +70,9 @@ export class BoBHelpers {
   /**
    * Add item modification if logic exists.
    * @param {Object} item_data
-   * @param {Document} entity
+   * @param {Document} document
    */
-  static async callItemLogic(item_data, entity) {
+  static async callItemLogic(item_data, document) {
 
     let items = item_data.data || {};
 
@@ -86,7 +84,7 @@ export class BoBHelpers {
       }
 
       if (logic) {
-        let logic_update = { "_id": entity.data._id };
+        let logic_update = { "_id": document.data._id };
         logic.forEach( expression => {
 
           // Different logic behav. dep on operator.
@@ -94,11 +92,9 @@ export class BoBHelpers {
 
             // Add when creating.
             case "addition":
-              let prefix = "";
-              prefix = "data.data.";
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(entity, prefix + expression.attribute)) + expression.value},
+                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value},
                 {insertKeys: true}
               );
               break;
@@ -122,9 +118,9 @@ export class BoBHelpers {
   /**
    * Undo Item modifications when item is removed.
    * @param {Object} item_data
-   * @param {Document} entity
+   * @param {Document} document
    */
-  static async undoItemLogic(item_data, entity) {
+  static async undoItemLogic(item_data, document) {
 
     let items = item_data.data || {};
 
@@ -137,8 +133,8 @@ export class BoBHelpers {
       }
 
       if (logic) {
-        let logic_update = { "_id": entity.data._id };
-        let entity_data = entity.data;
+        let logic_update = { "_id": document.data._id };
+        let entity_data = document.data;
 
         logic.forEach(expression => {
           // Different logic behav. dep on operator.
@@ -146,11 +142,9 @@ export class BoBHelpers {
 
             // Subtract when removing.
             case "addition":
-              let prefix = "";
-              prefix = "data.data.";
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(entity, prefix + expression.attribute)) - expression.value},
+                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) - expression.value},
                 {insertKeys: true}
               );
               break;
