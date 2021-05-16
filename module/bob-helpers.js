@@ -5,8 +5,9 @@ export class BoBHelpers {
    *
    * @param {Object} item_data
    * @param {Document} actor
+   *
    */
-  static removeDuplicatedItemType(item_data, actor) {
+  static async removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
     let distinct_types = ["class", "heritage"];
     let should_be_distinct = distinct_types.includes(item_data.type);
@@ -15,14 +16,10 @@ export class BoBHelpers {
     actor.items.forEach( i => {
       let has_double = (item_data.type === i.data.type);
       if (i.name === item_data.name || (should_be_distinct && has_double)) {
-        console.log(i);
-        console.log(item_data)
         dupe_list.push (i.id);
       }
     });
-    console.log(dupe_list)
-    actor.deleteEmbeddedDocuments("Item", dupe_list);
-    console.log(actor.data)
+    await actor.deleteEmbeddedDocuments("Item", dupe_list);
   }
 
   /**
@@ -75,7 +72,6 @@ export class BoBHelpers {
   static async callItemLogic(item_data, document) {
 
     let items = item_data.data || {};
-
     if ('logic' in items && items.logic !== '') {
       let logic = JSON.parse(items.logic);
       // Should be an array to support multiple expressions
@@ -83,10 +79,8 @@ export class BoBHelpers {
         logic = [logic];
       }
 
-      if (logic) {
         let logic_update = { "_id": document.data._id };
         logic.forEach( expression => {
-
           // Different logic behav. dep on operator.
           switch (expression.operator) {
 
@@ -94,8 +88,7 @@ export class BoBHelpers {
             case "addition":
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value},
-                {insertKeys: true}
+                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value}
               );
               break;
 
@@ -103,15 +96,13 @@ export class BoBHelpers {
             case "attribute_change":
               foundry.utils.mergeObject(
                 logic_update,
-                {[expression.attribute]: expression.value},
-                {insertKeys: true}
+                {[expression.attribute]: expression.value}
               );
               break;
 
           }
         });
         await Actor.updateDocuments( [logic_update] );
-      }
     }
   }
 

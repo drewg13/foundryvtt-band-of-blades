@@ -258,15 +258,21 @@ Hooks.once("ready", async function() {
  * Hooks
  */
 
+Hooks.on( "preUpdateActor", (document, change, options, userId) => {
+  console.log("Document");
+  console.log(document);
+  console.log("Change");
+  console.log(change);
+});
 
-Hooks.on("preCreateItem", (item, data, options, userId) => {
+Hooks.on("preCreateItem", async (item, data, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   if ( ( actor?.documentName === "Actor" ) ) {
-    BoBHelpers.removeDuplicatedItemType(data, actor);
+    await BoBHelpers.removeDuplicatedItemType(data, actor);
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && !( data.data.def_abilities === "" ) ) {
-      BoBHelpers.addDefaultAbilities( data, actor );
+      await BoBHelpers.addDefaultAbilities( data, actor );
     }
 
     if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
@@ -277,7 +283,7 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
           img: icon
         }
       };
-	    actor.update( icon_update );
+	    await actor.update( icon_update );
       /**  code to replace all attached tokens as well
        const tokens = actor.getActiveTokens();
        let token_update;
@@ -293,21 +299,21 @@ Hooks.on("preCreateItem", (item, data, options, userId) => {
   return true;
 });
 
-Hooks.on("createItem", (item, options, userId) => {
+Hooks.on("createItem", async (item, options, userId) => {
 
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    BoBHelpers.callItemLogic(data, actor);
+    await BoBHelpers.callItemLogic(data, actor);
   }
   return true;
 });
 
-Hooks.on("deleteItem", (item, options, userId) => {
+Hooks.on("deleteItem", async (item, options, userId) => {
   let actor = item.parent ? item.parent : null;
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-    BoBHelpers.undoItemLogic(data, actor);
+    await BoBHelpers.undoItemLogic(data, actor);
   }
   return true;
 });
@@ -315,8 +321,8 @@ Hooks.on("deleteItem", (item, options, userId) => {
 // getSceneControlButtons
 Hooks.on("renderSceneControls", (app, html) => {
   let dice_roller = $('<li class="scene-control" title="Dice Roll"><i class="fas fa-dice"></i></li>');
-  dice_roller.on( "click", function() {
-    simpleRollPopup();
+  dice_roller.on( "click", async function() {
+    await simpleRollPopup();
   })
   html.append(dice_roller);
 });
@@ -326,17 +332,17 @@ Hooks.once("init", () => {
   log(`Init ${game.data.system.id}`);
 });
 
-Hooks.on("getSceneControlButtons", async (controls) => {
-  await ClockTiles.getSceneControlButtons(controls);
+Hooks.on("getSceneControlButtons", (controls) => {
+  ClockTiles.getSceneControlButtons(controls);
 });
 
-Hooks.on("renderTileHUD", (hud, html, tile) => {
-  ClockTiles.renderTileHUD(hud, html, tile);
+Hooks.on("renderTileHUD", async (hud, html, tile) => {
+  await ClockTiles.renderTileHUD(hud, html, tile);
 });
 
-Hooks.on("renderTokenHUD", (hud, html, token) => {
+Hooks.on("renderTokenHUD", async (hud, html, token) => {
   let rootElement = document.getElementsByClassName('vtt game')[0];
-  if( ClockSheet.renderTokenHUD(hud, html, token) ) {
+  if( await ClockSheet.renderTokenHUD(hud, html, token) ) {
     rootElement.classList.add('hide-ui');
   } else {
     rootElement.classList.remove('hide-ui');

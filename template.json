@@ -89,9 +89,11 @@
         "exp": "0",
         "bonus": 0,
         "label": "BITD.SkillsInsight",
+        "tip": "BITD.SkillsInsightTip",
         "skills": {
           "research": {
             "label": "BITD.SkillsResearch",
+            "tip": "BITD.SkillsResearchTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -99,6 +101,7 @@
           },
           "rig": {
             "label": "BITD.SkillsRig",
+            "tip": "BITD.SkillsRigTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -106,6 +109,7 @@
           },
           "scout": {
             "label": "BITD.SkillsScout",
+            "tip": "BITD.SkillsScoutTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -117,9 +121,11 @@
         "exp": "0",
         "bonus": 0,
         "label": "BITD.SkillsProwess",
+        "tip": "BITD.SkillsProwessTip",
         "skills": {
           "maneuver": {
             "label": "BITD.SkillsManeuver",
+            "tip": "BITD.SkillsManeuverTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -127,6 +133,7 @@
           },
           "shoot": {
             "label": "BITD.SkillsShoot",
+            "tip": "BITD.SkillsShootTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -134,6 +141,7 @@
           },
           "skirmish": {
             "label": "BITD.SkillsSkirmish",
+            "tip": "BITD.SkillsSkirmishTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -141,6 +149,7 @@
           },
           "wreck": {
             "label": "BITD.SkillsWreck",
+            "tip": "BITD.SkillsWreckTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -152,9 +161,11 @@
         "exp": "0",
         "bonus": 0,
         "label": "BITD.SkillsResolve",
+        "tip": "BITD.SkillsResolveTip",
         "skills": {
           "consort": {
             "label": "BITD.SkillsConsort",
+            "tip": "BITD.SkillsConsortTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -162,6 +173,7 @@
           },
           "discipline": {
             "label": "BITD.SkillsDiscipline",
+            "tip": "BITD.SkillsDisciplineTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -169,6 +181,7 @@
           },
           "marshal": {
             "label": "BITD.SkillsMarshal",
+            "tip": "BITD.SkillsMarshalTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -176,6 +189,7 @@
           },
           "sway": {
             "label": "BITD.SkillsSway",
+            "tip": "BITD.SkillsSwayTip",
             "max": 3,
             "max_default": 3,
             "value": "0",
@@ -186,9 +200,11 @@
       "specialist": {
         "exp": "0",
         "label": "BITD.SkillsSpecialist",
+        "tip": "BITD.SkillsSpecialistTip",
         "skills": {
           "anchor": {
             "label": "BITD.SkillsAnchor",
+            "tip": "BITD.SkillsAnchorTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -197,6 +213,7 @@
           },
           "aim": {
             "label": "BITD.SkillsAim",
+            "tip": "BITD.SkillsAimTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -205,6 +222,7 @@
           },
           "channels": {
             "label": "BITD.SkillsChannels",
+            "tip": "BITD.SkillsChannelsTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -213,6 +231,7 @@
           },
           "doctor": {
             "label": "BITD.SkillsDoctor",
+            "tip": "BITD.SkillsDoctorTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -221,6 +240,7 @@
           },
           "grit": {
             "label": "BITD.SkillsGrit",
+            "tip": "BITD.SkillsGritTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -229,6 +249,7 @@
           },
           "scrounge": {
             "label": "BITD.SkillsScrounge",
+            "tip": "BITD.SkillsScroungeTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
@@ -237,6 +258,7 @@
           },
           "weave": {
             "label": "BITD.SkillsWeave",
+            "tip": "BITD.SkillsWeaveTip",
             "max": 0,
             "max_default": 0,
             "value": "0",
