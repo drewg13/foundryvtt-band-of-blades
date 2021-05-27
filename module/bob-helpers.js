@@ -1,25 +1,28 @@
 export class BoBHelpers {
 
   /**
-   * Removes a duplicate item type from charlist.
+   * Removes a duplicate item type from charlist and returns true if a duplicate was removed.
    *
    * @param {Object} item_data
    * @param {Document} actor
+   * @returns {Boolean}
    *
    */
   static async removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
     let distinct_types = ["class", "heritage"];
+    let allowed_types = ["item"];
     let should_be_distinct = distinct_types.includes(item_data.type);
     // If the Item has the exact same name - remove it from list.
     // Remove Duplicate items from the array.
     actor.items.forEach( i => {
       let has_double = (item_data.type === i.data.type);
-      if (i.name === item_data.name || (should_be_distinct && has_double)) {
+      if ( ( ( i.name === item_data.name ) || ( should_be_distinct && has_double ) ) && !( allowed_types.includes( item_data.type ) ) && ( item_data._id !== i.id ) ) {
         dupe_list.push (i.id);
       }
     });
     await actor.deleteEmbeddedDocuments("Item", dupe_list);
+    return !!dupe_list.length;
   }
 
   /**
@@ -28,7 +31,7 @@ export class BoBHelpers {
    * @param {Object} item_data
    * @param {Document} actor
    */
-  static addDefaultAbilities(item_data, actor) {
+  static async addDefaultAbilities(item_data, actor) {
 
     let def_abilities = item_data.data.def_abilities || {};
     let abil_list = def_abilities.split(', ');
@@ -45,13 +48,13 @@ export class BoBHelpers {
 
     if ( actor.data.type === "ship" ) {
       let size = actor.items.filter(a => a.type === "ship_size").map(e => {return e.data.name}) || [""];
-      if ( size.length > 0 ) { abilities.push( size ); }
+      if ( size.length ) { abilities.push( size ); }
     }
 
-    let items = BoBHelpers.getAllItemsByType(item_type, game);
+    let items = await BoBHelpers.getAllItemsByType(item_type, game);
 
     if ( actor.data.type === "ship" ) {
-      let all_sizes = BoBHelpers.getAllItemsByType("ship_size", game);
+      let all_sizes = await BoBHelpers.getAllItemsByType("ship_size", game);
       all_sizes.forEach( s => { items.push( s ); });
     }
 
@@ -60,7 +63,7 @@ export class BoBHelpers {
       items_to_add.push( items.find( e => ( e.name === i ) ));
     });
 
-    actor.createEmbeddedDocuments("Item", items_to_add);
+    await actor.createEmbeddedDocuments("Item", items_to_add);
   }
 
 
@@ -78,27 +81,26 @@ export class BoBHelpers {
       if (!Array.isArray(logic)) {
         logic = [logic];
       }
+      let logic_update = { "_id": document.data._id };
+      logic.forEach( expression => {
+        // Different logic behav. dep on operator.
+        switch (expression.operator) {
 
-        let logic_update = { "_id": document.data._id };
-        logic.forEach( expression => {
-          // Different logic behav. dep on operator.
-          switch (expression.operator) {
+          // Add when creating.
+          case "addition":
+            foundry.utils.mergeObject(
+              logic_update,
+              {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value}
+            );
+            break;
 
-            // Add when creating.
-            case "addition":
-              foundry.utils.mergeObject(
-                logic_update,
-                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value}
-              );
-              break;
-
-            // Change name property.
-            case "attribute_change":
-              foundry.utils.mergeObject(
-                logic_update,
-                {[expression.attribute]: expression.value}
-              );
-              break;
+          // Change name property.
+          case "attribute_change":
+            foundry.utils.mergeObject(
+              logic_update,
+              {[expression.attribute]: expression.value}
+            );
+            break;
 
           }
         });

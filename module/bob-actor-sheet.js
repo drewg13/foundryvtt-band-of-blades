@@ -26,7 +26,7 @@ export class BoBActorSheet extends BoBSheet {
     const data = super.getData();
     data.isGM = game.user.isGM;
     data.editable = data.options.editable;
-    const actorData = data.data;
+    const actorData = this.actor.data.toObject(false);
     data.actor = actorData;
     data.data = actorData.data;
 
@@ -97,6 +97,11 @@ export class BoBActorSheet extends BoBSheet {
 	if ( data.data.loadout.planned < loadout ) {
 		data.data.loadout.load_level = "BITD.OverMax";
 	}
+  const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
+
+	spec_skills.forEach( s => {
+	  //data.data.usesarray[s] = Array.from(Array(parseInt( data.data.attributes.specialist.skills[s].value) + 1).keys());
+  })
 
   return data;
   }
@@ -111,7 +116,7 @@ export class BoBActorSheet extends BoBSheet {
     if ( !this.options.editable ) return;
 
     // Update Inventory Item
-    html.find('.item-body').click(ev => {
+    html.find('.item-name').click(ev => {
       const element = $(ev.currentTarget).parents(".item");
       const item = this.document.items.get(element.data("itemId"));
       item.sheet.render(true);

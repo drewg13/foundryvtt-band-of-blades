@@ -79,7 +79,7 @@ export class BoBSheet extends ActorSheet {
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "ability") {
-		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( e.data.class === "General" ) && ( this.actor.data.data.class !== "Rookie") ) ) {
+		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( e.data.class === "General" ) && ( ( this.actor.data.data.class !== "Rookie") && ( this.actor.data.data.class !== "" ) ) ) ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
 			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;

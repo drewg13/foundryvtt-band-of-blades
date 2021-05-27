@@ -5,7 +5,7 @@
   <div id="attributes-{{attribute_name}}" class="attribute">
     <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
       <div class="stripe">
-        <a class="attribute-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext delay">{{{localize attribute.tip}}}</span></a>
+        <a class="attribute-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left delay">{{{localize attribute.tip}}}</span></a>
       </div>
       <div class="stripe-tooth-body-blue">
         {{#multiboxes attribute.exp}}
@@ -49,10 +49,11 @@
   {{/unless}}
 
   {{#if (eq attribute_name "specialist")}}
+    {{#if (eq ../data.item_triggers.specialist 1)}}
     <div id="attributes-{{attribute_name}}" class="attribute">
       <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
         <div class="stripe">
-          <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext delay">{{{localize attribute.tip}}}</span></span>
+          <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left delay">{{{localize attribute.tip}}}</span></span>
         </div>
         <div class="stripe-tooth-body-blue">
           {{#multiboxes attribute.exp}}
@@ -78,14 +79,16 @@
           {{#if (gt skill.max 0)}}
             <div class="attributes-container">
               {{#multiboxes skill.value}}
-
                 {{#times_from_0 skill.max}}
                   <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"
                          name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
                   <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                 {{/times_from_0}}
-
                 <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext delay">{{{localize skill.tip}}}</span></div>
+                <div class="skill-select">
+                  <span>Uses</span>
+                  <select id="skilluses-{{skill_name}}-{{../../actor._id}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.usesindex">{{selectOptions (lookup skill 'usesarray') selected=(lookup skill 'usesindex') localize=true}}</select>
+                </div>
               {{/multiboxes}}
             </div>
           {{/if}}
@@ -94,6 +97,7 @@
 
     </div>
 
+  {{/if}}
   {{/if}}
   {{/each}}
 

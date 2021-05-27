@@ -59,7 +59,12 @@ Hooks.once("init", async function() {
   Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
   await preloadHandlebarsTemplates();
 
-
+  // allow Handlebars lookups to use variables for initial key and return subvalues
+  Handlebars.registerHelper("lookup2", function(object, property, subproperty, options) {
+    let newObject = object ? options.lookupProperty(object, property) : object;
+    let subObject = newObject ? options.lookupProperty(newObject, subproperty) : newObject;
+    return subObject ? subObject : {};
+  });
 
   // Multiboxes.
   Handlebars.registerHelper('multiboxes', function(selected, options) {
@@ -258,43 +263,10 @@ Hooks.once("ready", async function() {
  * Hooks
  */
 
-Hooks.on( "preUpdateActor", (document, change, options, userId) => {
-  console.log("Document");
-  console.log(document);
-  console.log("Change");
-  console.log(change);
-});
-
-Hooks.on("preCreateItem", async (item, data, options, userId) => {
-
+Hooks.on( "preCreateItem", async (item, data, options, userId) => {
   let actor = item.parent ? item.parent : null;
-  if ( ( actor?.documentName === "Actor" ) ) {
-    await BoBHelpers.removeDuplicatedItemType(data, actor);
-
-    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && !( data.data.def_abilities === "" ) ) {
-      await BoBHelpers.addDefaultAbilities( data, actor );
-    }
-
-    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
-      const icon = data.img;
-      const icon_update = {
-	    img: icon,
-        token: {
-          img: icon
-        }
-      };
-	    await actor.update( icon_update );
-      /**  code to replace all attached tokens as well
-       const tokens = actor.getActiveTokens();
-       let token_update;
-       if ( tokens ) {
-         token_update = {
-           img: icon
-         };
-	       tokens.forEach( t => t.update( token_update ) );
-       };
-      */
-    }
+  if ( actor?.documentName === "Actor" ) {
+    await BoBHelpers.removeDuplicatedItemType( data, actor );
   }
   return true;
 });
@@ -305,6 +277,21 @@ Hooks.on("createItem", async (item, options, userId) => {
   let data = item.data;
   if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
     await BoBHelpers.callItemLogic(data, actor);
+
+    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( data.data.def_abilities !== "" ) ) {
+      await BoBHelpers.addDefaultAbilities( data, actor );
+    }
+
+    if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
+      const icon = data.img;
+      const icon_update = {
+        img: icon,
+        token: {
+          img: icon
+        }
+      };
+      actor.data.update( icon_update );
+    }
   }
   return true;
 });

@@ -16,7 +16,9 @@
       "chemist": 0,
       "chemist_default": 0,
       "crimson": 0,
-      "crimson_default": 0
+      "crimson_default": 0,
+      "specialist": 0,
+      "specialist_default": 0
     },
     "stress": {
       "value": "0",
@@ -96,24 +98,21 @@
             "tip": "BITD.SkillsResearchTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "rig": {
             "label": "BITD.SkillsRig",
             "tip": "BITD.SkillsRigTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "scout": {
             "label": "BITD.SkillsScout",
             "tip": "BITD.SkillsScoutTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           }
         }
       },
@@ -128,32 +127,28 @@
             "tip": "BITD.SkillsManeuverTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "shoot": {
             "label": "BITD.SkillsShoot",
             "tip": "BITD.SkillsShootTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "skirmish": {
             "label": "BITD.SkillsSkirmish",
             "tip": "BITD.SkillsSkirmishTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "wreck": {
             "label": "BITD.SkillsWreck",
             "tip": "BITD.SkillsWreckTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           }
         }
       },
@@ -168,32 +163,28 @@
             "tip": "BITD.SkillsConsortTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "discipline": {
             "label": "BITD.SkillsDiscipline",
             "tip": "BITD.SkillsDisciplineTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "marshal": {
             "label": "BITD.SkillsMarshal",
             "tip": "BITD.SkillsMarshalTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           },
           "sway": {
             "label": "BITD.SkillsSway",
             "tip": "BITD.SkillsSwayTip",
             "max": 3,
             "max_default": 3,
-            "value": "0",
-            "value_default": "0"
+            "value": "0"
           }
         }
       },
@@ -208,8 +199,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "aim": {
             "label": "BITD.SkillsAim",
@@ -217,8 +208,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "channels": {
             "label": "BITD.SkillsChannels",
@@ -226,8 +217,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "doctor": {
             "label": "BITD.SkillsDoctor",
@@ -235,8 +226,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "grit": {
             "label": "BITD.SkillsGrit",
@@ -244,8 +235,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "scrounge": {
             "label": "BITD.SkillsScrounge",
@@ -253,8 +244,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           },
           "weave": {
             "label": "BITD.SkillsWeave",
@@ -262,8 +253,8 @@
             "max": 0,
             "max_default": 0,
             "value": "0",
-            "value_default": "0",
-            "uses": "0"
+            "usesindex": "0",
+            "usesarray": "0"
           }
         }
       }
@@ -396,16 +387,10 @@
   "item": {
     "templates": ["default", "logic"],
     "load": 0,
-    "weight": "",
-    "uses": {
-      "value": 0,
-      "max": 0,
-      "max_default": 0
-    }
+    "uses": "0"
   },
   "class": {
     "templates": ["default", "logic"],
-    "spec_action": "",
     "def_abilities": "",
 	"experience_clues": ""
   },

@@ -13,5 +13,9 @@
       <input id="item-load" type="text" name="data.load" value="{{data.load}}">
       <label class="label-stripe">{{localize "BITD.Class"}}</label>
       <input id="item-class" type="text" name="data.class" value="{{data.class}}">
+      {{#if (gt data.uses 0)}}
+      <label class="label-stripe">{{localize "BITD.Uses"}}</label>
+      <input id="item-uses" type="text" name="data.uses" value="{{data.uses}}">
+      {{/if}}
     </section>
 </form>

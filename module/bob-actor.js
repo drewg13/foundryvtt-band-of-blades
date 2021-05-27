@@ -8,47 +8,42 @@ import { BoBHelpers } from "./bob-helpers.js";
 export class BoBActor extends Actor {
 
   /** @override */
-  static async create(data, options={}) {
+  async _preCreate(createData, options, user) {
+    await super._preCreate(createData, options, user);
 
-    data.token = data.token || {};
-
-    // For Crew and Character set the Token to sync with charsheet.
-
-    let icon = "";
-
-    switch ( data.type ) {
+    const updateData = {};
+    switch ( createData.type ) {
       case "universe": {
-        icon = "systems/band-of-blades/styles/assets/icons/galaxy.png";
-        data.token.actorLink = true;
-  	    data.token.name = data.name;
-  	    data.token.displayName = 50;
+        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/galaxy.png";
+        updateData['data.token.actorLink'] = true;
+  	    updateData['data.token.name'] = createData.name;
+  	    updateData['data.token.displayName'] = 50;
   	    break;
       }
       case "ship": {
-  	    icon = "systems/band-of-blades/styles/assets/icons/ufo.png";
-  	    data.token.actorLink = true;
-  	    data.token.name = data.name;
-  	    data.token.displayName = 50;
+        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/ufo.png";
+        updateData['data.token.actorLink'] = true;
+        updateData['data.token.name'] = createData.name;
+        updateData['data.token.displayName'] = 50;
   	    break;
       }
       case "character": {
-  	    icon = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-  	    data.token.actorLink = true;
-        data.token.name = data.name;
-        data.token.displayName = 50;
+        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
+        updateData['data.token.actorLink'] = true;
+        updateData['data.token.name'] = createData.name;
+        updateData['data.token.displayName'] = 50;
         break;
       }
       case "\uD83D\uDD5B clock": {
-  	    icon = "systems/band-of-blades/themes/black/4clock_0.svg";
-  	    data.token.actorLink = true;
-  	    data.token.name = data.name;
-  	    data.token.displayName = 50;
-  	    break;
-  	  }
+        updateData['data.img'] = "systems/band-of-blades/themes/black/4clock_0.svg";
+        updateData['data.token.actorLink'] = true;
+        updateData['data.token.name'] = createData.name;
+        updateData['data.token.displayName'] = 50;
+        break;
+      }
     }
-    data.img = icon;
 
-    return super.create(data, options);
+    this.data.update(updateData);
   }
 
   /* -------------------------------------------- */
@@ -61,6 +56,25 @@ export class BoBActor extends Actor {
     if ( actorData.type === "ship" ) {
       // calculates upkeep value from (crew quality + engine quality + hull quality + comms quality + weapons quality) / 4, rounded down
       data.systems.upkeep.value = Math.floor((parseInt(data.systems.crew.value) + parseInt(data.systems.engines.value) + parseInt(data.systems.hull.value) + parseInt(data.systems.comms.value) + parseInt(data.systems.weapons.value)) / 4);
+    }
+
+    if ( actorData.type === "character" ) {
+      //sets up array of values for specialist skill uses tracking dropdown
+      const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
+      let skillarray = "";
+      let skill_val = 0;
+      spec_skills.forEach( s => {
+        data.attributes.specialist.skills[s].usesarray = "0";
+        skill_val = data.attributes.specialist.skills[s].value;
+        if( skill_val ) {
+          for( let i = 0; i <= skill_val; i++ ) {
+            skillarray = skillarray + i;
+          }
+          data.attributes.specialist.skills[s].usesarray = skillarray;
+          skill_val = 0;
+          skillarray = "";
+        }
+      })
     }
   }
 
@@ -106,7 +120,15 @@ export class BoBActor extends Actor {
 		          dice_amount[a]++;
 		        }
 		      }
+		      // add resistance bonus dice
+		      if( this.data.data.attributes[a].bonus ) {
+		        dice_amount[a] = dice_amount[a] + this.data.data.attributes[a].bonus;
+          }
 		    }
+        // add specialist action to insight resistance dice
+        if( this.data.data.item_triggers.specialist ) {
+          dice_amount.insight++;
+        }
 	      break;
 
 	    case 'ship':

@@ -68,6 +68,7 @@
   "BITD.Heavy": "Heavy",
   "BITD.OverMax": "Over Max",
   "BITD.Special": "Special",
+  "BITD.Uses": "Number of Uses",
   "BITD.LessEffect": "Less Effect",
   "BITD.Description": "Description",
   "BITD.Loadout": "Loadout",
