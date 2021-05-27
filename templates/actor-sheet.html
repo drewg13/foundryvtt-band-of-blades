@@ -401,7 +401,7 @@
                 <div><a class="item-name">{{item.name}}</a></div>
                 {{#if (gt item.data.uses 0)}}
                   <div class="uses-select">
-                    <span>Uses</span>
+                    <span>{{localize "BITD.Uses"}}</span>
                     <select id="itemuses-{{item.name}}-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.uses" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usesarray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'uses') localize=true}}</select>
                   </div>
                 {{/if}}
