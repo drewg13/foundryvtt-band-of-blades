@@ -60,7 +60,7 @@
   list-style: none;
 }
 * form.actor-sheet {
-  padding: 20px;
+  /* padding: 20px; */
 }
 * form .form-group.roll > * {
     flex: 3;
@@ -1446,6 +1446,7 @@ input[type="checkbox"]:hover {
   font-weight: normal;
   cursor: default;
   transition: 0.2s;
+  font-family: 'Vollkorn', 'Signika', serif;
 }
 * .tooltip:hover .tooltiptext {
   visibility: visible;

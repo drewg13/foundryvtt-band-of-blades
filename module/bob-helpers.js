@@ -1,14 +1,14 @@
 export class BoBHelpers {
 
   /**
-   * Removes a duplicate item type from charlist and returns true if a duplicate was removed.
+   * Identifies duplicate items by type and returns a array of item ids to remove
    *
    * @param {Object} item_data
    * @param {Document} actor
-   * @returns {Boolean}
+   * @returns {Array}
    *
    */
-  static async removeDuplicatedItemType(item_data, actor) {
+  static removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
     let distinct_types = ["class", "heritage"];
     let allowed_types = ["item"];
@@ -21,8 +21,8 @@ export class BoBHelpers {
         dupe_list.push (i.id);
       }
     });
-    await actor.deleteEmbeddedDocuments("Item", dupe_list);
-    return !!dupe_list.length;
+
+    return dupe_list;
   }
 
   /**

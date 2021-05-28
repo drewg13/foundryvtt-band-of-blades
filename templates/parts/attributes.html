@@ -49,7 +49,7 @@
   {{/unless}}
 
   {{#if (eq attribute_name "specialist")}}
-    {{#if (eq ../data.item_triggers.specialist 1)}}
+    {{#if (gt ../data.item_triggers.specialist 0)}}
     <div id="attributes-{{attribute_name}}" class="attribute">
       <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
         <div class="stripe">

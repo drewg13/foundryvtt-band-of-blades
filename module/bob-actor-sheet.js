@@ -97,11 +97,7 @@ export class BoBActorSheet extends BoBSheet {
 	if ( data.data.loadout.planned < loadout ) {
 		data.data.loadout.load_level = "BITD.OverMax";
 	}
-  const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
 
-	spec_skills.forEach( s => {
-	  //data.data.usesarray[s] = Array.from(Array(parseInt( data.data.attributes.specialist.skills[s].value) + 1).keys());
-  })
 
   return data;
   }

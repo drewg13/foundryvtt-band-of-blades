@@ -60,21 +60,6 @@
           {{/each}}
           </div>
         </div>
-
-		    <div class="item-block flex-horizontal">
-          <div class="item-class-label"><a class="flag-add-popup" data-distinct="true" data-item-type="chosen">{{localize "BITD.Chosen"}}</a></div>
-            {{#each actor.flags.band-of-blades.chosen as |item id|}}
-                {{#unless (eq item.name "")}}
-                <div class="item flex-horizontal" data-item-id="{{item._id}}" data-item-type="{{item.type}}">
-                  <div class="item-body flex-horizontal">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                    <a class="item-name">{{item.name}}</a>
-                  </div>
-                  <a class="item-control flag-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                </div>
-                {{/unless}}
-            {{/each}}
-        </div>
 	    </div>
     </div>
 
@@ -89,6 +74,20 @@
         <input type="text" id="character-{{actor._id}}-look" name="data.look" value="{{data.look}}">
       </div>
 
+      <div class="item-block flex-horizontal">
+        <div class="item-class-label"><a class="flag-add-popup" data-distinct="true" data-item-type="chosen">{{localize "BITD.Chosen"}}</a></div>
+        {{#each actor.flags.band-of-blades.chosen as |item id|}}
+          {{#unless (eq item.name "")}}
+            <div class="item flex-horizontal" data-item-id="{{item._id}}" data-item-type="{{item.type}}">
+              <div class="item-body flex-horizontal">
+                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                <a class="item-name">{{item.name}}</a>
+              </div>
+              <a class="item-control flag-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+            </div>
+          {{/unless}}
+        {{/each}}
+      </div>
       {{!-- Load --}}
 
     </div>
@@ -342,9 +341,15 @@
         <div class="label-stripe">
           <p><label for="character-{{actor._id}}-experience-0">{{localize "BITD.Abilities"}}</label></p>
           <p><a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a></p>
-          <div id="character-experience" class="teeth-experience">
-            <p><span class="xp-triggers nullifier">{{localize "BITD.PExperience"}}</span></p>
-			      <label for="character-{{actor._id}}-experience-0"><i class="fab fa-creative-commons-zero nullifier"></i></label>
+          <div id="character-experience" class="teeth-experience tooltip">
+			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
+              <span class="tooltiptext delay left">{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />
+                {{#each actor.items as |item id|}}
+                  {{#if (eq item.type "class")}}
+                    {{item.data.experience_clues}}
+                  {{/if}}
+                {{/each}}
+                </span></label>
             {{#multiboxes data.experience}}
             <input type="radio" id="character-{{actor._id}}-experience-0" name="data.experience" value="0" dtype="Radio">
             <input type="radio" id="character-{{actor._id}}-experience-1" name="data.experience" value="1" dtype="Radio">
@@ -402,7 +407,7 @@
                 {{#if (gt item.data.uses 0)}}
                   <div class="uses-select">
                     <span>{{localize "BITD.Uses"}}</span>
-                    <select id="itemuses-{{item.name}}-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.uses" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usesarray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'uses') localize=true}}</select>
+                    <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.uses" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'uses') localize=true}}</select>
                   </div>
                 {{/if}}
                 </div>
