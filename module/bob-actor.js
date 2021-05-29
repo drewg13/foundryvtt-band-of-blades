@@ -61,18 +61,18 @@ export class BoBActor extends Actor {
     if ( actorData.type === "character" ) {
       //sets up array of values for specialist skill uses tracking dropdown
       const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
-      let skillarray = "";
-      let skill_val = 0;
+      let skillArray = "";
+      let skillVal = 0;
       spec_skills.forEach( s => {
-        data.attributes.specialist.skills[s].usesarray = "0";
-        skill_val = data.attributes.specialist.skills[s].value;
-        if( skill_val ) {
-          for( let i = 0; i <= skill_val; i++ ) {
-            skillarray = skillarray + i;
+        data.attributes.specialist.skills[s].usesArray = "0";
+        skillVal = data.attributes.specialist.skills[s].value;
+        if( skillVal ) {
+          for( let i = skillVal; i >= 0; i-- ) {
+            skillArray = skillArray + i;
           }
-          data.attributes.specialist.skills[s].usesarray = skillarray;
-          skill_val = 0;
-          skillarray = "";
+          data.attributes.specialist.skills[s].usesArray = skillArray;
+          skillVal = 0;
+          skillArray = "";
         }
       })
     }

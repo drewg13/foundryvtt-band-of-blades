@@ -68,6 +68,9 @@
     flex-shrink: 1;
     flex-basis: 0%;
 }
+* .fa-creative-commons-zero.nullifier {
+  font-size: 14px;
+}
 * .band-of-blades.sheet .window-header h4.window-title {
   font-family: 'Zamolxis', 'serif';
   font-size: xx-large;

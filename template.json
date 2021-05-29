@@ -18,7 +18,9 @@
       "crimson": 0,
       "crimson_default": 0,
       "specialist": 0,
-      "specialist_default": 0
+      "specialist_default": 0,
+      "spec_skill": "",
+      "spec_skill_default": ""
     },
     "stress": {
       "value": "0",
@@ -197,64 +199,57 @@
             "label": "BITD.SkillsAnchor",
             "tip": "BITD.SkillsAnchorTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "aim": {
             "label": "BITD.SkillsAim",
             "tip": "BITD.SkillsAimTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "channels": {
             "label": "BITD.SkillsChannels",
             "tip": "BITD.SkillsChannelsTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "doctor": {
             "label": "BITD.SkillsDoctor",
             "tip": "BITD.SkillsDoctorTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "grit": {
             "label": "BITD.SkillsGrit",
             "tip": "BITD.SkillsGritTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "scrounge": {
             "label": "BITD.SkillsScrounge",
             "tip": "BITD.SkillsScroungeTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           },
           "weave": {
             "label": "BITD.SkillsWeave",
             "tip": "BITD.SkillsWeaveTip",
             "max": 0,
-            "max_default": 0,
             "value": "0",
-            "usesindex": "0",
-            "usesarray": "0"
+            "usesIndex": "0",
+            "usesArray": "0"
           }
         }
       }
