@@ -13,37 +13,23 @@ export class BoBActor extends Actor {
 
     const updateData = {};
     switch ( createData.type ) {
-      case "universe": {
-        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/galaxy.png";
-        updateData['data.token.actorLink'] = true;
-  	    updateData['data.token.name'] = createData.name;
-  	    updateData['data.token.displayName'] = 50;
-  	    break;
-      }
-      case "ship": {
-        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/ufo.png";
-        updateData['data.token.actorLink'] = true;
-        updateData['data.token.name'] = createData.name;
-        updateData['data.token.displayName'] = 50;
-  	    break;
-      }
       case "character": {
-        updateData['data.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-        updateData['data.token.actorLink'] = true;
-        updateData['data.token.name'] = createData.name;
-        updateData['data.token.displayName'] = 50;
+        updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
+        updateData['token.actorLink'] = true;
+        updateData['token.name'] = createData.name;
+        updateData['token.displayName'] = 50;
         break;
       }
       case "\uD83D\uDD5B clock": {
-        updateData['data.img'] = "systems/band-of-blades/themes/black/4clock_0.svg";
-        updateData['data.token.actorLink'] = true;
-        updateData['data.token.name'] = createData.name;
-        updateData['data.token.displayName'] = 50;
+        updateData['img'] = "systems/band-of-blades/themes/black/4clock_0.svg";
+        updateData['token.actorLink'] = true;
+        updateData['token.name'] = createData.name;
+        updateData['token.displayName'] = 50;
         break;
       }
     }
 
-    this.data.update(updateData);
+    await this.data.update(updateData);
   }
 
   /* -------------------------------------------- */

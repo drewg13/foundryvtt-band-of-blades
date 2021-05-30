@@ -261,49 +261,6 @@ Hooks.once("ready", async function() {
  * Hooks
  */
 
-Hooks.on( "preCreateItem", async (item, data, options, userId) => {
-
-  //let actor = item.parent ? item.parent : null;
-  //if ( actor?.documentName === "Actor" ) {
-  //  await BoBHelpers.removeDuplicatedItemType( data, actor );
-  //}
-  return true;
-});
-
-Hooks.on("createItem", async (item, options, userId) => {
-
-  //let actor = item.parent ? item.parent : null;
-  //let data = item.data;
-  //if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-  //  await BoBHelpers.callItemLogic(data, actor);
-
-  //  if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( data.data.def_abilities !== "" ) ) {
-  //    await BoBHelpers.addDefaultAbilities( data, actor );
-  //  }
-
-  //  if ( ( ( data.type === "class" ) || ( data.type === "crew_type" ) ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
-  //    const icon = data.img;
-  //    const icon_update = {
-  //      img: icon,
-  //      token: {
-  //        img: icon
-  //      }
-  //    };
-  //    actor.data.update( icon_update );
-  //  }
-  //}
-  return true;
-});
-
-Hooks.on("deleteItem", async (item, options, userId) => {
-  //let actor = item.parent ? item.parent : null;
-  //let data = item.data;
-  //if ( (actor?.documentName === "Actor") && (actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER) ) {
-  //  await BoBHelpers.undoItemLogic(data, actor);
-  //}
-  return true;
-});
-
 // getSceneControlButtons
 Hooks.on("renderSceneControls", (app, html) => {
   let dice_roller = $('<li class="scene-control" title="Dice Roll"><i class="fas fa-dice"></i></li>');

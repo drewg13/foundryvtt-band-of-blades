@@ -4,9 +4,9 @@
   "description": "Band of Blades game system.",
   "version": "1.0.0",
   "minimumCoreVersion": "0.8.3",
-  "compatibleCoreVersion": "0.8.3",
+  "compatibleCoreVersion": "0.8.5",
   "templateVersion": 1,
-  "author": "megastruktur, Andrew Garinger [agaringer#6498]",
+  "authors": ["megastruktur", "Andrew Garinger [agaringer#6498]"],
   "esmodules": [
     "module/bob.js"
   ],

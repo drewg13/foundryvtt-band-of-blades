@@ -81,7 +81,7 @@ export class BoBItem extends Item {
 
     // Delete related flags on item delete
     if ( actor !== null ) {
-      let itemFlag = actor.getFlag( "band-of-blades", "items." + this.data._id ) || {};
+      let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
       if( itemFlag ) {
         const key = "flags.band-of-blades.items.-=" + this.data._id;
         await actor.data.update( { [key]: null } )
