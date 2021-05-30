@@ -6,7 +6,6 @@
 
 // Import Modules
 import { registerSystemSettings } from "./settings.js";
-import { preloadHandlebarsTemplates } from "./bob-templates.js";
 import { bobRoll, simpleRollPopup } from "./bob-roll.js";
 import { BoBHelpers } from "./bob-helpers.js";
 import { BoBActor } from "./bob-actor.js";
@@ -57,7 +56,6 @@ Hooks.once("init", async function() {
   Actors.registerSheet("band-of-blades", BoBUniverseSheet, { types: ["universe"], makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
-  await preloadHandlebarsTemplates();
 
   // allow Handlebars lookups to use variables for initial key and return subvalues
   Handlebars.registerHelper("lookup2", function(object, property, subproperty, options) {

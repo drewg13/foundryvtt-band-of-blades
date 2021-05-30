@@ -240,7 +240,8 @@ input[type="checkbox"]:hover {
   position: relative;
   padding-top: 3px;
   display: flex;
-  font-weight: bold;
+  font-family: 'MajorGuilty', 'serif';
+  font-size: x-large;
   margin: 0;
 }
 * .label-stripe-chat-small {
@@ -1677,6 +1678,7 @@ input[type="checkbox"]:hover {
   font-size: x-large;
   color: white;
   text-align: right;
+  margin-top: 1px;
 }
 * #loadout .dropdown select option {
   font-family: 'MajorGuilty', 'serif';
