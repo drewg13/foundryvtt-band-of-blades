@@ -789,7 +789,6 @@ input[type="checkbox"]:hover {
 }
 * #attributes .attributes-exp {
   position: relative;
-  margin-bottom: 10px;
 }
 * #attributes .attributes-exp .stripe-tooth-body-red {
   display: flex;
