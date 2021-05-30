@@ -193,6 +193,7 @@ input[type="checkbox"]:hover {
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
+  justify-content: space-between;
 }
 * .label-stripe span {
   font-family: 'MajorGuilty', 'serif';
@@ -1433,8 +1434,11 @@ input[type="checkbox"]:hover {
 * #items-to-add input[type=checkbox]:checked + label {
   font-weight: bolder;
 }
+* .tooltip {
+  position: relative;
+}
 * .tooltip .tooltiptext {
-  visibility: hidden;
+  visibility: collapse;
   opacity: 0;
   width: 200px;
   background-color: #191813;
@@ -1454,13 +1458,16 @@ input[type="checkbox"]:hover {
 * .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+  transition-delay: 1.2s;
+  transition-timing-function: linear;
 }
-* .tooltip:hover .tooltiptext.delay {
-  transition-delay: 1.5s;
-}
-* .tooltip:hover .tooltiptext.left {
+* .tooltip .tooltiptext.left {
   right: 105%;
 }
+* .tooltip .tooltiptext.bottom {
+  top: 105%;
+  right: 75%;
+ }
 * .sav-die-tooltip .die {
   font-weight: bold;
   text-transform: capitalize;

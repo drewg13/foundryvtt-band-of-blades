@@ -15,7 +15,7 @@ export class BoBActorSheet extends BoBSheet {
       width: 800,
       height: 970,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
-	    scrollY: [".description"]
+	    scrollY: [".sheet"]
     });
   }
 

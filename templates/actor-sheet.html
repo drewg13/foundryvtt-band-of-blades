@@ -22,7 +22,7 @@
                   <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                   <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
                     <a class="item-name">{{item.name}}</a>
-                    <span class="tooltiptext delay">{{{item.data.description}}}<br />{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />{{item.data.experience_clues}}</span>
+                    <span class="tooltiptext">{{{item.data.description}}}<br />{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />{{item.data.experience_clues}}</span>
                   </div>
                 </div>
                 <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
@@ -42,7 +42,7 @@
                   <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                   <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
                     <a class="item-name">{{item.name}}</a>
-                    <span class="tooltiptext delay">{{{item.data.description}}}</span>
+                    <span class="tooltiptext">{{{item.data.description}}}</span>
                   </div>
                 </div>
                 <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
@@ -64,7 +64,7 @@
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
                         <a class="item-name">{{item.name}}</a>
-                        <span class="tooltiptext delay">{{{item.data.shortdesc}}}</span>
+                        <span class="tooltiptext">{{{item.data.shortdesc}}}</span>
                       </div>
                     </div>
                     <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
@@ -137,37 +137,37 @@
       </div>
 
       <div id="trauma-list">
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.cold" value="cold" {{checked data.trauma.list.cold}}>
-          <span class="checkmark">{{localize "BITD.TraumaCold"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaCold"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaColdTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.haunted" value="haunted" {{checked data.trauma.list.haunted}}>
-          <span class="checkmark">{{localize "BITD.TraumaHaunted"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaHaunted"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaHauntedTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.obsessed" value="obsessed" {{checked data.trauma.list.obsessed}}>
-          <span class="checkmark">{{localize "BITD.TraumaObsessed"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaObsessed"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaObsessedTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.paranoid" value="paranoid" {{checked data.trauma.list.paranoid}}>
-          <span class="checkmark">{{localize "BITD.TraumaParanoid"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaParanoid"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaParanoidTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.reckless" value="reckless" {{checked data.trauma.list.reckless}}>
-          <span class="checkmark">{{localize "BITD.TraumaReckless"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaReckless"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaRecklessTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.soft" value="soft" {{checked data.trauma.list.soft}}>
-          <span class="checkmark">{{localize "BITD.TraumaSoft"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaSoft"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaSoftTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.unstable" value="unstable" {{checked data.trauma.list.unstable}}>
-          <span class="checkmark">{{localize "BITD.TraumaUnstable"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaUnstable"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaUnstableTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.trauma.list.vicious" value="vicious" {{checked data.trauma.list.vicious}}>
-          <span class="checkmark">{{localize "BITD.TraumaVicious"}}</span>
+          <span class="checkmark">{{localize "BITD.TraumaVicious"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaColdTip"}}}</span></span>
         </label>
       </div>
     </div>
@@ -202,37 +202,37 @@
       </div>
 
       <div id="blight-list">
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.anathema" value="anathema" {{checked data.blight.list.anathema}}>
-          <span class="checkmark">{{localize "BITD.BlightAnathema"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightAnathema"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightAnathemaTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.host" value="host" {{checked data.blight.list.host}}>
-          <span class="checkmark">{{localize "BITD.BlightHost"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightHost"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightHostTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.hunger" value="hunger" {{checked data.blight.list.hunger}}>
-          <span class="checkmark">{{localize "BITD.BlightHunger"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightHunger"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightHungerTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.miasma" value="miasma" {{checked data.blight.list.miasma}}>
-          <span class="checkmark">{{localize "BITD.BlightMiasma"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightMiasma"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightMiasmaTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.mutated" value="mutated" {{checked data.blight.list.mutated}}>
-          <span class="checkmark">{{localize "BITD.BlightMutated"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightMutated"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightMutatedTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.rage" value="rage" {{checked data.blight.list.rage}}>
-          <span class="checkmark">{{localize "BITD.BlightRage"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightRage"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightRageTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.rot" value="rot" {{checked data.blight.list.rot}}>
-          <span class="checkmark">{{localize "BITD.BlightRot"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightRot"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightRotTip"}}}</span></span>
         </label>
-        <label>
+        <label class="tooltip">
           <input type="checkbox" name="data.blight.list.visions" value="visions" {{checked data.blight.list.visions}}>
-          <span class="checkmark">{{localize "BITD.BlightVisions"}}</span>
+          <span class="checkmark">{{localize "BITD.BlightVisions"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightVisionsTip"}}}</span></span>
         </label>
       </div>
     </div>
@@ -353,7 +353,7 @@
           </p>
           <div id="character-experience" class="teeth-experience tooltip">
 			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
-              <span class="tooltiptext delay left">{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />
+              <span class="tooltiptext left">{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />
                 {{#each actor.items as |item id|}}
                   {{#if (eq item.type "class")}}
                     {{item.data.experience_clues}}
@@ -432,10 +432,12 @@
         <div class="label-stripe">
           <p><label>{{localize "BITD.Notes"}}</label></p>
         </div>
-        {{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}
-        {{#if editable}}
-          <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
-        {{/if}}
+        <div class="description">
+          {{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}}
+          {{#if editable}}
+            <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
+          {{/if}}
+        </div>
       </div>
 
       {{!-- Full Item List --}}
@@ -461,7 +463,7 @@
           <div id="attributes-{{attribute_name}}" class="attribute">
             <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
               <div class="stripe">
-                <a class="attribute-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left delay">{{{localize attribute.tip}}}</span></a>
+                <a class="attribute-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left">{{{localize attribute.tip}}}</span></a>
               </div>
               <div class="stripe-tooth-body-blue">
                 {{#multiboxes attribute.exp}}
@@ -485,7 +487,7 @@
                         <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
                         <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                       {{/times_from_0}}
-                      <div class="attribute-skill-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext delay">{{{localize skill.tip}}}</span></div>
+                      <div class="attribute-skill-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext bottom">{{{localize skill.tip}}}</span></div>
                     {{/multiboxes}}
                   </div>
                 {{/if}}
@@ -499,7 +501,7 @@
             <div id="attributes-{{attribute_name}}" class="attribute">
               <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
                 <div class="stripe">
-                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left delay">{{{localize attribute.tip}}}</span></span>
+                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left">{{{localize attribute.tip}}}</span></span>
                 </div>
                 <div class="stripe-tooth-body-blue">
                   {{#multiboxes attribute.exp}}
@@ -523,7 +525,7 @@
                           <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
                           <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                         {{/times_from_0}}
-                        <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext delay">{{{localize skill.tip}}}</span></div>
+                        <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext">{{{localize skill.tip}}}</span></div>
                         <div class="skill-select">
                           <span>{{localize "BITD.Uses"}}</span>
                           <select id="skilluses-{{skill_name}}-{{../../actor._id}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.usesIndex">{{selectOptions (lookup skill 'usesArray') selected=(lookup skill 'usesIndex') localize=true}}</select>

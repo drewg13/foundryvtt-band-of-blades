@@ -15,7 +15,7 @@
       <input id="ability-class" type="text" name="data.class" value="{{data.class}}" placeholder="{{localize 'BITD.AbilityClass'}}">
       {{#if isGM}}
         <label class="label-stripe">{{localize "BITD.Logic"}}</label>
-        {{{editor content=data.logic target="data.logic" button=true owner=owner editable=editable}}}
+        <textarea name="data.logic">{{{data.logic}}}</textarea>
       {{/if}}
     </div>
 </form>

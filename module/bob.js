@@ -12,9 +12,9 @@ import { BoBActor } from "./bob-actor.js";
 import { BoBItem } from "./bob-item.js";
 import { BoBItemSheet } from "./bob-item-sheet.js";
 import { BoBActorSheet } from "./bob-actor-sheet.js";
-import { BoBShipSheet } from "./bob-ship-sheet.js";
-import { BoBUniverseSheet } from "./bob-universe-sheet.js";
-import * as migrations from "./migration.js";
+//import { BoBShipSheet } from "./bob-ship-sheet.js";
+//import { BoBUniverseSheet } from "./bob-universe-sheet.js";
+//import * as migrations from "./migration.js";
 /* For Clocks UI */
 import { BoBClockSheet } from "./bob-clock-sheet.js";
 import ClockTiles from "./bob-clock-tiles.js";
@@ -51,9 +51,9 @@ Hooks.once("init", async function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBShipSheet, { types: ["ship"], makeDefault: true });
+  //Actors.registerSheet("band-of-blades", BoBShipSheet, { types: ["ship"], makeDefault: true });
   Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBUniverseSheet, { types: ["universe"], makeDefault: true});
+  //Actors.registerSheet("band-of-blades", BoBUniverseSheet, { types: ["universe"], makeDefault: true});
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
 
