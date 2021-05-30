@@ -68,7 +68,8 @@
     flex-shrink: 1;
     flex-basis: 0%;
 }
-* .fa-creative-commons-zero.nullifier {
+* .fa-creative-commons-zero.nullifier,
+* .fa-plus-square {
   font-size: 14px;
 }
 * .band-of-blades.sheet .window-header h4.window-title {
@@ -196,6 +197,7 @@ input[type="checkbox"]:hover {
 * .label-stripe span {
   font-family: 'MajorGuilty', 'serif';
   font-size: x-large;
+  font-weight: normal;
 }
 * .label-stripe label {
   font-family: 'MajorGuilty', 'serif';
@@ -487,9 +489,7 @@ input[type="checkbox"]:hover {
 	width: 400px;
 	padding-left: 5px;
 }
-* #friend-list .item-description {
-	width: 300px;
-}
+* #friend-list .item-description,
 * #faction-items .item-description,
 * #loadout .item-description,
 * #upgrades .item-description,
@@ -650,7 +650,7 @@ input[type="checkbox"]:hover {
 * .teeth-experience label[for$="-0"] {
   width: auto;
   height: auto;
-  padding-top: 4px;
+  padding-top: 6px;
   background-image: none !important;
   color: #EEEFFF;
 }
@@ -1119,7 +1119,7 @@ input[type="checkbox"]:hover {
 	flex-grow: 0;
 }
 * .item div {
-  /* flex-grow: 3; */
+  flex-grow: 3;
 }
 * .item .item-control {
   flex-grow: 1;
@@ -1658,5 +1658,36 @@ input[type="checkbox"]:hover {
   font-weight: bold;
   font-family: monospace;
 }
-
+* #loadout .utility {
+  font-family: 'Vollkorn', 'Signika', serif;
+  font-size: large;
+  font-weight: bold;
+  margin-top: 3px;
+}
+* #loadout .dropdown select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+  border: none;
+  cursor: pointer;
+  background: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") no-repeat right;
+  padding: 0 20px 0 0;
+  background-color: #191813;
+  font-family: 'MajorGuilty', 'serif';
+  font-size: x-large;
+  color: white;
+  text-align: right;
+}
+* #loadout .dropdown select option {
+  font-family: 'MajorGuilty', 'serif';
+  font-size: medium;
+  color: white;
+}
+* #loadout .dropdown select:hover {
+  color: red;
+}
+* .item-add-popup {
+  margin-left: 10px;
+}
 /*# sourceMappingURL=bob.css.map */

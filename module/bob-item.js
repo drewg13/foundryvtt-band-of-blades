@@ -16,7 +16,7 @@ export class BoBItem extends Item {
       if( actor?.documentName === "Actor" ) {
         removeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
       }
-      if( removeItems ) {
+      if( removeItems.length !== 0 ) {
         await actor.deleteEmbeddedDocuments( "Item", removeItems );
       }
     }
@@ -51,7 +51,7 @@ export class BoBItem extends Item {
       }
 
       // Create actor flags for consumable uses dropdowns on sheet
-      if( parseInt( data.data.uses ) ) {
+      if( ( actor !== null ) && parseInt( data.data.uses ) ) {
         let key = data._id;
         let itemVal = parseInt( data.data.uses );
         let itemArray = "";
@@ -80,10 +80,12 @@ export class BoBItem extends Item {
     }
 
     // Delete related flags on item delete
-    let itemFlag = actor.getFlag( "band-of-blades", "items." + this.data._id ) || {};
-    if( itemFlag ) {
-      const key = "flags.band-of-blades.items.-=" + this.data._id;
-      await actor.data.update( { [key]: null } )
+    if ( actor !== null ) {
+      let itemFlag = actor.getFlag( "band-of-blades", "items." + this.data._id ) || {};
+      if( itemFlag ) {
+        const key = "flags.band-of-blades.items.-=" + this.data._id;
+        await actor.data.update( { [key]: null } )
+      }
     }
   }
 

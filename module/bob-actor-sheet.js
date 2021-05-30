@@ -98,6 +98,7 @@ export class BoBActorSheet extends BoBSheet {
 		data.data.loadout.load_level = "BITD.OverMax";
 	}
 
+	data.load_levels = {"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
 
   return data;
   }

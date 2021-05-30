@@ -339,8 +339,7 @@
 
       <div id="abilities" class="tab flex-vertical" data-tab="abilities">
         <div class="label-stripe">
-          <p><label for="character-{{actor._id}}-experience-0">{{localize "BITD.Abilities"}}</label></p>
-          <p><a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a></p>
+          <p><label for="character-{{actor._id}}-experience-0">{{localize "BITD.Abilities"}}</label><a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a></p>
           <div id="character-experience" class="teeth-experience tooltip">
 			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
               <span class="tooltiptext delay left">{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />
@@ -392,10 +391,15 @@
       {{!-- Owned Items Tab --}}
       <div id="loadout" class="tab flex-vertical" data-tab="loadout">
 
-		    <div class="label-stripe{{#if (eq data.loadout.load_level "BITD.OverMax")}}-red{{/if}}">
-          <p><label>{{localize "BITD.Loadout"}}</label>:  {{data.loadout.current}} / {{localize data.loadout.load_level}}</p>
-          <p><a class="item-add-popup" data-item-type="item"><i class="fas fa-plus-square"></i></a></p>
-        </div>
+		    <span class="label-stripe flex-horizontal">
+          <span><label>{{localize "BITD.Loadout"}} </label><a class="item-add-popup" data-item-type="item"><i class="fas fa-plus-square"></i></a></span>
+          <div class="utility" {{#if (gt data.loadout.current data.loadout.utility)}}style="color: red"{{/if}}>{{data.loadout.current}} / {{data.loadout.utility}} <span>{{localize "BITD.Utility"}}</span></div>
+          <span class="dropdown">
+            <select name="data.loadout.selected_load_level">
+              {{selectOptions load_levels selected=data.loadout.selected_load_level localize=true}}
+            </select>
+          </span>
+        </span>
         <div id="loadout-list">
           {{#each actor.items as |item id|}}
           {{#if (eq item.type "item")}}
