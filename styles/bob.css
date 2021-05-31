@@ -1695,7 +1695,8 @@ input[type="checkbox"]:hover {
 * #loadout .dropdown select:hover {
   color: red;
 }
-* .item-add-popup {
+* .item-add-popup,
+* .item-delete-all {
   margin-left: 10px;
 }
 /*# sourceMappingURL=bob.css.map */

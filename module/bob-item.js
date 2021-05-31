@@ -11,10 +11,22 @@ export class BoBItem extends Item {
     await super._preCreate( data, options, user );
 
     let removeItems = [];
+    let actor = this.parent ? this.parent : null;
+
+    //remove duplicates for some item types
     if( user.id === game.user.id ) {
-      let actor = this.parent ? this.parent : null;
       if( actor?.documentName === "Actor" ) {
         removeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
+      }
+      if( removeItems.length !== 0 ) {
+        await actor.deleteEmbeddedDocuments( "Item", removeItems );
+      }
+    }
+
+    //remove all load items on class change
+    if( user.id === game.user.id ) {
+      if( data.type === "class" ) {
+        removeItems = await BoBHelpers.getActorItemsByType( actor.id, "item" );
       }
       if( removeItems.length !== 0 ) {
         await actor.deleteEmbeddedDocuments( "Item", removeItems );

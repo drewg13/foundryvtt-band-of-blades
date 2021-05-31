@@ -221,10 +221,18 @@ export class BoBHelpers {
 
     return list_of_items;
   }
+
   /* -------------------------------------------- */
 
   static async getAllActorsByType(item_type, game) {
     return game.actors.filter( e => e.data.type === item_type ).map( e => { return e.data } ) || [];
+  }
+
+  /* -------------------------------------------- */
+
+  static async getActorItemsByType( actorId, itemType ) {
+    let actor = game.actors.get( actorId );
+    return actor.data.items.filter( i => i.type === itemType ).map( i => i.id ) || [];
   }
 
   /* -------------------------------------------- */

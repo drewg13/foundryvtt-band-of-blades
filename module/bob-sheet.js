@@ -11,6 +11,7 @@ export class BoBSheet extends ActorSheet {
 	activateListeners(html) {
     super.activateListeners(html);
     html.find(".item-add-popup").click(this._onItemAddClick.bind(this));
+    html.find(".item-delete-all").click(this._onDeleteAllClick.bind(this));
 	  html.find(".flag-add-popup").click(this._onFlagAddClick.bind(this));
 	  html.find(".update-sheet").click(this._onUpdateClick.bind(this));
 	  html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
@@ -35,29 +36,8 @@ export class BoBSheet extends ActorSheet {
     let html = `<div id="items-to-add">`;
 	  let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
 
-	  let stun_weapons = 0;
-	  actor_flags.forEach(i => {
-      if (i.data.installs.stun_inst === 1) {
-        stun_weapons = 1;
-      } else {
-		    stun_weapons = 0;
-	    }
-	  });
-
-		let main_systems = ["Engines", "Hull", "Comms", "Weapons"];
-		let overloaded = {};
-
-    if ( this.actor.data.type === "ship" ) {
-		  main_systems.forEach( m => {
-  	    let actor_items = this.actor.data.items.filter(i => i.data.data.class === m);
-	  	  let total = actor_items.length;
-        let lower_m = m.toLowerCase();
-		    if ( total >= this.actor.data.data.systems[lower_m].value ) {
-			 	  overloaded[m] = 1;
-			  } else {
-			    overloaded[m] = 0;
-			  }
-		  });
+	  if( item_type === "class" ) {
+	    html += `<div class="class-help">${game.i18n.localize('BITD.ClassWarning')}</div>`;
     }
 
     items.forEach(e => {
@@ -133,6 +113,38 @@ export class BoBSheet extends ActorSheet {
 
       dialog.render(true);
 	  }
+  }
+
+  /* -------------------------------------------- */
+
+  async _onDeleteAllClick(event) {
+    event.preventDefault();
+    const item_type = $(event.currentTarget).data("itemType")
+
+    let removeItems = await BoBHelpers.getActorItemsByType( this.actor.id, item_type );
+    let html = `<div id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
+    let options = {};
+
+    if( ( removeItems.length !== 0 ) && ( this.actor.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
+        let dialog = new Dialog( {
+          title: `${ game.i18n.localize( 'BITD.DeleteAllLoadout' ) }`,
+          content: html,
+          buttons: {
+            one: {
+              icon: '<i class="fas fa-check"></i>',
+              label: game.i18n.localize( 'BITD.Delete' ),
+              callback: async() => await this.actor.deleteEmbeddedDocuments( "Item", removeItems )
+            },
+            two: {
+              icon: '<i class="fas fa-times"></i>',
+              label: game.i18n.localize( 'BITD.Cancel' ),
+              callback: () => false
+            }
+          },
+          default: "two"
+        }, options );
+        dialog.render( true );
+    }
   }
 
 async _onFlagAddClick(event) {

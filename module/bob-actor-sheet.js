@@ -126,13 +126,6 @@ export class BoBActorSheet extends BoBSheet {
       actor.sheet.render(true);
     });
 
-	  // Render XP Triggers sheet
-    html.find('.xp-triggers').click(ev => {
-      const itemId = this.actor.items.filter( i => i.type === "class" )[0]?.id;
-      const item = this.document.items.get(itemId);
-      item?.sheet.render(true, {"renderContext": "xp"});
-    });
-
     // Delete Inventory Item
     html.find('.item-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");

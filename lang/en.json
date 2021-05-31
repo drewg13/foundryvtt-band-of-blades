@@ -232,6 +232,9 @@
 
   "BITD.AddAbility": "Add Ability",
   "BITD.AddItem": "Add Item",
+  "BITD.Delete": "Delete",
+  "BITD.DeleteAllLoadout": "Delete All Loadout Items",
+  "BITD.ClassWarning": "<p>Please note that changing class will delete all Loadout items and changing to Rookie class will reset your character's skills entirely.</p><p><strong>Cancel if you do not wish to continue.</strong></p>",
   "BITD.AddUpgrade": "Add Upgrade",
   "BITD.AddFriend": "Add Friend",
 
