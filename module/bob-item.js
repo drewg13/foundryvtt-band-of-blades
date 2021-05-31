@@ -25,7 +25,7 @@ export class BoBItem extends Item {
 
     //remove all load items on class change
     if( user.id === game.user.id ) {
-      if( data.type === "class" ) {
+      if( ( actor?.id ) && ( data.type === "class" ) ) {
         removeItems = await BoBHelpers.getActorItemsByType( actor.id, "item" );
       }
       if( removeItems.length !== 0 ) {

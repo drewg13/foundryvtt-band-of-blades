@@ -19,8 +19,8 @@
       <input id="item-uses" type="text" name="data.uses" value="{{data.uses}}">
 
       {{#if isGM}}
-        <label class="label-stripe">{{localize "BITD.Logic"}}</label>
-        <textarea name="data.logic">{{{data.logic}}}</textarea>
+        <div class="label-stripe">{{localize "BITD.Logic"}}</div>
+        <div id="logic">{{{data.logic}}}</div>
       {{/if}}
     </section>
 </form>

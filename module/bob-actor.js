@@ -11,10 +11,10 @@ export class BoBActor extends Actor {
   async _preCreate(createData, options, user) {
     await super._preCreate(createData, options, user);
 
+    // add token default settings
     const updateData = {};
     switch ( createData.type ) {
       case "character": {
-        updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
@@ -28,8 +28,26 @@ export class BoBActor extends Actor {
         break;
       }
     }
-
     await this.data.update(updateData);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onCreate( data, options, userId ) {
+    super._onCreate( data, options, userId );
+
+    if( userId === game.user.id ) {
+
+      // add default class to new character
+      const defaultClassName = "Rookie";
+      let classes = await BoBHelpers.getAllItemsByType( "class", game );
+      let itemData = classes.find( c => c.name === defaultClassName ) || {};
+      if( this.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+        await this.createEmbeddedDocuments( "Item", [ itemData ] );
+      }
+
+    }
   }
 
   /* -------------------------------------------- */
