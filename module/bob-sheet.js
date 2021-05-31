@@ -49,8 +49,6 @@ export class BoBSheet extends ActorSheet {
         addition_price_load += `(${e.data.price})`
       }
 
-	    const nonclass_upgrades = ["Auxiliary", "Gear", "Training", "Upgrades"];
-
       if (e.type === "trait") {
 		    if ( e.data.class === this.actor.data.data.heritage ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
@@ -213,6 +211,8 @@ async _onFlagAddClick(event) {
 		 await Item.create(items_to_add, {parent: this.document});
 	  }
   }
+
+  /* -------------------------------------------- */
 
   async addFlagsToSheet(item_type, el) {
 	  let items = await BoBHelpers.getAllActorsByType(item_type, game);
