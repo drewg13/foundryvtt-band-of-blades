@@ -55,14 +55,14 @@ export class BoBSheet extends ActorSheet {
 		    if ( e.data.class === this.actor.data.data.heritage ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "ability") {
 		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( e.data.class === "General" ) && ( ( this.actor.data.data.class !== "Rookie") && ( this.actor.data.data.class !== "" ) ) ) ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "item") {
@@ -74,13 +74,13 @@ export class BoBSheet extends ActorSheet {
           ( ( this.actor.data.data.item_triggers.chemist === 1 ) && ( e.data.class === "Chemist") ) ) {
 			      html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			      html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
 			      html += `</label>`;
 		    }
 	    } else {
 			  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			  html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			  html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.description)}</span></i>`;
+			  html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
 			  html += `</label>`;
 	    }
     });
@@ -164,7 +164,7 @@ async _onFlagAddClick(event) {
 	  if (e.type === item_type) {
   	  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
       html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-      html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext">${game.i18n.localize(e.data.designation)}</span></i>`;
+      html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.designation)}</span></i>`;
       html += `</label>`;
 	  }
   });
