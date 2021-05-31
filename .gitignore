@@ -1,1 +1,3 @@
+.gitignore
 /.idea/*
+/band-of-blades.lock

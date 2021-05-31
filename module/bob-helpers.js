@@ -251,25 +251,28 @@ export class BoBHelpers {
   static getAttributeLabel(attribute_name) {
     // Calculate Dice to throw.
     let attribute_labels = {};
-    let attributes = {};
+    let attributeObj = {};
+    let skills = [];
 
-    // There has to be a better way to to do this
-    // @todo - pull skill list dynamically
-    const skills = ["insight","doctor","hack","rig","study","prowess","helm","scramble","scrap","skulk","resolve","attune","command","consort","sway"];
-    const systems = ["crew","upkeep","engines","comms","weapons","hull","shields","encryptor"];
+    const attributes = Object.keys( game.system.model.Actor.character.attributes );
+    if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
+    attributes.forEach( a => {
+      skills.push( a );
+      Object.keys( game.system.model.Actor.character.attributes[a].skills ).forEach( s => {
+        skills.push( s );
+      })
+    });
 
     if (skills.indexOf(attribute_name) !== -1 ) {
-      attributes = game.system.model.Actor.character.attributes;
-    } else if (systems.indexOf(attribute_name) !== -1 ) {
-      attributes = game.system.model.Actor.ship.systems;
+      attributeObj = game.system.model.Actor.character.attributes;
     } else {
       return BoBHelpers.getProperCase(attribute_name);
     }
 
-    for (const a in attributes) {
-      attribute_labels[a] = attributes[a].label;
-      for (const skill_name in attributes[a].skills) {
-        attribute_labels[skill_name] = attributes[a].skills[skill_name].label;
+    for (const a in attributeObj) {
+      attribute_labels[a] = attributeObj[a].label;
+      for (const s in attributeObj[a].skills) {
+        attribute_labels[s] = attributeObj[a].skills[s].label;
       }
     }
 

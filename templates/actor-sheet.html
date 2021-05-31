@@ -490,7 +490,7 @@
                       <input type="radio" id="attributes-{{../../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}" name="data.attributes.specialist.skills.{{../../data.item_triggers.spec_skill}}.value" value="{{this}}">
                       <label for="attributes-{{../../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}"></label>
                     {{/times_from_0}}
-                    <div class="attribute-skill-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{../data.item_triggers.spec_skill}}">{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'label')}}<span class="tooltiptext bottom">{{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'tip')}}}</span></div>
+                    <div class="attribute-skill-label tooltip">{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'label')}}<span class="tooltiptext bottom">{{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'tip')}}}<br />{{localize "BITD.SkillsSpecialistTip"}}</span></div>
                     <div class="skill-select">
                       <span>{{localize "BITD.Uses"}}</span>
                       <select id="skilluses-{{../data.item_triggers.spec_skill}}-{{../../actor._id}}" name="data.attributes.specialist.skills.{{../data.item_triggers.spec_skill}}.usesIndex">{{selectOptions (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesArray') selected=(lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesIndex') localize=true}}</select>
