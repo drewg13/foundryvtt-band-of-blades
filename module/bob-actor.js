@@ -86,12 +86,10 @@ export class BoBActor extends Actor {
   /** @override */
   getRollData() {
     const data = super.getRollData();
-    const attributes = ["insight", "prowess", "resolve"];
+    const attributes = Object.keys( game.system.model.Actor.character.attributes );
+    if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
     data.dice_amount = this.getAttributeDiceToThrow();
-    if ( this.data.type === "character" ) {
-      const attribute_values = attributes.map( a => data.dice_amount[a] );
-      data.dice_amount.vice = Math.min( ...attribute_values );
-    }
+
     return data;
   }
 
@@ -107,48 +105,34 @@ export class BoBActor extends Actor {
 	  switch (this.data.type) {
 	    case 'character':
 	      for (const a in this.data.data.attributes) {
-          dice_amount[a] = 0;
-		      // Add +1d to resistance rolls only for Forged item on ship
-		      let actor_flags = this.getFlag("band-of-blades", "ship") || [];
-		      actor_flags.forEach(i => {
-		        if (i.data.installs.forged_inst === 1) {
-		          dice_amount[a]++;
-		        }
-		      });
+          dice_amount[a] = {
+            "value": 0,
+            "bonus": 0
+          };
 
-		      for (const s in this.data.data.attributes[a].skills) {
-		        dice_amount[s] = parseInt(this.data.data.attributes[a].skills[s]['value'][0])
+          for( const s in this.data.data.attributes[a].skills ) {
+            dice_amount[s] = {
+              "value": parseInt( this.data.data.attributes[a].skills[s]['value'][0] ),
+              "bonus": 0
+            }
 
-		        // We add a +1d for every skill higher than 0.
-		        if ( dice_amount[s] > 0 ) {
-		          dice_amount[a]++;
-		        }
-		      }
-		      // add resistance bonus dice
-		      if( this.data.data.attributes[a].bonus ) {
-		        dice_amount[a] = dice_amount[a] + this.data.data.attributes[a].bonus;
+            // We add a +1d for every skill higher than 0.
+            if( dice_amount[s].value > 0 ) {
+              dice_amount[a].value++;
+            }
+
+            // add resistance bonus dice
+            if( this.data.data.attributes[a].bonus ) {
+              dice_amount[a].bonus = this.data.data.attributes[a].bonus;
+            }
           }
-		    }
+        }
         // add specialist action to insight resistance dice
         if( this.data.data.item_triggers.specialist ) {
-          dice_amount.insight++;
+          dice_amount.insight.value++;
         }
 	      break;
-
-	    case 'ship':
-	      for (const a in this.data.data.systems) {
-	        dice_amount[a] = 0;
-		      if ( a === "upkeep" ) {
-		        dice_amount[a] = parseInt(this.data.data.systems[a]['damage'][0])
-		      }
-		      else {
-		        dice_amount[a] = parseInt(this.data.data.systems[a]['value'][0]) - parseInt(this.data.data.systems[a]['damage'][0]);
-		        if (dice_amount[a] < 0) { dice_amount[a] = 0 }
-		      }
-	      }
-	      break;
 	  }
-
     return dice_amount;
   }
 
@@ -159,8 +143,9 @@ export class BoBActor extends Actor {
     let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
 
     // Calculate Dice Amount for Attributes
-    const base_dice = this.getRollData().dice_amount[attribute_name];
-    let total_dice = base_dice;
+    const base_dice = this.getRollData().dice_amount[attribute_name].value;
+    const bonus_dice = this.getRollData().dice_amount[attribute_name].bonus;
+    let total_dice = base_dice + bonus_dice;
 
     new Dialog({
       title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
@@ -187,6 +172,10 @@ export class BoBActor extends Actor {
             <div class="form-group roll base-dice">
               <label class="base-dice">${game.i18n.localize('BITD.BaseDice')}: </label>
 			        <label>${base_dice}d</label>
+            </div>
+            <div class="form-group roll bonus-dice">
+              <label class="bonus-dice">${game.i18n.localize('BITD.BonusDice')}: </label>
+			        <label>${bonus_dice}d</label>
             </div>
             <div class="form-group roll mod">
               <label>${game.i18n.localize('BITD.Modifier')}:</label>
@@ -233,9 +222,10 @@ export class BoBActor extends Actor {
     let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
 
     // Calculate Dice Amount for Attributes
-    const base_dice = this.getRollData().dice_amount[attribute_name];
+    const base_dice = this.getRollData().dice_amount[attribute_name].value;
+    const bonus_dice = this.getRollData().dice_amount[attribute_name].bonus;
+    let total_dice = base_dice + bonus_dice;
 
-    let total_dice = base_dice;
     const proper_attribute_name = BoBHelpers.getProperCase(roll_type);
 
     new Dialog({
@@ -247,6 +237,10 @@ export class BoBActor extends Actor {
             <div class="form-group roll base-dice">
               <label class="base-dice">${game.i18n.localize('BITD.BaseDice')}: </label>
 			        <label>${base_dice}d</label>
+            </div>
+            <div class="form-group roll bonus-dice">
+              <label class="bonus-dice">${game.i18n.localize('BITD.BonusDice')}: </label>
+			        <label>${bonus_dice}d</label>
             </div>
             <div class="form-group roll mod">
               <label>${game.i18n.localize('BITD.Modifier')}:</label>
@@ -291,15 +285,12 @@ export class BoBActor extends Actor {
   async rollAttribute( attribute_name = "", additional_dice_amount = 0, position, effect ) {
 
     let dice_amount = 0;
-    const attributes = [ "insight", "prowess", "resolve" ];
+    const attributes = Object.keys( game.system.model.Actor.character.attributes );
+    if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
     if ( attribute_name !== "" ) {
       let roll_data = this.getRollData();
-      if ( attribute_name === "Vice" ) {
-	      const attribute_values = attributes.map( a => roll_data.dice_amount[a] );
-	      dice_amount = Math.min( ...attribute_values  );
-	    } else {
-	      dice_amount += roll_data.dice_amount[attribute_name];
-      }
+      dice_amount += roll_data.dice_amount[attribute_name].value;
+      dice_amount += roll_data.dice_amount[attribute_name].bonus;
     }
     else {
       dice_amount = 1;

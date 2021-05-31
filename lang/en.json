@@ -242,6 +242,7 @@
   "BITD.Effect": "Effect",
   "BITD.Modifier": "Modifier",
   "BITD.BaseDice": "Base Dice",
+  "BITD.BonusDice": "Bonus Dice from Abilities",
   "BITD.TotalDice": "Total Dice",
   "BITD.RollOptions": "Roll Options",
   "BITD.ActionsHelp": "Roll 1d per action rating.<br>Improve your chances using the following:<br><strong>Get An Assist:</strong> Get +1d if another PC assisted you, then that PC takes 1 <strong>stress</strong><br><strong>Push Yourself:</strong> Take 2 <strong>stress</strong> for: +1d, +1 to <strong>effect</strong>, or to take action when you're incapacitated, but you can't take a Devil's Bargain<br><strong>Devil's Bargain:</strong> Accept a consequence to get +1d, but you can't Push Yourself<br><strong>Group Action:</strong> All involved PCs make an action roll and count the single best result, but the leader takes 1 <strong>stress</strong> for each failure<br><strong>Setup Action:</strong> If this action roll succeeds and it makes sense in the fiction, give <strong>improved position</strong> or <strong>+1 effect</strong> to the next PC's action roll",

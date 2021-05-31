@@ -35,7 +35,8 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
 
   // Retrieve Roll status.
   let roll_status;
-  let resistance_rolls = [ "insight", "prowess", "resolve" ];
+  let resistance_rolls = Object.keys( game.system.model.Actor.character.attributes );
+  if( resistance_rolls[resistance_rolls.length - 1] === "specialist" ) { resistance_rolls.pop(); }
   let stress_result = 0;
   let stress_result_display = 0;
   let vice_result = 0;
@@ -46,10 +47,6 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
   } else if ( resistance_rolls.includes( attribute_name ) ) {
 	  [ roll_status, stress_result ] = getSaVResistRollStatus(rolls, zeromode);
 	  stress_result_display = ( 6 - stress_result );
-	  position = "";
-	  effect = "";
-  } else if ( attribute_name === "Vice" ) {
-	  [ roll_status, vice_result ] = getSaVViceRollStatus(rolls, zeromode);
 	  position = "";
 	  effect = "";
   } else if ( attribute_name === "upkeep" ) {
