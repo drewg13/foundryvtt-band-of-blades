@@ -40,7 +40,9 @@ Classes:
 
 Screenshots
 
+![image](./images/BoB.gif)
 
+![image](./images/Items.gif)
 
 
 Clocks
