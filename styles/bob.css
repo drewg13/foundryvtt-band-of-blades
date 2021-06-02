@@ -263,9 +263,6 @@ input[type="checkbox"]:hover {
   display: flex;
   font-weight: bold;
 }
-* .description {
-  font-style: italic;
-}
 * .rollable-text {
   transition: color 0.2s;
 }
