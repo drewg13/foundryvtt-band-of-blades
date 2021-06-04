@@ -32,8 +32,8 @@ Hooks.once("init", async function() {
     dice: bobRoll
   }
   game.system.bobclocks = {
-    themes: ["black"],
-    sizes: [ 4, 6, 8 ]
+    themes: ["black", "grey", "white", "red", "yellow", "green", "blue"],
+    sizes: [ 4, 6, 8, 10 ]
   };
 
   const versionParts = game.data.version.split('.');
