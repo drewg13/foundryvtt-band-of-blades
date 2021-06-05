@@ -349,7 +349,7 @@
         <div class="label-stripe">
           <p>
             <label for="character-{{actor._id}}-experience-0">{{localize "BITD.Abilities"}}</label>
-            <a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a>
+            <a class="item-add-popup" data-distinct="true" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a>
           </p>
           <div id="character-experience" class="teeth-experience tooltip">
 			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
@@ -394,7 +394,7 @@
 		    <span class="label-stripe flex-horizontal">
           <span>
             <label>{{localize "BITD.Loadout"}} </label>
-            <a class="item-add-popup" data-item-type="item"><i class="fas fa-plus-square"></i></a>
+            <a class="item-add-popup" data-distinct="true" data-item-type="item"><i class="fas fa-plus-square"></i></a>
           </span>
           <div class="utility" {{#if (gt data.loadout.current data.loadout.utility)}}style="color: red"{{/if}}>{{data.loadout.current}} / {{data.loadout.utility}} <span>{{localize "BITD.Utility"}}</span></div>
           <span class="dropdown">

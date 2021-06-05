@@ -33,7 +33,7 @@ Hooks.once("init", async function() {
   }
   game.system.bobclocks = {
     themes: ["black", "grey", "white", "red", "yellow", "green", "blue"],
-    sizes: [ 4, 6, 8, 10 ]
+    sizes: [ 4, 6, 8, 10, 12 ]
   };
 
   const versionParts = game.data.version.split('.');

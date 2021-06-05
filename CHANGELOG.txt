@@ -1,3 +1,5 @@
 v0.1.0  Initial beta release
 
-v0.1.1  Add colors and 10 clocks
+v0.1.1  Add colors and 10-clocks
+
+v0.1.2  Add 12-clocks, limit adding abilities and items to one at a time
