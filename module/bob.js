@@ -275,8 +275,8 @@ Hooks.on("getSceneControlButtons", (controls) => {
   ClockTiles.getSceneControlButtons(controls);
 });
 
-Hooks.on("renderTileHUD", async (hud, html, tile) => {
-  await ClockTiles.renderTileHUD(hud, html, tile);
+Hooks.on("renderTileHUD", async (hud, html, tileData) => {
+  await ClockTiles.renderTileHUD(hud, html, tileData);
 });
 
 Hooks.on("renderTokenHUD", async (hud, html, token) => {

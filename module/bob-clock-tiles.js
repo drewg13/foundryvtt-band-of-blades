@@ -36,18 +36,32 @@ export default {
     });
   },
 
-  renderTileHUD: async (_hud, html, tile) => {
+  renderTileHUD: async (_hud, html, tileData) => {
     log("Render")
-    let t = canvas.tiles.get(tile._id);
-    if (!t.data.flags['band-of-blades'].clocks) {
-      return;
+    let t;
+    let b = canvas.background.tiles.find( tile => tile.id === tileData._id );
+    let f = canvas.foreground.tiles.find( tile => tile.id === tileData._id );
+    if( b?.id === tileData._id ) {
+      t = b;
+    } else if ( f?.id === tileData._id ) {
+      t = f;
+    } else { return false }
+
+    if (!t?.data?.flags['band-of-blades']?.clocks) {
+      return false;
     }
 
     const buttonHTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-buttons.html');
-    html.find("div.left").append(buttonHTML).click(async (event) => {
+    html.find("div.right").append(buttonHTML).click(async (event) => {
       log("HUD Clicked")
       // re-get in case there has been an update
-      t = canvas.tiles.get(tile._id);
+      b = canvas.background.tiles.find( tile => tile.id === tileData._id );
+      f = canvas.foreground.tiles.find( tile => tile.id === tileData._id );
+      if( b?.id === tileData._id ) {
+        t = b;
+      } else if ( f?.id === tileData._id ) {
+        t = f;
+      }
 
       const oldClock = new BoBClock(t.data.flags['band-of-blades'].clocks);
       let newClock;
@@ -63,6 +77,8 @@ export default {
         newClock = oldClock.increment();
       } else if (target.classList.contains("progress-down")) {
         newClock = oldClock.decrement();
+      } else if ( target.dataset.action ) {
+        return;
       } else {
         return error("ERROR: Unknown TileHUD Button");
       }
