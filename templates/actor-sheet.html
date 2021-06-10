@@ -248,7 +248,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>3</td>
+            <td class="harm-header">3</td>
             <td colspan="2">
               <input type="text" id="character-{{actor._id}}-harm-3-1" name="data.harm.heavy.one" value="{{data.harm.heavy.one}}">
             </td>
@@ -293,7 +293,7 @@
             </td>
           </tr>
           <tr>
-            <td>2</td>
+            <td class="harm-header">2</td>
             <td>
               <input type="text" id="character-{{actor._id}}-harm-2-1" name="data.harm.medium.one" value="{{data.harm.medium.one}}">
             </td>
@@ -313,7 +313,7 @@
             </td>
           </tr>
           <tr>
-            <td>1</td>
+            <td class="harm-header">1</td>
             <td>
               <input type="text" id="character-{{actor._id}}-harm-1-1" name="data.harm.light.one" value="{{data.harm.light.one}}">
             </td>
@@ -342,6 +342,9 @@
         <a class="item" data-tab="abilities">{{localize "BITD.Abilities"}}</a>
         <a class="item" data-tab="loadout">{{localize "BITD.Loadout"}}</a>
         <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
+        {{#if isGM}}
+          <a class="item" data-tab="effects">{{localize "BITD.Effects"}}</a>
+        {{/if}}
         <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
       </nav>
 
@@ -349,7 +352,7 @@
         <div class="label-stripe">
           <p>
             <label for="character-{{actor._id}}-experience-0">{{localize "BITD.Abilities"}}</label>
-            <a class="item-add-popup" data-distinct="true" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a>
+            <a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a>
           </p>
           <div id="character-experience" class="teeth-experience tooltip">
 			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
@@ -394,7 +397,7 @@
 		    <span class="label-stripe flex-horizontal">
           <span>
             <label>{{localize "BITD.Loadout"}} </label>
-            <a class="item-add-popup" data-distinct="true" data-item-type="item"><i class="fas fa-plus-square"></i></a>
+            <a class="item-add-popup" data-item-type="item"><i class="fas fa-plus-square"></i></a>
           </span>
           <div class="utility" {{#if (gt data.loadout.current data.loadout.utility)}}style="color: red"{{/if}}>{{data.loadout.current}} / {{data.loadout.utility}} <span>{{localize "BITD.Utility"}}</span></div>
           <span class="dropdown">
@@ -439,6 +442,14 @@
             <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
           {{/if}}
         </div>
+      </div>
+
+      {{!-- Active Effects --}}
+      <div id="effects" class="tab effects flex-vertical" data-tab="effects">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Effects"}}</label></p>
+        </div>
+        {{> "systems/band-of-blades/templates/parts/active-effects.html"}}
       </div>
 
       {{!-- Full Item List --}}
@@ -486,14 +497,16 @@
                 {{#if (eq attribute_name "insight")}}
                 <div class="attributes-container">
                   {{#multiboxes (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'value')}}
-                    {{#times_from_0 (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'max')}}
-                      <input type="radio" id="attributes-{{../../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}" name="data.attributes.specialist.skills.{{../../data.item_triggers.spec_skill}}.value" value="{{this}}">
-                      <label for="attributes-{{../../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}"></label>
-                    {{/times_from_0}}
+                    <div class="attribute-stats">
+                      {{#times_from_0 (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'max')}}
+                        <input type="radio" id="attributes-{{../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}" name="data.attributes.specialist.skills.{{../../data.item_triggers.spec_skill}}.value" value="{{this}}">
+                        <label for="attributes-{{../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}"></label>
+                      {{/times_from_0}}
+                    </div>
                     <div class="attribute-skill-label tooltip">{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'label')}}<span class="tooltiptext bottom">{{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'tip')}}}<br />{{localize "BITD.SkillsSpecialistTip"}}</span></div>
                     <div class="skill-select">
                       <span>{{localize "BITD.Uses"}}</span>
-                      <select id="skilluses-{{../data.item_triggers.spec_skill}}-{{../../actor._id}}" name="data.attributes.specialist.skills.{{../data.item_triggers.spec_skill}}.usesIndex">{{selectOptions (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesArray') selected=(lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesIndex') localize=true}}</select>
+                      <select id="skilluses-{{../data.item_triggers.spec_skill}}-{{../actor._id}}" name="data.attributes.specialist.skills.{{../data.item_triggers.spec_skill}}.usesIndex">{{selectOptions (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesArray') selected=(lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesIndex') localize=true}}</select>
                     </div>
                   {{/multiboxes}}
                 </div>
@@ -506,10 +519,12 @@
                 {{#if (gt skill.max 0)}}
                   <div class="attributes-container">
                     {{#multiboxes skill.value}}
-                      {{#times_from_0 skill.max}}
-                        <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
-                        <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
-                      {{/times_from_0}}
+                      <div class="attribute-stats">
+                        {{#times_from_0 skill.max}}
+                          <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
+                          <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
+                        {{/times_from_0}}
+                      </div>
                       <div class="attribute-skill-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext bottom">{{{localize skill.tip}}}</span></div>
                     {{/multiboxes}}
                   </div>
@@ -524,7 +539,7 @@
             <div id="attributes-{{attribute_name}}" class="attribute">
               <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
                 <div class="stripe">
-                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left">{{{localize attribute.tip}}}</span></span>
+                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext top">{{{localize attribute.tip}}}</span></span>
                 </div>
                 <div class="stripe-tooth-body-blue">
                   {{#multiboxes attribute.exp}}
@@ -545,11 +560,13 @@
                     {{#if (gt skill.max 0)}}
                       <div class="attributes-container">
                         {{#multiboxes skill.value}}
-                          {{#times_from_0 skill.max}}
-                            <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
-                            <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
-                          {{/times_from_0}}
-                          <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext">{{{localize skill.tip}}}</span></div>
+                          <div class="attribute-stats">
+                            {{#times_from_0 skill.max}}
+                              <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
+                              <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
+                            {{/times_from_0}}
+                          </div>
+                          <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext top">{{{localize skill.tip}}}<br />{{localize "BITD.SkillsSpecialistTip"}}</span></div>
                           <div class="skill-select">
                             <span>{{localize "BITD.Uses"}}</span>
                             <select id="skilluses-{{skill_name}}-{{../../actor._id}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.usesIndex">{{selectOptions (lookup skill 'usesArray') selected=(lookup skill 'usesIndex') localize=true}}</select>

@@ -5,56 +5,41 @@
     "alias": "",
     "look": "",
     "class": "",
-    "class_default": "",
     "heritage": "",
-    "heritage_default": "",
     "notes": "",
     "experience": "0",
     "item_triggers": {
       "grenadier": 0,
-      "grenadier_default": 0,
       "chemist": 0,
-      "chemist_default": 0,
       "crimson": 0,
-      "crimson_default": 0,
       "specialist": 0,
-      "specialist_default": 0,
       "spec_skill": "",
-      "spec_skill_default": ""
+      "pious": 0
     },
     "stress": {
       "value": "0",
       "max": 6,
-      "max_default": 6,
-      "name_default": "BITD.Stress",
       "name": "BITD.Stress"
     },
     "trauma": {
       "max": 1,
-      "max_default": 1,
       "value": "0",
       "name": "BITD.Trauma",
-      "name_default": "BITD.Trauma",
       "list": [0]
     },
     "corruption": {
       "value": "0",
       "max": 6,
-      "max_default": 6,
-      "name_default": "BITD.Corruption",
       "name": "BITD.Corruption"
     },
     "blight": {
       "max": 4,
-      "max_default": 4,
       "value": "0",
       "name": "BITD.Blight",
-      "name_default": "BITD.Blight",
       "list": [0]
     },
     "loadout": {
       "utility": 2,
-      "utility_default": 2,
   	  "load_level": "",
       "selected_load_level": ""
   	},
@@ -97,21 +82,18 @@
             "label": "BITD.SkillsResearch",
             "tip": "BITD.SkillsResearchTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "rig": {
             "label": "BITD.SkillsRig",
             "tip": "BITD.SkillsRigTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "scout": {
             "label": "BITD.SkillsScout",
             "tip": "BITD.SkillsScoutTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           }
         }
@@ -126,28 +108,24 @@
             "label": "BITD.SkillsManeuver",
             "tip": "BITD.SkillsManeuverTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "shoot": {
             "label": "BITD.SkillsShoot",
             "tip": "BITD.SkillsShootTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "skirmish": {
             "label": "BITD.SkillsSkirmish",
             "tip": "BITD.SkillsSkirmishTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "wreck": {
             "label": "BITD.SkillsWreck",
             "tip": "BITD.SkillsWreckTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           }
         }
@@ -162,28 +140,24 @@
             "label": "BITD.SkillsConsort",
             "tip": "BITD.SkillsConsortTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "discipline": {
             "label": "BITD.SkillsDiscipline",
             "tip": "BITD.SkillsDisciplineTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "marshal": {
             "label": "BITD.SkillsMarshal",
             "tip": "BITD.SkillsMarshalTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           },
           "sway": {
             "label": "BITD.SkillsSway",
             "tip": "BITD.SkillsSwayTip",
             "max": 3,
-            "max_default": 3,
             "value": "0"
           }
         }
@@ -268,27 +242,60 @@
     "logic": {
       "class": "",
       "logic": ""
+    },
+    "activatedEffect": {
+      "activation": {
+        "type": "",
+        "cost": 0,
+        "condition": ""
+      },
+      "duration": {
+        "value": null,
+        "units": ""
+      },
+      "target": {
+        "value": null,
+        "width": null,
+        "units": "",
+        "type": ""
+      },
+      "range": {
+        "value": null,
+        "long": null,
+        "units": ""
+      },
+      "uses": {
+        "value": 0,
+        "max": 0,
+        "per": null
+      },
+      "consume": {
+        "type": "",
+        "target": null,
+        "amount": null
+      }
     }
   },
   "item": {
-    "templates": ["default", "logic"],
+    "templates": ["default", "logic", "activatedEffect"],
     "load": 0,
     "load_type": "",
     "uses": "0"
   },
   "class": {
-    "templates": ["default", "logic"],
+    "templates": ["default", "logic", "activatedEffect"],
     "def_abilities": "",
-	"experience_clues": ""
+	"experience_clues": "",
+    "skill": ""
   },
   "ability": {
-    "templates": ["default", "logic"]
+    "templates": ["default", "logic", "activatedEffect"]
   },
   "heritage": {
-    "templates": ["default", "logic"]
+    "templates": ["default", "logic", "activatedEffect"]
   },
   "trait": {
-    "templates": ["default", "logic"],
+    "templates": ["default", "logic", "activatedEffect"],
     "shortdesc": ""
   }
 }

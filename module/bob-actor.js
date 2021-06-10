@@ -28,7 +28,8 @@ export class BoBActor extends Actor {
         break;
       }
     }
-    await this.data.update(updateData);
+    this.data.update(updateData);
+
   }
 
   /* -------------------------------------------- */
@@ -39,30 +40,38 @@ export class BoBActor extends Actor {
 
     if( userId === game.user.id ) {
 
-      // add default class to new character
-      const defaultClassName = "Rookie";
-      let classes = await BoBHelpers.getAllItemsByType( "class", game );
-      let itemData = classes.find( c => c.name === defaultClassName ) || {};
-      if( this.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) {
-        await this.createEmbeddedDocuments( "Item", [ itemData ] );
+      if( this.type === 'character' ) {
+        // add default class to new character
+        const defaultClassName = "Rookie";
+        let classes = await BoBHelpers.getAllItemsByType( "class", game );
+        let itemData = classes.find( c => c.name === defaultClassName ).toObject() || {};
+        if( this.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+          await Item.createDocuments( [ itemData ], { parent: this } );
+          //await this.createEmbeddedDocuments( "Item", [ itemData ] );
+        }
       }
-
     }
+
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  prepareData() {
+    super.prepareData();
+
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   prepareDerivedData() {
+    super.prepareDerivedData();
     const actorData = this.data;
     const data = actorData.data;
 
-    if ( actorData.type === "ship" ) {
-      // calculates upkeep value from (crew quality + engine quality + hull quality + comms quality + weapons quality) / 4, rounded down
-      data.systems.upkeep.value = Math.floor((parseInt(data.systems.crew.value) + parseInt(data.systems.engines.value) + parseInt(data.systems.hull.value) + parseInt(data.systems.comms.value) + parseInt(data.systems.weapons.value)) / 4);
-    }
-
     if ( actorData.type === "character" ) {
+
       //sets up array of values for specialist skill uses tracking dropdown
       const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
       let skillArray = "";
@@ -86,8 +95,7 @@ export class BoBActor extends Actor {
   /** @override */
   getRollData() {
     const data = super.getRollData();
-    const attributes = Object.keys( game.system.model.Actor.character.attributes );
-    if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
+
     data.dice_amount = this.getAttributeDiceToThrow();
 
     return data;

@@ -3,11 +3,11 @@
  * @return {Promise}      A Promise which resolves once the migration is completed
  */
 export const migrateWorld = async function() {
-  ui.notifications.info(`Applying SaV Actors migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
+  ui.notifications.info(`Applying BoB Actors migration for version ${game.system.data.version}. Please be patient and do not close your game or shut down your server.`, {permanent: true});
 
   // Migrate World Actors
-  for ( let a of game.actors.entities ) {
-    if ((a.data.type === 'character') || (a.data.type === 'ship') || (a.data.type === 'universe')) {
+  for ( let a of game.actors.contents ) {
+    if ( (a.type === 'character') ) {
       try {
         const updateData = _migrateActor(a.data);
         if ( !isObjectEmpty(updateData) ) {
@@ -19,38 +19,12 @@ export const migrateWorld = async function() {
       }
     }
 
-    // Migrate Token Link for Character and Ship
-    if (a.data.type === 'character' || a.data.type === 'ship') {
-      try {
-        const updateData = _migrateTokenLink(a.data);
-        if ( !isObjectEmpty(updateData) ) {
-          console.log(`Migrating Token Link for ${a.name}`);
-          await a.update(updateData, {enforceTypes: false});
-        }
-      } catch(err) {
-        console.error(err);
-      }
-    }
-
-  }
-
-  // Migrate Actor Link
-  for ( let s of game.scenes.entities ) {
-    try {
-      const updateData = _migrateSceneData(s.data);
-      if ( !isObjectEmpty(updateData) ) {
-        console.log(`Migrating Scene entity ${s.name}`);
-        await s.update(updateData, {enforceTypes: false});
-      }
-    } catch(err) {
-      console.error(err);
-    }
   }
 
   // Set the migration as complete
   game.settings.set("band-of-blades", "systemMigrationVersion", game.system.data.version);
   ui.notifications.info(`BoB System Migration to version ${game.system.data.version} completed!`, {permanent: true});
-};
+}
 
 
 /* -------------------------------------------- */
@@ -113,31 +87,7 @@ function _migrateActor(actor) {
     }
   }
 
-  // Migrate Stress to Array
-  if (typeof actor.data.stress[0] !== 'undefined') {
-    updateData[`data.stress.value`] = actor.data.stress;
-    updateData[`data.stress.max`] = 9;
-    updateData[`data.stress.max_default`] = 9;
-    updateData[`data.stress.name_default`] = "BITD.Stress";
-    updateData[`data.stress.name`] = "BITD.Stress";
-  }
-
-  // Migrate Trauma to Array
-  if (typeof actor.data.trauma === 'undefined') {
-    updateData[`data.trauma.list`] = actor.data.traumas;
-    updateData[`data.trauma.value`] = [actor.data.traumas.length];
-    updateData[`data.trauma.max`] = 4;
-    updateData[`data.trauma.max_default`] = 4;
-    updateData[`data.trauma.name_default`] = "BITD.Trauma";
-    updateData[`data.trauma.name`] = "BITD.Trauma";
-  }
-
   return updateData;
-
-  // for ( let k of Object.keys(actor.data.attributes || {}) ) {
-  //   if ( k in b ) updateData[`data.bonuses.${k}`] = b[k];
-  //   else updateData[`data.bonuses.-=${k}`] = null;
-  // }
 }
 
 /* -------------------------------------------- */

@@ -174,6 +174,7 @@
   "BITD.EffectStandard": "Standard",
   "BITD.EffectGreat": "Great",
 
+  "BITD.SpecSkill": "Special Skill",
   "BITD.SkillsInsight": "Insight",
   "BITD.SkillsInsightShort": "Insight",
   "BITD.SkillsInsightTip": "Use Insight to avoid or reduce a consequence from deception or understanding.",
@@ -232,6 +233,12 @@
 
   "BITD.AddAbility": "Add Ability",
   "BITD.AddItem": "Add Item",
+  "BITD.Effects": "Effects",
+  "BITD.EffectCreate": "Create Effect",
+  "BITD.EffectToggle": "Toggle Effect",
+  "BITD.EffectEdit": "Edit Effect",
+  "BITD.EffectDelete": "Delete Effect",
+  "BITD.EffectWarning": "Managing Active Effects within an Owned Item is not currently supported by FoundryVTT and will be added in a subsequent update.",
   "BITD.Delete": "Delete",
   "BITD.DeleteAllLoadout": "Delete All Loadout Items",
   "BITD.ClassWarning": "<p>Please note that changing class will delete all Loadout items and changing to Rookie class will reset your character's skills entirely.</p><p><strong>Cancel if you do not wish to continue.</strong></p>",

@@ -1,18 +1,14 @@
-/**
- * A simple and flexible system for world-building using an arbitrary collection of character and item attributes
- * Author: Atropos
- * Software License: GNU GPLv3
- */
 
 // Import Modules
 import { registerSystemSettings } from "./settings.js";
+import { preloadHandlebarsTemplates } from "./templates.js";
 import { bobRoll, simpleRollPopup } from "./bob-roll.js";
 import { BoBHelpers } from "./bob-helpers.js";
 import { BoBActor } from "./bob-actor.js";
 import { BoBItem } from "./bob-item.js";
 import { BoBItemSheet } from "./bob-item-sheet.js";
 import { BoBActorSheet } from "./bob-actor-sheet.js";
-//import * as migrations from "./migration.js";
+import * as migrations from "./migration.js";
 /* For Clocks UI */
 import { BoBClockSheet } from "./bob-clock-sheet.js";
 import ClockTiles from "./bob-clock-tiles.js";
@@ -21,11 +17,10 @@ import { log } from "./bob-clock-util.js";
 
 window.BoBHelpers = BoBHelpers;
 
-
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
-Hooks.once("init", async function() {
+Hooks.once("init", function() {
   console.log(`Initializing Band of Blades System`);
 
   game.sav = {
@@ -45,6 +40,9 @@ Hooks.once("init", async function() {
 
   // Register System Settings
   registerSystemSettings();
+
+  // Preload Handlebars Templates
+  preloadHandlebarsTemplates();
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -239,7 +237,7 @@ Hooks.once("init", async function() {
 /**
  * Once the entire VTT framework is initialized, check to see if we should perform a data migration
  */
-Hooks.once("ready", async function() {
+Hooks.once("ready", function() {
 
   // Determine whether a system migration is required
   const currentVersion = game.settings.get("band-of-blades", "systemMigrationVersion");

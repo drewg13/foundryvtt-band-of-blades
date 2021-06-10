@@ -8,58 +8,81 @@ export class BoBItem extends Item {
 
   /** @override */
   async _preCreate( data, options, user ) {
+
+
     await super._preCreate( data, options, user );
-
-    let removeDupeItems = [];
-    let removeLoadItems = [];
-    let actor = this.parent ? this.parent : null;
-
-    //remove duplicates for some item types
-    if( user.id === game.user.id ) {
-      if( actor?.documentName === "Actor" ) {
-        removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
-      }
-      if( removeDupeItems.length !== 0 ) {
-        await actor.deleteEmbeddedDocuments( "Item", removeDupeItems );
-      }
-    }
-
-    //remove all load items on class change
-    if( user.id === game.user.id ) {
-      if( ( actor?.id ) && ( data.type === "class" ) ) {
-        removeLoadItems = await BoBHelpers.getActorItemsByType( actor.id, "item" );
-      }
-      if( removeLoadItems.length !== 0 ) {
-        await actor.deleteEmbeddedDocuments( "Item", removeLoadItems );
-      }
-    }
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onCreate( data, options, userId ) {
-    super._onCreate( data, options, userId );
 
     if( userId === game.user.id ) {
       let actor = this.parent ? this.parent : null;
 
       if( ( actor?.documentName === "Actor" ) && ( actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
-        await BoBHelpers.callItemLogic( data, actor );
+        //await BoBHelpers.callItemLogic( data, actor );
 
         if( ( data.type === "class" ) && ( data.data.def_abilities !== "" ) ) {
           await BoBHelpers.addDefaultAbilities( data, actor );
         }
 
-        if( ( data.type === "class" ) && ( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) ) {
-          const icon = data.img;
-          const icon_update = {
-            img: icon,
-            token: {
-              img: icon
-            }
-          };
-          await actor.update( icon_update );
+        if( data.type === "class" ) {
+
+          // adds specialist skill, if character has specialist class (non-Rookie)
+          const skill = data.data.skill;
+          let update = {_id: actor.id};
+          if( skill ) {
+            const value = parseInt( actor.data.data.attributes.specialist.skills[skill].value ) > 1 ? actor.data.data.attributes.specialist.skills[skill].value : "1";
+            const max = parseInt( actor.data.data.attributes.specialist.skills[skill].max ) > 3 ? actor.data.data.attributes.specialist.skills[skill].max : "3";
+            foundry.utils.mergeObject(
+              update,
+              { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
+            );
+          } else if( data.name === "Rookie" ) {
+            let attributes = Object.keys(game.system.model.Actor.character.attributes);
+            let max;
+            // reset attributes and skills to defaults
+            attributes.forEach( a => {
+              let skills = Object.keys( game.system.model.Actor.character.attributes[a].skills );
+              skills.forEach( s => {
+                max = (a === "specialist") ? 0 : 3;
+                foundry.utils.mergeObject(
+                  update,
+                  { data: { attributes: { [a]: { skills: { [s]: { value: 0, max: max } } } } } }
+                );
+            })});
+
+            // set Rookie defaults
+            foundry.utils.mergeObject(
+              update,
+              { data: { attributes: {
+                prowess: { skills: {
+                  maneuver: { value: 1 },
+                  skirmish: { value: 1 }
+                } },
+                resolve: { skills: {
+                  consort: { value : 1 }
+                } } } } }
+            );
+          }
+
+          // set actor icon for new class, if icon is already class icon or mystery man, avoid resetting custom art
+          if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
+            const icon = data.img;
+            foundry.utils.mergeObject(
+              update,
+              {
+                img: icon,
+                token: {
+                  img: icon
+                }
+              }
+            );
+          }
+
+          await Actor.updateDocuments([update]);
         }
       }
 
@@ -77,29 +100,51 @@ export class BoBItem extends Item {
         await actor.setFlag( "band-of-blades", "items." + key + ".uses", data.data.uses );
         await actor.setFlag( "band-of-blades", "items." + key + ".usesMax", data.data.uses );
       }
+
+      let removeDupeItems = [];
+      let removeLoadItems = [];
+
+      //remove duplicates for some item types
+      if( actor?.documentName === "Actor" ) {
+        removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
+        if( removeDupeItems.length !== 0 ) {
+          await actor.deleteEmbeddedDocuments( "Item", removeDupeItems );
+        }
+      }
+
+      //remove all load items on class change
+      if( actor && ( data.type === "class" ) ) {
+        removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
+        if( removeLoadItems.length !== 0 ) {
+          await actor.deleteEmbeddedDocuments( "Item", removeLoadItems );
+        }
+      }
     }
+    super._onCreate( data, options, userId );
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onDelete( options, userId ) {
-    super._onDelete( options, userId );
 
     let actor = this.parent ? this.parent : null;
-    let data = this.data;
+    //let data = this.data;
     if ( ( actor?.documentName === "Actor" ) && ( actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
-      await BoBHelpers.undoItemLogic( data, actor );
+      //await BoBHelpers.undoItemLogic( data, actor );
     }
 
     // Delete related flags on item delete
-    if ( actor !== null ) {
-      let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
-      if( itemFlag ) {
-        const key = "flags.band-of-blades.items.-=" + this.data._id;
-        await actor.data.update( { [key]: null } )
-      }
-    }
+    // TODO: this breaks item usage dropdowns as-is, old version broke active effects
+    //if ( actor !== null ) {
+    //  let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
+    //  if( itemFlag ) {
+    //    const key = "items.-=" + this.data._id;
+    //    let deleted = await actor?.setFlag( "band-of-blades", key, null );
+    //    console.log(deleted.data.flags["band-of-blades"].items);
+    //  }
+    //}
+    super._onDelete( options, userId );
   }
 
   /* -------------------------------------------- */

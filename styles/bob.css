@@ -53,11 +53,47 @@
 * {
 	font-family: 'Vollkorn', 'Signika', serif;
 }
+* .flex {
+  display: flex;
+}
 * header {
   margin-bottom: 10px;
 }
 * ul {
   list-style: none;
+}
+* #effects table {
+  background: unset;
+  border-top: unset;
+  border-bottom: unset;
+  margin: unset;
+}
+* #effects table .item {
+  font-weight: unset;
+}
+* #effects table tr:nth-child(even) {
+  background-color: unset;
+}
+* #effects table thead {
+  background: unset;
+  color: unset;
+  text-shadow: unset;
+  border-bottom: unset;
+}
+* #effects table .item-controls {
+  justify-content: space-evenly;
+}
+* .sheet table .center {
+  text-align: center;
+}
+* .sheet table .right {
+  text-align: right;
+}
+* .sheet img {
+  margin-right: 3px;
+}
+* .sheet section {
+  margin-bottom: unset;
 }
 * form.actor-sheet {
   /* padding: 20px; */
@@ -195,6 +231,9 @@ input[type="checkbox"]:hover {
   display: flex;
   justify-content: space-between;
 }
+* .label-stripe p {
+  margin: 0.25em 0;
+}
 * .label-stripe span {
   font-family: 'MajorGuilty', 'serif';
   font-size: x-large;
@@ -225,7 +264,7 @@ input[type="checkbox"]:hover {
 }
 * .label-stripe-gray {
   text-transform: uppercase;
-  background-color: #92a6ad;
+  background-color: #999999 !important;
   margin-bottom: 10px;
   position: relative;
   padding-left: 10px;
@@ -289,9 +328,6 @@ input[type="checkbox"]:hover {
 }
 * .big-teeth-section > * {
   margin-right: 10px;
-}
-* .big-teeth-section > *:last-child {
-  margin-right: 0px;
 }
 * .big-teeth-section:last-child {
   margin-right: 0px;
@@ -649,7 +685,7 @@ input[type="checkbox"]:hover {
 * .teeth-experience label[for$="-0"] {
   width: auto;
   height: auto;
-  padding-top: 6px;
+  padding-top: 2px;
   background-image: none !important;
   color: #EEEFFF;
 }
@@ -683,6 +719,14 @@ input[type="checkbox"]:hover {
 * #harm-armor {
   display: flex;
 }
+* #harm-armor table td,
+* #harm-armor table th {
+  padding: 1px;
+}
+* #harm-armor td.harm-header {
+  font-family: 'Zamolxis', 'serif';
+  font-size: x-large;
+}
 * #harm-armor #character-harm {
   width: 100%;
 }
@@ -699,6 +743,7 @@ input[type="checkbox"]:hover {
 }
 * #harm-armor #character-harm table input[type=text] {
   width: 100%;
+  font-weight: bold;
 }
 * #harm-armor #character-health-clock {
   margin-left: 25px;
@@ -771,6 +816,7 @@ input[type="checkbox"]:hover {
   color: #EEEFFF;
   font-size: 17px;
   padding-left: 5px;
+  margin-bottom: 5px;
 }
 * #attributes .attribute-label {
   font-family: 'MajorGuilty', 'serif';
@@ -879,7 +925,7 @@ input[type="checkbox"]:hover {
 }
 * #attributes .attributes-container {
   display: flex;
-  margin: 3px 0px;
+  position: relative;
   /* Hide the browser's default checkbox */
 }
 * #attributes .attributes-container label {
@@ -923,176 +969,22 @@ input[type="checkbox"]:hover {
 }
 * #attributes .attributes-container * {
   margin-right: 6px;
-}
-* #systems {
   display: flex;
-  flex-direction: column;
-  width: 245px;
-  overflow: visible;
 }
-* #systems .stripe {
-  background-color: #191813;
-  color: #EEEFFF;
-  font-size: 17px;
-  padding-left: 5px;
+* #attributes .skill-select {
+  position: absolute;
+  left:160px;
+  top: 1px;
+  font-weight: bold;
 }
-* #systems .stripe-damage {
-  background-color: #6E0101;
-  color: #EEEFFF;
-  font-size: 17px;
-  padding-left: 5px;
+* #attributes .skill-select span {
+  align-items: center;
 }
-* #systems .system-label,
-* #systems .system-skill-label {
-  text-transform: uppercase;
-}
-* #systems .system-label-damage {
-  padding-left: 25px;
-  text-transform: uppercase;
-}
-* #systems .system-skill-label {
-  letter-spacing: 1px;
-}
-* #systems .systems-value {
-  position: relative;
-  margin-bottom: 10px;
-}
-* #systems .systems-value .stripe-tooth-body-red {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  top: 0px;
-  right: 0px;
-}
-* #system-upgrades .item .item-body {
-	max-width: 150px;
-}
-* #system-subitem.stripe-tooth-body-red {
-	position: absolute;
-}
-* #systems .systems-value .stripe-tooth-body-blue {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  top: 0px;
-  right: 0px;
-}
-* #systems .systems-value .stripe-tooth-body-red label {
-  height: 30px;
-  width: 10px;
-  background-image: url("assets/teeth/xptooth-red.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 5px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #systems .systems-value .stripe-tooth-body-blue label {
-  height: 30px;
-  width: 10px;
-  background-image: url("assets/teeth/xptooth-blue.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 5px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #systems .systems-value .stripe-tooth-body-red label:last-of-type {
-  margin-right: 0px;
-}
-* #systems .systems-value .stripe-tooth-body-blue label:last-of-type {
-  margin-right: 0px;
-}
-* #systems .systems-value .stripe-tooth-body-red label[for$="-0"] {
-  width: auto;
-  height: auto;
-  background-image: none !important;
-  color: #EEEFFF;
-}
-* #systems .systems-value .stripe-tooth-body-blue label[for$="-0"] {
-  width: auto;
-  height: auto;
-  background-image: none !important;
-  color: #EEEFFF;
-}
-* #systems .systems-value .stripe-tooth-body-red label[for$="-0"] i {
-  margin-top: 4px;
-}
-* #systems .systems-value .stripe-tooth-body-blue label[for$="-0"] i {
-  margin-top: 4px;
-}
-* #systems .systems-value .stripe-tooth-body-red label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* #systems .systems-value .stripe-tooth-body-blue label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* #systems .systems-value .stripe-tooth-body-red input {
-  display: none;
-}
-* #systems .systems-value .stripe-tooth-body-blue input {
-  display: none;
-}
-* #systems .systems-value .stripe-tooth-body-red input:checked ~ label {
-  background-image: url("assets/teeth/xptooth-white.png");
-}
-* #systems .systems-value .stripe-tooth-body-blue input:checked ~ label {
-  background-image: url("assets/teeth/xptooth-white.png");
-}
-* #systems .systems-value .stripe-tooth-body-red input:checked + label {
-  background-image: url("assets/teeth/xptooth-red.png");
-}
-* #systems .systems-value .stripe-tooth-body-blue input:checked + label {
-  background-image: url("assets/teeth/xptooth-blue.png");
-}
-* #systems .systems-container {
-  display: flex;
-  margin: 3px 0px;
-  display: flex;
-  /* Hide the browser's default checkbox */
-}
-* #systems .systems-container label {
-  height: 15px;
-  width: 15px;
-  background-color: #191813;
-  vertical-align: middle;
-  border: 2px solid #191813;
-  border-radius: 24px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #systems .systems-container label[for$="-0"] {
-  height: 5px;
-  width: 5px;
-  border-radius: 24px;
-  background-image: none !important;
-  background-color: red !important;
-  margin-right: 0px;
-}
-* #systems .systems-container label:hover {
-  filter: brightness(0.7);
-  opacity: 0.7;
-}
-* #systems .systems-container input {
-  display: none;
-}
-* #systems .systems-container input:checked ~ label {
-  background-color: #EEEFFF;
-}
-* #systems .systems-container input:checked + label {
-  transition: filter 0.1s;
-  cursor: pointer;
-  background-color: #191813;
-}
-* #systems .systems-container input:checked + label:hover {
-  filter: brightness(0.7);
-  opacity: 0.7;
-}
-* #systems .systems-container * {
-  margin-right: 5px;
+* #attributes .skill-select select {
+  height: 22px;
 }
 * .item {
-  justify-content: space-between;
+  justify-content: flex-start;
   font-weight: bold;
 }
 * #abilities .item,
@@ -1103,11 +995,8 @@ input[type="checkbox"]:hover {
 }
 * .item .ship-body,
 * .item .item-body {
-  margin-bottom: 10px;
-}
-* .item .ship-body *,
-* .item .item-body * {
-  margin-right: 10px;
+  margin-bottom: 8px;
+  margin-right: 2px;
 }
 * .item .item-body .item-description {
   font-style: italic;
@@ -1120,7 +1009,8 @@ input[type="checkbox"]:hover {
   flex-grow: 3;
 }
 * .item .item-control {
-  flex-grow: 1;
+  text-align: center;
+  width: 40px;
 }
 * #all-items .item .item-body {
 	width: auto;
@@ -1137,221 +1027,6 @@ input[type="checkbox"]:hover {
 * #lair,
 * #alias {
   margin-bottom: 10px;
-}
-* .character-healing-clock,
-* .coins {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  flex-wrap: wrap;
-}
-* .coins label {
-  height: 15px;
-  width: 15px;
-  background-color: #DAA520;
-  vertical-align: middle;
-  border: 1px solid #191813;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .coins.healing label,
-* .coins.debt label {
-  height: 15px;
-  width: 15px;
-  background-color: #FC0303;
-  vertical-align: middle;
-  border: 1px solid #191813;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .coins.gambits label {
-  height: 15px;
-  width: 15px;
-  background-color: #03A33E;
-  vertical-align: middle;
-  border: 1px solid #191813;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .coins.loadout label {
-  height: 15px;
-  width: 15px;
-  background-color: #191813;
-  vertical-align: middle;
-  border: 1px solid #191813;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .coins label[for$="-0"] {
-  margin-right: 0px;
-}
-* .coins label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* .coins input {
-  display: none;
-}
-* .coins input:checked ~ label {
-  background-color: #EEEFFF;
-}
-* .coins input:checked + label {
-  background-color: #DAA520;
-}
-* .coins.healing input:checked + label,
-* .coins.debt input:checked + label {
-  background-color: #FC0303;
-}
-* .coins.gambits input:checked + label {
-  background-color: #03A33E;
-}
-* .coins.loadout input:checked + label {
-  background-color: #191813;
-}
-* #loadout-max .coins label {
-  margin-left: 15px;
-}
-* .coins input ~ label {
-  margin-right: 3px;
-  margin-bottom: 3px;
-  transition: filter 0.2s;
-  cursor: pointer;
-}
-* .coins input ~ label[for$="0"] {
-  border-width: 2px;
-}
-* .coins input ~ label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* .coins.healing {
-  width: 42px;
-}
-* .coins.coins-hands {
-  width: 72px;
-}
-* .coins.coins-stashed {
-  width: 190px;
-}
-* .crew-coins {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  flex-wrap: wrap;
-  max-width: 72px;
-}
-* .crew-coins label {
-  height: 15px;
-  width: 15px;
-  background-color: #DAA520;
-  vertical-align: middle;
-  border: 1px solid #191813;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .crew-coins label[for$="-0"] {
-  margin-right: 0px;
-}
-* .crew-coins label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* .crew-coins input {
-  display: none;
-}
-* .crew-coins input:checked ~ label {
-  background-color: #EEEFFF;
-}
-* .crew-coins input:checked + label {
-  background-color: #DAA520;
-}
-* .crew-coins label {
-  margin-right: 3px;
-  margin-bottom: 3px;
-}
-* #crew-reputation {
-  border-top: 3px solid #191813;
-  display: flex;
-  /* Hide the browser's default checkbox */
-}
-* #crew-reputation label {
-  height: 50px;
-  width: 17px;
-  background-image: url("assets/teeth/stresstooth-red.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 5px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #crew-reputation label:last-of-type {
-  margin-right: 0px;
-}
-* #crew-reputation label[for$="-0"] {
-  width: auto;
-  height: auto;
-  background-image: none !important;
-  color: #EEEFFF;
-}
-* #crew-reputation label[for$="-0"] i {
-  margin-top: 4px;
-}
-* #crew-reputation label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* #crew-reputation input {
-  display: none;
-}
-* #crew-reputation input:checked ~ label {
-  background-image: url("assets/teeth/stresstooth-halfgrey.png");
-}
-* #crew-reputation input:checked + label {
-  background-image: url("assets/teeth/stresstooth-red.png");
-}
-* #crew-reputation input[disabled=disabled] + label {
-  background-image: url(assets/teeth/stresstooth-black.png);
-}
-* #crew-qual {
-  background-color: #999;
-  height: 33px;
-  width: 145px;
-  display: flex;
-  align-items: center;
-  border-top: 3px solid #191813;
-  display: flex;
-  /* Hide the browser's default checkbox */
-}
-* #crew-qual label {
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* #crew-qual label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* #crew-qual label:not([for$="-0"]) {
-  height: 18px;
-  width: 18px;
-  background-color: #191813;
-  vertical-align: middle;
-  border: 2px solid #191813;
-  border-radius: 9px;
-}
-* #crew-qual input {
-  display: none;
-}
-* #crew-qual input:checked ~ label:not([for$="-0"]) {
-  border-color: gray;
-  background-color: #EEEFFF;
-}
-* #crew-qual input:checked + label:not([for$="-0"]) {
-  background-color: #191813;
-  border-color: #191813;
-}
-* #crew-qual > * {
-  margin-right: 5px;
-}
-* #heat-wanted {
-  justify-content: none;
 }
 * .experience-clues-container {
   width: 340px;
@@ -1379,43 +1054,6 @@ input[type="checkbox"]:hover {
 * .class-name .big-description {
   font-size: 20px;
   color: #191813;
-}
-* .edgeflaw input {
-  display: none;
-}
-* .edgeflaw input:checked + label {
-  color: red;
-}
-* #gang-expert-type-selector #gang-type-boxes {
-  flex-wrap: wrap;
-}
-* .cohorts {
-  flex-wrap: wrap;
-}
-* .cohorts .cohort-block-wrapper {
-  width: 400px;
-}
-* .cohorts .label-stripe {
-  margin-bottom: 0px;
-}
-* .cohorts .cohort-body > div {
-  margin-bottom: 10px;
-}
-* .cohorts .cohort-block-harm {
-  justify-content: space-around;
-}
-* .cohorts .cohort-block-harm input[type=radio] {
-  display: none;
-}
-* .cohorts .cohort-block-harm input[type=radio]:checked + label {
-  color: #EEEFFF;
-  font-weight: bold;
-  background-color: #191813;
-}
-* .cohorts .cohort-block-harm label {
-  border: 2px solid #191813;
-  border-top: none;
-  padding: 5px;
 }
 * #items-to-add {
   display: flex;
@@ -1464,7 +1102,11 @@ input[type="checkbox"]:hover {
 * .tooltip .tooltiptext.bottom {
   top: 105%;
   right: 75%;
- }
+}
+* .tooltip .tooltiptext.top {
+  bottom: 105%;
+  right: 75%;
+}
 * .sav-die-tooltip .die {
   font-weight: bold;
   text-transform: capitalize;

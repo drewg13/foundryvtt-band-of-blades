@@ -62,8 +62,9 @@ export class BoBHelpers {
     trim_abil_list.forEach(i => {
       items_to_add.push( items.find( e => ( e.name === i ) ));
     });
-
-    await actor.createEmbeddedDocuments("Item", items_to_add);
+    let update = items_to_add.map( item => item.toObject() );
+    await Item.createDocuments( update, { parent: this.actor } )
+    //await actor.createEmbeddedDocuments("Item", update);
   }
 
 
@@ -224,13 +225,13 @@ export class BoBHelpers {
 
   /* -------------------------------------------- */
 
-  static async getAllActorsByType(item_type, game) {
+  static getAllActorsByType(item_type, game) {
     return game.actors.filter( e => e.data.type === item_type ).map( e => { return e.data } ) || [];
   }
 
   /* -------------------------------------------- */
 
-  static async getActorItemsByType( actorId, itemType ) {
+  static getActorItemsByType( actorId, itemType ) {
     let actor = game.actors.get( actorId );
     return actor.data.items.filter( i => i.type === itemType ).map( i => i.id ) || [];
   }

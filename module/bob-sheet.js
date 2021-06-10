@@ -13,8 +13,8 @@ export class BoBSheet extends ActorSheet {
     html.find(".item-add-popup").click(this._onItemAddClick.bind(this));
     html.find(".item-delete-all").click(this._onDeleteAllClick.bind(this));
 	  html.find(".flag-add-popup").click(this._onFlagAddClick.bind(this));
-	  html.find(".update-sheet").click(this._onUpdateClick.bind(this));
-	  html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
+	  //html.find(".update-sheet").click(this._onUpdateClick.bind(this));
+	  //html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
 	  html.find(".roll-die-attribute").click(this._onRollAttributeDieClick.bind(this));
 
   }
@@ -69,7 +69,8 @@ export class BoBSheet extends ActorSheet {
           ( ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) || ( e.data.load_type === game.i18n.localize("BITD.Heavy") ) ) && ( this.actor.data.data.loadout.selected_load_level === "BITD.Heavy" ) ) ) ) ||
           ( ( this.actor.data.data.item_triggers.grenadier === 1 ) && ( e.data.class === "Grenadier") ) ||
           ( ( this.actor.data.data.item_triggers.crimson === 1 ) && ( e.data.class === "Crimson") ) ||
-          ( ( this.actor.data.data.item_triggers.chemist === 1 ) && ( e.data.class === "Chemist") ) ) {
+          ( ( this.actor.data.data.item_triggers.chemist === 1 ) && ( e.data.class === "Chemist") ) ||
+          ( ( this.actor.data.data.item_triggers.pious === 1 ) && ( e.data.class === "Pious") )) {
 			      html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			      html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
 			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
@@ -115,11 +116,11 @@ export class BoBSheet extends ActorSheet {
 
   /* -------------------------------------------- */
 
-  async _onDeleteAllClick(event) {
+  _onDeleteAllClick(event) {
     event.preventDefault();
     const item_type = $(event.currentTarget).data("itemType")
 
-    let removeItems = await BoBHelpers.getActorItemsByType( this.actor.id, item_type );
+    let removeItems = BoBHelpers.getActorItemsByType( this.actor.id, item_type );
     let html = `<div id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
     let options = {};
 
@@ -131,7 +132,7 @@ export class BoBSheet extends ActorSheet {
             one: {
               icon: '<i class="fas fa-check"></i>',
               label: game.i18n.localize( 'BITD.Delete' ),
-              callback: async() => await this.actor.deleteEmbeddedDocuments( "Item", removeItems )
+              callback: async () => await this.actor.deleteEmbeddedDocuments( "Item", removeItems )
             },
             two: {
               icon: '<i class="fas fa-times"></i>',
@@ -145,7 +146,7 @@ export class BoBSheet extends ActorSheet {
     }
   }
 
-async _onFlagAddClick(event) {
+_onFlagAddClick(event) {
   event.preventDefault();
 	const item_type = $(event.currentTarget).data("itemType")
 	const limiter = $(event.currentTarget).data("limiter")
@@ -156,7 +157,7 @@ async _onFlagAddClick(event) {
     input_type = "radio";
   }
 
-	let items = await BoBHelpers.getAllActorsByType(item_type, game);
+	let items = BoBHelpers.getAllActorsByType(item_type, game);
   let html = `<div id="items-to-add">`;
   items.forEach(e => {
 	  if (e.type === item_type) {
@@ -206,9 +207,10 @@ async _onFlagAddClick(event) {
     el.find("input:checked").each(function() {
 		  items_to_add.push(items.find(e => e._id === $(this).val()));
     });
-
+    let update = items_to_add.map( item => item.toObject() );
     if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-		 await Item.create(items_to_add, {parent: this.document});
+		  //await this.actor.createEmbeddedDocuments("Item", update);
+      await Item.createDocuments( items_to_add, { parent: this.actor } );
 	  }
   }
 
@@ -255,7 +257,7 @@ async _onFlagAddClick(event) {
 			} else {
     		roll_type = attribute_name;
 			}
-    	this.actor.rollSimplePopup( attribute_name, roll_type );
+    	await this.actor.rollSimplePopup( attribute_name, roll_type );
     }
   }
 
