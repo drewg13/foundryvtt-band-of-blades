@@ -14,7 +14,7 @@ export class BoBActorSheet extends BoBSheet {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/actor-sheet.html",
       width: 800,
-      height: 900,
+      height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
 	    scrollY: [".sheet"]
     });

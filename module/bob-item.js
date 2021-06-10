@@ -108,7 +108,11 @@ export class BoBItem extends Item {
       if( actor?.documentName === "Actor" ) {
         removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
         if( removeDupeItems.length !== 0 ) {
-          await actor.deleteEmbeddedDocuments( "Item", removeDupeItems );
+          for await( let item of removeDupeItems ) {
+            item = actor.items.get( item );
+            await item.delete();
+          }
+          //await actor.deleteEmbeddedDocuments( "Item", removeDupeItems );
         }
       }
 
@@ -116,7 +120,11 @@ export class BoBItem extends Item {
       if( actor && ( data.type === "class" ) ) {
         removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
         if( removeLoadItems.length !== 0 ) {
-          await actor.deleteEmbeddedDocuments( "Item", removeLoadItems );
+          //await actor.deleteEmbeddedDocuments( "Item", removeLoadItems );
+          for await( let item of removeLoadItems ) {
+            item = actor.items.get( item );
+            await item.delete();
+          }
         }
       }
     }

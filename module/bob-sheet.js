@@ -132,7 +132,7 @@ export class BoBSheet extends ActorSheet {
             one: {
               icon: '<i class="fas fa-check"></i>',
               label: game.i18n.localize( 'BITD.Delete' ),
-              callback: async () => await this.actor.deleteEmbeddedDocuments( "Item", removeItems )
+              callback: async () => await this.deleteItems( removeItems )
             },
             two: {
               icon: '<i class="fas fa-times"></i>',
@@ -319,4 +319,10 @@ _onFlagAddClick(event) {
 
 /* -------------------------------------------- */
 
+  async deleteItems( itemList ) {
+    for await( let item of itemList ) {
+      item = this.actor.items.get( item );
+      await item.delete();
+    }
+  }
 }
