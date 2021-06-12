@@ -9,7 +9,6 @@ export class BoBItem extends Item {
   /** @override */
   async _preCreate( data, options, user ) {
 
-
     await super._preCreate( data, options, user );
   }
 
@@ -22,7 +21,6 @@ export class BoBItem extends Item {
       let actor = this.parent ? this.parent : null;
 
       if( ( actor?.documentName === "Actor" ) && ( actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
-        //await BoBHelpers.callItemLogic( data, actor );
 
         if( ( data.type === "class" ) && ( data.data.def_abilities !== "" ) ) {
           await BoBHelpers.addDefaultAbilities( data, actor );
@@ -32,10 +30,11 @@ export class BoBItem extends Item {
 
           // adds specialist skill, if character has specialist class (non-Rookie)
           const skill = data.data.skill;
+          const skillData = actor.data.data.attributes;
           let update = {_id: actor.id};
           if( skill ) {
-            const value = parseInt( actor.data.data.attributes.specialist.skills[skill].value ) > 1 ? actor.data.data.attributes.specialist.skills[skill].value : "1";
-            const max = parseInt( actor.data.data.attributes.specialist.skills[skill].max ) > 3 ? actor.data.data.attributes.specialist.skills[skill].max : "3";
+            const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
+            const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
             foundry.utils.mergeObject(
               update,
               { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
@@ -50,7 +49,7 @@ export class BoBItem extends Item {
                 max = (a === "specialist") ? 0 : 3;
                 foundry.utils.mergeObject(
                   update,
-                  { data: { attributes: { [a]: { skills: { [s]: { value: 0, max: max } } } } } }
+                  { data: { attributes: { [a]: { skills: { [s]: { value: "0", max: max } } } } } }
                 );
             })});
 
@@ -59,11 +58,11 @@ export class BoBItem extends Item {
               update,
               { data: { attributes: {
                 prowess: { skills: {
-                  maneuver: { value: 1 },
-                  skirmish: { value: 1 }
+                  maneuver: { value: "1" },
+                  skirmish: { value: "1" }
                 } },
                 resolve: { skills: {
-                  consort: { value : 1 }
+                  consort: { value : "1" }
                 } } } } }
             );
           }
@@ -112,7 +111,6 @@ export class BoBItem extends Item {
             item = actor.items.get( item );
             await item.delete();
           }
-          //await actor.deleteEmbeddedDocuments( "Item", removeDupeItems );
         }
       }
 
@@ -120,7 +118,6 @@ export class BoBItem extends Item {
       if( actor && ( data.type === "class" ) ) {
         removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
         if( removeLoadItems.length !== 0 ) {
-          //await actor.deleteEmbeddedDocuments( "Item", removeLoadItems );
           for await( let item of removeLoadItems ) {
             item = actor.items.get( item );
             await item.delete();
@@ -138,17 +135,13 @@ export class BoBItem extends Item {
 
     let actor = this.parent ? this.parent : null;
     //let data = this.data;
-    if ( ( actor?.documentName === "Actor" ) && ( actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
-      //await BoBHelpers.undoItemLogic( data, actor );
-    }
 
     // Delete related flags on item delete
-    // TODO: this breaks item usage dropdowns as-is, old version broke active effects
+    // TODO: this breaks item usage dropdowns as-is, old version broke active effects, maybe fixed in 0.8.7?
     //if ( actor !== null ) {
     //  let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
     //  if( itemFlag ) {
-    //    const key = "items.-=" + this.data._id;
-    //    let deleted = await actor?.setFlag( "band-of-blades", key, null );
+    //    let deleted = await actor?.unsetFlag( "band-of-blades", "items." + this.data._id );
     //    console.log(deleted.data.flags["band-of-blades"].items);
     //  }
     //}

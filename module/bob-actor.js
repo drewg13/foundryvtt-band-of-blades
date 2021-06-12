@@ -12,6 +12,7 @@ export class BoBActor extends Actor {
     await super._preCreate(createData, options, user);
 
     // add token default settings
+    const theme = game.system.bobclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
     const updateData = {};
     switch ( createData.type ) {
       case "character": {
@@ -21,14 +22,14 @@ export class BoBActor extends Actor {
         break;
       }
       case "\uD83D\uDD5B clock": {
-        updateData['img'] = "systems/band-of-blades/themes/black/4clock_0.svg";
+        updateData['img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
         break;
       }
     }
-    this.data.update(updateData);
+    this.data.update( updateData );
 
   }
 
@@ -44,10 +45,9 @@ export class BoBActor extends Actor {
         // add default class to new character
         const defaultClassName = "Rookie";
         let classes = await BoBHelpers.getAllItemsByType( "class", game );
-        let itemData = classes.find( c => c.name === defaultClassName ).toObject() || {};
+        let itemData = classes.find( c => c.name === defaultClassName ) || {};
         if( this.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) {
-          await Item.createDocuments( [ itemData ], { parent: this } );
-          //await this.createEmbeddedDocuments( "Item", [ itemData ] );
+          await this.createEmbeddedDocuments( "Item", [ itemData ] );
         }
       }
     }

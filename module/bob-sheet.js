@@ -207,10 +207,8 @@ _onFlagAddClick(event) {
     el.find("input:checked").each(function() {
 		  items_to_add.push(items.find(e => e._id === $(this).val()));
     });
-    let update = items_to_add.map( item => item.toObject() );
     if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-		  //await this.actor.createEmbeddedDocuments("Item", update);
-      await Item.createDocuments( items_to_add, { parent: this.actor } );
+		  await this.actor.createEmbeddedDocuments("Item", items_to_add);
 	  }
   }
 

@@ -23,7 +23,7 @@ export class BoBItemSheet extends ItemSheet {
     const data = super.getData();
 	  data.isGM = game.user.isGM;
 		data.editable = data.options.editable;
-    const itemData = data.data;
+		const itemData = data.data;
     data.item = itemData;
 		data.data = itemData.data;
 

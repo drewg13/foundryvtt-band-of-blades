@@ -25,6 +25,8 @@ export class BoBHelpers {
     return dupe_list;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Adds default abilities when class is chosen for character
    *
@@ -67,102 +69,9 @@ export class BoBHelpers {
     //await actor.createEmbeddedDocuments("Item", update);
   }
 
+  /* -------------------------------------------- */
 
-  /**
-   * Add item modification if logic exists.
-   * @param {Object} item_data
-   * @param {Document} document
-   */
-  static async callItemLogic(item_data, document) {
-
-    let items = item_data.data || {};
-    if ('logic' in items && items.logic !== '') {
-      let logic = JSON.parse(items.logic);
-      // Should be an array to support multiple expressions
-      if (!Array.isArray(logic)) {
-        logic = [logic];
-      }
-      let logic_update = { "_id": document.data._id };
-      logic.forEach( expression => {
-        // Different logic behav. dep on operator.
-        switch (expression.operator) {
-
-          // Add when creating.
-          case "addition":
-            foundry.utils.mergeObject(
-              logic_update,
-              {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) + expression.value}
-            );
-            break;
-
-          // Change name property.
-          case "attribute_change":
-            foundry.utils.mergeObject(
-              logic_update,
-              {[expression.attribute]: expression.value}
-            );
-            break;
-
-          }
-        });
-        await Actor.updateDocuments( [logic_update] );
-    }
-  }
-
-  /**
-   * Undo Item modifications when item is removed.
-   * @param {Object} item_data
-   * @param {Document} document
-   */
-  static async undoItemLogic(item_data, document) {
-
-    let items = item_data.data || {};
-
-    if ( ('logic' in items) && (items.logic !== '') ) {
-      let logic = JSON.parse(items.logic)
-
-      // Should be an array to support multiple expressions
-      if (!Array.isArray(logic)) {
-        logic = [logic];
-      }
-
-      if (logic) {
-        let logic_update = { "_id": document.data._id };
-        let entity_data = document.data;
-
-        logic.forEach(expression => {
-          // Different logic behav. dep on operator.
-          switch (expression.operator) {
-
-            // Subtract when removing.
-            case "addition":
-              foundry.utils.mergeObject(
-                logic_update,
-                {[expression.attribute]: Number(BoBHelpers.getNestedProperty(document.data, expression.attribute)) - expression.value},
-                {insertKeys: true}
-              );
-              break;
-
-            // Change name back to default.
-            case "attribute_change":
-              // Get the array path to take data.
-              let default_expression_attribute_path = expression.attribute + '_default';
-              let default_name = default_expression_attribute_path.split(".").reduce((o, i) => o[i], entity_data);
-
-              foundry.utils.mergeObject(
-                logic_update,
-                {[expression.attribute]: default_name},
-				        {insertKeys: true}
-              );
-              break;
-          }
-        });
-		    await Actor.updateDocuments( [logic_update] );
-      }
-    }
-  }
-
-  /**
+   /**
    * Get a nested dynamic attribute.
    * @param {Object} obj
    * @param {string} property
@@ -173,6 +82,7 @@ export class BoBHelpers {
     }, obj);
   }
 
+  /* -------------------------------------------- */
 
   /**
    * Add item functionality
@@ -190,6 +100,8 @@ export class BoBHelpers {
     return actor.createEmbeddedDocuments("Item", [data]);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Get the list of all available ingame items by Type.
    *
@@ -198,13 +110,13 @@ export class BoBHelpers {
    */
   static async getAllItemsByType(item_type, game) {
 
-    let game_items = game.items.filter(e => e.type === item_type).map(e => {return e.data}) || [];
+    let game_items = game.items.filter(e => e.type === item_type).map(e => { return e.data.toObject() }) || [];
     let pack = game.packs.find(e => e.metadata.name === item_type);
     let compendium_content;
 
     compendium_content = await pack.getDocuments();
 
-    let compendium_items = compendium_content.map(k => {return k.data}) || [];
+    let compendium_items = compendium_content.map(k => { return k.data.toObject() }) || [];
     compendium_items = compendium_items.filter(a => game_items.filter(b => a.name === b.name && a.name === b.name).length === 0);
 
     let list_of_items = game_items.concat(compendium_items) || [];
@@ -243,6 +155,7 @@ export class BoBHelpers {
   }
 
   /* -------------------------------------------- */
+
   /**
    * Returns the label for attribute.
    *
