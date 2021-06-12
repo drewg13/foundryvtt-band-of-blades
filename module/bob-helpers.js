@@ -4,8 +4,11 @@ export class BoBHelpers {
    * Identifies duplicate items by type and returns a array of item ids to remove
    *
    * @param {Object} item_data
+   *   data of item being added
    * @param {Document} actor
+   *   actor item is being added to
    * @returns {Array}
+   *   array of items present on actor that should be distinct to be removed
    *
    */
   static removeDuplicatedItemType(item_data, actor) {
@@ -31,7 +34,9 @@ export class BoBHelpers {
    * Adds default abilities when class is chosen for character
    *
    * @param {Object} item_data
+   *   data of item containing default abilities
    * @param {Document} actor
+   *   data of actor to add abilities to
    */
   static async addDefaultAbilities(item_data, actor) {
 
@@ -42,31 +47,18 @@ export class BoBHelpers {
 
     if ( actor.data.type === "character" ) {
       item_type = "ability";
-    } else if ( actor.data.type === "ship" ) {
-      item_type = "crew_upgrade";
     }
 
     let abilities = actor.items.filter(a => a.type === item_type).map(e => {return e.data.name});
-
-    if ( actor.data.type === "ship" ) {
-      let size = actor.items.filter(a => a.type === "ship_size").map(e => {return e.data.name}) || [""];
-      if ( size.length ) { abilities.push( size ); }
-    }
-
     let items = await BoBHelpers.getAllItemsByType(item_type, game);
-
-    if ( actor.data.type === "ship" ) {
-      let all_sizes = await BoBHelpers.getAllItemsByType("ship_size", game);
-      all_sizes.forEach( s => { items.push( s ); });
-    }
 
     let trim_abil_list = abil_list.filter( x => !abilities.includes( x ) );
     trim_abil_list.forEach(i => {
       items_to_add.push( items.find( e => ( e.name === i ) ));
     });
-    let update = items_to_add.map( item => item.toObject() );
-    await Item.createDocuments( update, { parent: this.actor } )
-    //await actor.createEmbeddedDocuments("Item", update);
+    //let update = items_to_add.map( item => item.toObject() );
+    //await Item.createDocuments( update, { parent: this.actor } )
+    await actor.createEmbeddedDocuments( "Item", items_to_add );
   }
 
   /* -------------------------------------------- */
@@ -85,28 +77,12 @@ export class BoBHelpers {
   /* -------------------------------------------- */
 
   /**
-   * Add item functionality
-   */
-  static _addOwnedItem(event, actor) {
-
-    event.preventDefault();
-    const a = event.currentTarget;
-    const item_type = a.dataset.itemType;
-
-    let data = {
-      name: randomID(),
-      type: item_type
-    };
-    return actor.createEmbeddedDocuments("Item", [data]);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the list of all available ingame items by Type.
+   * Get the list of all available in-game items by Type.
    *
    * @param {string} item_type
+   *   item type of interest
    * @param {Object} game
+   *   game world object
    */
   static async getAllItemsByType(item_type, game) {
 
@@ -137,12 +113,32 @@ export class BoBHelpers {
 
   /* -------------------------------------------- */
 
-  static getAllActorsByType(item_type, game) {
-    return game.actors.filter( e => e.data.type === item_type ).map( e => { return e.data } ) || [];
+  /**
+   * Returns an array of actors matching the type passed which are present in the game world
+   *
+   * @param {string} actor_type
+   *   the actor type of interest
+   * @param {Object} game
+   *   current game world object
+   * @returns {Array}
+   *   an array of actors of the specified type in the game world
+   */
+  static getAllActorsByType(actor_type, game) {
+    return game.actors.filter( e => e.data.type === actor_type ).map( e => { return e.data.toObject() } ) || [];
   }
 
   /* -------------------------------------------- */
 
+  /**
+   * Returns an array of item ids of items matching the type passed which are present on the actor passed
+   *
+   * @param {string} actorId
+   *   the id of the actor
+   * @param {string} itemType
+   *   the item type of interest
+   * @returns {Array}
+   *   an array of item ids present on actor of item type
+   */
   static getActorItemsByType( actorId, itemType ) {
     let actor = game.actors.get( actorId );
     return actor.data.items.filter( i => i.type === itemType ).map( i => i.id ) || [];
@@ -150,6 +146,14 @@ export class BoBHelpers {
 
   /* -------------------------------------------- */
 
+  /**
+   * Returns the string passed with the first letter capitalized
+   *
+   * @param {string} name
+   *   a string to be capitalized
+   * @returns {string}
+   *   the capitalized string
+   */
   static getProperCase( name ) {
     return name.charAt(0).toUpperCase() + name.substr(1).toLowerCase();
   }
@@ -160,7 +164,9 @@ export class BoBHelpers {
    * Returns the label for attribute.
    *
    * @param {string} attribute_name
+   *   the attribute of interest
    * @returns {string}
+   *   the label to display for the passed attribute
    */
   static getAttributeLabel(attribute_name) {
     // Calculate Dice to throw.
