@@ -62,6 +62,9 @@
 * ul {
   list-style: none;
 }
+* .role-sheet ul {
+  list-style: outside;
+}
 * #effects table {
   background: unset;
   border-top: unset;
@@ -124,7 +127,7 @@ input[type="checkbox"]:hover {
 .placeable-hud .control-icon:first-child {
   margin-top: 8px;
 }
-.dice-tooltip .dice-rolls .roll.savd6 {
+.dice-tooltip .dice-rolls .roll.bobd6 {
 	background: url('assets/icons/d6-black.svg');
 	color: var(--almost_white);
 	background-size: 24px 24px;
@@ -231,6 +234,9 @@ input[type="checkbox"]:hover {
   display: flex;
   justify-content: space-between;
 }
+* #morale.label-stripe {
+  margin-bottom: 0px;
+}
 * .label-stripe p {
   margin: 0.25em 0;
 }
@@ -242,6 +248,9 @@ input[type="checkbox"]:hover {
 * .label-stripe label {
   font-family: 'MajorGuilty', 'serif';
   font-size: x-large;
+}
+* .role-sheet .label-stripe label {
+  margin-right: 20px;
 }
 * .label-stripe .hoverlink {
   cursor: pointer;
@@ -546,110 +555,6 @@ input[type="checkbox"]:hover {
   top: 0px;
   right: 10px;
 }
-* .friend-tracker {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  top: 0px;
-  right: 10px;
-}
-* .friend-tracker label {
-  height: 30px;
-  min-width: 10px;
-  background-image: url("assets/teeth/stresstooth-blue.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 1px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .friend-tracker label:last-of-type {
-  margin-right: 0px;
-}
-* .friend-tracker label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* .friend-tracker input {
-  display: none;
-}
-* .friend-tracker input + label[for$="-2"] {
-  background-image: url("assets/teeth/arrow-down.png");
-}
-* .friend-tracker input + label[for$="-1"] {
-  background-image: url("assets/teeth/arrow-grey.png");
-}
-* .friend-tracker input + label[for$="-0"] {
-  background-image: url("assets/teeth/arrow-up.png");
-}
-* .friend-tracker input:checked + label[for$="-2"] {
-  background-image: url("assets/teeth/arrow-red.png");
-}
-* .friend-tracker input:checked + label[for$="-1"] {
-  background-image: url("assets/teeth/arrow-middle.png");
-}
-* .friend-tracker input:checked + label[for$="-0"] {
-  background-image: url("assets/teeth/arrow-blue.png");
-}
-* .teeth-experience-faction {
-  display: flex;
-  /* Hide the browser's default checkbox */
-  position: float !important;
-  top: 0px;
-  right: 10px;
-}
-* .teeth-experience-faction label {
-  height: 30px;
-  width: 10px;
-  background-image: url("assets/teeth/stresstooth-blue.png");
-  background-repeat: no-repeat;
-  background-size: contain;
-  margin-right: 5px;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
-* .teeth-experience-faction label:last-of-type {
-  margin-right: 0px;
-}
-* .teeth-experience-faction label[for$="-0"] {
-  width: auto;
-  height: auto;
-  background-image: none !important;
-  color: #EEEFFF;
-}
-* .teeth-experience-faction label[for$="-0"] i {
-  margin-top: 4px;
-}
-* .teeth-experience-faction label:hover {
-  filter: brightness(0.8);
-  opacity: 0.9;
-}
-* .teeth-experience-faction input {
-  display: none;
-}
-* .teeth-experience-faction input + label {
-  background-image: url("assets/teeth/stresstooth-halfgrey.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-7"] {
-  background-image: url("assets/teeth/stresstooth-blue.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-6"] {
-  background-image: url("assets/teeth/stresstooth-6.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-5"] {
-  background-image: url("assets/teeth/stresstooth-5.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-4"] {
-  background-image: url("assets/teeth/stresstooth-4.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-3"] {
-  background-image: url("assets/teeth/stresstooth-3.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-2"] {
-  background-image: url("assets/teeth/stresstooth-2.png");
-}
-* .teeth-experience-faction input:checked + label[for$="-1"] {
-  background-image: url("assets/teeth/stresstooth-red.png");
-}
 * .teeth-experience {
   display: flex;
   /* Hide the browser's default checkbox */
@@ -745,10 +650,6 @@ input[type="checkbox"]:hover {
   width: 100%;
   font-weight: bold;
 }
-* #harm-armor #character-health-clock {
-  margin-left: 25px;
-  position: relative;
-}
 * #harm-armor #character-armor-uses div.armor-checkboxes {
   display: flex;
   flex-direction: row;
@@ -805,6 +706,56 @@ input[type="checkbox"]:hover {
 }
 * #harm-armor #character-armor-uses input:checked + label {
   background-color: #191813;
+}
+* .role-sheet #character-traits .flex-horizontal {
+  justify-content: flex-start;
+}
+* .role-sheet #character-traits .item-class-label {
+  margin-right: 15px;
+  margin-bottom: 0px;
+}
+* #character-traits .attributes-container {
+  display: flex;
+  position: relative;
+  /* Hide the browser's default checkbox */
+}
+* #character-traits .attributes-container label {
+  height: 12px;
+  width: 12px;
+  transform: rotate(45deg);
+  border: 2px solid;
+  background-color: #eeefff;
+  vertical-align: middle;
+  transition: filter 0.1s;
+  cursor: pointer;
+  margin-top: 5px;
+}
+* #character-traits .attributes-container label[for$="-0"] {
+  height: 5px;
+  width: 5px;
+  border: 1px solid;
+  border-radius: 24px;
+  background-image: none !important;
+  background-color: red !important;
+  margin-right: 3px;
+}
+* #character-traits .attributes-container label:hover {
+  filter: brightness(0.7);
+  opacity: 0.7;
+}
+* #character-traits .attributes-container input {
+  display: none;
+}
+* #character-traits .attributes-container input:checked + label {
+  background-color: #191813;
+}
+* #character-traits .attributes-container * {
+  margin-right: 4px;
+  display: flex;
+}
+* #character-traits .trait-label{
+  margin-top: 2px;
+  margin-right: 15px;
 }
 * #attributes {
   display: flex;
@@ -870,9 +821,7 @@ input[type="checkbox"]:hover {
   transition: filter 0.1s;
   cursor: pointer;
 }
-* #attributes .attributes-exp .stripe-tooth-body-red label:last-of-type {
-  margin-right: 0px;
-}
+* #attributes .attributes-exp .stripe-tooth-body-red label:last-of-type,
 * #attributes .attributes-exp .stripe-tooth-body-blue label:last-of-type {
   margin-right: 0px;
 }
@@ -911,9 +860,7 @@ input[type="checkbox"]:hover {
 * #attributes .attributes-exp .stripe-tooth-body-blue input {
   display: none;
 }
-* #attributes .attributes-exp .stripe-tooth-body-red input:checked ~ label {
-  background-image: url("assets/teeth/xptooth-white.png");
-}
+* #attributes .attributes-exp .stripe-tooth-body-red input:checked ~ label,
 * #attributes .attributes-exp .stripe-tooth-body-blue input:checked ~ label {
   background-image: url("assets/teeth/xptooth-white.png");
 }
@@ -923,21 +870,71 @@ input[type="checkbox"]:hover {
 * #attributes .attributes-exp .stripe-tooth-body-blue input:checked + label {
   background-image: url("assets/teeth/xptooth-blue.png");
 }
+* #morale-boxes .attributes-container {
+  display:flex;
+  justify-content: space-between;
+  width: 100%;
+}
+* .wounds-boxes.attributes-container,
 * #attributes .attributes-container {
   display: flex;
   position: relative;
   /* Hide the browser's default checkbox */
 }
+* #morale-boxes .attributes-container label {
+  height: 20px;
+  width: 20px;
+  margin-top: 7px;
+}
+* #morale-boxes .attributes-container label:last-child {
+  margin-right: 45px;
+}
+* .wounds-boxes.attributes-container span {
+  margin-top: 4px;
+}
+* .wounds-boxes.attributes-container label,
 * #attributes .attributes-container label {
   height: 12px;
   width: 12px;
+}
+* #attributes .attributes-container label {
+  margin-top: 5px;
+}
+* .wounds-boxes.attributes-container label {
+  margin-top: 7px !important;
+}
+* .wounds-boxes.attributes-container label,
+* #morale-boxes .attributes-container label,
+* #attributes .attributes-container label {
   transform: rotate(45deg);
   border: 2px solid;
   background-color: #191813;
   vertical-align: middle;
   transition: filter 0.1s;
+}
+* #morale-boxes .attributes-container label,
+* #attributes .attributes-container label {
   cursor: pointer;
-  margin-top: 5px;
+}
+* #morale-boxes .attributes-container label[for$="-1"],
+* #morale-boxes .attributes-container label[for$="-2"],
+* #morale-boxes .attributes-container label[for$="-3"] {
+  background-color: red;
+}
+* #morale-boxes .attributes-container label[for$="-4"],
+* #morale-boxes .attributes-container label[for$="-5"],
+* #morale-boxes .attributes-container label[for$="-6"],
+* #morale-boxes .attributes-container label[for$="-7"] {
+  background-color: yellow;
+}
+* #morale-boxes .attributes-container label[for$="-0"] {
+  height: 8px;
+  width: 8px;
+  border: 1px solid;
+  border-radius: 24px;
+  background-image: none !important;
+  background-color: red !important;
+  margin-right: 3px;
 }
 * #attributes .attributes-container label[for$="-0"] {
   height: 5px;
@@ -948,25 +945,44 @@ input[type="checkbox"]:hover {
   background-color: red !important;
   margin-right: 3px;
 }
+* #morale-boxes .attributes-container label:hover,
 * #attributes .attributes-container label:hover {
   filter: brightness(0.7);
   opacity: 0.7;
 }
+* .wounds-boxes.attributes-container input,
+* #morale-boxes .attributes-container input,
 * #attributes .attributes-container input {
   display: none;
 }
+* #morale-boxes .attributes-container input:checked ~ label,
 * #attributes .attributes-container input:checked ~ label {
   background-color: #EEEFFF;
 }
+* #morale-boxes .attributes-container input:checked + label,
 * #attributes .attributes-container input:checked + label {
   transition: filter 0.1s;
   cursor: pointer;
   background-color: #191813;
 }
+* #morale-boxes .attributes-container input:checked + label[for$="-1"],
+* #morale-boxes .attributes-container input:checked + label[for$="-2"],
+* #morale-boxes .attributes-container input:checked + label[for$="-3"] {
+  background-color: red;
+}
+* #morale-boxes .attributes-container input:checked + label[for$="-4"],
+* #morale-boxes .attributes-container input:checked + label[for$="-5"],
+* #morale-boxes .attributes-container input:checked + label[for$="-6"],
+* #morale-boxes .attributes-container input:checked + label[for$="-7"] {
+  background-color: yellow;
+}
+* #morale-boxes .attributes-container input:checked + label:hover,
 * #attributes .attributes-container input:checked + label:hover {
   filter: brightness(0.7);
   opacity: 0.7;
 }
+* .wounds-boxes.attributes-container *,
+* #morale-boxes .attributes-container *,
 * #attributes .attributes-container * {
   margin-right: 6px;
   display: flex;
@@ -1107,37 +1123,41 @@ input[type="checkbox"]:hover {
   bottom: 105%;
   right: 75%;
 }
-* .sav-die-tooltip .die {
+* .bob-die-tooltip .die {
   font-weight: bold;
   text-transform: capitalize;
   font-size: large;
   margin-top: 10px;
 }
-* .sav-die-tooltip .die.great,
-* .sav-die-tooltip .die.critical-resist,
-* .sav-die-tooltip .die.critical-success {
+* .bob-die-tooltip .die.great,
+* .bob-die-tooltip .die.fast,
+* .bob-die-tooltip .die.engCrit,
+* .bob-die-tooltip .die.critical-resist,
+* .bob-die-tooltip .die.critical-success {
   color: #12a012;
 }
-* .sav-die-tooltip .die.nodamage,
-* .sav-die-tooltip .die.standard,
-* .sav-die-tooltip .die.resist,
-* .sav-die-tooltip .die.success {
+* .bob-die-tooltip .die.moderate,
+* .bob-die-tooltip .die.engSuccess,
+* .bob-die-tooltip .die.standard,
+* .bob-die-tooltip .die.resist,
+* .bob-die-tooltip .die.success {
   color: #008000;
 }
-* .sav-die-tooltip .die.malfunction,
-* .sav-die-tooltip .die.limited,
-* .sav-die-tooltip .die.partial-success {
+* .bob-die-tooltip .die.limited,
+* .bob-die-tooltip .die.engPartial,
+* .bob-die-tooltip .die.partial-success {
   color: #04578f;
 }
-* .sav-die-tooltip .die.damaged,
-* .sav-die-tooltip .die.poor,
-* .sav-die-tooltip .die.failure {
+* .bob-die-tooltip .die.very-slow,
+* .bob-die-tooltip .die.engFail,
+* .bob-die-tooltip .die.poor,
+* .bob-die-tooltip .die.failure {
   color: red;
 }
 * .clock-zero-label {
   color: #191813;
 }
-* .sav-clock {
+* .bob-clock {
   position: relative;
   padding: 0;
   width: 80px;
@@ -1147,7 +1167,7 @@ input[type="checkbox"]:hover {
   overflow: hidden;
   background-size: cover;
 }
-* .sav-clock label {
+* .bob-clock label {
   overflow: hidden;
   position: absolute;
   top: -50%;
@@ -1158,78 +1178,102 @@ input[type="checkbox"]:hover {
   transition: filter 0.1s;
   cursor: pointer;
 }
-* .sav-clock label:hover {
+* .bob-clock label:hover {
   filter: brightness(0.8);
   opacity: 0.9;
 }
-* .sav-clock input {
+* .bob-clock input {
   position: absolute;
   display: none;
 }
-* .sav-clock.clock-4 input[value="0"] {
+* .bob-clock input[value="0"] {
   display: none;
 }
-* .sav-clock.clock-4 *:nth-child(3) {
+* .bob-clock.clock-4 *:nth-child(3) {
   transform: rotate(0deg) skewY(180deg);
 }
-* .sav-clock.clock-4 *:nth-child(5) {
+* .bob-clock.clock-4 *:nth-child(5) {
   transform: rotate(90deg) skewY(180deg);
 }
-* .sav-clock.clock-4 *:nth-child(7) {
+* .bob-clock.clock-4 *:nth-child(7) {
   transform: rotate(180deg) skewY(180deg);
 }
-* .sav-clock.clock-4 *:nth-child(9) {
+* .bob-clock.clock-4 *:nth-child(9) {
   transform: rotate(270deg) skewY(180deg);
 }
-* .sav-clock.clock-6 input[value="0"] {
-  display: none;
-}
-* .sav-clock.clock-6 *:nth-child(3) {
+* .bob-clock.clock-6 *:nth-child(3) {
   transform: rotate(0deg) skewY(150deg);
 }
-* .sav-clock.clock-6 *:nth-child(5) {
+* .bob-clock.clock-6 *:nth-child(5) {
   transform: rotate(60deg) skewY(150deg);
 }
-* .sav-clock.clock-6 *:nth-child(7) {
+* .bob-clock.clock-6 *:nth-child(7) {
   transform: rotate(120deg) skewY(150deg);
 }
-* .sav-clock.clock-6 *:nth-child(9) {
+* .bob-clock.clock-6 *:nth-child(9) {
   transform: rotate(180deg) skewY(150deg);
 }
-* .sav-clock.clock-6 *:nth-child(11) {
+* .bob-clock.clock-6 *:nth-child(11) {
   transform: rotate(240deg) skewY(150deg);
 }
-* .sav-clock.clock-6 *:nth-child(13) {
+* .bob-clock.clock-6 *:nth-child(13) {
   transform: rotate(300deg) skewY(150deg);
 }
-* .sav-clock.clock-8 input[value="0"] {
-  display: none;
-}
-* .sav-clock.clock-8 *:nth-child(3) {
+* .bob-clock.clock-8 *:nth-child(3) {
   transform: rotate(0deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(5) {
+* .bob-clock.clock-8 *:nth-child(5) {
   transform: rotate(45deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(7) {
+* .bob-clock.clock-8 *:nth-child(7) {
   transform: rotate(90deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(9) {
+* .bob-clock.clock-8 *:nth-child(9) {
   transform: rotate(135deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(11) {
+* .bob-clock.clock-8 *:nth-child(11) {
   transform: rotate(180deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(13) {
+* .bob-clock.clock-8 *:nth-child(13) {
   transform: rotate(225deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(15) {
+* .bob-clock.clock-8 *:nth-child(15) {
   transform: rotate(270deg) skewY(135deg);
 }
-* .sav-clock.clock-8 *:nth-child(17) {
+* .bob-clock.clock-8 *:nth-child(17) {
   transform: rotate(315deg) skewY(135deg);
 }
-* .sav-clock-name-type > * {
+* .bob-clock.clock-10 *:nth-child(3) {
+  transform: rotate(0deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(5) {
+  transform: rotate(36deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(7) {
+  transform: rotate(72deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(9) {
+  transform: rotate(108deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(11) {
+  transform: rotate(144deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(13) {
+  transform: rotate(180deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(15) {
+  transform: rotate(216deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(17) {
+  transform: rotate(252deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(19) {
+  transform: rotate(288deg) skewY(126deg);
+}
+* .bob-clock.clock-10 *:nth-child(21) {
+  transform: rotate(324deg) skewY(126deg);
+}
+* .bob-clock-name-type > * {
   margin-bottom: 10px;
   max-width: 220px;
 }
@@ -1322,20 +1366,124 @@ input[type="checkbox"]:hover {
   background-color: #191813;
   font-family: 'MajorGuilty', 'serif';
   font-size: x-large;
-  color: white;
+  color: #eeefff;
   text-align: right;
   margin-top: 1px;
 }
 * #loadout .dropdown select option {
   font-family: 'MajorGuilty', 'serif';
   font-size: medium;
-  color: white;
+  color: #eeefff;
 }
 * #loadout .dropdown select:hover {
   color: red;
 }
-* .item-add-popup,
+* .item-class-label,
 * .item-delete-all {
   margin-left: 10px;
+  margin-right: 10px;
+}
+* .role-sheet #time-clocks {
+  justify-content: center;
+}
+* .gradient-stripe-time {
+  background: linear-gradient(to right, rgba(238,239,255,0), rgba(25,24,19,1));
+}
+* .gradient-stripe-morale {
+  background: linear-gradient(to right, rgba(25,24,19,1) 0%,rgba(22,21,11,0.7) 40%,rgba(22,21,11,0.7) 60%,rgba(238,239,255,0) 100%);
+  height: 34px;
+}
+* .role-sheet p.caps {
+  text-transform: capitalize;
+  font-weight: bold;
+}
+* .role-sheet div.bob-clock:last-child{
+  margin-right: 20px;
+}
+* .role-sheet input[type="number"] {
+  font-size: xx-large;
+  width: 100px;
+  height: fit-content;
+  text-align: center;
+}
+* .role-sheet .list {
+  margin-bottom: 10px;
+}
+* .role-sheet .item-block {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+* .role-sheet .flex-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+* .role-sheet .item-class-label label {
+  margin-right: 10px;
+}
+* .role-sheet .item-body.flex-left {
+  display: flex;
+}
+* .role-sheet .item-body.flex-left .attribute-skill-label {
+  min-width: 120px;
+  margin-top: 3px;
+}
+* .role-sheet #squads span {
+  margin-right: 5px;
+}
+* .role-sheet .item-body.flex-left input[type="text"] {
+  width: 25px;
+  text-align: center;
+}
+* .role-sheet .item-body.flex-left label {
+  margin-left: 2px;
+  margin-top: 4px;
+}
+* .flex-flow {
+  display: flex;
+  flex-flow: column wrap;
+}
+* .role-sheet #squads .container {
+  max-height: 90px;
+}
+* .role-sheet #squads .container.flex-flow .item {
+  height: 27px;
+}
+.number-input {
+  border: 0;
+  display: inline-flex;
+}
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+.number-input button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 3rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+}
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 1rem;
+  height: 2px;
+  background-color: #212121;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.number-input button.plus {
+  margin-right: 10px;
 }
 /*# sourceMappingURL=bob.css.map */

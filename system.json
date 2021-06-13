@@ -2,7 +2,7 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "minimumCoreVersion": "0.8.6",
   "compatibleCoreVersion": "0.8.6",
   "templateVersion": 1,
@@ -23,13 +23,27 @@
   ],
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.2.1.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.3.0.zip",
   "packs": [
     {
       "name": "class",
       "label": "Classes",
       "system": "band-of-blades",
       "path": "./packs/classes.db",
+      "entity": "Item"
+    },
+    {
+      "name": "role",
+      "label": "Roles",
+      "system": "band-of-blades",
+      "path": "./packs/roles.db",
+      "entity": "Item"
+    },
+    {
+      "name": "squad",
+      "label": "Squads",
+      "system": "band-of-blades",
+      "path": "./packs/squads.db",
       "entity": "Item"
     },
     {

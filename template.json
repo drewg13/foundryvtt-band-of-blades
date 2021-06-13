@@ -1,11 +1,12 @@
 {
 "Actor": {
-  "types": ["character", "\uD83D\uDD5B clock"],
+  "types": ["character", "role", "\uD83D\uDD5B clock"],
   "character": {
     "alias": "",
     "look": "",
     "class": "",
     "heritage": "",
+    "squad": "",
     "notes": "",
     "experience": "0",
     "item_triggers": {
@@ -47,29 +48,29 @@
       "light": {
         "one": "",
         "two": "",
-        "heal_one": 0
+        "heal_one": false
       },
       "medium": {
         "one": "",
         "two": "",
-        "heal_one": 0,
-        "heal_two": 0
+        "heal_one": false,
+        "heal_two": false
       },
       "heavy": {
         "one": "",
-        "heal_one": 0,
-        "heal_two": 0,
-        "heal_three": 0
+        "heal_one": false,
+        "heal_two": false,
+        "heal_three": false
       },
       "deadly": {
         "one": ""
       }
     },
     "armor-uses": {
-      "armor": 0,
-      "heavy": 0,
-      "shield": 0,
-      "special": 0
+      "armor": false,
+      "heavy": false,
+      "shield": false,
+      "special": false
     },
     "attributes": {
       "insight": {
@@ -227,6 +228,40 @@
       }
     }
   },
+  "role": {
+    "name": "",
+    "type": "",
+    "notes": "",
+    "traits": {
+      "heritage": "0",
+      "reputation": "0",
+      "personality": [0],
+      "look": [0]
+    },
+    "resources": {
+      "pressure": 0,
+      "intel": 0,
+      "engagement": 0,
+      "morale": "0",
+      "time": {
+        "timeClock1": {
+          "name": "timeClock1",
+          "type": 10,
+          "value": "0"
+        },
+        "timeClock2": {
+          "name": "timeClock2",
+          "type": 10,
+          "value": "0"
+        },
+        "timeClock3": {
+          "name": "timeClock3",
+          "type": 10,
+          "value": "0"
+        }
+      }
+    }
+  },
   "\uD83D\uDD5B clock": {
     "name": "",
     "type": 4,
@@ -234,7 +269,7 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "ability", "heritage", "trait"],
+  "types": ["item", "class", "role", "squad", "ability", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
@@ -287,6 +322,12 @@
     "def_abilities": "",
 	"experience_clues": "",
     "skill": ""
+  },
+  "role": {
+    "templates": ["default", "activatedEffect"]
+  },
+  "squad": {
+    "templates": ["default", "activatedEffect"]
   },
   "ability": {
     "templates": ["default", "logic", "activatedEffect"]

@@ -1,0 +1,360 @@
+<form class="{{cssClass}} role-sheet" autocomplete="off">
+
+  <section id="name-alias" class="flex-vertical">
+    <div id="name-role" class="flex-horizontal">
+      <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+
+      <div class="grow-two flex-center">
+        <div id="name" class="item-block">
+          <label class="item-class-label" for="character-{{actor._id}}-name">{{localize "BITD.Name"}}</label>
+          <input type="text" id="character-{{actor._id}}-name" name="name" value="{{actor.name}}">
+        </div>
+
+  		  <div class="item-block flex-horizontal">
+          <div class="item-class-label">
+            <a class="item-add-popup" data-distinct="true" data-item-type="role">{{localize "BITD.Role"}}</a>
+          </div>
+          {{#each actor.items as |item id|}}
+            {{#if (eq item.type "role")}}
+              <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item-body flex-horizontal">
+                  <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                  <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
+                    <a class="item-name">{{item.name}}</a>
+                    <span class="tooltiptext">{{{item.data.description}}}</span>
+                  </div>
+                </div>
+                <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div id="character-traits" class="flex-vertical">
+      {{#if actor.data.type}}
+        <div class="item-block flex-horizontal">
+          <div class="item-class-label">{{localize "BITD.RoleHeritage"}}</div>
+          <div class="attributes-container">
+            {{#multiboxes data.traits.heritage}}
+              <div class="attribute-stats">
+                {{#times_from_1 5}}
+                  <input type="radio" id="heritage-{{../actor._id}}-{{this}}" name="data.traits.heritage" value="{{this}}">
+                  <label for="heritage-{{../actor._id}}-{{this}}"></label><span class="trait-label">{{localize (lookupstring "BITD.RoleHeritage" this)}}</span>
+                {{/times_from_1}}
+              </div>
+            {{/multiboxes}}
+          </div>
+        </div>
+        <div class="item-block flex-horizontal">
+          <div class="item-class-label">{{localize "BITD.RoleReputation"}}</div>
+          <div class="attributes-container">
+            {{#multiboxes data.traits.reputation}}
+              <div class="attribute-stats">
+                {{#times_from_1 5}}
+                  <input type="radio" id="reputation-{{../actor._id}}-{{this}}" name="data.traits.reputation" value="{{this}}">
+                  <label for="reputation-{{../actor._id}}-{{this}}"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." ../actor.data.type) "Reputation") this)}}</span>
+                {{/times_from_1}}
+              </div>
+            {{/multiboxes}}
+          </div>
+        </div>
+
+        <div class="item-block flex-horizontal">
+          <div class="item-class-label">{{localize "BITD.RolePersonality"}}</div>
+          <div class="attributes-container">
+            <div class="attribute-stats">
+              <input type="checkbox" id="personality-{{actor._id}}-1" name="data.traits.personality.one" value="one" {{checked data.traits.personality.one}}>
+              <label for="personality-{{actor._id}}-1"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 1)}}</span>
+              <input type="checkbox" id="personality-{{actor._id}}-2" name="data.traits.personality.two" value="two" {{checked data.traits.personality.two}}>
+              <label for="personality-{{actor._id}}-2"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 2)}}</span>
+              <input type="checkbox" id="personality-{{actor._id}}-3" name="data.traits.personality.three" value="three" {{checked data.traits.personality.three}}>
+              <label for="personality-{{actor._id}}-3"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 3)}}</span>
+              <input type="checkbox" id="personality-{{actor._id}}-4" name="data.traits.personality.four" value="four" {{checked data.traits.personality.four}}>
+              <label for="personality-{{actor._id}}-4"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 4)}}</span>
+              <input type="checkbox" id="personality-{{actor._id}}-5" name="data.traits.personality.five" value="five" {{checked data.traits.personality.five}}>
+              <label for="personality-{{actor._id}}-5"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 5)}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-block flex-horizontal">
+          <div class="item-class-label">{{localize "BITD.RoleLook"}}</div>
+          <div class="attributes-container">
+            <div class="attribute-stats">
+              <input type="checkbox" id="look-{{actor._id}}-1" name="data.traits.look.one" value="one" {{checked data.traits.look.one}}>
+              <label for="look-{{actor._id}}-1"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 1)}}</span>
+              <input type="checkbox" id="look-{{actor._id}}-2" name="data.traits.look.two" value="two" {{checked data.traits.look.two}}>
+              <label for="look-{{actor._id}}-2"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 2)}}</span>
+              <input type="checkbox" id="look-{{actor._id}}-3" name="data.traits.look.three" value="three" {{checked data.traits.look.three}}>
+              <label for="look-{{actor._id}}-3"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 3)}}</span>
+              <input type="checkbox" id="look-{{actor._id}}-4" name="data.traits.look.four" value="four" {{checked data.traits.look.four}}>
+              <label for="look-{{actor._id}}-4"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 4)}}</span>
+              <input type="checkbox" id="look-{{actor._id}}-5" name="data.traits.look.five" value="five" {{checked data.traits.look.five}}>
+              <label for="look-{{actor._id}}-5"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 5)}}</span>
+            </div>
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </section>
+  <br />
+  <section id="resources-section" class="flex-horizontal">
+    <div class="tab-content flex-vertical grow-two">
+      {{!-- Nav menu --}}
+      <nav class="tabs flex-horizontal">
+        <a class="item" data-tab="duties">{{localize "BITD.Duties"}}</a>
+        <a class="item" data-tab="resources">{{localize "BITD.Resources"}}</a>
+        {{#if (eq actor.data.type "Marshal")}}
+          <a class="item" data-tab="squads">{{localize "BITD.Squads"}}</a>
+          <a class="item" data-tab="specialists">{{localize "BITD.Specialists"}}</a>
+        {{/if}}
+        <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
+        {{#if isGM}}
+          <a class="item" data-tab="effects">{{localize "BITD.Effects"}}</a>
+        {{/if}}
+        <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
+      </nav>
+
+      <div id="duties" class="tab flex-vertical" data-tab="duties">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Duties"}}</label>{{localize "BITD.DutiesLabel"}}</p>
+        </div>
+        <div id="duties-list" class="list">
+          {{{localize (concat (lookupstring "BITD." actor.data.type) "Duties")}}}
+        </div>
+      </div>
+
+      <div id="resources" class="tab flex-vertical" data-tab="resources">
+        {{#if (eq actor.data.type "Commander")}}
+          <div class="label-stripe">
+            <p><label class="roll-die-attribute rollable-text" data-roll-attribute="pressure">{{localize "BITD.Pressure"}}</label>{{localize "BITD.PressureLabel"}}</p>
+          </div>
+          <div id="pressure-list" class="list">
+            <div class="flex-horizontal number-input">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="pressure-{{actor._id}}" type="number" name="data.resources.pressure" value="{{data.resources.pressure}}">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              <label for="pressure-{{actor._id}}">{{{localize "BITD.PressureDetail"}}}</label>
+            </div>
+          </div>
+
+          <div class="label-stripe">
+            <p><label>{{localize "BITD.Time"}}</label>{{localize "BITD.TimeLabel"}}</p>
+          </div>
+          <div id="time-list" class="list">
+            <div id="time-clocks" class="flex-vertical">
+              <div>{{localize "BITD.TimeDetail"}}</div>
+              <div class="gradient-stripe-time flex-horizontal">
+                <div class="flex-horizontal">{{{bob-clock "data.resources.time.timeClock1.value" data.resources.time.timeClock1.type data.resources.time.timeClock1.value (concat actor._id "-clock-one") "grey"}}}</div>
+                <div class="flex-vertical"><p class="caps">{{localize "BITD.Time1"}}</p><p>{{localize "BITD.Time2"}}</p></div>
+                <div class="flex-horizontal">{{{bob-clock "data.resources.time.timeClock2.value" data.resources.time.timeClock2.type data.resources.time.timeClock2.value (concat actor._id "-clock-two") "yellow"}}}</div>
+                <div class="flex-vertical"><p class="caps">{{localize "BITD.Time3"}}</p><p>{{localize "BITD.Time4"}}</p></div>
+                <div class="flex-horizontal">{{{bob-clock "data.resources.time.timeClock3.value" data.resources.time.timeClock3.type data.resources.time.timeClock3.value (concat actor._id "-clock-three") "red"}}}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="label-stripe">
+            <p><label>{{localize "BITD.Intel"}}</label>{{localize "BITD.IntelLabel"}}</p>
+          </div>
+          <div id="intel-list" class="list">
+            <div class="flex-horizontal number-input">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="intel-{{actor._id}}" type="number" name="data.resources.intel" value="{{data.resources.intel}}">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              <label for="intel-{{actor._id}}">{{{localize "BITD.IntelDetail"}}}</label>
+            </div>
+            <br />
+            <div class="flex-vertical">
+              <div class="flex-horizontal">
+                <span>{{{localize "BITD.IntelQuestions0"}}}</span>
+                {{#if (gt data.resources.intel 0)}}
+                  <span>{{{localize "BITD.IntelQuestions1"}}}</span>
+                {{/if}}
+              </div>
+              <div class="flex-horizontal">
+                {{#if (gt data.resources.intel 1)}}
+                  <span>{{{localize "BITD.IntelQuestions2"}}}</span>
+                {{/if}}
+                {{#if (gt data.resources.intel 2)}}
+                  <span>{{{localize "BITD.IntelQuestions3"}}}</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+
+        {{else if (eq actor.data.type "Marshal")}}
+          <div id="morale" class="label-stripe">
+            <p><label>{{localize "BITD.Morale"}}</label>{{localize "BITD.MoraleLabel"}}</p>
+          </div>
+          <div id="morale-list" class="list">
+            <div id="morale-boxes" class="flex-vertical">
+              <div class="gradient-stripe-morale flex-horizontal">
+                {{#multiboxes data.resources.morale}}
+                  <div class="attributes-container">
+                    {{#times_from_0 10}}
+                      <input type="radio" id="morale-{{../actor._id}}-{{this}}" name="data.resources.morale" value="{{this}}">
+                      <label for="morale-{{../actor._id}}-{{this}}"></label>
+                    {{/times_from_0}}
+                  </div>
+                {{/multiboxes}}
+              </div>
+              <div>{{{localize "BITD.MoraleDetail"}}}</div>
+            </div>
+          </div>
+
+          <div class="label-stripe">
+            <p><label class="roll-die-attribute rollable-text" data-roll-attribute="engagement">{{localize "BITD.Engagement"}}</label>{{localize "BITD.EngagementLabel"}}</p>
+          </div>
+          <div id="engagement-list" class="list">
+            <div class="flex-horizontal number-input">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="engagement-{{actor._id}}" type="number" name="data.resources.engagement" value="{{data.resources.engagement}}">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              <label for="engagement-{{actor._id}}">{{{localize "BITD.EngagementDetail"}}}</label>
+            </div>
+            <div class="">
+              {{{localize "BITD.EngagementGeneral"}}}
+            </div>
+            <div class="">
+              {{{localize "BITD.EngagementAssault"}}}
+            </div>
+            <div class="">
+              {{{localize "BITD.EngagementRecon"}}}
+            </div>
+            <div class="">
+              {{{localize "BITD.EngagementReligious"}}}
+            </div>
+            <div class="">
+              {{{localize "BITD.EngagementSupply"}}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+
+      <div id="squads" class="tab flex-vertical" data-tab="squads">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Squads"}}</label>{{localize "BITD.SquadsLabel"}}</p>
+        </div>
+        {{#each squads as |squad sindex|}}
+          <div class="label-stripe-gray">
+            <p class="tooltip">
+              {{squad.name}}
+              <a class="rookie-create" data-item-type="{{squad.name}}">
+                <i class="fas fa-plus-square">
+                  <span class="tooltiptext">{{localize "BITD.CreateRookies"}}</span>
+                </i>
+              </a>
+            </p>
+          </div>
+          <div class="container flex-flow">
+            {{#each ../squaddies as |squaddie lindex|}}
+              {{#if (eq squaddie.data.squad squad.name)}}
+                <span class="item flex-horizontal" data-item-id="{{squaddie._id}}">
+                  <span class="item-body flex-left">
+                    <img src="{{squaddie.img}}" title="{{squaddie.name}}" width="24" height="24"/>
+                    <span class="attribute-skill-label">
+                      <a class="actor-name">{{squaddie.name}}</a>
+                    </span>
+                    <span id="wounds-stress-{{squaddie._id}}" class="flex-horizontal">
+                      <span class="wounds-boxes attributes-container flex-horizontal">
+                        <input id="wounds-light-{{squaddie._id}}" disabled type="radio" name="squaddie.data.lightBox" value="{{squaddie.data.lightBox}}">
+                        <label for="wounds-light-{{squaddie._id}}" style="background-color: {{squaddie.data.lightBox}};"></label>
+                        <input id="wounds-medium-{{squaddie._id}}" disabled type="radio" name="squaddie.data.mediumBox" value="{{squaddie.data.mediumBox}}">
+                        <label for="wounds-medium-{{squaddie._id}}" style="background-color: {{squaddie.data.mediumBox}};"></label>
+                        <input id="wounds-heavy-{{squaddie._id}}" disabled type="radio" name="squaddie.data.heavyBox" value="{{squaddie.data.heavyBox}}">
+                        <label for="wounds-heavy-{{squaddie._id}}" style="background-color: {{squaddie.data.heavyBox}};"></label>
+                        <span>{{localize "BITD.Wounds"}}</span>
+                      </span>
+                      <span class="stress-boxes flex-horizontal">
+                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}}">
+                        <label for="stress-{{squaddie._id}}">{{localize "BITD.Stress"}}</label>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/each}}
+      </div>
+
+      <div id="specialists" class="tab flex-vertical" data-tab="specialists">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Specialists"}}</label>{{localize "BITD.SpecialistsLabel"}}</p>
+        </div>
+        {{#each specialistTypes as |specType sindex|}}
+          <div class="label-stripe-gray">{{specType.name}}</div>
+          <div class="container flex-flow">
+            {{#each ../specialists as |specialist lindex|}}
+              {{#if (eq specialist.data.class specType.name)}}
+                <span class="item flex-horizontal" data-item-id="{{specialist._id}}">
+                  <span class="item-body flex-left">
+                    <img src="{{specialist.img}}" title="{{specialist.name}}" width="24" height="24"/>
+                    <span class="attribute-skill-label">
+                      <a class="actor-name">{{specialist.name}}</a>
+                    </span>
+                    <span id="wounds-stress-{{specialist._id}}" class="flex-horizontal">
+                      <span class="wounds-boxes attributes-container flex-horizontal">
+                        <input id="wounds-light-{{specialist._id}}" disabled type="radio" name="specialist.data.lightBox" value="{{specialist.data.lightBox}}">
+                        <label for="wounds-light-{{specialist._id}}" style="background-color: {{specialist.data.lightBox}};"></label>
+                        <input id="wounds-medium-{{specialist._id}}" disabled type="radio" name="specialist.data.mediumBox" value="{{specialist.data.mediumBox}}">
+                        <label for="wounds-medium-{{specialist._id}}" style="background-color: {{specialist.data.mediumBox}};"></label>
+                        <input id="wounds-heavy-{{specialist._id}}" disabled type="radio" name="specialist.data.heavyBox" value="{{specialist.data.heavyBox}}">
+                        <label for="wounds-heavy-{{specialist._id}}" style="background-color: {{specialist.data.heavyBox}};"></label>
+                        <span>{{localize "BITD.Wounds"}}</span>
+                      </span>
+                      <span class="stress-boxes flex-horizontal">
+                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}}">
+                        <label for="stress-{{specialist._id}}">{{localize "BITD.Stress"}}</label>
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              {{/if}}
+            {{/each}}
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="tab flex-vertical" data-tab="character-notes">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Notes"}}</label></p>
+        </div>
+        <div class="description">
+          {{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}}
+          {{#if editable}}
+            <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
+          {{/if}}
+        </div>
+      </div>
+
+      {{!-- Active Effects --}}
+      <div id="effects" class="tab effects flex-vertical" data-tab="effects">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Effects"}}</label></p>
+        </div>
+        {{> "systems/band-of-blades/templates/parts/active-effects.html"}}
+      </div>
+
+      {{!-- Full Item List --}}
+      <div id="all-items" class="tab grow-two flex-vertical" data-tab="all-character-items">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.AllItems"}}</label></p>
+        </div>
+        {{#each actor.items as |item id|}}
+          <div class="item flex-horizontal" data-item-id="{{item._id}}">
+            <div class="item-body item-sheet-open flex-horizontal">
+              <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+              <a class="item-name">{{item.name}}</a>
+            </div>
+            <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+</form>

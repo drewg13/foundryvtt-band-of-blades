@@ -35,12 +35,16 @@ export class BoBActorSheet extends BoBSheet {
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.actor.effects);
 
-    // Calculate Load
-    let loadout = 0;
-    data.items.forEach( i => { loadout += ( i.type === "item" ) ? parseInt( i.data.load ) : 0 } );
-    data.data.loadout.current = loadout;
+    if( this.actor.type === "character" ) {
+      // Calculate Load
+      let loadout = 0;
+      data.items.forEach( i => {
+        loadout += ( i.type === "item" ) ? parseInt( i.data.load ) : 0
+      } );
+      data.data.loadout.current = loadout;
 
-	  data.load_levels = {"BITD.Light":"BITD.Light", "BITD.Normal":"BITD.Normal", "BITD.Heavy":"BITD.Heavy"};
+      data.load_levels = { "BITD.Light": "BITD.Light", "BITD.Normal": "BITD.Normal", "BITD.Heavy": "BITD.Heavy" };
+    }
 
     return data;
   }

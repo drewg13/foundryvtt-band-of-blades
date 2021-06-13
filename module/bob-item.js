@@ -8,15 +8,34 @@ export class BoBItem extends Item {
 
   /** @override */
   async _preCreate( data, options, user ) {
-
     await super._preCreate( data, options, user );
+    let actor = this.parent ? this.parent : null;
+
+    if( ( ( data.type === "class") || ( data.type === "role" ) ) && actor !== null ) {
+      let update = {_id: actor.id};
+      // set actor icon for new class, if icon is already class icon or mystery man to avoid resetting custom art
+      if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
+        const icon = data.img;
+        foundry.utils.mergeObject(
+          update,
+          {
+            img: icon,
+            token: {
+              img: icon
+            }
+          }
+        );
+      }
+      //console.log(update)
+      await Actor.updateDocuments([update]);
+    }
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   async _onCreate( data, options, userId ) {
-
+    super._onCreate( data, options, userId );
     if( userId === game.user.id ) {
       let actor = this.parent ? this.parent : null;
 
@@ -27,11 +46,12 @@ export class BoBItem extends Item {
         }
 
         if( data.type === "class" ) {
+          let update = {_id: actor.id};
 
           // adds specialist skill, if character has specialist class (non-Rookie)
           const skill = data.data.skill;
           const skillData = actor.data.data.attributes;
-          let update = {_id: actor.id};
+
           if( skill ) {
             const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
             const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
@@ -39,48 +59,8 @@ export class BoBItem extends Item {
               update,
               { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
             );
-          } else if( data.name === "Rookie" ) {
-            let attributes = Object.keys(game.system.model.Actor.character.attributes);
-            let max;
-            // reset attributes and skills to defaults
-            attributes.forEach( a => {
-              let skills = Object.keys( game.system.model.Actor.character.attributes[a].skills );
-              skills.forEach( s => {
-                max = (a === "specialist") ? 0 : 3;
-                foundry.utils.mergeObject(
-                  update,
-                  { data: { attributes: { [a]: { skills: { [s]: { value: "0", max: max } } } } } }
-                );
-            })});
-
-            // set Rookie defaults
-            foundry.utils.mergeObject(
-              update,
-              { data: { attributes: {
-                prowess: { skills: {
-                  maneuver: { value: "1" },
-                  skirmish: { value: "1" }
-                } },
-                resolve: { skills: {
-                  consort: { value : "1" }
-                } } } } }
-            );
           }
-
-          // set actor icon for new class, if icon is already class icon or mystery man, avoid resetting custom art
-          if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
-            const icon = data.img;
-            foundry.utils.mergeObject(
-              update,
-              {
-                img: icon,
-                token: {
-                  img: icon
-                }
-              }
-            );
-          }
-
+          //console.log(update)
           await Actor.updateDocuments([update]);
         }
       }
@@ -100,12 +80,9 @@ export class BoBItem extends Item {
         await actor.setFlag( "band-of-blades", "items." + key + ".usesMax", data.data.uses );
       }
 
-      let removeDupeItems = [];
-      let removeLoadItems = [];
-
       //remove duplicates for some item types
       if( actor?.documentName === "Actor" ) {
-        removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
+        const removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
         if( removeDupeItems.length !== 0 ) {
           for await( let item of removeDupeItems ) {
             item = actor.items.get( item );
@@ -116,7 +93,7 @@ export class BoBItem extends Item {
 
       //remove all load items on class change
       if( actor && ( data.type === "class" ) ) {
-        removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
+        const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
         if( removeLoadItems.length !== 0 ) {
           for await( let item of removeLoadItems ) {
             item = actor.items.get( item );
@@ -125,7 +102,6 @@ export class BoBItem extends Item {
         }
       }
     }
-    super._onCreate( data, options, userId );
   }
 
   /* -------------------------------------------- */

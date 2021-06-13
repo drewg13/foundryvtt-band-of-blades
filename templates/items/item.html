@@ -19,8 +19,6 @@
       <input id="item-uses" type="text" name="data.uses" value="{{data.uses}}">
 
       {{#if isGM}}
-        <div class="label-stripe">{{localize "BITD.Logic"}}</div>
-        <textarea name="data.logic">{{{data.logic}}}</textarea>
         <div class="label-stripe">{{localize "BITD.Effects"}}</div>
         <div id="effects">{{> "systems/band-of-blades/templates/parts/active-effects.html"}}</div>
       {{/if}}

@@ -31,6 +31,28 @@
           {{/each}}
         </div>
 
+        {{#if (or (eq actor.data.class "Rookie") (eq actor.data.class "Soldier") )}}
+        <div class="item-block flex-horizontal">
+          <div class="item-class-label">
+            <a class="item-add-popup" data-distinct="true" data-item-type="squad">{{localize "BITD.Squad"}}</a>
+          </div>
+          {{#each actor.items as |item id|}}
+            {{#if (eq item.type "squad")}}
+              <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item-body flex-horizontal">
+                  <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                  <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
+                    <a class="item-name">{{item.name}}</a>
+                    <span class="tooltiptext">{{{item.data.description}}}</span>
+                  </div>
+                </div>
+                <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+        {{/if}}
+
         <div class="item-block flex-horizontal">
           <div class="item-class-label">
             <a class="item-add-popup" data-distinct="true" data-item-type="heritage">{{localize "BITD.Heritage"}}</a>

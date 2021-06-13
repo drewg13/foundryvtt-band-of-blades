@@ -16,6 +16,14 @@ export class BoBActor extends Actor {
     const updateData = {};
     switch ( createData.type ) {
       case "character": {
+        updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
+        updateData['token.actorLink'] = true;
+        updateData['token.name'] = createData.name;
+        updateData['token.displayName'] = 50;
+        break;
+      }
+      case "role": {
+        updateData['img'] = "systems/band-of-blades/styles/assets/icons/role.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
@@ -29,7 +37,7 @@ export class BoBActor extends Actor {
         break;
       }
     }
-    this.data.update( updateData );
+    await this.data.update( updateData );
 
   }
 
@@ -38,19 +46,6 @@ export class BoBActor extends Actor {
   /** @override */
   async _onCreate( data, options, userId ) {
     super._onCreate( data, options, userId );
-
-    if( userId === game.user.id ) {
-
-      if( this.type === 'character' ) {
-        // add default class to new character
-        const defaultClassName = "Rookie";
-        let classes = await BoBHelpers.getAllItemsByType( "class", game );
-        let itemData = classes.find( c => c.name === defaultClassName ) || {};
-        if( this.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) {
-          await this.createEmbeddedDocuments( "Item", [ itemData ] );
-        }
-      }
-    }
 
   }
 
@@ -140,6 +135,17 @@ export class BoBActor extends Actor {
           dice_amount.insight.value++;
         }
 	      break;
+      case 'role':
+        dice_amount.pressure = {
+          "value": this.data.data.resources.pressure,
+          "bonus": 0
+        };
+        dice_amount.engagement = {
+          "value": this.data.data.resources.engagement,
+          "bonus": 0
+        };
+
+        break;
 	  }
     return dice_amount;
   }

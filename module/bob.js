@@ -8,6 +8,7 @@ import { BoBActor } from "./bob-actor.js";
 import { BoBItem } from "./bob-item.js";
 import { BoBItemSheet } from "./bob-item-sheet.js";
 import { BoBActorSheet } from "./bob-actor-sheet.js";
+import { BoBRoleSheet } from "./bob-role-sheet.js";
 import * as migrations from "./migration.js";
 /* For Clocks UI */
 import { BoBClockSheet } from "./bob-clock-sheet.js";
@@ -23,13 +24,14 @@ window.BoBHelpers = BoBHelpers;
 Hooks.once("init", function() {
   console.log(`Initializing Band of Blades System`);
 
-  game.sav = {
+  game.bob = {
     dice: bobRoll
   }
   game.system.bobclocks = {
     themes: ["black", "grey", "white", "red", "yellow", "green", "blue"],
     sizes: [ 4, 6, 8, 10, 12 ]
   };
+  game.BoBHelpers = BoBHelpers;
 
   const versionParts = game.data.version.split('.');
   game.majorVersion = parseInt(versionParts[1]);
@@ -47,6 +49,7 @@ Hooks.once("init", function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", BoBRoleSheet, { types: ["role"], makeDefault: true });
   Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
@@ -56,6 +59,12 @@ Hooks.once("init", function() {
     let newObject = object ? options.lookupProperty(object, property) : object;
     let subObject = newObject ? options.lookupProperty(newObject, subproperty) : newObject;
     return subObject ? subObject : {};
+  });
+
+  // allow Handlebars lookups to combine strings with variables
+  Handlebars.registerHelper("lookupstring", function(string, variable, options) {
+    let newString = string ? string + String( variable ) : string;
+    return newString ? newString : "";
   });
 
   // Multiboxes.
@@ -201,10 +210,12 @@ Hooks.once("init", function() {
    * Create appropriate clock
    */
 
-  Handlebars.registerHelper('sav-clock', function(parameter_name, type, current_value, uniq_id) {
+  Handlebars.registerHelper('bob-clock', function(parameter_name, type, current_value, uniq_id, theme) {
 
     let html = '';
-
+    if( theme === null ) {
+      theme = game.system.bobclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
+    }
     if (current_value === null) {
       current_value = 0;
     }
@@ -215,7 +226,7 @@ Hooks.once("init", function() {
 
     // Label for 0
     html += `<label class="clock-zero-label" for="clock-0-${uniq_id}}"><i class="fab fa-creative-commons-zero nullifier"></i></label>`;
-    html += `<div id="sav-clock-${uniq_id}" class="sav-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/black/${type}clock_${current_value}.svg');">`;
+    html += `<div id="bob-clock-${uniq_id}" class="bob-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/${theme}/${type}clock_${current_value}.svg');">`;
 
     let zero_checked = (parseInt(current_value) === 0) ? 'checked="checked"' : '';
     html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" name="${parameter_name}" ${zero_checked}>`;
@@ -267,6 +278,15 @@ Hooks.on("renderSceneControls", (app, html) => {
 //For Clocks UI
 Hooks.once("init", () => {
   log(`Init ${game.data.system.id}`);
+});
+
+// re-render the Marshal sheet after updating any squad sheets to catch changes made
+Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
+  let marshals = game.actors.filter( a => a.data.data.type === "Marshal" ).map( a => { return a.id } );
+  marshals.forEach( m => {
+    game.actors.get( m ).sheet.render(false);
+  });
+
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {

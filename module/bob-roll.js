@@ -43,18 +43,22 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
 
 
   if ( attribute_name === "Fortune!" ) {
-	  roll_status = getSaVFortuneRollStatus(rolls, zeromode);
+	  roll_status = getFortuneRollStatus(rolls, zeromode);
   } else if ( resistance_rolls.includes( attribute_name ) ) {
-	  [ roll_status, stress_result ] = getSaVResistRollStatus(rolls, zeromode);
+	  [ roll_status, stress_result ] = getResistRollStatus(rolls, zeromode);
 	  stress_result_display = ( 6 - stress_result );
 	  position = "";
 	  effect = "";
-  } else if ( attribute_name === "upkeep" ) {
-	  roll_status = getSaVUpkeepRollStatus(rolls, zeromode);
+  } else if ( attribute_name === "pressure" ) {
+	  roll_status = getPressureRollStatus(rolls, zeromode);
 	  position = "";
 	  effect = "";
+  } else if ( attribute_name === "engagement" ) {
+    roll_status = getEngagementRollStatus(rolls, zeromode);
+    position = "";
+    effect = "";
   } else {
-	  roll_status = getSaVActionRollStatus(rolls, zeromode);
+	  roll_status = getActionRollStatus(rolls, zeromode);
   }
 
   let position_localize;
@@ -104,7 +108,7 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
  * @param {Array} rolls
  * @param {Boolean} zeromode
  */
-export function getSaVActionRollStatus(rolls, zeromode = false) {
+export function getActionRollStatus(rolls, zeromode = false) {
 
   let sorted_rolls = rolls.map(i => i.result).sort();
   let roll_status;
@@ -140,7 +144,7 @@ export function getSaVActionRollStatus(rolls, zeromode = false) {
   return roll_status;
 }
 
-export function getSaVFortuneRollStatus(rolls, zeromode = false) {
+export function getFortuneRollStatus(rolls, zeromode = false) {
 
   let sorted_rolls = rolls.map(i => i.result).sort();
   let roll_status;
@@ -173,7 +177,7 @@ export function getSaVFortuneRollStatus(rolls, zeromode = false) {
   return roll_status;
 }
 
-export function getSaVResistRollStatus(rolls, zeromode = false) {
+export function getResistRollStatus(rolls, zeromode = false) {
 
   let sorted_rolls = rolls.map(i => i.result).sort();
   let roll_status;
@@ -206,45 +210,71 @@ export function getSaVResistRollStatus(rolls, zeromode = false) {
   return [roll_status, use_die];
 }
 
-export function getSaVViceRollStatus(rolls, zeromode = false) {
-
-  let sorted_rolls = rolls.map(i => i.result).sort();
-  let roll_status = "vice";
-  let use_die;
-
-  if (zeromode) {
-    use_die = sorted_rolls[0];
-  } else {
-    use_die = sorted_rolls[sorted_rolls.length - 1];
-  }
-
-  return [roll_status, use_die];
-}
-
-export function getSaVUpkeepRollStatus(rolls, zeromode = false) {
+export function getPressureRollStatus(rolls, zeromode = false) {
 
   let sorted_rolls = rolls.map(i => i.result).sort();
   let roll_status;
   let use_die;
+  let prev_use_die;
 
   if (zeromode) {
     use_die = sorted_rolls[0];
   } else {
     use_die = sorted_rolls[sorted_rolls.length - 1];
+    if (sorted_rolls.length - 2 >= 0) {
+      prev_use_die = sorted_rolls[sorted_rolls.length - 2]
+    }
   }
 
   // 1,2,3 = failure
   if (use_die <= 3) {
-    roll_status = "nodamage";
+    roll_status = "fast";
   } else if (use_die === 6) {
-    roll_status = "damaged";
+    // 6,6 - critical success
+    if (prev_use_die && prev_use_die === 6) {
+      roll_status = "very-slow";
+    } else {
+      roll_status = "slow";
+    }
   } else {
-    roll_status = "malfunction";
+    roll_status = "moderate";
   }
 
   return roll_status;
 }
 
+export function getEngagementRollStatus(rolls, zeromode = false) {
+
+  let sorted_rolls = rolls.map(i => i.result).sort();
+  let roll_status;
+  let use_die;
+  let prev_use_die;
+
+  if (zeromode) {
+    use_die = sorted_rolls[0];
+  } else {
+    use_die = sorted_rolls[sorted_rolls.length - 1];
+    if (sorted_rolls.length - 2 >= 0) {
+      prev_use_die = sorted_rolls[sorted_rolls.length - 2]
+    }
+  }
+
+  // 1,2,3 = failure
+  if (use_die <= 3) {
+    roll_status = "engFail";
+  } else if (use_die === 6) {
+    // 6,6 - critical success
+    if (prev_use_die && prev_use_die === 6) {
+      roll_status = "engCrit";
+    } else {
+      roll_status = "engSuccess";
+    }
+  } else {
+    roll_status = "engPartial";
+  }
+
+  return roll_status;
+}
 /**
  * Call a Roll popup.
  */

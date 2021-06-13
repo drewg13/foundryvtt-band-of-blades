@@ -36,7 +36,7 @@ export class BoBItemSheet extends ItemSheet {
   /** @override */
   get template() {
     const path = "systems/band-of-blades/templates/items";
-    let simple_item_types = ["background", "heritage"];
+    let simple_item_types = ["background", "heritage", "role", "squad"];
     let template_name = `${this.item.data.type}`;
 
     if (simple_item_types.indexOf(this.item.data.type) >= 0) {

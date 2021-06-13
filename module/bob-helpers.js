@@ -13,7 +13,7 @@ export class BoBHelpers {
    */
   static removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
-    let distinct_types = ["class", "heritage"];
+    let distinct_types = ["class", "heritage", "squad"];
     let allowed_types = ["item"];
     let should_be_distinct = distinct_types.includes(item_data.type);
     // If the Item has the exact same name - remove it from list.
@@ -77,6 +77,80 @@ export class BoBHelpers {
   /* -------------------------------------------- */
 
   /**
+   * Create a set of default Rookie characters in a set squad
+   * @param {string} squad
+   * @param {number} number
+   * @returns {Document[]} array of created Documents
+   */
+  static async createRookies(squad, number) {
+    let folder;
+    const squads = await BoBHelpers.getAllItemsByType("squad", game);
+    const squadItem = squads.filter( s => s.name === squad );
+    const defaultClassName = "Rookie";
+    const classes = await BoBHelpers.getAllItemsByType( "class", game );
+    const classItem = classes.find( c => c.name === defaultClassName ) || {};
+
+    if( game.folders.find( f => f.name === squad ) === undefined ) {
+      folder = await Folder.create({
+        name: squad,
+        type: "Actor"
+      });
+    } else {
+      folder = game.folders.find( f => f.name === squad );
+    }
+
+    let createData = [];
+    for( let i = 1; i < number+1; i++ ) {
+      let data = {
+        name: squad + " " + i,
+        img: "systems/band-of-blades/styles/assets/icons/rookie.svg",
+        type: "character",
+        folder: folder,
+        token: {
+          img: "systems/band-of-blades/styles/assets/icons/rookie.svg"
+        },
+        data: {
+          class: "Rookie",
+          squad: squad,
+          attributes: {
+            prowess: {
+              skills: {
+                maneuver: {
+                  value: "1"
+                },
+                skirmish: {
+                  value: "1"
+                }
+              }
+            },
+            resolve: {
+              skills: {
+                consort: {
+                  value: "1"
+                }
+              }
+            }
+          }
+        }
+      }
+      data.items = [];
+      data.items = data.items.concat( squadItem );
+      data.items = data.items.concat( classItem );
+      createData.push(data);
+    }
+
+    let created = await Actor.createDocuments( createData );
+
+    let marshals = game.actors.filter( a => a.data.data.type === "Marshal" ).map( a => { return a.id } );
+    marshals.forEach( m => {
+      game.actors.get( m ).sheet.render(false);
+    });
+
+    return created;
+  }
+  /* -------------------------------------------- */
+
+  /**
    * Get the list of all available in-game items by Type.
    *
    * @param {string} item_type
@@ -114,17 +188,33 @@ export class BoBHelpers {
   /* -------------------------------------------- */
 
   /**
-   * Returns an array of actors matching the type passed which are present in the game world
+   * Returns an array of actor objects matching the type passed which are present in the game world
    *
    * @param {string} actor_type
    *   the actor type of interest
    * @param {Object} game
    *   current game world object
    * @returns {Array}
-   *   an array of actors of the specified type in the game world
+   *   an array of actor objects of the specified type in the game world
    */
   static getAllActorsByType(actor_type, game) {
     return game.actors.filter( e => e.data.type === actor_type ).map( e => { return e.data.toObject() } ) || [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Returns an array of character objects matching the class passed which are present in the game world
+   *
+   * @param {string} class
+   *   the character class of interest
+   * @param {Object} game
+   *   current game world object
+   * @returns {Array}
+   *   an array of ActorData objects of the specified class in the game world
+   */
+  static getAllCharactersByClass(actor_class, game) {
+    return game.actors.filter( e => e.data.data.class === actor_class ).map( e => { return e.data } ) || [];
   }
 
   /* -------------------------------------------- */
