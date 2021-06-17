@@ -439,7 +439,7 @@
                     {{#if (gt item.data.uses 0)}}
                       <div class="uses-select">
                         <span>{{localize "BITD.Uses"}}</span>
-                        <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.uses" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'uses') localize=true}}</select>
+                        <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                       </div>
                     {{/if}}
                   </div>
@@ -528,7 +528,7 @@
                     <div class="attribute-skill-label tooltip">{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'label')}}<span class="tooltiptext bottom">{{{localize (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'tip')}}}<br />{{localize "BITD.SkillsSpecialistTip"}}</span></div>
                     <div class="skill-select">
                       <span>{{localize "BITD.Uses"}}</span>
-                      <select id="skilluses-{{../data.item_triggers.spec_skill}}-{{../actor._id}}" name="data.attributes.specialist.skills.{{../data.item_triggers.spec_skill}}.usesIndex">{{selectOptions (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesArray') selected=(lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usesIndex') localize=true}}</select>
+                      <select id="skilluses-{{../data.item_triggers.spec_skill}}-{{../actor._id}}" name="data.attributes.specialist.skills.{{../data.item_triggers.spec_skill}}.usagesIndex">{{selectOptions (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usagesArray') selected=(lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'usagesIndex') localize=true}}</select>
                     </div>
                   {{/multiboxes}}
                 </div>
@@ -591,7 +591,7 @@
                           <div class="attribute-skill-label tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext top">{{{localize skill.tip}}}<br />{{localize "BITD.SkillsSpecialistTip"}}</span></div>
                           <div class="skill-select">
                             <span>{{localize "BITD.Uses"}}</span>
-                            <select id="skilluses-{{skill_name}}-{{../../actor._id}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.usesIndex">{{selectOptions (lookup skill 'usesArray') selected=(lookup skill 'usesIndex') localize=true}}</select>
+                            <select id="skilluses-{{skill_name}}-{{../../actor._id}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.usagesIndex">{{selectOptions (lookup skill 'usagesArray') selected=(lookup skill 'usagesIndex') localize=true}}</select>
                           </div>
                         {{/multiboxes}}
                       </div>

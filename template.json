@@ -173,56 +173,56 @@
             "tip": "BITD.SkillsAnchorTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "aim": {
             "label": "BITD.SkillsAim",
             "tip": "BITD.SkillsAimTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "channels": {
             "label": "BITD.SkillsChannels",
             "tip": "BITD.SkillsChannelsTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "doctor": {
             "label": "BITD.SkillsDoctor",
             "tip": "BITD.SkillsDoctorTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "grit": {
             "label": "BITD.SkillsGrit",
             "tip": "BITD.SkillsGritTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "scrounge": {
             "label": "BITD.SkillsScrounge",
             "tip": "BITD.SkillsScroungeTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           },
           "weave": {
             "label": "BITD.SkillsWeave",
             "tip": "BITD.SkillsWeaveTip",
             "max": 0,
             "value": "0",
-            "usesIndex": "0",
-            "usesArray": "0"
+            "usagesIndex": "0",
+            "usagesArray": "0"
           }
         }
       }
@@ -242,6 +242,16 @@
       "pressure": 0,
       "intel": 0,
       "engagement": 0,
+      "carts": 0,
+      "laborers": 0,
+      "alchemists": 0,
+      "mercies": 0,
+      "siege": 0,
+      "supply": {
+        "value": 0,
+        "max": 3,
+        "extraUses": 0
+      },
       "morale": "0",
       "time": {
         "timeClock1": {
@@ -269,7 +279,7 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "role", "squad", "ability", "heritage", "trait"],
+  "types": ["item", "class", "role", "squad", "ability", "personnel", "materiel", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
@@ -331,6 +341,14 @@
   },
   "ability": {
     "templates": ["default", "logic", "activatedEffect"]
+  },
+  "personnel": {
+    "templates": ["default", "activatedEffect"],
+    "uses": "0"
+  },
+  "materiel": {
+    "templates": ["default", "activatedEffect"],
+    "uses": "0"
   },
   "heritage": {
     "templates": ["default", "logic", "activatedEffect"]

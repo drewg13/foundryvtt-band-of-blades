@@ -65,17 +65,34 @@ export class BoBSheet extends ActorSheet {
 		    }
 	    } else if (e.type === "item") {
 		    if ( ( ( e.data.class === this.actor.data.data.class ) && ( ( ( e.data.load_type === game.i18n.localize("BITD.Light") ) || ( e.data.load_type === "Utility" ) ) ||
-          ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) && ( this.actor.data.data.loadout.selected_load_level === "BITD.Normal" ) ) ||
-          ( ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) || ( e.data.load_type === game.i18n.localize("BITD.Heavy") ) ) && ( this.actor.data.data.loadout.selected_load_level === "BITD.Heavy" ) ) ) ) ||
-          ( ( this.actor.data.data.item_triggers.grenadier === 1 ) && ( e.data.class === "Grenadier") ) ||
-          ( ( this.actor.data.data.item_triggers.crimson === 1 ) && ( e.data.class === "Crimson") ) ||
-          ( ( this.actor.data.data.item_triggers.chemist === 1 ) && ( e.data.class === "Chemist") ) ||
-          ( ( this.actor.data.data.item_triggers.pious === 1 ) && ( e.data.class === "Pious") )) {
+          ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) && ( this.actor.data.data.loadout?.selected_load_level === "BITD.Normal" ) ) ||
+          ( ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) || ( e.data.load_type === game.i18n.localize("BITD.Heavy") ) ) && ( this.actor.data.data.loadout?.selected_load_level === "BITD.Heavy" ) ) ) ) ||
+          ( ( this.actor.data.data.item_triggers?.grenadier === 1 ) && ( e.data.class === "Grenadier") ) ||
+          ( ( this.actor.data.data.item_triggers?.crimson === 1 ) && ( e.data.class === "Crimson") ) ||
+          ( ( this.actor.data.data.item_triggers?.chemist === 1 ) && ( e.data.class === "Chemist") ) ||
+          ( ( this.actor.data.data.item_triggers?.pious === 1 ) && ( e.data.class === "Pious") )) {
 			      html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			      html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
 			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
 			      html += `</label>`;
 		    }
+      } else if (e.type === "materiel") {
+        if ( ( ( ( this.actor.data.data.resources.carts < 3 ) && ( e.name === "Supply Cart" ) ) || ( e.name !== "Supply Cart" ) ) &&
+          ( ( ( this.actor.data.data.resources.siege < 3 ) && ( e.name === "Siege Weapons" ) ) || ( e.name !== "Siege Weapons" ) ) ) {
+          html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
+          html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+          html += `</label>`;
+        }
+      } else if (e.type === "personnel") {
+        if ( ( ( ( this.actor.data.data.resources.laborers < 3 ) && ( e.name === "Laborer" ) ) || ( e.name !== "Laborer" ) ) &&
+          ( ( ( this.actor.data.data.resources.alchemists < 3 ) && ( e.name === "Alchemist" ) ) || ( e.name !== "Alchemist" ) ) &&
+          ( ( ( this.actor.data.data.resources.mercies < 3 ) && ( e.name === "Mercy" ) ) || ( e.name !== "Mercy" ) ) ) {
+          html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
+          html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+          html += `</label>`;
+        }
 	    } else {
 			  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			  html += `<label class="flex-horizontal" for="select-item-${e._id}">`;

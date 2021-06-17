@@ -65,20 +65,37 @@ export class BoBActor extends Actor {
     const actorData = this.data;
     const data = actorData.data;
 
-    if ( actorData.type === "character" ) {
+    if( ( actorData.type === "role" ) && ( data.resources.supply.extraUses > 0 ) ) {
+      let foodItems = [];
+      actorData.items.forEach( i => {
+        if( i.name === "Food Stores" ) {
+          foodItems.push( i.id );
+        }
+      })
+      foodItems.forEach( f => {
+        if( actorData.flags['band-of-blades'].items[f] ) {
+          const increase = data.resources.supply.extraUses;
+          actorData.flags['band-of-blades'].items[f].usagesMax = String( parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ) + increase );
+          for( let i = ( parseInt( actorData.flags['band-of-blades'].items[f].usagesArray.slice( -1 ) ) + 1 ); i <= parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ); i++ ) {
+            actorData.flags['band-of-blades'].items[f].usagesArray += String( i );
+          }
+        }
+      })
+    }
 
+    if ( actorData.type === "character" ) {
       //sets up array of values for specialist skill uses tracking dropdown
       const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
       let skillArray = "";
       let skillVal = 0;
       spec_skills.forEach( s => {
-        data.attributes.specialist.skills[s].usesArray = "0";
+        data.attributes.specialist.skills[s].usagesArray = "0";
         skillVal = data.attributes.specialist.skills[s].value;
         if( skillVal ) {
           for( let i = skillVal; i >= 0; i-- ) {
             skillArray = skillArray + i;
           }
-          data.attributes.specialist.skills[s].usesArray = skillArray;
+          data.attributes.specialist.skills[s].usagesArray = skillArray;
           skillVal = 0;
           skillArray = "";
         }
@@ -142,6 +159,10 @@ export class BoBActor extends Actor {
         };
         dice_amount.engagement = {
           "value": this.data.data.resources.engagement,
+          "bonus": 0
+        };
+        dice_amount.alchemists = {
+          "value": this.data.items.filter( a => a.name === "Alchemist" ).length,
           "bonus": 0
         };
 

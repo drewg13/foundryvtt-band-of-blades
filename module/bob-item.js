@@ -9,25 +9,64 @@ export class BoBItem extends Item {
   /** @override */
   async _preCreate( data, options, user ) {
     await super._preCreate( data, options, user );
+    // put as many things into preCreate as possible to avoid database semaphore issue that likely won't be corrected until 0.9.x
     let actor = this.parent ? this.parent : null;
 
-    if( ( ( data.type === "class") || ( data.type === "role" ) ) && actor !== null ) {
-      let update = {_id: actor.id};
-      // set actor icon for new class, if icon is already class icon or mystery man to avoid resetting custom art
-      if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
-        const icon = data.img;
-        foundry.utils.mergeObject(
-          update,
-          {
-            img: icon,
-            token: {
-              img: icon
+    if( ( actor?.documentName === "Actor" ) && ( user.id === game.user.id ) ) {
+      //remove duplicates for some item types
+      const removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
+      if( removeDupeItems.length !== 0 ) {
+        for await( let item of removeDupeItems ) {
+          item = actor.items.get( item );
+          await item.delete();
+        }
+      }
+
+      if( ( data.type === "class" ) && ( data.data.def_abilities !== "" ) ) {
+        await BoBHelpers.addDefaultAbilities( data, actor );
+      }
+
+      if( ( data.type === "class" ) || ( data.type === "role" ) ) {
+        let update = { _id: actor.id };
+        // set actor icon for new class, if icon is already class icon or mystery man to avoid resetting custom art
+        if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
+          const icon = data.img;
+          foundry.utils.mergeObject(
+            update,
+            {
+              img: icon,
+              "token.img": icon
+            }
+          );
+
+          if( data.type === "class" ) {
+
+            // adds specialist skill, if character has specialist class (non-Rookie)
+            const skill = data.data.skill;
+            const skillData = actor.data.data.attributes;
+
+            if( skill ) {
+              const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
+              const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
+              foundry.utils.mergeObject(
+                update,
+                { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
+              );
+            }
+
+            //remove all load items on class change
+            const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
+            if( removeLoadItems.length !== 0 ) {
+              for await( let item of removeLoadItems ) {
+                item = actor.items.get( item );
+                await item.delete();
+              }
             }
           }
-        );
+        }
+
+        await Actor.updateDocuments( [ update ] );
       }
-      //console.log(update)
-      await Actor.updateDocuments([update]);
     }
   }
 
@@ -36,70 +75,28 @@ export class BoBItem extends Item {
   /** @override */
   async _onCreate( data, options, userId ) {
     super._onCreate( data, options, userId );
-    if( userId === game.user.id ) {
-      let actor = this.parent ? this.parent : null;
+    let actor = this.parent ? this.parent : null;
 
-      if( ( actor?.documentName === "Actor" ) && ( actor?.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
-
-        if( ( data.type === "class" ) && ( data.data.def_abilities !== "" ) ) {
-          await BoBHelpers.addDefaultAbilities( data, actor );
-        }
-
-        if( data.type === "class" ) {
-          let update = {_id: actor.id};
-
-          // adds specialist skill, if character has specialist class (non-Rookie)
-          const skill = data.data.skill;
-          const skillData = actor.data.data.attributes;
-
-          if( skill ) {
-            const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
-            const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
-            foundry.utils.mergeObject(
-              update,
-              { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
-            );
-          }
-          //console.log(update)
-          await Actor.updateDocuments([update]);
-        }
-      }
-
-      // Create actor flags for consumable uses dropdowns on sheet
-      if( ( actor !== null ) && parseInt( data.data.uses ) ) {
-        let key = data._id;
+    // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate
+    if( ( actor !== null ) && parseInt( data.data.uses ) ) {
+      let key = data._id;
+      if( data.name === "Mercy" ) {
+        await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
+      } else {
         let itemVal = parseInt( data.data.uses );
         let itemArray = "";
         if( itemVal ) {
           for( let i = 0; i <= itemVal; i++ ) {
             itemArray = itemArray + i;
           }
-          await actor.setFlag( "band-of-blades", "items." + key + ".usesArray", itemArray );
+          await actor.setFlag( "band-of-blades", "items." + key + ".usagesArray", itemArray );
         }
-        await actor.setFlag( "band-of-blades", "items." + key + ".uses", data.data.uses );
-        await actor.setFlag( "band-of-blades", "items." + key + ".usesMax", data.data.uses );
-      }
-
-      //remove duplicates for some item types
-      if( actor?.documentName === "Actor" ) {
-        const removeDupeItems = BoBHelpers.removeDuplicatedItemType( data, actor );
-        if( removeDupeItems.length !== 0 ) {
-          for await( let item of removeDupeItems ) {
-            item = actor.items.get( item );
-            await item.delete();
-          }
+        if( data.name === "Alchemist" ) {
+          await actor.setFlag( "band-of-blades", "items." + key + ".usages", "0" );
+        } else {
+          await actor.setFlag( "band-of-blades", "items." + key + ".usages", data.data.uses );
         }
-      }
-
-      //remove all load items on class change
-      if( actor && ( data.type === "class" ) ) {
-        const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
-        if( removeLoadItems.length !== 0 ) {
-          for await( let item of removeLoadItems ) {
-            item = actor.items.get( item );
-            await item.delete();
-          }
-        }
+        await actor.setFlag( "band-of-blades", "items." + key + ".usagesMax", data.data.uses );
       }
     }
   }
@@ -108,19 +105,19 @@ export class BoBItem extends Item {
 
   /** @override */
   async _onDelete( options, userId ) {
+    if( userId === game.user.id ) {
+      const actor = this.parent ? this.parent : null;
+      const actorData = actor?.data;
+      const data = this.data;
 
-    let actor = this.parent ? this.parent : null;
-    //let data = this.data;
-
-    // Delete related flags on item delete
-    // TODO: this breaks item usage dropdowns as-is, old version broke active effects, maybe fixed in 0.8.7?
-    //if ( actor !== null ) {
-    //  let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
-    //  if( itemFlag ) {
-    //    let deleted = await actor?.unsetFlag( "band-of-blades", "items." + this.data._id );
-    //    console.log(deleted.data.flags["band-of-blades"].items);
-    //  }
-    //}
+      // Delete related flags on item delete
+      if ( actor !== null ) {
+        let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
+        if( itemFlag ) {
+          let deleted = await actor?.unsetFlag( "band-of-blades", "items." + this.data._id );
+        }
+      }
+    }
     super._onDelete( options, userId );
   }
 
@@ -133,19 +130,6 @@ export class BoBItem extends Item {
     const item_data = this.data;
     const data = item_data.data;
 
-	  if (item_data.type === "faction") {
-      this._prepareStatusDefault( data );
-      data.size_list = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.goal_clock_max, parseInt( data.goal_clock.max ) );
-    }
-  };
 
-  _prepareStatusDefault( data ) {
-
-	  let status = data.status.value;
-
-	  if ( this ) {
-		  if ( ( status === "0" ) || ( status === 0 ) ) { status = 4; }
-		  data.status.value = status;
-	  }
   };
 }

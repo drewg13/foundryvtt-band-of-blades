@@ -11,3 +11,5 @@ v0.2.0  Add Active Effects system
 v0.2.1  Add tighter controls over the item deletion process
 
 v0.3.0  Add Commander and Marshal sheets
+
+v0.3.1  Add Quartermaster sheet

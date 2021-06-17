@@ -194,6 +194,42 @@
     </div>
   {{/if}}
 
+  {{#if (eq roll_status "alcFail")}}
+    <div class="die {{roll_status}}">{{localize "BITD.RollFailure"}}</div>
+    <div class="description">
+      <p>
+        {{{localize "BITD.RollAlcFailDescription"}}}
+      </p>
+    </div>
+  {{/if}}
+
+  {{#if (eq roll_status "alcPartial")}}
+    <div class="die {{roll_status}}">{{localize "BITD.RollPartialSuccess"}}</div>
+    <div class="description">
+      <p>
+        {{{localize "BITD.RollAlcPartialDescription"}}}
+      </p>
+    </div>
+  {{/if}}
+
+  {{#if (eq roll_status "alcSuccess")}}
+    <div class="die {{roll_status}}">{{localize "BITD.RollSuccess"}}</div>
+    <div class="description">
+      <p>
+        {{{localize "BITD.RollAlcSuccessDescription"}}}
+      </p>
+    </div>
+  {{/if}}
+
+  {{#if (eq roll_status "alcCrit")}}
+    <div class="die {{roll_status}}">{{localize "BITD.RollCriticalSuccess"}}</div>
+    <div class="description">
+      <p>
+        {{{localize "BITD.RollAlcCritDescription"}}}
+      </p>
+    </div>
+  {{/if}}
+
   <ol class="dice-rolls">
     {{#each this.rolls}}
     {{#if this.result}}

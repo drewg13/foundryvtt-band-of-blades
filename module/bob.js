@@ -58,7 +58,7 @@ Hooks.once("init", function() {
   Handlebars.registerHelper("lookup2", function(object, property, subproperty, options) {
     let newObject = object ? options.lookupProperty(object, property) : object;
     let subObject = newObject ? options.lookupProperty(newObject, subproperty) : newObject;
-    return subObject ? subObject : {};
+    return subObject;
   });
 
   // allow Handlebars lookups to combine strings with variables
@@ -111,6 +111,16 @@ Hooks.once("init", function() {
   // NotEquals handlebar.
   Handlebars.registerHelper('noteq', (a, b, options) => {
     return (a !== b) ? options.fn(this) : '';
+  });
+
+  // String handlebar.
+  Handlebars.registerHelper('str', (value) => {
+    return String(value);
+  });
+
+  // Number handlebar.
+  Handlebars.registerHelper('num', (value) => {
+    return parseInt(value);
   });
 
   //Case-insensitive comparison
@@ -210,7 +220,7 @@ Hooks.once("init", function() {
    * Create appropriate clock
    */
 
-  Handlebars.registerHelper('bob-clock', function(parameter_name, type, current_value, uniq_id, theme) {
+  Handlebars.registerHelper('bob-clock', function(parameter_name, type, current_value, uniq_id, theme=null) {
 
     let html = '';
     if( theme === null ) {

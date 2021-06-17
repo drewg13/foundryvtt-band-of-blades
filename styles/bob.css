@@ -250,6 +250,9 @@ input[type="checkbox"]:hover {
   font-size: x-large;
 }
 * .role-sheet .label-stripe label {
+  margin-right: 10px;
+}
+* .role-sheet .label-stripe a {
   margin-right: 20px;
 }
 * .label-stripe .hoverlink {
@@ -1132,12 +1135,14 @@ input[type="checkbox"]:hover {
 * .bob-die-tooltip .die.great,
 * .bob-die-tooltip .die.fast,
 * .bob-die-tooltip .die.engCrit,
+* .bob-die-tooltip .die.alcCrit,
 * .bob-die-tooltip .die.critical-resist,
 * .bob-die-tooltip .die.critical-success {
   color: #12a012;
 }
 * .bob-die-tooltip .die.moderate,
 * .bob-die-tooltip .die.engSuccess,
+* .bob-die-tooltip .die.alcSuccess,
 * .bob-die-tooltip .die.standard,
 * .bob-die-tooltip .die.resist,
 * .bob-die-tooltip .die.success {
@@ -1145,11 +1150,13 @@ input[type="checkbox"]:hover {
 }
 * .bob-die-tooltip .die.limited,
 * .bob-die-tooltip .die.engPartial,
+* .bob-die-tooltip .die.alcPartial,
 * .bob-die-tooltip .die.partial-success {
   color: #04578f;
 }
 * .bob-die-tooltip .die.very-slow,
 * .bob-die-tooltip .die.engFail,
+* .bob-die-tooltip .die.alcFail,
 * .bob-die-tooltip .die.poor,
 * .bob-die-tooltip .die.failure {
   color: red;
@@ -1166,6 +1173,14 @@ input[type="checkbox"]:hover {
   list-style: none;
   overflow: hidden;
   background-size: cover;
+}
+* .normal .bob-clock {
+  width: 80px;
+  height: 80px;
+}
+* .small .bob-clock {
+  width: 40px;
+  height: 40px;
 }
 * .bob-clock label {
   overflow: hidden;
@@ -1319,6 +1334,9 @@ input[type="checkbox"]:hover {
   color: #aaaaaa;
   border: none;
 }
+* .role-sheet button:disabled {
+  cursor: not-allowed;
+}
 .clocks.sheet .clock-image img {
   border: none;
   padding: 10px;
@@ -1419,6 +1437,9 @@ input[type="checkbox"]:hover {
   flex-direction: column;
   justify-content: center;
 }
+* .role-sheet .item-body {
+  width: unset;
+}
 * .role-sheet .item-class-label label {
   margin-right: 10px;
 }
@@ -1444,11 +1465,20 @@ input[type="checkbox"]:hover {
   display: flex;
   flex-flow: column wrap;
 }
-* .role-sheet #squads .container {
-  max-height: 90px;
+* .role-sheet #squads .container.flex-flow {
+  max-height: 100px;
+}
+* .role-sheet #materiel-list .container.flex-flow {
+  max-height: 110px;
+}
+* .role-sheet .item-name {
+  margin-right: 5px;
 }
 * .role-sheet #squads .container.flex-flow .item {
   height: 27px;
+}
+* .role-sheet .actions-list .label-stripe-gray {
+  margin-top: 10px;
 }
 .number-input {
   border: 0;

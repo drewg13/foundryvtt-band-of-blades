@@ -2,9 +2,9 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "0.3.0",
-  "minimumCoreVersion": "0.8.6",
-  "compatibleCoreVersion": "0.8.6",
+  "version": "0.3.1",
+  "minimumCoreVersion": "0.8.7",
+  "compatibleCoreVersion": "0.8.7",
   "templateVersion": 1,
   "authors": ["megastruktur", "Andrew Garinger [agaringer#6498]"],
   "esmodules": [
@@ -23,7 +23,7 @@
   ],
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.3.0.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.3.1.zip",
   "packs": [
     {
       "name": "class",
@@ -65,6 +65,20 @@
       "label": "Items",
       "system": "band-of-blades",
       "path": "./packs/items.db",
+      "entity": "Item"
+    },
+    {
+      "name": "materiel",
+      "label": "Materiel",
+      "system": "band-of-blades",
+      "path": "./packs/materiel.db",
+      "entity": "Item"
+    },
+    {
+      "name": "personnel",
+      "label": "Personnel",
+      "system": "band-of-blades",
+      "path": "./packs/personnel.db",
       "entity": "Item"
     },
     {

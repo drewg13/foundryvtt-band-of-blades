@@ -13,8 +13,8 @@ export class BoBHelpers {
    */
   static removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
-    let distinct_types = ["class", "heritage", "squad"];
-    let allowed_types = ["item"];
+    let distinct_types = ["class", "role", "heritage", "squad"];
+    let allowed_types = ["item", "materiel", "personnel"];
     let should_be_distinct = distinct_types.includes(item_data.type);
     // If the Item has the exact same name - remove it from list.
     // Remove Duplicate items from the array.
@@ -85,7 +85,7 @@ export class BoBHelpers {
   static async createRookies(squad, number) {
     let folder;
     const squads = await BoBHelpers.getAllItemsByType("squad", game);
-    const squadItem = squads.filter( s => s.name === squad );
+    const squadItem = squads.filter( s => s.name === squad ) || {};
     const defaultClassName = "Rookie";
     const classes = await BoBHelpers.getAllItemsByType( "class", game );
     const classItem = classes.find( c => c.name === defaultClassName ) || {};
@@ -101,36 +101,24 @@ export class BoBHelpers {
 
     let createData = [];
     for( let i = 1; i < number+1; i++ ) {
+      let name = squad + " " + i;
       let data = {
-        name: squad + " " + i,
+        name: name,
         img: "systems/band-of-blades/styles/assets/icons/rookie.svg",
         type: "character",
         folder: folder,
         token: {
-          img: "systems/band-of-blades/styles/assets/icons/rookie.svg"
+          img: "systems/band-of-blades/styles/assets/icons/rookie.svg",
+          actorLink: true,
+          name: name,
+          displayName: 50
         },
         data: {
           class: "Rookie",
           squad: squad,
-          attributes: {
-            prowess: {
-              skills: {
-                maneuver: {
-                  value: "1"
-                },
-                skirmish: {
-                  value: "1"
-                }
-              }
-            },
-            resolve: {
-              skills: {
-                consort: {
-                  value: "1"
-                }
-              }
-            }
-          }
+          "attributes.prowess.skills.maneuver.value": "1",
+          "attributes.prowess.skills.skirmish.value": "1",
+          "attributes.resolve.skills.consort.value": "1"
         }
       }
       data.items = [];

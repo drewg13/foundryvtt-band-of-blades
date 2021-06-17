@@ -57,6 +57,10 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
     roll_status = getEngagementRollStatus(rolls, zeromode);
     position = "";
     effect = "";
+  } else if ( attribute_name === "alchemists" ) {
+    roll_status = getAlchemistRollStatus(rolls, zeromode);
+    position = "";
+    effect = "";
   } else {
 	  roll_status = getActionRollStatus(rolls, zeromode);
   }
@@ -275,6 +279,40 @@ export function getEngagementRollStatus(rolls, zeromode = false) {
 
   return roll_status;
 }
+
+export function getAlchemistRollStatus(rolls, zeromode = false) {
+
+  let sorted_rolls = rolls.map(i => i.result).sort();
+  let roll_status;
+  let use_die;
+  let prev_use_die;
+
+  if (zeromode) {
+    use_die = sorted_rolls[0];
+  } else {
+    use_die = sorted_rolls[sorted_rolls.length - 1];
+    if (sorted_rolls.length - 2 >= 0) {
+      prev_use_die = sorted_rolls[sorted_rolls.length - 2]
+    }
+  }
+
+  // 1,2,3 = failure
+  if (use_die <= 3) {
+    roll_status = "alcFail";
+  } else if (use_die === 6) {
+    // 6,6 - critical success
+    if (prev_use_die && prev_use_die === 6) {
+      roll_status = "alcCrit";
+    } else {
+      roll_status = "alcSuccess";
+    }
+  } else {
+    roll_status = "alcPartial";
+  }
+
+  return roll_status;
+}
+
 /**
  * Call a Roll popup.
  */

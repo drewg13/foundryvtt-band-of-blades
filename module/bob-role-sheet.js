@@ -31,7 +31,11 @@ export class BoBRoleSheet extends BoBSheet {
     const actorData = this.actor.data.toObject(false);
     data.actor = actorData;
     data.data = actorData.data;
-    data.items = actorData.items;
+    data.items = actorData.items.sort(function(a, b) {
+      let textA = a.name.toUpperCase();
+      let textB = b.name.toUpperCase();
+      return textA.localeCompare(textB);
+    });
 
     const soldiers = BoBHelpers.getAllCharactersByClass("Soldier", game);
     const rookies = BoBHelpers.getAllCharactersByClass("Rookie", game);

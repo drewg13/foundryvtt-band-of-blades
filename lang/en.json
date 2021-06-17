@@ -32,6 +32,12 @@
   "BITD.Duties": "Duties",
   "BITD.DutiesLabel": "During the game, do the following:",
 
+  "BITD.HeavyLabel": "assault and supply missions",
+  "BITD.MedicLabel": "assault and religious missions",
+  "BITD.OfficerLabel": "religious and supply missions",
+  "BITD.ScoutLabel": "recon and supply missions",
+  "BITD.SniperLabel": "assault and recon missions",
+
   "BITD.Pressure": "Pressure",
   "BITD.PressureLabel": "A measure of how surrounded you are by undead",
   "BITD.PressureDetail": "When you advance, roll pressure minus Horses uses spent, and add time below. (1-3: One. 4/5: Two. 6: Three. CRIT: Five) Then reset pressure to 0. Add pressure when time passes (after campaign actions), or when there is a pressure penalty for a failed mission.",
@@ -64,6 +70,40 @@
   "BITD.Morale": "Morale",
   "BITD.MoraleLabel": "Represents the esprit-de-corps, emotional fatigue, and the hopes and dreams of the troops",
   "BITD.MoraleDetail": "<strong>Gain</strong> morale from: Successful mission rewards and whenever the Quartermaster chooses the liberty campaign action.<br /><strong>Lose</strong> morale from: Penalties for mission failure or loss, from when you can’t pay Supply (-1) or Food (-2), or from whenever a soldier dies (-1).<br /><strong>If you lose morale and have none</strong>, soldiers desert (one per morale you can’t pay). You lose Rookies, then Soldiers. If fewer than 3 full squads, end the game. The Legion is no more.",
+
+  "BITD.Supply": "Supply",
+  "BITD.SupplyLabel": "A measure of the Legion’s spare gear, liquid funds, and trade goods.",
+  "BITD.SupplyDetail": "<strong>Gain</strong> from mission rewards. <strong>Lose</strong> from mission penalties. If you lose supply and have none, lose 1 morale instead. Spend supply to boost campaign actions and to take additional campaign actions. You can keep a max of 3 supply +1 per Supply Cart (see Materiel below) when advancing.",
+
+  "BITD.Materiel": "Materiel",
+  "BITD.MaterielLabel": "Supplies and items that make the Legion work",
+  "BITD.MaterielDetail": "Spend 1 use of Food Stores when time passes or lose 2 morale. Carry up to 6 food per Food Stores with Supply Carts.",
+
+  "BITD.Personnel": "Non-Legion Personnel",
+  "BITD.PersonnelLabel": "Skilled personnel to keep the Legion operational",
+
+  "BITD.Actions": "Actions",
+  "BITD.ActionsDetail": "After missions, perform campaign actions based on morale (ask the Marshal). Take additional campaign actions by spending supply one-for-one. Spend a supply to boost an action in addition to any other costs. You can do each action once per campaign phase (except acquire assets and long-term projects).",
+  "BITD.CampaignActions": "Campaign Actions",
+  "BITD.Actions1": "Acquire Assets",
+  "BITD.Actions1Detail": "Beg, borrow, or steal an asset you need. Make a Fortune roll using the location’s assets rating. The result indicates the quality of the asset (1-3: Poor. 4/5: Standard. 6: Fine. crit: Exceptional). Laborers, Siege Weapons, and alchemical concoctions are fine quality. Alchemists and Mercies are exceptional quality.<br /><strong>Boosted:</strong> Upgrade result by one level. You may spend multiple supply.",
+  "BITD.Actions2": "Liberty",
+  "BITD.Actions2Detail": "Legionnaires are given leave of their responsibilities for a few days, good food and drink is provided, and campfire revelry is permitted. During this time, Legionnaires at liberty can party, fraternize, or relax as they see fit. Every character clears up to 3 stress. Tell the Commander to increase Legion morale by 2.<br /><strong>Boosted:</strong> Legionnaires clear all stress. Tell the Commander to increase Legion morale by 4, instead of 2.",
+  "BITD.Actions3": "Long-Term Project",
+  "BITD.Actions3Detail": "Work on a long-term project, if you have the means. Pick a Specialist to lead the project. They roll an appropriate Action and mark segments on the project clock based on the result (1-3: One. 4/5: Two. 6: Three. crit: Five). You can do this campaign action multiple times, but only if working on a different project each time.<br /><strong>Boosted:</strong> Upgrade result by one level. You may spend multiple supply.",
+  "BITD.Actions4": "Recruit",
+  "BITD.Actions4Detail": "The war has left soldiers crawling home and mercenaries guarding villages and roads (or raiding them). You recruit these recluses, rejects, and returning warriors to serve in the Legion’s ranks. Gain up to five Rookies for the Marshal to replenish the rosters with.<br /><strong>Boosted:</strong> Two of those Rookies are Soldiers instead (the other 3 remain Rookies).",
+  "BITD.Actions5": "Rest and Recuperation",
+  "BITD.Actions5Detail": "Take time to let soldiers tend wounds and rest. Each Legionnaire marks one tick in any harm row. Once a row’s healing ticks are full, erase the ticks and injuries in that row. If you wound a Mercy, one Specialist gains an extra healing tick. Finally, heal any Mercies who were wounded before this recuperation action.<br /><strong>Boosted:</strong> Every Legionnaire gains a second healing tick.",
+
+  "BITD.Mercies": "Mercies",
+  "BITD.MerciesLabel": "Unsettling healers who take wounds onto themselves",
+  "BITD.Alchemists": "Alchemists",
+  "BITD.AlchemistsLabel": "Scientists who can make alchemical brews and cure mystical diseases",
+  "BITD.AlchemistsHelp": "First, roll dice equal to Alchemists for effect.<br />Then roll Alchemists again for corruption (1-3: 3. 4/5: 2. 6: 1. crit: 0).<br />Distribute corruption among Alchemist clocks. When full, the Alchemist is blighted and ended.<br />Dangerous projects may add +1 or +2 corruption per roll.",
+  "BITD.Laborers": "Laborers",
+  "BITD.LaborersLabel": "Workers and artisans",
+  "BITD.Wounded": "Wounded",
 
   "BITD.RoleHeritage1": "Bartan",
   "BITD.RoleHeritage2": "Orite",
@@ -120,7 +160,7 @@
   "BITD.QuartermasterLook3": "Colorful",
   "BITD.QuartermasterLook4": "Tired",
   "BITD.QuartermasterLook5": "Grizzled",
-  "BITD.QuartermasterDuties": "<ul><li><strong>Track and Spend Supply.</strong> You gain supply primarily from supply mission rewards. Spend supply for additional campaign actions or to boost a campaign action. When the Commander advances the Legion, lose any supply you can’t take with you (maximum 3 supply, plus 1 per Supply Cart).</li><li><strong>Perform Campaign Actions.</strong> Between mission phases, perform a number of campaign actions according to troop morale. Ask the Marshal how many you get.</li><li><strong>Track and Use Materiel and Non-Legion Personnel.</strong> Expend materiel to make missions more successful. Track Mercy and Alchemist statuses, such as wounds and corruption. Work on projects to change the position of the Legion.</li><li><strong>Work with Other Roles.</strong> Consult with the rest of the players to make the best decisions you can, but you have the final say in the duties you are tasked with. The fate of the Legion is in your hands. Good luck.</li></ul>",
+  "BITD.QuartermasterDuties": "<ul><li><strong>Track and Spend Supply.</strong> You gain supply primarily from supply mission rewards. Spend supply for additional campaign actions or to boost a campaign action. When the Commander advances the Legion, lose any supply you can’t take with you (maximum 3 supply, plus 1 per Supply Cart).</li><li><strong>Track and Use Materiel and Non-Legion Personnel.</strong> Expend materiel to make missions more successful. Track Mercy and Alchemist statuses, such as wounds and corruption. Work on projects to change the position of the Legion.</li><li><strong>Perform Campaign Actions.</strong> Between mission phases, perform a number of campaign actions according to troop morale. Ask the Marshal how many you get.</li><li><strong>Work with Other Roles.</strong> Consult with the rest of the players to make the best decisions you can, but you have the final say in the duties you are tasked with. The fate of the Legion is in your hands. Good luck.</li></ul>",
 
   "BITD.LorekeeperReputation1": "Wise",
   "BITD.LorekeeperReputation2": "Friendly",
@@ -271,6 +311,11 @@
   "BITD.RollEngPartialDescription": "<strong>Primary Mission:</strong> You are in a <strong>risky</strong> position when the action starts.<br /><strong>Secondary Mission:</strong> Fail the mission OR you can succeed, but two squad members die and all Specialists take level 2 harm.",
   "BITD.RollEngSuccessDescription": "<strong>Primary Mission:</strong> You’re in a <strong>controlled</strong> position when the action starts.<br /><strong>Secondary Mission:</strong> You succeed at the mission, all Specialists take level 1 harm, and you may choose to lose 2 squad members to promote a Rookie to Soldier.",
   "BITD.RollEngCritDescription": "<strong>Primary Mission:</strong> You’ve overcome the first obstacle and are in a <strong>controlled</strong> position at the next.<br /><Secondary Mission: You succeed at the mission and promote one squad member.",
+
+  "BITD.RollAlcFailDescription": "<strong>Alchemical Effect:</strong> You get a bad result or little effect. Roll again for corruption.<br /><strong>Corruption:</strong> Distribute <strong>3</strong> corruption among your Alchemists.",
+  "BITD.RollAlcPartialDescription": "<strong>Alchemical Effect:</strong> You get a mixed result or a partial effect. Roll again for corruption.<br /><strong>Corruption:</strong> Distribute <strong>2</strong> corruption among your Alchemists.",
+  "BITD.RollAlcSuccessDescription": "<strong>Alchemical Effect:</strong> You get a good result or full effect. Roll again for corruption.<br /><strong>Corruption:</strong> Distribute <strong>1</strong> corruption among your Alchemists.",
+  "BITD.RollAlcCritDescription": "<strong>Alchemical Effect:</strong> You get an exceptional result or an extreme effect. Roll again for corruption.<br /><strong>Corruption:</strong> Distribute <strong>0</strong> corruption among your Alchemists.",
 
   "BITD.RollZeromode": "Zero Dice rolled - rolling two dice and taking the lowest",
 
