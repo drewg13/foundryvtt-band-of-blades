@@ -74,13 +74,15 @@
 
   "BITD.Supply": "Supply",
   "BITD.SupplyLabel": "A measure of the Legion’s spare gear, liquid funds, and trade goods.",
-  "BITD.SupplyDetail": "<strong>Gain</strong> from mission rewards. <strong>Lose</strong> from mission penalties. If you lose supply and have none, lose 1 morale instead. Spend supply to boost campaign actions and to take additional campaign actions. You can keep a max of 3 supply +1 per Supply Cart (see Materiel below) when advancing.",
+  "BITD.SupplyDetail": "<strong>Gain</strong> from mission rewards. <strong>Lose</strong> from mission penalties. If you lose supply and have none, lose 1 morale instead. Spend supply to boost campaign actions and to take additional campaign actions. You can keep a max of 3 Supply + 1 per Supply Cart for a total of <strong>",
+  "BITD.SupplyDetail2": " Supply</strong>, when advancing.",
 
   "BITD.Materiel": "Materiel",
   "BITD.MaterielLabel": "Supplies and items that make the Legion work",
   "BITD.MaterielDetail": "Spend 1 use of Food Stores when time passes or lose 2 morale. Carry up to 6 food per Food Stores with Supply Carts.",
 
   "BITD.Personnel": "Non-Legion Personnel",
+  "BITD.PersonnelShort": "Personnel",
   "BITD.PersonnelLabel": "Skilled personnel to keep the Legion operational",
 
   "BITD.Actions": "Actions",
@@ -105,6 +107,19 @@
   "BITD.Laborers": "Laborers",
   "BITD.LaborersLabel": "Workers and artisans",
   "BITD.Wounded": "Wounded",
+
+  "BITD.FoodStores": "Food Stores",
+  "BITD.FoodStoresLabel": "Food to stave off hunger",
+  "BITD.BlackShot": "Black Shot",
+  "BITD.BlackShotLabel": "Ammo to fight the Undead",
+  "BITD.Horses": "Horses",
+  "BITD.HorsesLabel": "Critical for mobility",
+  "BITD.ReligiousSupplies": "Religious Supplies",
+  "BITD.ReligiousSuppliesLabel": "Protection against the Undead",
+  "BITD.SiegeWeapons": "Siege Weapons",
+  "BITD.SiegeWeaponsLabel": "Weapons of mass destruction",
+  "BITD.SupplyCart": "Supply Carts",
+  "BITD.SupplyCartLabel": "Critical for logistics",
 
   "BITD.RoleHeritage1": "Bartan",
   "BITD.RoleHeritage2": "Orite",
