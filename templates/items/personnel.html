@@ -9,6 +9,8 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body flex-vertical">
       <textarea name="data.description">{{data.description}}</textarea>
+      <label class="label-stripe">{{localize "BITD.ItemType"}}</label>
+      <input id="item-type" type="text" name="data.itemType" value="{{data.itemType}}">
       <label class="label-stripe">{{localize "BITD.Uses"}}</label>
       <input id="item-uses" type="text" name="data.uses" value="{{data.uses}}">
       {{#if isGM}}

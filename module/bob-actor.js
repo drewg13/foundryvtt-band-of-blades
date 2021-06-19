@@ -17,6 +17,7 @@ export class BoBActor extends Actor {
     switch ( createData.type ) {
       case "character": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
+        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
@@ -24,6 +25,7 @@ export class BoBActor extends Actor {
       }
       case "role": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/role.svg";
+        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/role.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
@@ -31,6 +33,7 @@ export class BoBActor extends Actor {
       }
       case "\uD83D\uDD5B clock": {
         updateData['img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
+        updateData['token.img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
@@ -68,7 +71,7 @@ export class BoBActor extends Actor {
     if( ( actorData.type === "role" ) && ( data.resources.supply.extraUses > 0 ) ) {
       let foodItems = [];
       actorData.items.forEach( i => {
-        if( i.name === "Food Stores" ) {
+        if( i.data.data.itemType === "Food Stores" ) {
           foodItems.push( i.id );
         }
       })
@@ -76,8 +79,11 @@ export class BoBActor extends Actor {
         if( actorData.flags['band-of-blades'].items[f] ) {
           const increase = data.resources.supply.extraUses;
           actorData.flags['band-of-blades'].items[f].usagesMax = String( parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ) + increase );
-          for( let i = ( parseInt( actorData.flags['band-of-blades'].items[f].usagesArray.slice( -1 ) ) + 1 ); i <= parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ); i++ ) {
-            actorData.flags['band-of-blades'].items[f].usagesArray += String( i );
+          for( let i = ( Math.max( ...Object.keys( actorData.flags['band-of-blades'].items[f].usagesArray ).map( n => Number(n) ) ) + 1 ); i < ( parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ) + 1 ); i++ ) {
+            foundry.utils.mergeObject(
+              actorData.flags['band-of-blades'].items[f].usagesArray,
+              { [i]: String( i ) }
+            )
           }
         }
       })
@@ -86,18 +92,21 @@ export class BoBActor extends Actor {
     if ( actorData.type === "character" ) {
       //sets up array of values for specialist skill uses tracking dropdown
       const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
-      let skillArray = "";
+      let skillArray = {};
       let skillVal = 0;
       spec_skills.forEach( s => {
-        data.attributes.specialist.skills[s].usagesArray = "0";
+        data.attributes.specialist.skills[s].usagesArray = {};
         skillVal = data.attributes.specialist.skills[s].value;
         if( skillVal ) {
           for( let i = skillVal; i >= 0; i-- ) {
-            skillArray = skillArray + i;
+            foundry.utils.mergeObject(
+              skillArray,
+              { [i]: String(i) }
+            );
           }
           data.attributes.specialist.skills[s].usagesArray = skillArray;
           skillVal = 0;
-          skillArray = "";
+          skillArray = {};
         }
       })
     }

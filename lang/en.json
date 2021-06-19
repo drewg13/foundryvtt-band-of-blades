@@ -3,6 +3,7 @@
   "BITD.Name": "Name",
   "BITD.CampaignName": "Campaign Name",
   "BITD.Item": "Item",
+  "BITD.ItemType": "Item Type",
   "BITD.Ability": "Ability",
   "BITD.Heritage": "Heritage",
   "BITD.RoleHeritage": "Heritage (Choose 1):",

@@ -145,6 +145,8 @@ export class BoBHelpers {
    *   item type of interest
    * @param {Object} game
    *   game world object
+   * @returns {Array[Object]}
+   *   an array of copy-safe objects matching the supplied item type present in the game, favoring in-world items over compendium items with the same name
    */
   static async getAllItemsByType(item_type, game) {
 
@@ -161,15 +163,8 @@ export class BoBHelpers {
     list_of_items.sort(function(a, b) {
       let nameA = a.name.toUpperCase();
       let nameB = b.name.toUpperCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
+      return nameA.localeCompare(nameB);
     });
-
     return list_of_items;
   }
 
@@ -183,7 +178,7 @@ export class BoBHelpers {
    * @param {Object} game
    *   current game world object
    * @returns {Array}
-   *   an array of actor objects of the specified type in the game world
+   *   an array of copy-safe actor objects of the specified type in the game world
    */
   static getAllActorsByType(actor_type, game) {
     return game.actors.filter( e => e.data.type === actor_type ).map( e => { return e.data.toObject() } ) || [];
@@ -199,7 +194,7 @@ export class BoBHelpers {
    * @param {Object} game
    *   current game world object
    * @returns {Array}
-   *   an array of ActorData objects of the specified class in the game world
+   *   an array of raw ActorData objects of the specified class in the game world
    */
   static getAllCharactersByClass(actor_class, game) {
     return game.actors.filter( e => e.data.data.class === actor_class ).map( e => { return e.data } ) || [];

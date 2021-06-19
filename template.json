@@ -344,10 +344,12 @@
   },
   "personnel": {
     "templates": ["default", "activatedEffect"],
+    "itemType": "",
     "uses": "0"
   },
   "materiel": {
     "templates": ["default", "activatedEffect"],
+    "itemType": "",
     "uses": "0"
   },
   "heritage": {

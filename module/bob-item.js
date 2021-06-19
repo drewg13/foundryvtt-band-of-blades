@@ -80,18 +80,21 @@ export class BoBItem extends Item {
     // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate
     if( ( actor !== null ) && parseInt( data.data.uses ) ) {
       let key = data._id;
-      if( data.name === "Mercy" ) {
+      if( data.data.itemType === "Mercy" ) {
         await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
       } else {
         let itemVal = parseInt( data.data.uses );
-        let itemArray = "";
+        let itemArray = {};
         if( itemVal ) {
           for( let i = 0; i <= itemVal; i++ ) {
-            itemArray = itemArray + i;
+            foundry.utils.mergeObject(
+              itemArray,
+              { [i]: String(i) }
+            );
           }
           await actor.setFlag( "band-of-blades", "items." + key + ".usagesArray", itemArray );
         }
-        if( data.name === "Alchemist" ) {
+        if( data.data.itemType === "Alchemist" ) {
           await actor.setFlag( "band-of-blades", "items." + key + ".usages", "0" );
         } else {
           await actor.setFlag( "band-of-blades", "items." + key + ".usages", data.data.uses );

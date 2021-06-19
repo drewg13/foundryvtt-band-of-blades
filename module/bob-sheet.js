@@ -77,17 +77,17 @@ export class BoBSheet extends ActorSheet {
 			      html += `</label>`;
 		    }
       } else if (e.type === "materiel") {
-        if ( ( ( ( this.actor.data.data.resources.carts < 3 ) && ( e.name === "Supply Cart" ) ) || ( e.name !== "Supply Cart" ) ) &&
-          ( ( ( this.actor.data.data.resources.siege < 3 ) && ( e.name === "Siege Weapons" ) ) || ( e.name !== "Siege Weapons" ) ) ) {
+        if ( ( ( ( this.actor.data.data.resources.carts < 3 ) && ( e.data.itemType === "Supply Cart" ) ) || ( e.data.itemType !== "Supply Cart" ) ) &&
+          ( ( ( this.actor.data.data.resources.siege < 3 ) && ( e.data.itemType === "Siege Weapons" ) ) || ( e.data.itemType !== "Siege Weapons" ) ) ) {
           html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
           html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
           html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
           html += `</label>`;
         }
       } else if (e.type === "personnel") {
-        if ( ( ( ( this.actor.data.data.resources.laborers < 3 ) && ( e.name === "Laborer" ) ) || ( e.name !== "Laborer" ) ) &&
-          ( ( ( this.actor.data.data.resources.alchemists < 3 ) && ( e.name === "Alchemist" ) ) || ( e.name !== "Alchemist" ) ) &&
-          ( ( ( this.actor.data.data.resources.mercies < 3 ) && ( e.name === "Mercy" ) ) || ( e.name !== "Mercy" ) ) ) {
+        if ( ( ( ( this.actor.data.data.resources.laborers < 3 ) && ( e.data.itemType === "Laborer" ) ) || ( e.data.itemType !== "Laborer" ) ) &&
+          ( ( ( this.actor.data.data.resources.alchemists < 3 ) && ( e.data.itemType === "Alchemist" ) ) || ( e.data.itemType !== "Alchemist" ) ) &&
+          ( ( ( this.actor.data.data.resources.mercies < 3 ) && ( e.data.itemType === "Mercy" ) ) || ( e.data.itemType !== "Mercy" ) ) ) {
           html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
           html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
           html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
