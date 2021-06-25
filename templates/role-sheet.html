@@ -105,7 +105,13 @@
       {{!-- Nav menu --}}
       <nav class="tabs flex-horizontal">
         <a class="item" data-tab="duties">{{localize "BITD.Duties"}}</a>
-        <a class="item" data-tab="resources">{{localize "BITD.Resources"}}</a>
+        {{#unless (eq actor.data.type "Lorekeeper")}}
+          <a class="item" data-tab="resources">{{localize "BITD.Resources"}}</a>
+        {{/unless}}
+        {{#if (eq actor.data.type "Lorekeeper")}}
+          <a class="item" data-tab="annals">{{localize "BITD.AnnalsShort"}}</a>
+          <a class="item" data-tab="camp">{{localize "BITD.CampShort"}}</a>
+        {{/if}}
         {{#if (eq actor.data.type "Marshal")}}
           <a class="item" data-tab="squads">{{localize "BITD.Squads"}}</a>
           <a class="item" data-tab="specialists">{{localize "BITD.Specialists"}}</a>
@@ -514,7 +520,148 @@
           </div>
       </div>
 
+      <div id="annals" class="tab flex-vertical" data-tab="annals">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Annals"}}</label>{{localize "BITD.AnnalsLabel"}}</p>
+        </div>
+        <div>{{localize "BITD.AnnalsDetail"}}</div>
+        {{#times_from_0 fallenBlocks}}
+          <div class="flexrow">
+            <div class="flex1">
+              {{#each ../data.resources.fallen as |fallen findex|}}
+                {{#if (or (and (gteq findex (mult ../this 4) ) (lt findex (mult (add ../this 1) 4 ) ) ) (and @last (notNum ../this) (lt findex 4)))}}
+                  <input type="text" id="fallen-{{../../actor._id}}-name-{{findex}}" name="data.resources.fallen.{{findex}}" value="{{fallen}}" placeholder="Name">
+                  <label style="display:none;" class="fallen-label" for="fallen-{{../../actor._id}}-name-{{findex}}"></label>
+                {{/if}}
+              {{/each}}
+            </div>
+            {{#if (lt this 5)}}
+              <div class="flex2">
+                <div class="label-stripe-gray">
+                  <p>{{localize (concat "BITD.AnnalsLabel" this)}}</p>
+                </div>
+                <div>{{{localize (concat "BITD.AnnalsDetail" this)}}}</div>
+              </div>
+              <div class="flex2">
+                <div class="label-stripe-gray">
+                  <p>{{localize "BITD.AnnalsEffectLabel"}}</p>
+                </div>
+                <div>{{{localize (concat "BITD.AnnalsEffect" this)}}}</div>
+              </div>
+            {{else}}
+              <div class="flex2">
+                <div class="label-stripe-gray">
+                  <p>{{localize "BITD.AnnalsLabel5"}}</p>
+                </div>
+                <div>{{{localize "BITD.AnnalsDetail5"}}}</div>
+              </div>
+            {{/if}}
+          </div>
+        {{/times_from_0}}
+      </div>
 
+      <div id="camp" class="tab flex-vertical" data-tab="camp">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Camp"}}</label>{{localize "BITD.CampLabel"}}</p>
+        </div>
+        <div>{{localize "BITD.CampDetail"}}</div>
+        <table class="camp-scenes">
+          <tr>
+            <th colspan="2">
+              <div class="label-stripe-gray">
+                <p>{{localize "BITD.HighMorale"}}</p>
+              </div>
+            </th>
+          </tr>
+          {{#times_from_x 1 6}}
+          <tr class="high-morale">
+            <td>
+              <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+            </td>
+            <td>
+              <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+            </td>
+          </tr>
+          {{/times_from_x}}
+          <tr>
+            <th colspan="2">
+              <div class="label-stripe-gray">
+                <p>{{localize "BITD.MediumMorale"}}</p>
+              </div>
+            </th>
+          </tr>
+          {{#times_from_x 7 11}}
+            <tr class="medium-morale">
+              <td>
+                <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+              </td>
+              <td>
+                <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+              </td>
+            </tr>
+          {{/times_from_x}}
+          <tr class="medium-morale">
+            <td>
+              <input type="checkbox" id="camp-{{actor._id}}-12-one" name="data.resources.camp.12.one" {{checked data.resources.camp.12.one }}>
+              <input type="checkbox" id="camp-{{actor._id}}-12-two" name="data.resources.camp.12.two" {{checked data.resources.camp.12.two }}>
+            </td>
+            <td>
+              <label for="camp-{{actor._id}}-12-one">{{localize "BITD.CampMorale12"}}</label>
+              <label for="camp-{{actor._id}}-12-two" style="display:none;"></label>
+            </td>
+          </tr>
+          <tr>
+            <th colspan="2">
+              <div class="label-stripe-gray">
+                <p>{{localize "BITD.LowMorale"}}</p>
+              </div>
+            </th>
+          </tr>
+          {{#times_from_x 13 15}}
+            <tr class="low-morale">
+              <td>
+                <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+              </td>
+              <td>
+                <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+              </td>
+            </tr>
+          {{/times_from_x}}
+          <tr class="low-morale">
+            <td>
+              <input type="checkbox" id="camp-{{actor._id}}-16-one" name="data.resources.camp.16.one" {{checked data.resources.camp.16.one }}>
+              <input type="checkbox" id="camp-{{actor._id}}-16-two" name="data.resources.camp.16.two" {{checked data.resources.camp.16.two }}>
+            </td>
+            <td>
+              <label for="camp-{{actor._id}}-16-one">{{localize "BITD.CampMorale16"}}</label>
+              <label for="camp-{{actor._id}}-16-two" style="display:none;"></label>
+            </td>
+          </tr>
+          <tr class="low-morale">
+            <td>
+              <input type="checkbox" id="camp-{{actor._id}}-17-one" name="data.resources.camp.17.one" {{checked data.resources.camp.17.one }}>
+              <input type="checkbox" id="camp-{{actor._id}}-17-two" name="data.resources.camp.17.two" {{checked data.resources.camp.17.two }}>
+            </td>
+            <td>
+              <label for="camp-{{actor._id}}-17-one">{{localize "BITD.CampMorale17"}}</label>
+              <label for="camp-{{actor._id}}-17-two" style="display:none;"></label>
+            </td>
+          </tr>
+          <tr class="low-morale">
+            <td>
+              <input type="checkbox" id="camp-{{actor._id}}-18-one" name="data.resources.camp.18.one" {{checked data.resources.camp.18.one }}>
+              <input type="checkbox" id="camp-{{actor._id}}-18-two" name="data.resources.camp.18.two" {{checked data.resources.camp.18.two }}>
+              <input type="checkbox" id="camp-{{actor._id}}-18-three" name="data.resources.camp.18.three" {{checked data.resources.camp.18.three }}>
+            </td>
+            <td>
+              <label for="camp-{{../actor._id}}-18-one">{{localize "BITD.CampMorale18"}}</label>
+              <label for="camp-{{../actor._id}}-18-two" style="display:none;"></label>
+              <label for="camp-{{../actor._id}}-18-three" style="display:none;"></label>
+            </td>
+          </tr>
+        </table>
+
+      </div>
 
       <div id="squads" class="tab flex-vertical" data-tab="squads">
         <div class="label-stripe">
@@ -630,6 +777,7 @@
         </div>
       </div>
 
+      {{!-- Notes --}}
       <div class="tab flex-vertical" data-tab="character-notes">
         <div class="label-stripe">
           <p><label>{{localize "BITD.Notes"}}</label></p>

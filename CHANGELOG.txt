@@ -17,3 +17,5 @@ v0.3.1  Add Quartermaster sheet
 v0.3.2  Fix filtering for QM items to use type rather than name, use proper choices objects for SelectOptions helper
 
 v0.3.3  Reorganize QM sheet
+
+v0.4.0  Add Lorekeeper sheet, fix 0d Fortune rolls

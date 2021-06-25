@@ -133,6 +133,13 @@ Hooks.once("init", function() {
     return (a <= b);
   });
 
+  Handlebars.registerHelper('gteq', (a, b) => {
+    return (a >= b);
+  });
+
+  Handlebars.registerHelper('notNum', (a) => {
+    return isNaN(a);
+  });
 
   // Enrich the HTML replace /n with <br>
   Handlebars.registerHelper('html', (options) => {
@@ -174,6 +181,22 @@ Hooks.once("init", function() {
     return accum;
   });
 
+  // "N Times" loop for handlebars.
+  //  Block is executed X times starting from n=Y.
+  //
+  // Usage:
+  // {{#times_from_x 1 10}}
+  //   <span>{{this}}</span>
+  // {{/times_from_x}}
+  Handlebars.registerHelper('times_from_x', function(x, y, block) {
+
+    let accum = '';
+    for (let i = x; i <= y; ++i) {
+      accum += block.fn(i);
+    }
+    return accum;
+  });
+
   // Concat helper
   // https://gist.github.com/adg29/f312d6fab93652944a8a1026142491b1
   // Usage: (concat 'first 'second')
@@ -187,6 +210,13 @@ Hooks.once("init", function() {
     return outStr;
   });
 
+  Handlebars.registerHelper('add', function(a, b) {
+    return (a + b);
+  });
+
+  Handlebars.registerHelper('mult', function(a, b) {
+    return (a * b);
+  });
 
   /**
    * @inheritDoc

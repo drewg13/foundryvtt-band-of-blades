@@ -14,7 +14,7 @@ export class BoBRoleSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/role-sheet.html",
-      width: 800,
+      width: 900,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "duties"}],
 	    scrollY: [".sheet"]
@@ -37,57 +37,96 @@ export class BoBRoleSheet extends BoBSheet {
       return textA.localeCompare(textB);
     });
 
-    const soldiers = BoBHelpers.getAllCharactersByClass("Soldier", game);
-    const rookies = BoBHelpers.getAllCharactersByClass("Rookie", game);
-    data.squaddies = [...rookies, ...soldiers];
-    const nonSquaddies = game.actors.filter(({ id: id1 }) => !data.squaddies.some(({ _id: id2 }) => id2 === id1));
-    const specialists = nonSquaddies.filter( s => s.type === "character" );
-    data.specialists = specialists.map( s => { return s.data } );
-    data.squaddies.forEach( s => {
-      let heavy, medium, light = "white";
-      if( s.data.harm.heavy.one === "" ) { heavy = "white"; }
-        else { heavy = "black"; }
-      if( ( s.data.harm.medium.one === "" ) && ( s.data.harm.medium.two === "" ) ) { medium = "white"; }
-        else if( ( s.data.harm.medium.one === "" ) || ( s.data.harm.medium.two === "" ) ) { medium = "red"; }
-        else { medium = "black"; }
-      if( ( s.data.harm.light.one === "" ) && ( s.data.harm.light.two === "" ) ) { light = "white"; }
-        else if( ( s.data.harm.light.one === "" ) || ( s.data.harm.light.two === "" ) ) { light = "red"; }
-        else { light = "black"; }
-
-      foundry.utils.mergeObject(
-        s,
-        { "data": {
-          "heavyBox": heavy,
-          "mediumBox": medium,
-          "lightBox": light
-          }
+    if( data.data.type === "Marshal" ) {
+      const soldiers = BoBHelpers.getAllCharactersByClass( "Soldier", game );
+      const rookies = BoBHelpers.getAllCharactersByClass( "Rookie", game );
+      data.squaddies = [ ...rookies, ...soldiers ];
+      const nonSquaddies = game.actors.filter( ( { id: id1 } ) => !data.squaddies.some( ( { _id: id2 } ) => id2 === id1 ) );
+      const specialists = nonSquaddies.filter( s => s.type === "character" );
+      data.specialists = specialists.map( s => {
+        return s.data
+      } );
+      data.squaddies.forEach( s => {
+        let heavy, medium, light = "white";
+        if( s.data.harm.heavy.one === "" ) {
+          heavy = "white";
+        } else {
+          heavy = "black";
         }
-      );
-    });
-    data.specialists.forEach( s => {
-      let heavy, medium, light;
-      if( s.data.harm.heavy.one !== "" ) { heavy = "black"; }
-      else { heavy = "white"; }
-      if( ( s.data.harm.medium.one !== "" ) && ( s.data.harm.medium.two !== "" ) ) { medium = "black"; }
-      else if( ( s.data.harm.medium.one !== "" ) || ( s.data.harm.medium.two !== "" ) ) { medium = "red"; }
-      else { medium = "white"; }
-      if( ( s.data.harm.light.one !== "" ) && ( s.data.harm.light.two !== "" ) ) { light = "black"; }
-      else if( ( s.data.harm.light.one !== "" ) || ( s.data.harm.light.two !== "" ) ) { light = "red"; }
-      else { light = "white"; }
-
-      foundry.utils.mergeObject(
-        s,
-        { "data": {
-            "heavyBox": heavy,
-            "mediumBox": medium,
-            "lightBox": light
-          }
+        if( ( s.data.harm.medium.one === "" ) && ( s.data.harm.medium.two === "" ) ) {
+          medium = "white";
+        } else if( ( s.data.harm.medium.one === "" ) || ( s.data.harm.medium.two === "" ) ) {
+          medium = "red";
+        } else {
+          medium = "black";
         }
-      );
-    })
-    data.squads = await BoBHelpers.getAllItemsByType("squad", game);
-    const specTypes = await BoBHelpers.getAllItemsByType("class", game);
-    data.specialistTypes = specTypes.filter( t => ( t.name !== "Rookie" ) && ( t.name !== "Soldier" ) );
+        if( ( s.data.harm.light.one === "" ) && ( s.data.harm.light.two === "" ) ) {
+          light = "white";
+        } else if( ( s.data.harm.light.one === "" ) || ( s.data.harm.light.two === "" ) ) {
+          light = "red";
+        } else {
+          light = "black";
+        }
+
+        foundry.utils.mergeObject(
+          s,
+          {
+            "data": {
+              "heavyBox": heavy,
+              "mediumBox": medium,
+              "lightBox": light
+            }
+          }
+        );
+      } );
+      data.specialists.forEach( s => {
+        let heavy, medium, light;
+        if( s.data.harm.heavy.one !== "" ) {
+          heavy = "black";
+        } else {
+          heavy = "white";
+        }
+        if( ( s.data.harm.medium.one !== "" ) && ( s.data.harm.medium.two !== "" ) ) {
+          medium = "black";
+        } else if( ( s.data.harm.medium.one !== "" ) || ( s.data.harm.medium.two !== "" ) ) {
+          medium = "red";
+        } else {
+          medium = "white";
+        }
+        if( ( s.data.harm.light.one !== "" ) && ( s.data.harm.light.two !== "" ) ) {
+          light = "black";
+        } else if( ( s.data.harm.light.one !== "" ) || ( s.data.harm.light.two !== "" ) ) {
+          light = "red";
+        } else {
+          light = "white";
+        }
+
+        foundry.utils.mergeObject(
+          s,
+          {
+            "data": {
+              "heavyBox": heavy,
+              "mediumBox": medium,
+              "lightBox": light
+            }
+          }
+        );
+      } )
+      data.squads = await BoBHelpers.getAllItemsByType( "squad", game );
+      const specTypes = await BoBHelpers.getAllItemsByType( "class", game );
+      data.specialistTypes = specTypes.filter( t => ( t.name !== "Rookie" ) && ( t.name !== "Soldier" ) );
+    }
+
+    if( data.data.type === "Lorekeeper" ) {
+      data.fallenLength = Object.keys( data.data.resources.fallen ).length;
+      data.fallenBlocks = Math.ceil( ( data.fallenLength + 1 ) / 4 ) - 1;
+      if( data.data.resources.fallen[( data.fallenLength - 1 )] !== "" ) {
+        foundry.utils.mergeObject(
+          data.data.resources.fallen,
+          { [ data.fallenLength ]: "" }
+        );
+      }
+    }
 
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.actor.effects);
