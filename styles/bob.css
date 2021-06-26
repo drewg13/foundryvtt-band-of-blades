@@ -1138,6 +1138,7 @@ input[type="checkbox"]:hover {
 * .bob-die-tooltip .die.fast,
 * .bob-die-tooltip .die.engCrit,
 * .bob-die-tooltip .die.alcCrit,
+* .bob-die-tooltip .die.misCrit,
 * .bob-die-tooltip .die.critical-resist,
 * .bob-die-tooltip .die.critical-success {
   color: #12a012;
@@ -1145,6 +1146,7 @@ input[type="checkbox"]:hover {
 * .bob-die-tooltip .die.moderate,
 * .bob-die-tooltip .die.engSuccess,
 * .bob-die-tooltip .die.alcSuccess,
+* .bob-die-tooltip .die.misSuccess,
 * .bob-die-tooltip .die.standard,
 * .bob-die-tooltip .die.resist,
 * .bob-die-tooltip .die.success {
@@ -1153,12 +1155,14 @@ input[type="checkbox"]:hover {
 * .bob-die-tooltip .die.limited,
 * .bob-die-tooltip .die.engPartial,
 * .bob-die-tooltip .die.alcPartial,
+* .bob-die-tooltip .die.misPartial,
 * .bob-die-tooltip .die.partial-success {
   color: #04578f;
 }
 * .bob-die-tooltip .die.very-slow,
 * .bob-die-tooltip .die.engFail,
 * .bob-die-tooltip .die.alcFail,
+* .bob-die-tooltip .die.misFail,
 * .bob-die-tooltip .die.poor,
 * .bob-die-tooltip .die.failure {
   color: red;
@@ -1368,6 +1372,7 @@ input[type="checkbox"]:hover {
   font-weight: bold;
   font-family: monospace;
 }
+* #resources .total-spies,
 * #loadout .utility {
   font-family: 'Vollkorn', 'Signika', serif;
   font-size: large;
@@ -1516,6 +1521,25 @@ input[type="checkbox"]:hover {
 }
 * table.camp-scenes .label-stripe-gray {
   margin-bottom: 1px;
+}
+* #network-list .item-body,
+* #spies-list .item-body {
+  justify-content: unset;
+}
+* #network-list .tooltip,
+* #spies-list .tooltip {
+  width: 200px;
+}
+* #spies-list .wound-checkboxes span {
+  width: 75px;
+  margin-right: 5px;
+}
+* #network-list .item,
+* #spies-list .item {
+  margin-bottom: 20px;
+}
+* #mission-list .label-stripe-gray {
+  margin-bottom: 0px;
 }
 .number-input {
   border: 0;

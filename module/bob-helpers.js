@@ -47,7 +47,9 @@ export class BoBHelpers {
 
     if ( actor.data.type === "character" ) {
       item_type = "ability";
-    }
+    } else if( actor.data.type === "role" ) {
+      item_type = "network";
+    } else { return }
 
     let abilities = actor.items.filter(a => a.type === item_type).map(e => {return e.data.name});
     let items = await BoBHelpers.getAllItemsByType(item_type, game);

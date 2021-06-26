@@ -22,7 +22,7 @@ export class BoBItem extends Item {
         }
       }
 
-      if( ( data.type === "class" ) && ( data.data.def_abilities !== "" ) ) {
+      if( ( ( data.type === "class" ) || ( data.type === "role" ) ) && ( data.data.def_abilities !== "" ) ) {
         await BoBHelpers.addDefaultAbilities( data, actor );
       }
 
@@ -78,11 +78,14 @@ export class BoBItem extends Item {
     let actor = this.parent ? this.parent : null;
 
     // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate
-    if( ( actor !== null ) && parseInt( data.data.uses ) ) {
+    if( actor !== null ) {
       let key = data._id;
       if( data.data.itemType === "Mercy" ) {
         await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
-      } else {
+      } else if( data.type === "spies" ) {
+        await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
+        await actor.setFlag( "band-of-blades", "items." + key + ".master", data.data.master );
+      } else if( parseInt( data.data.uses ) ) {
         let itemVal = parseInt( data.data.uses );
         let itemArray = {};
         if( itemVal ) {

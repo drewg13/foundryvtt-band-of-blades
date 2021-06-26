@@ -137,6 +137,10 @@ Hooks.once("init", function() {
     return (a >= b);
   });
 
+  Handlebars.registerHelper('not', (a) => {
+    return !a;
+  });
+
   Handlebars.registerHelper('notNum', (a) => {
     return isNaN(a);
   });

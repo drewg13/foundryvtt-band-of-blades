@@ -2,7 +2,7 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "minimumCoreVersion": "0.8.7",
   "compatibleCoreVersion": "0.8.8",
   "templateVersion": 1,
@@ -23,7 +23,7 @@
   ],
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.4.0.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v0.5.0.zip",
   "packs": [
     {
       "name": "class",
@@ -86,6 +86,20 @@
       "label": "Abilities",
       "system": "band-of-blades",
       "path": "./packs/abilities.db",
+      "entity": "Item"
+    },
+    {
+      "name": "spies",
+      "label": "Spies",
+      "system": "band-of-blades",
+      "path": "./packs/spies.db",
+      "entity": "Item"
+    },
+    {
+      "name": "network",
+      "label": "Spy Network",
+      "system": "band-of-blades",
+      "path": "./packs/network.db",
       "entity": "Item"
     }
   ]

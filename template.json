@@ -247,6 +247,7 @@
       "alchemists": 0,
       "mercies": 0,
       "siege": 0,
+      "spies": 2,
       "fallen": {
         "0": ""
       },
@@ -283,6 +284,33 @@
           "three": false
         }
       },
+      "missions": {
+        "augmentClock": {
+          "name": "augmentClock",
+          "type": 8,
+          "value": "0"
+        },
+        "expandClock": {
+          "name": "expandClock",
+          "type": 8,
+          "value": "0"
+        },
+        "trapClock": {
+          "name": "trapClock",
+          "type": 8,
+          "value": "0"
+        },
+        "recruitClock": {
+          "name": "recruitClock",
+          "type": 8,
+          "value": "0"
+        },
+        "researchClock": {
+          "name": "researchClock",
+          "type": 8,
+          "value": "0"
+        }
+      },
       "supply": {
         "value": 0,
         "max": 3,
@@ -315,7 +343,7 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "role", "squad", "ability", "personnel", "materiel", "heritage", "trait"],
+  "types": ["item", "class", "role", "squad", "ability", "personnel", "materiel", "spies", "network", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
@@ -370,7 +398,8 @@
     "skill": ""
   },
   "role": {
-    "templates": ["default", "activatedEffect"]
+    "templates": ["default", "activatedEffect"],
+    "def_abilities": ""
   },
   "squad": {
     "templates": ["default", "activatedEffect"]
@@ -382,6 +411,15 @@
     "templates": ["default", "activatedEffect"],
     "itemType": "",
     "uses": "0"
+  },
+  "spies": {
+    "templates": ["default", "activatedEffect"],
+    "special": "",
+    "master": false
+  },
+  "network": {
+    "templates": ["default", "activatedEffect"],
+    "requirements": ""
   },
   "materiel": {
     "templates": ["default", "activatedEffect"],

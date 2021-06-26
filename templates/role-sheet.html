@@ -34,65 +34,65 @@
 
     <div id="character-traits" class="flex-vertical">
       {{#if actor.data.type}}
-        <div class="item-block flex-horizontal">
-          <div class="item-class-label">{{localize "BITD.RoleHeritage"}}</div>
-          <div class="attributes-container">
+        <div class="item-block flexrow">
+          <div class="item-class-label flex1">{{localize "BITD.RoleHeritage"}}</div>
+          <div class="attributes-container flex3">
             {{#multiboxes data.traits.heritage}}
               <div class="attribute-stats">
                 {{#times_from_1 5}}
                   <input type="radio" id="heritage-{{../actor._id}}-{{this}}" name="data.traits.heritage" value="{{this}}">
-                  <label for="heritage-{{../actor._id}}-{{this}}"></label><span class="trait-label">{{localize (lookupstring "BITD.RoleHeritage" this)}}</span>
+                  <label for="heritage-{{../actor._id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring "BITD.RoleHeritage" this)}}</span>
                 {{/times_from_1}}
               </div>
             {{/multiboxes}}
           </div>
         </div>
-        <div class="item-block flex-horizontal">
-          <div class="item-class-label">{{localize "BITD.RoleReputation"}}</div>
-          <div class="attributes-container">
+        <div class="item-block flexrow">
+          <div class="item-class-label flex1">{{localize "BITD.RoleReputation"}}</div>
+          <div class="attributes-container flex3">
             {{#multiboxes data.traits.reputation}}
               <div class="attribute-stats">
                 {{#times_from_1 5}}
                   <input type="radio" id="reputation-{{../actor._id}}-{{this}}" name="data.traits.reputation" value="{{this}}">
-                  <label for="reputation-{{../actor._id}}-{{this}}"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." ../actor.data.type) "Reputation") this)}}</span>
+                  <label for="reputation-{{../actor._id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." ../actor.data.type) "Reputation") this)}}</span>
                 {{/times_from_1}}
               </div>
             {{/multiboxes}}
           </div>
         </div>
 
-        <div class="item-block flex-horizontal">
-          <div class="item-class-label">{{localize "BITD.RolePersonality"}}</div>
-          <div class="attributes-container">
+        <div class="item-block flexrow">
+          <div class="item-class-label flex1">{{localize "BITD.RolePersonality"}}</div>
+          <div class="attributes-container flex3">
             <div class="attribute-stats">
               <input type="checkbox" id="personality-{{actor._id}}-1" name="data.traits.personality.one" value="one" {{checked data.traits.personality.one}}>
-              <label for="personality-{{actor._id}}-1"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 1)}}</span>
+              <label for="personality-{{actor._id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 1)}}</span>
               <input type="checkbox" id="personality-{{actor._id}}-2" name="data.traits.personality.two" value="two" {{checked data.traits.personality.two}}>
-              <label for="personality-{{actor._id}}-2"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 2)}}</span>
+              <label for="personality-{{actor._id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 2)}}</span>
               <input type="checkbox" id="personality-{{actor._id}}-3" name="data.traits.personality.three" value="three" {{checked data.traits.personality.three}}>
-              <label for="personality-{{actor._id}}-3"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 3)}}</span>
+              <label for="personality-{{actor._id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 3)}}</span>
               <input type="checkbox" id="personality-{{actor._id}}-4" name="data.traits.personality.four" value="four" {{checked data.traits.personality.four}}>
-              <label for="personality-{{actor._id}}-4"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 4)}}</span>
+              <label for="personality-{{actor._id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 4)}}</span>
               <input type="checkbox" id="personality-{{actor._id}}-5" name="data.traits.personality.five" value="five" {{checked data.traits.personality.five}}>
-              <label for="personality-{{actor._id}}-5"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 5)}}</span>
+              <label for="personality-{{actor._id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 5)}}</span>
             </div>
           </div>
         </div>
 
-        <div class="item-block flex-horizontal">
-          <div class="item-class-label">{{localize "BITD.RoleLook"}}</div>
-          <div class="attributes-container">
+        <div class="item-block flexrow">
+          <div class="item-class-label flex1">{{localize "BITD.RoleLook"}}</div>
+          <div class="attributes-container flex3">
             <div class="attribute-stats">
               <input type="checkbox" id="look-{{actor._id}}-1" name="data.traits.look.one" value="one" {{checked data.traits.look.one}}>
-              <label for="look-{{actor._id}}-1"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 1)}}</span>
+              <label for="look-{{actor._id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 1)}}</span>
               <input type="checkbox" id="look-{{actor._id}}-2" name="data.traits.look.two" value="two" {{checked data.traits.look.two}}>
-              <label for="look-{{actor._id}}-2"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 2)}}</span>
+              <label for="look-{{actor._id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 2)}}</span>
               <input type="checkbox" id="look-{{actor._id}}-3" name="data.traits.look.three" value="three" {{checked data.traits.look.three}}>
-              <label for="look-{{actor._id}}-3"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 3)}}</span>
+              <label for="look-{{actor._id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 3)}}</span>
               <input type="checkbox" id="look-{{actor._id}}-4" name="data.traits.look.four" value="four" {{checked data.traits.look.four}}>
-              <label for="look-{{actor._id}}-4"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 4)}}</span>
+              <label for="look-{{actor._id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 4)}}</span>
               <input type="checkbox" id="look-{{actor._id}}-5" name="data.traits.look.five" value="five" {{checked data.traits.look.five}}>
-              <label for="look-{{actor._id}}-5"></label><span class="trait-label">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 5)}}</span>
+              <label for="look-{{actor._id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 5)}}</span>
             </div>
           </div>
         </div>
@@ -111,6 +111,10 @@
         {{#if (eq actor.data.type "Lorekeeper")}}
           <a class="item" data-tab="annals">{{localize "BITD.AnnalsShort"}}</a>
           <a class="item" data-tab="camp">{{localize "BITD.CampShort"}}</a>
+        {{/if}}
+        {{#if (eq actor.data.type "Spymaster")}}
+          <a class="item" data-tab="network">{{localize "BITD.NetworkShort"}}</a>
+          <a class="item" data-tab="missions">{{localize "BITD.Missions"}}</a>
         {{/if}}
         {{#if (eq actor.data.type "Marshal")}}
           <a class="item" data-tab="squads">{{localize "BITD.Squads"}}</a>
@@ -158,9 +162,9 @@
               <div>{{localize "BITD.TimeDetail"}}</div>
               <div class="gradient-stripe-time flex-horizontal">
                 <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock1.value" data.resources.time.timeClock1.type data.resources.time.timeClock1.value (concat actor._id "-clock-one") "grey"}}}</div>
-                <div class="flex-vertical"><p class="caps">{{localize "BITD.Time1"}}</p><p>{{localize "BITD.Time2"}}</p></div>
+                <div class="flex-vertical"><p class="caps" style="color:yellow;">{{localize "BITD.Time1"}}</p><p style="color:yellow;">{{localize "BITD.Time2"}}</p></div>
                 <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock2.value" data.resources.time.timeClock2.type data.resources.time.timeClock2.value (concat actor._id "-clock-two") "yellow"}}}</div>
-                <div class="flex-vertical"><p class="caps">{{localize "BITD.Time3"}}</p><p>{{localize "BITD.Time4"}}</p></div>
+                <div class="flex-vertical"><p class="caps" style="color:red;">{{localize "BITD.Time3"}}</p><p style="color:red;">{{localize "BITD.Time4"}}</p></div>
                 <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock3.value" data.resources.time.timeClock3.type data.resources.time.timeClock3.value (concat actor._id "-clock-three") "red"}}}</div>
               </div>
             </div>
@@ -362,7 +366,7 @@
                         {{#if (gt item.data.uses 0)}}
                           <span class="uses-select">
                             <span>{{localize "BITD.Uses"}}</span>
-                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                           </span>
                         {{/if}}
                       </span>
@@ -389,7 +393,7 @@
                         {{#if (gt item.data.uses 0)}}
                           <span class="uses-select">
                             <span>{{localize "BITD.Uses"}}</span>
-                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                           </span>
                         {{/if}}
                       </span>
@@ -416,7 +420,7 @@
                         {{#if (gt item.data.uses 0)}}
                           <span class="uses-select">
                             <span>{{localize "BITD.Uses"}}</span>
-                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                            <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                           </span>
                         {{/if}}
                       </span>
@@ -428,6 +432,50 @@
             </div>
 
             <div class="item-class-label"><a class="item-add-popup" data-item-type="materiel">{{localize "BITD.AddItem"}}</a></div>
+          </div>
+
+        {{else if (eq actor.data.type "Spymaster")}}
+          <div class="label-stripe">
+            <p><label>{{localize "BITD.Spies"}}</label>
+              <a class="item-add-popup" data-item-type="spies">
+                <i class="fas fa-plus-square"></i>
+              </a>
+              {{{localize "BITD.SpiesLabel"}}}
+              <div class="total-spies" {{#if (gt actor.data.spies data.resources.spies)}}style="color:red;"{{/if}}>{{actor.data.spies}} / {{data.resources.spies}}  <span>{{localize "BITD.MaxSpies"}}</span></div>
+            </p>
+          </div>
+          <div id="spies-list">
+            <div class="container flex-vertical">
+              {{#each actor.items as |item id|}}
+                {{#if (eq item.type "spies")}}
+                  <div class="item flex-vertical" data-item-id="{{item._id}}">
+                    <span class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                      <span class="center flex-horizontal">
+                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                        </span>
+                        <span class="wound-checkboxes center flex-horizontal">
+                          <input id="master-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.master" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'master')}}>
+                          <label for="master-{{item._id}}"></label>
+                          {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'master')}}
+                            <span>{{localize "BITD.Master"}}</span>
+                          {{else}}
+                            <span>{{localize "BITD.Trained"}}</span>
+                          {{/if}}
+                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'wounded')}}>
+                          <label for="wounded-{{item._id}}"></label>
+                          <span>{{localize "BITD.Wounded"}}</span>
+                        </span>
+                      </span>
+                      <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                    </span>
+                    <span>{{item.data.special}}</span>
+                  </div>
+                {{/if}}
+              {{/each}}
+            </div>
+            <div class="item-class-label"><a class="item-add-popup" data-item-type="spies">{{localize "BITD.AddItem"}}</a></div>
           </div>
         {{/if}}
       </div>
@@ -660,7 +708,79 @@
             </td>
           </tr>
         </table>
+      </div>
 
+      <div id="network" class="tab flex-vertical" data-tab="network">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Network"}}</label>
+            <a class="item-add-popup" data-item-type="network">
+              <i class="fas fa-plus-square"></i>
+            </a>
+          </p>
+        </div>
+        <div id="network-list">
+          <div class="container flex-vertical">
+            {{#each actor.items as |item id|}}
+              {{#if (eq item.type "network")}}
+                <div class="item flex-vertical" data-item-id="{{item._id}}">
+                  <span class="item-body flex-horizontal">
+                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                    <span class="center flex-horizontal">
+                      <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                        <span class="tooltiptext">{{{item.data.description}}}</span>
+                      </span>
+                    </span>
+                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                  </span>
+                  <span>{{{item.data.description}}}</span>
+                </div>
+              {{/if}}
+            {{/each}}
+          </div>
+          <div class="item-class-label"><a class="item-add-popup" data-item-type="network">{{localize "BITD.AddItem"}}</a></div>
+        </div>
+      </div>
+
+      <div id="missions" class="tab flex-vertical" data-tab="missions">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.SMissions"}}</label>{{localize "BITD.SMissionsLabel"}}</p>
+        </div>
+        <div>{{{localize "BITD.SMissionsDetail"}}}</div>
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.LTMissions"}}</label>{{localize "BITD.LTMissionsLabel"}}</p>
+        </div>
+        <div id="mission-list" class="list">
+          <div id="mission-clocks" class="flex-vertical">
+            <div>{{{localize "BITD.LTMissionsDetail"}}}</div>
+            <div class="flex-vertical">
+              <div class="label-stripe-gray"><p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.AugmentLabel"}}</p></div>
+              <div class="flexrow">
+                <div class="flex3"><p>{{{localize "BITD.AugmentDetail"}}}</p></div>
+                <div class="flex1">{{{bob-clock "data.resources.missions.augmentClock.value" data.resources.missions.augmentClock.type data.resources.missions.augmentClock.value (concat actor._id "-clock-augment") "red"}}}</div>
+              </div>
+              <div class="label-stripe-gray"><p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.ExpandLabel"}}</p></div>
+              <div class="flexrow">
+                <div class="flex3"><p>{{{localize "BITD.ExpandDetail"}}}</p></div>
+                <div class="flex1">{{{bob-clock "data.resources.missions.expandClock.value" data.resources.missions.expandClock.type data.resources.missions.expandClock.value (concat actor._id "-clock-expand") "red"}}}</div>
+              </div>
+              <div class="label-stripe-gray"><p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.TrapLabel"}}</p></div>
+              <div class="flexrow">
+                <div class="flex3"><p>{{{localize "BITD.TrapDetail"}}}</p></div>
+                <div class="flex1">{{{bob-clock "data.resources.missions.trapClock.value" data.resources.missions.trapClock.type data.resources.missions.trapClock.value (concat actor._id "-clock-trap") "red"}}}</div>
+              </div>
+              <div class="label-stripe-gray"><p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.RecruitLabel"}}</p></div>
+              <div class="flexrow">
+                <div class="flex3"><p>{{{localize "BITD.RecruitDetail"}}}</p></div>
+                <div class="flex1">{{{bob-clock "data.resources.missions.recruitClock.value" data.resources.missions.recruitClock.type data.resources.missions.recruitClock.value (concat actor._id "-clock-recruit") "red"}}}</div>
+              </div>
+              <div class="label-stripe-gray"><p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.ResearchLabel"}}</p></div>
+              <div class="flexrow">
+                <div class="flex3"><p>{{{localize "BITD.ResearchDetail"}}}</p></div>
+                <div class="flex1">{{{bob-clock "data.resources.missions.researchClock.value" data.resources.missions.researchClock.type data.resources.missions.researchClock.value (concat actor._id "-clock-research") "red"}}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="squads" class="tab flex-vertical" data-tab="squads">

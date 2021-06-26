@@ -128,6 +128,10 @@ export class BoBRoleSheet extends BoBSheet {
       }
     }
 
+    if( data.data.type === "Spymaster" ) {
+      data.data.spies = BoBHelpers.getActorItemsByType( this.actor.id, "spies" ).length;
+    }
+
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.actor.effects);
 

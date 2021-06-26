@@ -174,6 +174,10 @@ export class BoBActor extends Actor {
           "value": this.data.items.filter( a => a.name === "Alchemist" ).length,
           "bonus": 0
         };
+        dice_amount.mission = {
+          "value": 1,
+          "bonus": 0
+        };
 
         break;
 	  }
