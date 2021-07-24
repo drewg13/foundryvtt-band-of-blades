@@ -78,7 +78,7 @@ export class BoBItem extends Item {
     let actor = this.parent ? this.parent : null;
 
     // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate
-    if( actor !== null ) {
+    if( actor && actor.data ) {
       let key = data._id;
       if( data.data.itemType === "Mercy" ) {
         await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
