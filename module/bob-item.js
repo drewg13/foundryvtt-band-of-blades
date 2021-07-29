@@ -22,7 +22,7 @@ export class BoBItem extends Item {
         }
       }
 
-      if( ( ( data.type === "class" ) || ( data.type === "role" ) ) && ( data.data.def_abilities !== "" ) ) {
+      if( ( ( data.type === "class" ) || ( data.type === "role" ) || ( data.type === "chosen" ) ) && ( data.data.def_abilities !== "" ) ) {
         await BoBHelpers.addDefaultAbilities( data, actor );
       }
 

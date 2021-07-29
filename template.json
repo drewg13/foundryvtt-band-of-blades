@@ -1,6 +1,6 @@
 {
 "Actor": {
-  "types": ["character", "role", "\uD83D\uDD5B clock"],
+  "types": ["character", "role", "chosen", "\uD83D\uDD5B clock"],
   "character": {
     "alias": "",
     "look": "",
@@ -336,6 +336,22 @@
       }
     }
   },
+  "chosen": {
+    "type": "",
+    "alias": "",
+    "notes": "",
+    "favor": "",
+    "features": "",
+    "traits": {
+      "favorType": 0,
+      "features": [0]
+    },
+    "favorClock": {
+      "name": "favorClock",
+      "type": 4,
+      "value": "0"
+    }
+  },
   "\uD83D\uDD5B clock": {
     "name": "",
     "type": 4,
@@ -343,14 +359,10 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "role", "squad", "ability", "personnel", "materiel", "spies", "network", "heritage", "trait"],
+  "types": ["item", "class", "role", "chosen", "squad", "chosenAbility", "ability", "personnel", "materiel", "spies", "network", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
-    },
-    "logic": {
-      "class": "",
-      "logic": ""
     },
     "activatedEffect": {
       "activation": {
@@ -386,13 +398,13 @@
     }
   },
   "item": {
-    "templates": ["default", "logic", "activatedEffect"],
+    "templates": ["default", "activatedEffect"],
     "load": 0,
     "load_type": "",
     "uses": "0"
   },
   "class": {
-    "templates": ["default", "logic", "activatedEffect"],
+    "templates": ["default", "activatedEffect"],
     "def_abilities": "",
 	"experience_clues": "",
     "skill": ""
@@ -405,7 +417,16 @@
     "templates": ["default", "activatedEffect"]
   },
   "ability": {
-    "templates": ["default", "logic", "activatedEffect"]
+    "templates": ["default", "activatedEffect"],
+    "class": ""
+  },
+  "chosen": {
+    "templates": ["default", "activatedEffect"],
+    "def_abilities": ""
+  },
+  "chosenAbility": {
+    "templates": ["default", "activatedEffect"],
+    "class": ""
   },
   "personnel": {
     "templates": ["default", "activatedEffect"],
@@ -427,10 +448,10 @@
     "uses": "0"
   },
   "heritage": {
-    "templates": ["default", "logic", "activatedEffect"]
+    "templates": ["default", "activatedEffect"]
   },
   "trait": {
-    "templates": ["default", "logic", "activatedEffect"],
+    "templates": ["default", "activatedEffect"],
     "shortdesc": ""
   }
 }

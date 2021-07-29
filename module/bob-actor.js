@@ -31,6 +31,14 @@ export class BoBActor extends Actor {
         updateData['token.displayName'] = 50;
         break;
       }
+      case "chosen": {
+        updateData['img'] = "systems/band-of-blades/styles/assets/icons/chosen.svg";
+        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/chosen.svg";
+        updateData['token.actorLink'] = true;
+        updateData['token.name'] = createData.name;
+        updateData['token.displayName'] = 50;
+        break;
+      }
       case "\uD83D\uDD5B clock": {
         updateData['img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
         updateData['token.img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";

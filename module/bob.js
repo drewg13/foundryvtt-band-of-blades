@@ -9,6 +9,7 @@ import { BoBItem } from "./bob-item.js";
 import { BoBItemSheet } from "./bob-item-sheet.js";
 import { BoBActorSheet } from "./bob-actor-sheet.js";
 import { BoBRoleSheet } from "./bob-role-sheet.js";
+import { BoBChosenSheet } from "./bob-chosen-sheet.js";
 import * as migrations from "./migration.js";
 /* For Clocks UI */
 import { BoBClockSheet } from "./bob-clock-sheet.js";
@@ -50,6 +51,7 @@ Hooks.once("init", function() {
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
   Actors.registerSheet("band-of-blades", BoBRoleSheet, { types: ["role"], makeDefault: true });
+  Actors.registerSheet("band-of-blades", BoBChosenSheet, { types: ["chosen"], makeDefault: true });
   Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});

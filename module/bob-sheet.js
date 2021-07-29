@@ -34,7 +34,7 @@ export class BoBSheet extends ActorSheet {
 
 	  let items = await BoBHelpers.getAllItemsByType(item_type, game);
     let html = `<div id="items-to-add">`;
-	  let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
+	  // let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
 
 	  if( item_type === "class" ) {
 	    html += `<div class="class-help">${game.i18n.localize('BITD.ClassWarning')}</div>`;
@@ -107,6 +107,13 @@ export class BoBSheet extends ActorSheet {
           html += `<input id="select-item-${ e._id }" type="${ input_type }" name="select_items" value="${ e._id }">`;
           html += `<label class="flex-horizontal" for="select-item-${ e._id }">`;
           html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.data.special ) }</span></i>`;
+          html += `</label>`;
+        }
+      } else if (e.type === "chosenAbility") {
+        if ( e.data.class === this.actor.data.name ) {
+          html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
+          html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
           html += `</label>`;
         }
 	    } else {

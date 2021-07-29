@@ -23,3 +23,5 @@ v0.4.0  Add Lorekeeper sheet, fix 0d Fortune rolls
 v0.5.0  Add Spymaster sheet
 
 v0.5.1  Fix Scout class
+
+v1.0.0  Add Chosen/Broken sheet and Mission tables, Initial full release

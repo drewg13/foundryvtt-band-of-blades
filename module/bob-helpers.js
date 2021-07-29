@@ -13,7 +13,7 @@ export class BoBHelpers {
    */
   static removeDuplicatedItemType(item_data, actor) {
     let dupe_list = [];
-    let distinct_types = ["class", "role", "heritage", "squad"];
+    let distinct_types = ["class", "role", "chosen", "heritage", "squad"];
     let allowed_types = ["item", "materiel", "personnel"];
     let should_be_distinct = distinct_types.includes(item_data.type);
     // If the Item has the exact same name - remove it from list.
@@ -49,6 +49,8 @@ export class BoBHelpers {
       item_type = "ability";
     } else if( actor.data.type === "role" ) {
       item_type = "network";
+    } else if( actor.data.type === "chosen" ) {
+      item_type = "chosenAbility";
     } else { return }
 
     let abilities = actor.items.filter(a => a.type === item_type).map(e => {return e.data.name});

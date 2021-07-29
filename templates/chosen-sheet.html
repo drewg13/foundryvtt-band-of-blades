@@ -1,0 +1,176 @@
+<form class="{{cssClass}} chosen-sheet" autocomplete="off">
+
+  <section id="name-alias" class="flex-vertical">
+    <div id="name-chosen" class="flex-horizontal">
+      <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+
+      <div class="grow-two flex-center">
+        <div id="name" class="item-block">
+          <label class="item-class-label" for="chosen-{{actor._id}}-name">{{localize "BITD.Name"}}</label>
+          <input type="text" id="chosen-{{actor._id}}-name" name="name" value="{{actor.name}}">
+        </div>
+
+        <div id="alias" class="item-block">
+          <label class="item-class-label" for="chosen-{{actor._id}}-alias">{{localize "BITD.AKA"}}</label>
+          <input type="text" id="chosen-{{actor._id}}-alias" name="data.alias" value="{{data.alias}}">
+        </div>
+
+  		  <div class="item-block flex-horizontal">
+          <div class="item-class-label">
+            <a class="item-add-popup" data-distinct="true" data-item-type="chosen">{{localize "BITD.Chosen"}}</a>
+          </div>
+          {{#each actor.items as |item id|}}
+            {{#if (eq item.type "chosen")}}
+              <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item-body center flex-horizontal">
+                  <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                  <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
+                    <a class="item-name">{{item.name}}</a>
+                    <span class="tooltiptext">{{{item.data.description}}}</span>
+                  </div>
+                </div>
+                <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+              </div>
+            {{/if}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <div id="character-traits" class="flex-vertical">
+      {{#if (eq actor.data.type "Chosen")}}
+
+        <div class="item-block flexrow">
+          <div class="item-class-label">{{localize "BITD.ChosenFavorType"}}</div>
+          <div class="attributes-container">
+            <div class="attribute-stats">
+              <input type="radio" id="favorType-{{actor._id}}-1" name="data.traits.favorType" value="1" {{checked (eq data.traits.favorType "1")}}>
+              <label for="favorType-{{actor._id}}-1"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[0]}}</span>
+              <input type="radio" id="favorType-{{actor._id}}-2" name="data.traits.favorType" value="2" {{checked (eq data.traits.favorType "2")}}>
+              <label for="favorType-{{actor._id}}-2"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[1]}}</span>
+              <input type="radio" id="favorType-{{actor._id}}-3" name="data.traits.favorType" value="3" {{checked (eq data.traits.favorType "3")}}>
+              <label for="favorType-{{actor._id}}-3"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[2]}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="item-block flexrow">
+          <div class="item-class-label">{{localize "BITD.ChosenFeatures"}}</div>
+          <div class="attributes-container">
+            <div class="attribute-stats">
+              <input type="checkbox" id="features-{{actor._id}}-1" name="data.traits.features.one" value="one" {{checked data.traits.features.one}}>
+              <label for="features-{{actor._id}}-1"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[0]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-2" name="data.traits.features.two" value="two" {{checked data.traits.features.two}}>
+              <label for="features-{{actor._id}}-2"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[1]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-3" name="data.traits.features.three" value="three" {{checked data.traits.features.three}}>
+              <label for="features-{{actor._id}}-3"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[2]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-4" name="data.traits.features.four" value="four" {{checked data.traits.features.four}}>
+              <label for="features-{{actor._id}}-4"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[3]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-5" name="data.traits.features.five" value="five" {{checked data.traits.features.five}}>
+              <label for="features-{{actor._id}}-5"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[4]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-6" name="data.traits.features.six" value="six" {{checked data.traits.features.six}}>
+              <label for="features-{{actor._id}}-6"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[5]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-7" name="data.traits.features.seven" value="seven" {{checked data.traits.features.seven}}>
+              <label for="features-{{actor._id}}-7"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[6]}}</span>
+              <input type="checkbox" id="features-{{actor._id}}-8" name="data.traits.features.eight" value="eight" {{checked data.traits.features.eight}}>
+              <label for="features-{{actor._id}}-8"></label><span class="trait-label flex1">{{actor.data.featureTypes.0.[7]}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.MissionFavor"}}</label></p>
+        </div>
+        <div id="favor-list" class="list">
+          <div id="favor-clocks" class="flex-vertical">
+            <div class="flex-horizontal">
+              <div>{{{localize "BITD.ChosenAbilityDetail"}}}</div>
+              <div class="flex-horizontal normal">{{{bob-clock "data.favorClock.value" data.favorClock.type data.favorClock.value (concat actor._id "-favorClock") "yellow"}}}</div>
+            </div>
+          </div>
+        </div>
+
+      {{/if}}
+      {{#if (eq actor.data.type "Broken")}}
+        <div>{{{localize "BITD.BrokenAbilityDetail"}}}</div>
+      {{/if}}
+    </div>
+  </section>
+  <br />
+  <section id="resources-section" class="flex-horizontal">
+    <div class="tab-content flex-vertical grow-two">
+      {{!-- Nav menu --}}
+      <nav class="tabs flex-horizontal">
+        <a class="item" data-tab="abilities">{{localize "BITD.Abilities"}}</a>
+        <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
+        {{#if isGM}}
+          <a class="item" data-tab="effects">{{localize "BITD.Effects"}}</a>
+        {{/if}}
+        <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
+      </nav>
+
+      <div id="abilities" class="tab flex-vertical" data-tab="abilities">
+        <div class="label-stripe">
+          <p>
+            <label>{{localize "BITD.Abilities"}}</label>
+            <a class="item-add-popup" data-item-type="chosenAbility" data-limiter=data.type><i class="fas fa-plus-square"></i></a>
+          </p>
+        </div>
+
+        <div id="abilities-list">
+          {{#each actor.items as |item id|}}
+            {{#if (eq item.type "chosenAbility")}}
+              <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item-body flex-horizontal">
+                  <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                  <a class="item-name">{{item.name}}</a>
+                  <div class="item-description">{{item.data.description}}</div>
+                </div>
+                <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+              </div>
+            {{/if}}
+          {{/each}}
+          <div class="item-class-label"><a class="item-add-popup" data-item-type="chosenAbility">{{localize "BITD.AddAbility"}}</a></div>
+        </div>
+      </div>
+
+      {{!-- Notes --}}
+      <div class="tab flex-vertical" data-tab="character-notes">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Notes"}}</label></p>
+        </div>
+        <div class="description">
+          {{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}}
+          {{#if editable}}
+            <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
+          {{/if}}
+        </div>
+      </div>
+
+      {{!-- Active Effects --}}
+      <div id="effects" class="tab effects flex-vertical" data-tab="effects">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Effects"}}</label></p>
+        </div>
+        {{> "systems/band-of-blades/templates/parts/active-effects.html"}}
+      </div>
+
+      {{!-- Full Item List --}}
+      <div id="all-items" class="tab grow-two flex-vertical" data-tab="all-character-items">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.AllItems"}}</label></p>
+        </div>
+        {{#each actor.items as |item id|}}
+          <div class="item flex-horizontal" data-item-id="{{item._id}}">
+            <div class="item-body item-sheet-open flex-horizontal">
+              <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+              <a class="item-name">{{item.name}}</a>
+            </div>
+            <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </section>
+
+</form>

@@ -62,7 +62,8 @@
 * ul {
   list-style: none;
 }
-* .role-sheet ul {
+* .role-sheet ul,
+* .chosen-sheet ul {
   list-style: outside;
 }
 * #effects table {
@@ -175,6 +176,9 @@ input[type="checkbox"]:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+* .chosen-sheet .flex-horizontal {
+  justify-content: unset;
 }
 * .flex-vertical {
   display: flex;
@@ -715,6 +719,9 @@ input[type="checkbox"]:hover {
 * .role-sheet #character-traits .item-class-label {
   margin-right: 15px;
   margin-bottom: 0px;
+}
+* .chosen-sheet .item-class-label {
+  max-width: 180px;
 }
 * #character-traits .attributes-container {
   display: flex;
