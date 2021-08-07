@@ -34,10 +34,6 @@ Hooks.once("init", function() {
   };
   game.BoBHelpers = BoBHelpers;
 
-  const versionParts = game.data.version.split('.');
-  game.majorVersion = parseInt(versionParts[1]);
-  game.minorVersion = parseInt(versionParts[2]);
-
   CONFIG.Item.documentClass = BoBItem;
   CONFIG.Actor.documentClass = BoBActor;
 
