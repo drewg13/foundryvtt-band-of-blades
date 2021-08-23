@@ -29,3 +29,5 @@ v1.0.0  Add Chosen/Broken sheet and Mission tables, Initial full release
 v1.0.1  Minor code cleanup for v9
 
 v1.1.0  Add support for auto-creation of basic Roll macros via drag-and-drop to the macro toolbar, add icons created by @Gus#4294
+
+v1.1.1  Fix data paths for some Elite abilities
