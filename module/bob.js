@@ -292,6 +292,9 @@ Hooks.once("init", function() {
  */
 Hooks.once("ready", function() {
 
+  // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
+  Hooks.on("hotbarDrop", (bar, data, slot) => BoBHelpers.createBoBMacro(data, slot));
+
   // Determine whether a system migration is required
   const currentVersion = game.settings.get("band-of-blades", "systemMigrationVersion");
   const NEEDS_MIGRATION_VERSION = 1.0;

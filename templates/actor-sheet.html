@@ -109,23 +109,6 @@
         <label for="character-{{actor._id}}-look">{{localize "BITD.Look"}}</label>
         <input type="text" id="character-{{actor._id}}-look" name="data.look" value="{{data.look}}">
       </div>
-      {{!--
-      <div class="item-block flex-horizontal">
-        <div class="item-class-label"><a class="flag-add-popup" data-distinct="true" data-item-type="chosen">{{localize "BITD.Chosen"}}</a></div>
-        {{#each actor.flags.band-of-blades.chosen as |item id|}}
-          {{#unless (eq item.name "")}}
-            <div class="item flex-horizontal" data-item-id="{{item._id}}" data-item-type="{{item.type}}">
-              <div class="item-body flex-horizontal">
-                <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                <a class="item-name">{{item.name}}</a>
-              </div>
-              <a class="item-control flag-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-            </div>
-          {{/unless}}
-        {{/each}}
-      </div>
-      --}}
-
     </div>
   </section>
   <section id="stress-trauma-section">
@@ -497,7 +480,7 @@
           <div id="attributes-{{attribute_name}}" class="attribute">
             <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
               <div class="stripe">
-                <a class="attribute-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left">{{{localize attribute.tip}}}</span></a>
+                <a class="attribute-label macroable roll-die-attribute rollable-text tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext left">{{{localize attribute.tip}}}</span></a>
               </div>
               <div class="stripe-tooth-body-blue">
                 {{#multiboxes attribute.exp}}
@@ -547,7 +530,7 @@
                           <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                         {{/times_from_0}}
                       </div>
-                      <div class="attribute-skill-label roll-die-attribute rollable-text tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext bottom">{{{localize skill.tip}}}</span></div>
+                      <div class="attribute-skill-label macroable roll-die-attribute rollable-text tooltip" data-roll-attribute="{{skill_name}}">{{localize skill.label}}<span class="tooltiptext bottom">{{{localize skill.tip}}}</span></div>
                     {{/multiboxes}}
                   </div>
                 {{/if}}

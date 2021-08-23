@@ -13,8 +13,6 @@ export class BoBSheet extends ActorSheet {
     html.find(".item-add-popup").click(this._onItemAddClick.bind(this));
     html.find(".item-delete-all").click(this._onDeleteAllClick.bind(this));
 	  html.find(".flag-add-popup").click(this._onFlagAddClick.bind(this));
-	  //html.find(".update-sheet").click(this._onUpdateClick.bind(this));
-	  //html.find(".update-box").click(this._onUpdateBoxClick.bind(this));
 	  html.find(".roll-die-attribute").click(this._onRollAttributeDieClick.bind(this));
 
   }
@@ -34,7 +32,6 @@ export class BoBSheet extends ActorSheet {
 
 	  let items = await BoBHelpers.getAllItemsByType(item_type, game);
     let html = `<div id="items-to-add">`;
-	  // let actor_flags = this.actor.getFlag( "band-of-blades", "ship" ) || [];
 
 	  if( item_type === "class" ) {
 	    html += `<div class="class-help">${game.i18n.localize('BITD.ClassWarning')}</div>`;

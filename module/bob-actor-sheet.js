@@ -16,7 +16,8 @@ export class BoBActorSheet extends BoBSheet {
       width: 800,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
-	    scrollY: [".sheet"]
+	    scrollY: [".sheet"],
+      dragDrop: [{dragSelector: ".macroable", dropSelector: null}]
     });
   }
 
@@ -86,5 +87,25 @@ export class BoBActorSheet extends BoBSheet {
 	}
 
   /* -------------------------------------------- */
+
+  /** @override */
+  _onDragStart(event) {
+    const li = event.currentTarget;
+    if ( event.target.classList.contains("entity-link") ) return;
+
+    // Create drag data
+    const dragData = {
+      actorId: this.actor.id
+    };
+
+    // Owned Items
+    if ( li.dataset.rollAttribute ) {
+      dragData.type = "Roll";
+      dragData.data = li.dataset.rollAttribute;
+    }
+
+    // Set data transfer
+    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
 
 }
