@@ -1191,6 +1191,10 @@ input[type="checkbox"]:hover {
   width: 80px;
   height: 80px;
 }
+* .medium .bob-clock {
+  width: 60px;
+  height: 60px;
+}
 * .small .bob-clock {
   width: 40px;
   height: 40px;
@@ -1301,9 +1305,49 @@ input[type="checkbox"]:hover {
 * .bob-clock.clock-10 *:nth-child(21) {
   transform: rotate(324deg) skewY(126deg);
 }
+* .bob-clock.clock-12 *:nth-child(3) {
+  transform: rotate(0deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(5) {
+  transform: rotate(30deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(7) {
+  transform: rotate(60deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(9) {
+  transform: rotate(90deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(11) {
+  transform: rotate(120deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(13) {
+  transform: rotate(150deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(15) {
+  transform: rotate(180deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(17) {
+  transform: rotate(210deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(19) {
+  transform: rotate(240deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(21) {
+  transform: rotate(270deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(23) {
+  transform: rotate(300deg) skewY(120deg);
+}
+* .bob-clock.clock-12 *:nth-child(25) {
+  transform: rotate(330deg) skewY(120deg);
+}
 * .bob-clock-name-type > * {
   margin-bottom: 10px;
   max-width: 220px;
+}
+* #minion-hp-clock .hp-clock {
+  margin: auto;
+  padding-left: 3px;
 }
 * .nullifier {
   transition: filter 0.2s;
@@ -1432,6 +1476,7 @@ input[type="checkbox"]:hover {
 * .role-sheet div.bob-clock:last-child{
   margin-right: 20px;
 }
+* .minion-sheet input[type="number"],
 * .role-sheet input[type="number"] {
   font-size: xx-large;
   width: 100px;

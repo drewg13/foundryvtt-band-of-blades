@@ -1,0 +1,83 @@
+<form class="{{cssClass}} minion-sheet" autocomplete="off">
+
+  <section id="name-alias" class="flex-vertical">
+    <div id="name-minion" class="flex-horizontal">
+      <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+
+      <div class="grow-two flex-center">
+        <div id="name" class="item-block">
+          <label class="item-class-label" for="minion-{{actor._id}}-name">{{localize "BITD.Name"}}</label>
+          <input type="text" id="minion-{{actor._id}}-name" name="name" value="{{actor.name}}">
+        </div>
+
+        <div class="flex-horizontal">
+          <div id="type" class="item-block">
+            <label class="item-class-label" for="minion-{{actor._id}}-type">{{localize "BITD.Type"}}</label>
+            <input type="text" id="minion-{{actor._id}}-type" name="data.type" value="{{data.type}}">
+          </div>
+
+          <div class="number-input">
+            <div class="flex-vertical">
+              <label for="threat-{{actor._id}}">{{{localize "BITD.Threat"}}}</label>
+              <div class="flex-horizontal">
+                <button {{#if (eq data.threat 1)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                <input id="threat-{{actor._id}}" type="number" name="data.threat" value="{{data.threat}}">
+                <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex-horizontal clock-block medium" id="minion-hp-clock">
+            <div class="clocks clocks-{{data.hpClock.type}}">
+              {{{bob-clock "data.hpClock.value" data.hpClock.type data.hpClock.value actor._id "green"}}}
+            </div>
+            <div class="hp-clock">
+              <select id="max" name="data.hpClock.type">
+                {{{data.size_list}}}
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+        <textarea rows="10" name="data.description">{{data.description}}</textarea>
+
+      </div>
+    </div>
+  </section>
+  <br />
+  <section id="resources-section" class="flex-horizontal">
+    <div class="tab-content flex-vertical grow-two">
+      {{!-- Nav menu --}}
+      <nav class="tabs flex-horizontal">
+        <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
+        {{#if isGM}}
+          <a class="item" data-tab="effects">{{localize "BITD.Effects"}}</a>
+        {{/if}}
+      </nav>
+
+      {{!-- Notes --}}
+      <div class="tab flex-vertical" data-tab="character-notes">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Notes"}}</label></p>
+        </div>
+        <div class="description">
+          {{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}}
+          {{#if editable}}
+            <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
+          {{/if}}
+        </div>
+      </div>
+
+      {{!-- Active Effects --}}
+      <div id="effects" class="tab effects flex-vertical" data-tab="effects">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Effects"}}</label></p>
+        </div>
+        {{> "systems/band-of-blades/templates/parts/active-effects.html"}}
+      </div>
+
+    </div>
+  </section>
+
+</form>

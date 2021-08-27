@@ -1,6 +1,6 @@
 {
 "Actor": {
-  "types": ["character", "role", "chosen", "\uD83D\uDD5B clock"],
+  "types": ["character", "role", "chosen", "minion", "\uD83D\uDD5B clock"],
   "character": {
     "alias": "",
     "look": "",
@@ -348,6 +348,17 @@
     },
     "favorClock": {
       "name": "favorClock",
+      "type": 4,
+      "value": "0"
+    }
+  },
+  "minion": {
+    "type": "",
+    "notes": "",
+    "description": "",
+    "threat": 1,
+    "hpClock": {
+      "name": "hpClock",
       "type": 4,
       "value": "0"
     }

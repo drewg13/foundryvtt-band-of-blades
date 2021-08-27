@@ -39,6 +39,14 @@ export class BoBActor extends Actor {
         updateData['token.displayName'] = 50;
         break;
       }
+      case "minion": {
+        updateData['img'] = "systems/band-of-blades/styles/assets/icons/minion.svg";
+        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/minion.svg";
+        updateData['token.actorLink'] = true;
+        updateData['token.name'] = createData.name;
+        updateData['token.displayName'] = 50;
+        break;
+      }
       case "\uD83D\uDD5B clock": {
         updateData['img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
         updateData['token.img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
@@ -66,6 +74,14 @@ export class BoBActor extends Actor {
   prepareData() {
     super.prepareData();
 
+    const actorData = this.data;
+    const data = actorData.data;
+
+    if (actorData.type === "minion") {
+      if( !data.hpClock.value ){ data.hpClock.value = 0 }
+      if( data.hpClock.type === 0 ){ data.hpClock.type = 4 }
+      data.size_list = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.hpClock.type, parseInt( data.hpClock.type ) );
+    }
   }
 
   /* -------------------------------------------- */

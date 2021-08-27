@@ -32,6 +32,8 @@
   "BITD.Alias": "Nickname",
   "BITD.Look": "Appearance",
   "BITD.Wounds": "Wounds",
+  "BITD.Type": "Type",
+  "BITD.Threat": "Threat",
 
   "BITD.Resources": "Resources",
   "BITD.Squads": "Squads",
