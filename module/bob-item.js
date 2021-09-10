@@ -138,4 +138,17 @@ export class BoBItem extends Item {
 
 
   };
+
+  async sendToChat() {
+    const itemData = this.data.toObject();
+    if (itemData.img.includes("/mystery-man")) {
+      itemData.img = null;
+    }
+    const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", itemData);
+    const chatData = {
+      user: game.userId,
+      content: html,
+    };
+    const message = await ChatMessage.create(chatData);
+  }
 }

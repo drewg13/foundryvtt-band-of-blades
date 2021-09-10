@@ -77,6 +77,13 @@ export class BoBChosenSheet extends BoBSheet {
       element.slideUp(200, () => this.render(false));
     });
 
+    // Post item to chat
+    html.find(".item-post").click((ev) => {
+      const element = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(element.data("itemId"));
+      item.sendToChat();
+    });
+
 	  // Clear Flag
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");

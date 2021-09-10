@@ -116,6 +116,13 @@
   font-family: 'Zamolxis', 'serif';
   font-size: xx-large;
 }
+.chat-item img {
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-right: 5px;
+  margin-top: 5px;
+}
 input[type="checkbox"] {
   cursor: pointer;
   transition: filter 0.1s;
@@ -519,9 +526,6 @@ input[type="checkbox"]:hover {
 }
 * #faction-items .item-name {
   width: 120px;
-}
-* #all-items .item .item-body {
-	max-width: 15rem;
 }
 * #friend-list .item .item-body {
 	margin-left: 20px;
@@ -1028,7 +1032,7 @@ input[type="checkbox"]:hover {
   text-align: justify;
 }
 * #all-items .item div {
-	flex-grow: 0;
+	flex-grow: 4;
 }
 * .item div {
   flex-grow: 3;
@@ -1038,7 +1042,7 @@ input[type="checkbox"]:hover {
 }
 * .item .item-control {
   text-align: center;
-  width: 40px;
+  width: 20px;
   margin-top: 4px;
 }
 * #all-items .item .item-body {
