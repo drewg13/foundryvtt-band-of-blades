@@ -33,6 +33,8 @@ Hooks.once("init", function() {
     themes: ["black", "grey", "white", "red", "yellow", "green", "blue"],
     sizes: [ 4, 6, 8, 10, 12 ]
   };
+  game.system.traumaList = ["cold", "haunted", "obsessed", "paranoid", "reckless", "soft", "unstable", "vicious"];
+  game.system.blightList = ["anathema", "host", "hunger", "miasma", "mutated", "rage", "rot", "visions"];
   game.BoBHelpers = BoBHelpers;
 
   CONFIG.Item.documentClass = BoBItem;
@@ -220,6 +222,10 @@ Hooks.once("init", function() {
 
   Handlebars.registerHelper('mult', function(a, b) {
     return (a * b);
+  });
+
+  Handlebars.registerHelper('pcase', function(a) {
+    return BoBHelpers.getProperCase( a );
   });
 
   /**

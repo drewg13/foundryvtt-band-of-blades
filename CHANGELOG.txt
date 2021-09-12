@@ -35,3 +35,5 @@ v1.1.1  Fix data paths for some Elite abilities
 v1.2.0  Add Minions sheet
 
 v1.3.0  Add icons to post item descriptions to chat directly from actor sheets
+
+v1.4.0  Fix tooltip z-indexing for Trauma/Blight, remove hardcoded conditions for Trauma/Blight

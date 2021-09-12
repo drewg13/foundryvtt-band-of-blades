@@ -146,38 +146,15 @@
       </div>
 
       <div id="trauma-list">
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.cold" value="cold" {{checked data.trauma.list.cold}}>
-          <span class="checkmark">{{localize "BITD.TraumaCold"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaColdTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.haunted" value="haunted" {{checked data.trauma.list.haunted}}>
-          <span class="checkmark">{{localize "BITD.TraumaHaunted"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaHauntedTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.obsessed" value="obsessed" {{checked data.trauma.list.obsessed}}>
-          <span class="checkmark">{{localize "BITD.TraumaObsessed"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaObsessedTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.paranoid" value="paranoid" {{checked data.trauma.list.paranoid}}>
-          <span class="checkmark">{{localize "BITD.TraumaParanoid"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaParanoidTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.reckless" value="reckless" {{checked data.trauma.list.reckless}}>
-          <span class="checkmark">{{localize "BITD.TraumaReckless"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaRecklessTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.soft" value="soft" {{checked data.trauma.list.soft}}>
-          <span class="checkmark">{{localize "BITD.TraumaSoft"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaSoftTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.unstable" value="unstable" {{checked data.trauma.list.unstable}}>
-          <span class="checkmark">{{localize "BITD.TraumaUnstable"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaUnstableTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.trauma.list.vicious" value="vicious" {{checked data.trauma.list.vicious}}>
-          <span class="checkmark">{{localize "BITD.TraumaVicious"}}<span class="tooltiptext bottom">{{{localize "BITD.TraumaColdTip"}}}</span></span>
-        </label>
+        {{#each data.trauma.list}}
+          <div class="tooltip">
+            <span class="tooltiptext bottom">{{{localize (concat "BITD.Trauma" (pcase @key) "Tip")}}}</span>
+            <label>
+              <input type="checkbox" name="data.trauma.list.{{@key}}" value="{{@key}}" {{checked (lookup ../data.trauma.list @key)}}>
+              <span class="checkmark">{{localize (concat "BITD.Trauma" (pcase @key))}}</span>
+            </label>
+          </div>
+        {{/each}}
       </div>
     </div>
 
@@ -211,38 +188,15 @@
       </div>
 
       <div id="blight-list">
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.anathema" value="anathema" {{checked data.blight.list.anathema}}>
-          <span class="checkmark">{{localize "BITD.BlightAnathema"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightAnathemaTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.host" value="host" {{checked data.blight.list.host}}>
-          <span class="checkmark">{{localize "BITD.BlightHost"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightHostTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.hunger" value="hunger" {{checked data.blight.list.hunger}}>
-          <span class="checkmark">{{localize "BITD.BlightHunger"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightHungerTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.miasma" value="miasma" {{checked data.blight.list.miasma}}>
-          <span class="checkmark">{{localize "BITD.BlightMiasma"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightMiasmaTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.mutated" value="mutated" {{checked data.blight.list.mutated}}>
-          <span class="checkmark">{{localize "BITD.BlightMutated"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightMutatedTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.rage" value="rage" {{checked data.blight.list.rage}}>
-          <span class="checkmark">{{localize "BITD.BlightRage"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightRageTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.rot" value="rot" {{checked data.blight.list.rot}}>
-          <span class="checkmark">{{localize "BITD.BlightRot"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightRotTip"}}}</span></span>
-        </label>
-        <label class="tooltip">
-          <input type="checkbox" name="data.blight.list.visions" value="visions" {{checked data.blight.list.visions}}>
-          <span class="checkmark">{{localize "BITD.BlightVisions"}}<span class="tooltiptext bottom">{{{localize "BITD.BlightVisionsTip"}}}</span></span>
-        </label>
+        {{#each data.blight.list}}
+          <div class="tooltip">
+            <span class="tooltiptext bottom">{{{localize (concat "BITD.Blight" (pcase @key) "Tip")}}}</span>
+            <label>
+              <input type="checkbox" name="data.blight.list.{{@key}}" value="{{@key}}" {{checked (lookup ../data.blight.list @key)}}>
+              <span class="checkmark">{{localize (concat "BITD.Blight" (pcase @key))}}</span>
+            </label>
+          </div>
+        {{/each}}
       </div>
     </div>
   </section>

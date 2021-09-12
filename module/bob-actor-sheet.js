@@ -13,7 +13,7 @@ export class BoBActorSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/actor-sheet.html",
-      width: 800,
+      width: 740,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
 	    scrollY: [".sheet"],
