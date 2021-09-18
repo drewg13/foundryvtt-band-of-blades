@@ -356,7 +356,7 @@ export function getMissionRollStatus(rolls, zeromode = false) {
 export async function simpleRollPopup() {
 
   new Dialog({
-    title: `Fortune Roll`,
+    title: `${game.i18n.localize("BITD.FortuneRoll")}`,
     content: `
       <h2>${game.i18n.localize("BITD.FortuneRoll")}</h2>
       <p>${game.i18n.localize("BITD.RollTokenDescription")}</p>
@@ -372,15 +372,15 @@ export async function simpleRollPopup() {
     buttons: {
       yes: {
         icon: "<i class='fas fa-check'></i>",
-        label: game.i18n.localize('Roll'),
+        label: game.i18n.localize('BITD.Roll'),
         callback: async (html) => {
           let diceQty = html.find('[name="qty"]')[0].value;
-          await bobRoll(parseInt(diceQty), "Fortune!", "", "");
+          await bobRoll(parseInt(diceQty), game.i18n.localize("BITD.Fortune"), "", "");
         },
       },
       no: {
         icon: "<i class='fas fa-times'></i>",
-        label: game.i18n.localize('Cancel'),
+        label: game.i18n.localize('BITD.Cancel'),
       },
     },
     default: "yes"

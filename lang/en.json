@@ -1,4 +1,22 @@
 {
+  "ACTOR.TypeCharacter": "Character",
+  "ACTOR.TypeRole": "Role",
+  "ACTOR.TypeChosen": "Chosen",
+  "ACTOR.TypeMinion": "Minion",
+  "ACTOR.Type🕛 Clock": "🕛 Clock",
+  "ITEM.TypeItem": "Item",
+  "ITEM.TypeClass": "Class",
+  "ITEM.TypeRole": "Role",
+  "ITEM.TypeChosen": "Chosen",
+  "ITEM.TypeSquad": "Squad",
+  "ITEM.TypeChosenability": "Chosen Ability",
+  "ITEM.TypePersonnel": "Personnel",
+  "ITEM.TypeMateriel": "Materiel",
+  "ITEM.TypeAbility": "Ability",
+  "ITEM.TypeSpies": "Spies",
+  "ITEM.TypeNetwork": "Network",
+  "ITEM.TypeHeritage": "Heritage",
+  "ITEM.TypeTrait": "Trait",
   "BITD.HelloThere": "General Kenobi",
   "BITD.Name": "Name",
   "BITD.AKA": "Also called",
@@ -383,6 +401,7 @@
   "BITD.RollCriticalSuccess": "Critical Success!",
   "BITD.RollSuccess": "Success",
   "BITD.RollPartialSuccess": "Partial Success",
+  "BITD.Fortune": "Fortune!",
   "BITD.FortuneRoll": "Fortune Roll!",
   "BITD.RollTokenDescription": "Add +1d for each Trait rating and +1d for each Major Advantage, -1d for each Major Disadvantage.",
   "BITD.RollNumberOfDice": "Number of Dice",
@@ -526,5 +545,10 @@
   "BITD.Add": "Add",
   "BITD.Cancel": "Cancel",
 
-  "BITD.ClockSettingDefaultTheme": "Default Clock Theme:"
+  "BITD.ClockSettingDefaultTheme": "Default Clock Theme:",
+  "BITD.ClockSettingDefaultThemeHint": "Clock theme for newly created clocks",
+  "BITD.AttributeXPBarSize": "XP Bar Size for Attributes:",
+  "BITD.AttributeXPBarSizeHint": "Number of boxes for character attribute XP bars",
+  "BITD.PlaybookXPBarSize": "XP Bar Size for Playbook:",
+  "BITD.PlaybookXPBarSizeHint": "Number of boxes for character playbook XP bar"
 }

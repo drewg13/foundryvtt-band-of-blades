@@ -39,3 +39,5 @@ v1.3.0  Add icons to post item descriptions to chat directly from actor sheets
 v1.4.0  Fix tooltip z-indexing for Trauma/Blight, remove hardcoded conditions for Trauma/Blight
 
 v1.4.1  Localize Trauma/Blight lists
+
+v1.4.2  Additional localization fixes and updates for V9p2

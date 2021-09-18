@@ -13,12 +13,41 @@ export const registerSystemSettings = function() {
   
   game.settings.register("band-of-blades", "defaultClockTheme", {
     name: "BITD.ClockSettingDefaultTheme",
+    hint: "BITD.ClockSettingDefaultThemeHint",
     scope: "world",
     config: true,
     type: Number,
     choices: game.system.bobclocks.themes,
 	  default: 0,
 	  icon: "fas fa-palette"
+  });
+
+  game.settings.register("band-of-blades", "defaultAttributeXPBarSize", {
+    name: "BITD.AttributeXPBarSize",
+    hint: "BITD.AttributeXPBarSizeHint",
+    scope: "world",
+    config: true,
+    type: Number,
+    range: {
+      min: 1,
+      max: 12,
+      step: 1
+    },
+    default: 6
+  });
+
+  game.settings.register("band-of-blades", "defaultPlaybookXPBarSize", {
+    name: "BITD.PlaybookXPBarSize",
+    hint: "BITD.PlaybookXPBarSizeHint",
+    scope: "world",
+    config: true,
+    type: Number,
+    range: {
+      min: 1,
+      max: 12,
+      step: 1
+    },
+    default: 8
   });
 
 };

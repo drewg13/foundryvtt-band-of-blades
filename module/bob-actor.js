@@ -23,6 +23,16 @@ export class BoBActor extends Actor {
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;
+        const playbookXP = game.settings.get( "band-of-blades", "defaultPlaybookXPBarSize" );
+        const attributeXP = game.settings.get( "band-of-blades", "defaultAttributeXPBarSize" );
+
+        if( playbookXP ) {
+          updateData['data.experienceMax'] = playbookXP;
+        }
+        if( attributeXP ) {
+          const attributes = Object.keys( game.system.model.Actor.character.attributes );
+          attributes.forEach( a => updateData['data.attributes.'+ a + '.expMax'] = attributeXP );
+        }
         break;
       }
       case "role": {

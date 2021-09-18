@@ -329,7 +329,7 @@
             </label>
             {{#multiboxes data.experience}}
               <input type="radio" id="character-{{actor._id}}-experience-0" name="data.experience" value="0" dtype="Radio">
-              {{#times_from_1 8}}
+              {{#times_from_1 data.experienceMax}}
                 <input type="radio" id="character-{{../actor._id}}-experience-{{this}}" name="data.experience" value="{{this}}" dtype="Radio">
                 <label for="character-{{../actor._id}}-experience-{{this}}"></label>
               {{/times_from_1}}
@@ -447,7 +447,7 @@
                 {{#multiboxes attribute.exp}}
                   <label for="{{../actor._id}}-{{attribute_name}}-exp-0">{{localize "BITD.AExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i></label>
                   <input type="radio" id="{{../actor._id}}-{{attribute_name}}-exp-0" name="data.attributes.{{attribute_name}}.exp" value="0" checked="checked">
-                  {{#times_from_1 6}}
+                  {{#times_from_1 attribute.expMax}}
                     <input type="radio" id="{{../../actor._id}}-{{attribute_name}}-exp-{{this}}" name="data.attributes.{{attribute_name}}.exp" value="{{this}}">
                     <label for="{{../../actor._id}}-{{attribute_name}}-exp-{{this}}"></label>
                   {{/times_from_1}}

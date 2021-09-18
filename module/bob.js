@@ -325,7 +325,11 @@ Hooks.on("renderSceneControls", (app, html) => {
   dice_roller.on( "click", async function() {
     await simpleRollPopup();
   })
-  html.append(dice_roller);
+  if( isNewerVersion( game.version, '9.220' ) ) {
+    html.children().first().append( dice_roller );
+  } else {
+    html.append( dice_roller );
+  }
 });
 
 //For Clocks UI

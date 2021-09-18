@@ -9,6 +9,7 @@
     "squad": "",
     "notes": "",
     "experience": "0",
+    "experienceMax": 8,
     "item_triggers": {
       "grenadier": 0,
       "chemist": 0,
@@ -75,6 +76,7 @@
     "attributes": {
       "insight": {
         "exp": "0",
+        "expMax": 6,
         "bonus": 0,
         "label": "BITD.SkillsInsight",
         "tip": "BITD.SkillsInsightTip",
@@ -101,6 +103,7 @@
       },
       "prowess": {
         "exp": "0",
+        "expMax": 6,
         "bonus": 0,
         "label": "BITD.SkillsProwess",
         "tip": "BITD.SkillsProwessTip",
@@ -133,6 +136,7 @@
       },
       "resolve": {
         "exp": "0",
+        "expMax": 6,
         "bonus": 0,
         "label": "BITD.SkillsResolve",
         "tip": "BITD.SkillsResolveTip",
@@ -165,6 +169,7 @@
       },
       "specialist": {
         "exp": "0",
+        "expMax": 6,
         "label": "BITD.SkillsSpecialist",
         "tip": "BITD.SkillsSpecialistTip",
         "skills": {
@@ -370,7 +375,7 @@
   }
 },
 "Item": {
-  "types": ["item", "class", "role", "chosen", "squad", "chosenAbility", "ability", "personnel", "materiel", "spies", "network", "heritage", "trait"],
+  "types": ["item", "class", "role", "chosen", "squad", "chosenability", "ability", "personnel", "materiel", "spies", "network", "heritage", "trait"],
   "templates": {
     "default": {
       "description": ""
@@ -435,7 +440,7 @@
     "templates": ["default", "activatedEffect"],
     "def_abilities": ""
   },
-  "chosenAbility": {
+  "chosenability": {
     "templates": ["default", "activatedEffect"],
     "class": ""
   },
