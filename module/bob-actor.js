@@ -289,7 +289,7 @@ export class BoBActor extends Actor {
         },
         no: {
           icon: "<i class='fas fa-times'></i>",
-          label: game.i18n.localize('Cancel'),
+          label: game.i18n.localize('BITD.Cancel'),
         },
       },
       default: "yes",
@@ -354,7 +354,7 @@ export class BoBActor extends Actor {
         },
         no: {
           icon: "<i class='fas fa-times'></i>",
-          label: game.i18n.localize('Cancel'),
+          label: game.i18n.localize('BITD.Cancel'),
         },
       },
       default: "yes",

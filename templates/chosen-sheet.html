@@ -114,13 +114,13 @@
         <div class="label-stripe">
           <p>
             <label>{{localize "BITD.Abilities"}}</label>
-            <a class="item-add-popup" data-item-type="chosenAbility" data-limiter=data.type><i class="fas fa-plus-square"></i></a>
+            <a class="item-add-popup" data-item-type="chosenability" data-limiter=data.type><i class="fas fa-plus-square"></i></a>
           </p>
         </div>
 
         <div id="abilities-list">
           {{#each actor.items as |item id|}}
-            {{#if (eq item.type "chosenAbility")}}
+            {{#if (eq item.type "chosenability")}}
               <div class="item flex-horizontal" data-item-id="{{item._id}}">
                 <div class="item-body flex-horizontal">
                   <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
@@ -132,7 +132,7 @@
               </div>
             {{/if}}
           {{/each}}
-          <div class="item-class-label"><a class="item-add-popup" data-item-type="chosenAbility">{{localize "BITD.AddAbility"}}</a></div>
+          <div class="item-class-label"><a class="item-add-popup" data-item-type="chosenability">{{localize "BITD.AddAbility"}}</a></div>
         </div>
       </div>
 

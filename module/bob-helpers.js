@@ -50,7 +50,7 @@ export class BoBHelpers {
     } else if( actor.data.type === "role" ) {
       item_type = "network";
     } else if( actor.data.type === "chosen" ) {
-      item_type = "chosenAbility";
+      item_type = "chosenability";
     } else {
       return
     }
