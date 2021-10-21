@@ -2,9 +2,9 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "minimumCoreVersion": "0.8.8",
-  "compatibleCoreVersion": "9.224",
+  "compatibleCoreVersion": "9.225",
   "templateVersion": 1,
   "authors": ["megastruktur", "Andrew Garinger [agaringer#6498]"],
   "esmodules": [
@@ -23,13 +23,14 @@
   ],
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v1.4.3.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v1.4.4.zip",
   "packs": [
     {
       "name": "class",
       "label": "Classes",
       "system": "band-of-blades",
       "path": "./packs/classes.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -37,6 +38,7 @@
       "label": "Roles",
       "system": "band-of-blades",
       "path": "./packs/roles.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -44,6 +46,7 @@
       "label": "Squads",
       "system": "band-of-blades",
       "path": "./packs/squads.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -51,6 +54,7 @@
       "label": "Heritages",
       "system": "band-of-blades",
       "path": "./packs/heritages.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -58,6 +62,7 @@
       "label": "Traits",
       "system": "band-of-blades",
       "path": "./packs/traits.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -65,6 +70,7 @@
       "label": "Items",
       "system": "band-of-blades",
       "path": "./packs/items.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -72,6 +78,7 @@
       "label": "Materiel",
       "system": "band-of-blades",
       "path": "./packs/materiel.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -79,6 +86,7 @@
       "label": "Personnel",
       "system": "band-of-blades",
       "path": "./packs/personnel.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -86,6 +94,7 @@
       "label": "Abilities",
       "system": "band-of-blades",
       "path": "./packs/abilities.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -93,6 +102,7 @@
       "label": "Chosen/Broken",
       "system": "band-of-blades",
       "path": "./packs/chosen.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -100,6 +110,7 @@
       "label": "Chosen/Broken Abilities",
       "system": "band-of-blades",
       "path": "./packs/chosenabilities.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -107,6 +118,7 @@
       "label": "Spies",
       "system": "band-of-blades",
       "path": "./packs/spies.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -114,6 +126,7 @@
       "label": "Spy Network",
       "system": "band-of-blades",
       "path": "./packs/network.db",
+      "type": "Item",
       "entity": "Item"
     },
     {
@@ -121,6 +134,7 @@
       "label": "Undead Armies",
       "system": "band-of-blades",
       "path": "./packs/minions.db",
+      "type": "Actor",
       "entity": "Actor"
     },
     {
@@ -128,6 +142,7 @@
       "label": "Mission Tables",
       "system": "band-of-blades",
       "path": "./packs/missions.db",
+      "type": "RollTable",
       "entity": "RollTable"
     }
   ]

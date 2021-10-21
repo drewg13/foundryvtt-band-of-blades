@@ -43,3 +43,5 @@ v1.4.1  Localize Trauma/Blight lists
 v1.4.2  Additional localization fixes and updates for V9p2
 
 v1.4.3  Fixed Chosen abilities broken by localization fixes
+
+v1.4.4  Missing Zora ability and updates for V9d1
