@@ -284,7 +284,7 @@ Hooks.once("init", function() {
     for (let i = 1; i <= parseInt(type); i++) {
       let checked = (parseInt(current_value) === i) ? 'checked="checked"' : '';
       html += `
-        <input type="radio" value="${i}" id="clock-${i}-${uniq_id}" name="${parameter_name}" ${checked}>
+        <input data-resource="clock" type="radio" value="${i}" id="clock-${i}-${uniq_id}" name="${parameter_name}" ${checked}>
         <label for="clock-${i}-${uniq_id}"></label>
       `;
     }
@@ -344,6 +344,55 @@ Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
     game.actors.get( m ).sheet.render(false);
   });
 
+});
+
+// Send Role resource changes to chat
+Hooks.on("preUpdateActor", (actor, data, options, userId) => {
+  if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) ) {
+    let item = Object.keys(data.data.resources)[0];
+    let actorName = actor.name;
+    let resource, newValue, oldValue;
+    switch ( item ) {
+      case "intel":
+        resource = game.i18n.localize("BITD.Intel");
+        newValue = data.data.resources[item];
+        oldValue = actor.data.data.resources[item];
+        break;
+      case "pressure":
+        resource = game.i18n.localize("BITD.Pressure");
+        newValue = data.data.resources[item];
+        oldValue = actor.data.data.resources[item];
+        break;
+      case "morale":
+        resource = game.i18n.localize("BITD.Morale");
+        newValue = data.data.resources[item];
+        oldValue = actor.data.data.resources[item];
+        break;
+      case "engagement":
+        resource = game.i18n.localize("BITD.Engagement");
+        newValue = data.data.resources[item];
+        oldValue = actor.data.data.resources[item];
+        break;
+      case "supply":
+        resource = game.i18n.localize("BITD.Supply");
+        newValue = data.data.resources[item].value;
+        oldValue = actor.data.data.resources[item].value;
+        break;
+      case "time":
+        resource = Object.keys( data.data.resources[item] )[0];
+        newValue = data.data.resources.time[resource].value;
+        oldValue = actor.data.data.resources.time[resource].value;
+        const result = resource.replace(/([A-Z 0-9])/g, " $1");
+        resource = result.charAt(0).toUpperCase() + result.slice(1);
+        break;
+      default:
+        console.log(item, newValue, oldValue);
+        break;
+    }
+    if ( item !== undefined && game.settings.get("band-of-blades", "logResourceToChat") ) {
+      BoBHelpers.chatNotify( actorName, resource, oldValue, newValue );
+    }
+  }
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {

@@ -550,5 +550,7 @@
   "BITD.AttributeXPBarSize": "XP Bar Size for Attributes:",
   "BITD.AttributeXPBarSizeHint": "Number of boxes for character attribute XP bars",
   "BITD.PlaybookXPBarSize": "XP Bar Size for Playbook:",
-  "BITD.PlaybookXPBarSizeHint": "Number of boxes for character playbook XP bar"
+  "BITD.PlaybookXPBarSizeHint": "Number of boxes for character playbook XP bar",
+  "BITD.LogResourceToChat": "Log Resources to Chat:",
+  "BITD.LogResourceToChatHint": "Log all changes to Ship Resources (Cred, Debt, Gambits) with a chat notification"
 }

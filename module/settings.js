@@ -10,7 +10,7 @@ export const registerSystemSettings = function() {
     type: Number,
     default: 0
   });
-  
+
   game.settings.register("band-of-blades", "defaultClockTheme", {
     name: "BITD.ClockSettingDefaultTheme",
     hint: "BITD.ClockSettingDefaultThemeHint",
@@ -50,4 +50,12 @@ export const registerSystemSettings = function() {
     default: 8
   });
 
+  game.settings.register("band-of-blades", "logResourceToChat", {
+    name: "BITD.LogResourceToChat",
+    hint: "BITD.LogResourceToChatHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true
+  });
 };

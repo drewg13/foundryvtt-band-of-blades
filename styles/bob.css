@@ -62,6 +62,24 @@
 * ul {
   list-style: none;
 }
+.resource-chat-notification table tr td.value {
+  font-weight: bold;
+  width: 25px;
+  text-align: center;
+}
+.resource-chat-notification table tr td.arrow {
+  width: 20px;
+  text-align: center;
+}
+.resource-chat-notification table tr td .small {
+  font-size: 10px;
+}
+.resource-chat-notification table tr td .green {
+  color: green;
+}
+.resource-chat-notification table tr td .red {
+  color: red;
+}
 * .role-sheet ul,
 * .chosen-sheet ul {
   list-style: outside;

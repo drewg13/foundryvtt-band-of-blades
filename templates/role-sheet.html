@@ -255,7 +255,7 @@
             <div class="flex-horizontal number-input">
               <button {{#if (eq data.resources.supply.value 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
               <input id="supply-{{actor._id}}" type="number" name="data.resources.supply.value" value="{{data.resources.supply.value}}">
-              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              <button {{#if (gteq data.resources.supply.value data.resources.supply.max)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
               <label for="supply-{{actor._id}}">{{{localize "BITD.SupplyDetail"}}}{{data.resources.supply.max}}{{{localize "BITD.SupplyDetail2"}}}</label>
             </div>
           </div>
