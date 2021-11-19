@@ -348,7 +348,7 @@ Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
 
 // Send Role resource changes to chat
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-  if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) ) {
+  if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) && ( Object.keys(data.data)[0] === "resources" )) {
     let item = Object.keys(data.data.resources)[0];
     let actorName = actor.name;
     let resource, newValue, oldValue;
