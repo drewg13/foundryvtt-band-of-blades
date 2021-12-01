@@ -830,8 +830,12 @@
                         <span>{{localize "BITD.Wounds"}}</span>
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}}">
+                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}} / {{str squaddie.data.stress.max}}">
                         <label for="stress-{{squaddie._id}}">{{localize "BITD.Stress"}}</label>
+                      </span>
+                      <span class="stress-boxes flex-horizontal">
+                        <input id="trauma-{{squaddie._id}}" type="text" disabled name="squaddie.data.trauma.value" value="{{squaddie.data.trauma.value}} / {{str squaddie.data.trauma.max}}">
+                        <label for="trauma-{{squaddie._id}}">{{localize "BITD.Trauma"}}</label>
                       </span>
                     </span>
                   </span>
@@ -868,8 +872,12 @@
                         <span>{{localize "BITD.Wounds"}}</span>
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}}">
+                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}} / {{str specialist.data.stress.max}}">
                         <label for="stress-{{specialist._id}}">{{localize "BITD.Stress"}}</label>
+                      </span>
+                      <span class="stress-boxes flex-horizontal">
+                        <input id="trauma-{{specialist._id}}" type="text" disabled name="specialist.data.trauma.value" value="{{specialist.data.trauma.value}} / {{str specialist.data.trauma.max}}">
+                        <label for="trauma-{{specialist._id}}">{{localize "BITD.Trauma"}}</label>
                       </span>
                     </span>
                   </span>

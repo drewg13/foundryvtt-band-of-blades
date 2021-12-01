@@ -14,7 +14,7 @@ export class BoBRoleSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/role-sheet.html",
-      width: 900,
+      width: 910,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "duties"}],
 	    scrollY: [".sheet"]

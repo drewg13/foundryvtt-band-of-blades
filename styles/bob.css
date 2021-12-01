@@ -1535,7 +1535,7 @@ input[type="checkbox"]:hover {
   margin-right: 5px;
 }
 * .role-sheet .item-body.flex-left input[type="text"] {
-  width: 25px;
+  width: 35px;
   text-align: center;
 }
 * .role-sheet .item-body.flex-left label {
