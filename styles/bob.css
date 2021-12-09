@@ -202,8 +202,8 @@ input[type="checkbox"]:hover {
   flex-direction: row;
   justify-content: space-between;
 }
-* .chosen-sheet .flex-horizontal {
-  justify-content: unset;
+* .tabs.flex-horizontal {
+  justify-content: space-around;
 }
 * .flex-vertical {
   display: flex;

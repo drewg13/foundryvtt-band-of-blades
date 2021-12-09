@@ -2,9 +2,9 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "minimumCoreVersion": "0.8.8",
-  "compatibleCoreVersion": "9.232",
+  "compatibleCoreVersion": "9.235",
   "templateVersion": 1,
   "authors": ["megastruktur", "Andrew Garinger [agaringer#6498]"],
   "esmodules": [
@@ -23,7 +23,7 @@
   ],
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v1.5.2.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v1.5.3.zip",
   "packs": [
     {
       "name": "class",

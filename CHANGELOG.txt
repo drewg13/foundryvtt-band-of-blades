@@ -53,3 +53,5 @@ v1.5.0  Report Role resource value changes to chat
 v1.5.1  Fix chat resource console errors
 
 v1.5.2  Minor improvements to Marshal role sheet
+
+v1.5.3  Fixes to tab spacing CSS
