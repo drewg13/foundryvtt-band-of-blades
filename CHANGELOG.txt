@@ -55,3 +55,5 @@ v1.5.1  Fix chat resource console errors
 v1.5.2  Minor improvements to Marshal role sheet
 
 v1.5.3  Fixes to tab spacing CSS
+
+v1.5.4  Localization fix, fix chat notify string -> int, fix console error on creation of item with usages

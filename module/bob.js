@@ -355,33 +355,33 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
     switch ( item ) {
       case "intel":
         resource = game.i18n.localize("BITD.Intel");
-        newValue = data.data.resources[item];
-        oldValue = actor.data.data.resources[item];
+        newValue = parseInt( data.data.resources[item] );
+        oldValue = parseInt( actor.data.data.resources[item] );
         break;
       case "pressure":
         resource = game.i18n.localize("BITD.Pressure");
-        newValue = data.data.resources[item];
-        oldValue = actor.data.data.resources[item];
+        newValue = parseInt( data.data.resources[item] );
+        oldValue = parseInt( actor.data.data.resources[item] );
         break;
       case "morale":
         resource = game.i18n.localize("BITD.Morale");
-        newValue = data.data.resources[item];
-        oldValue = actor.data.data.resources[item];
+        newValue = parseInt( data.data.resources[item] );
+        oldValue = parseInt( actor.data.data.resources[item] );
         break;
       case "engagement":
         resource = game.i18n.localize("BITD.Engagement");
-        newValue = data.data.resources[item];
-        oldValue = actor.data.data.resources[item];
+        newValue = parseInt( data.data.resources[item] );
+        oldValue = parseInt( actor.data.data.resources[item] );
         break;
       case "supply":
         resource = game.i18n.localize("BITD.Supply");
-        newValue = data.data.resources[item].value;
-        oldValue = actor.data.data.resources[item].value;
+        newValue = parseInt( data.data.resources[item].value );
+        oldValue = parseInt( actor.data.data.resources[item].value );
         break;
       case "time":
         resource = Object.keys( data.data.resources[item] )[0];
-        newValue = data.data.resources.time[resource].value;
-        oldValue = actor.data.data.resources.time[resource].value;
+        newValue = parseInt( data.data.resources.time[resource].value );
+        oldValue = parseInt( actor.data.data.resources.time[resource].value );
         const result = resource.replace(/([A-Z 0-9])/g, " $1");
         resource = result.charAt(0).toUpperCase() + result.slice(1);
         break;

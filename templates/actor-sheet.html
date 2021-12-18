@@ -381,7 +381,9 @@
                     {{#if (gt item.data.uses 0)}}
                       <div class="uses-select">
                         <span>{{localize "BITD.Uses"}}</span>
-                        <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                        {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                          <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                        {{/if}}
                       </div>
                     {{/if}}
                   </div>

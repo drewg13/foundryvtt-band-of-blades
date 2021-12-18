@@ -280,7 +280,7 @@ export class BoBHelpers {
     if( skills.indexOf( attribute_name ) !== -1 ) {
       attributeObj = game.system.model.Actor.character.attributes;
     } else {
-      return BoBHelpers.getProperCase( attribute_name );
+      return game.i18n.localize( "BITD." + BoBHelpers.getProperCase( attribute_name ) );
     }
 
     for( const a in attributeObj ) {
