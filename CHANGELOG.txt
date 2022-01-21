@@ -57,3 +57,6 @@ v1.5.2  Minor improvements to Marshal role sheet
 v1.5.3  Fixes to tab spacing CSS
 
 v1.5.4  Localization fix, fix chat notify string -> int, fix console error on creation of item with usages
+
+v1.5.5  Fix for localization of Fortune rolls
+

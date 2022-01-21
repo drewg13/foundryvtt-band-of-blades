@@ -44,7 +44,7 @@ export class BoBClock {
 
   get image () {
     return {
-      img: `/systems/band-of-blades/themes/${this.theme}/${this.size}clock_${this.progress}.svg`,
+      img: `systems/band-of-blades/themes/${this.theme}/${this.size}clock_${this.progress}.svg`,
       widthTile: 200,
       heightTile: 200,
 	    widthSheet: 350,

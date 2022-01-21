@@ -30,7 +30,12 @@ export async function bobRoll( dice_amount, attribute_name = "", position = "ris
 async function showChatRollMessage(r, zeromode, attribute_name = "", position = "", effect = "") {
 
   let speaker = ChatMessage.getSpeaker();
-  let attribute_label = BoBHelpers.getAttributeLabel(attribute_name);
+  let attribute_label;
+  if ( attribute_name === "fortune" ){
+    attribute_label = game.i18n.localize( "BITD.Fortune" );
+  } else {
+    attribute_label = BoBHelpers.getAttributeLabel( attribute_name );
+  }
   let rolls = (r.terms)[0].results;
 
   // Retrieve Roll status.
@@ -42,7 +47,7 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
   let vice_result = 0;
 
 
-  if ( attribute_name === "Fortune!" ) {
+  if ( attribute_name === "fortune" ) {
 	  roll_status = getFortuneRollStatus(rolls, zeromode);
   } else if ( resistance_rolls.includes( attribute_name ) ) {
 	  [ roll_status, stress_result ] = getResistRollStatus(rolls, zeromode);
@@ -375,7 +380,7 @@ export async function simpleRollPopup() {
         label: game.i18n.localize('BITD.Roll'),
         callback: async (html) => {
           let diceQty = html.find('[name="qty"]')[0].value;
-          await bobRoll(parseInt(diceQty), game.i18n.localize("BITD.Fortune"), "", "");
+          await bobRoll(parseInt(diceQty), "fortune", "", "");
         },
       },
       no: {
