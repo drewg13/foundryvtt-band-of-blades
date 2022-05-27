@@ -123,6 +123,7 @@
         {{/if}}
         {{#if (eq actor.data.type "Quartermaster")}}
           <a class="item" data-tab="personnel">{{localize "BITD.PersonnelShort"}}</a>
+          <a class="item" data-tab="projects">{{localize "BITD.ProjectsShort"}}</a>
           <a class="item" data-tab="actions">{{localize "BITD.Actions"}}</a>
         {{/if}}
         <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
@@ -270,7 +271,8 @@
           </div>
           <div id="materiel-list">
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.FoodStores"}}  &mdash;  {{localize "BITD.FoodStoresLabel"}}</p>
+              <p>{{localize "BITD.FoodStores"}}  &mdash;  {{localize "BITD.FoodStoresLabel"}}
+              <a class="materiel-add" data-mtype="Food Stores"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div>{{localize "BITD.MaterielDetail"}}</div>
             <div class="container flex-flow">
@@ -299,7 +301,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.BlackShot"}}  &mdash;  {{localize "BITD.BlackShotLabel"}}</p>
+              <p>{{localize "BITD.BlackShot"}}  &mdash;  {{localize "BITD.BlackShotLabel"}}
+              <a class="materiel-add" data-mtype="Black Shot"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex-flow">
               {{#each actor.items as |item id|}}
@@ -327,7 +330,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.Horses"}}  &mdash;  {{localize "BITD.HorsesLabel"}}</p>
+              <p>{{localize "BITD.Horses"}}  &mdash;  {{localize "BITD.HorsesLabel"}}
+              <a class="materiel-add" data-mtype="Horses"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex-flow">
               {{#each actor.items as |item id|}}
@@ -355,7 +359,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.ReligiousSupplies"}}  &mdash;  {{localize "BITD.ReligiousSuppliesLabel"}}</p>
+              <p>{{localize "BITD.ReligiousSupplies"}}  &mdash;  {{localize "BITD.ReligiousSuppliesLabel"}}
+              <a class="materiel-add" data-mtype="Religious Supplies"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex-flow">
               {{#each actor.items as |item id|}}
@@ -383,7 +388,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.SiegeWeapons"}}  &mdash;  {{localize "BITD.SiegeWeaponsLabel"}}</p>
+              <p>{{localize "BITD.SiegeWeapons"}}  &mdash;  {{localize "BITD.SiegeWeaponsLabel"}}
+              <a class="materiel-add" data-mtype="Siege Weapons"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex">
               {{#each actor.items as |item id|}}
@@ -411,7 +417,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.SupplyCart"}}  &mdash;  {{localize "BITD.SupplyCartLabel"}}</p>
+              <p>{{localize "BITD.SupplyCart"}}  &mdash;  {{localize "BITD.SupplyCartLabel"}}
+              <a class="materiel-add" data-mtype="Supply Cart"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex">
               {{#each actor.items as |item id|}}
@@ -499,7 +506,8 @@
           </div>
           <div id="personnel-list">
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}</p>
+              <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}
+              <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex-horizontal">
               {{#each actor.items as |item id|}}
@@ -526,7 +534,10 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p><span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}</p>
+              <p>
+                <span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}
+                <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
+              </p>
             </div>
             <div class="container flex-horizontal">
               {{#each actor.items as |item id|}}
@@ -554,7 +565,8 @@
             </div>
 
             <div class="label-stripe-gray">
-              <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}</p>
+              <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}
+                <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a></p>
             </div>
             <div class="container flex-horizontal">
               {{#each actor.items as |item id|}}
@@ -577,6 +589,162 @@
 
             <div class="item-class-label"><a class="item-add-popup" data-item-type="personnel">{{localize "BITD.AddItem"}}</a></div>
           </div>
+      </div>
+
+      <div id="projects" class="tab flex-vertical" data-tab="projects">
+        <div class="label-stripe">
+          <p><label>{{localize "BITD.Projects"}}</label>{{localize "BITD.ProjectsLabel"}}</p>
+        </div>
+        <div id="project-list" class="list">
+          <div id="project-clocks" class="flex-vertical">
+            <div>{{{localize "BITD.Actions3Detail"}}}</div>
+            <div class="flex-vertical">
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock1.name" value="{{data.resources.projects.clock1.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock1.description">{{data.resources.projects.clock1.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock1.value" data.resources.projects.clock1.type data.resources.projects.clock1.value (concat actor._id "-clock1-project") data.resources.projects.clock1.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock1.type">
+                        {{{data.size_list.clock1}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock1.color">
+                        {{{data.color_list.clock1}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock2.name" value="{{data.resources.projects.clock2.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock2.description">{{data.resources.projects.clock2.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock2.value" data.resources.projects.clock2.type data.resources.projects.clock2.value (concat actor._id "-clock2-project") data.resources.projects.clock2.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock2.type">
+                        {{{data.size_list.clock2}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock2.color">
+                        {{{data.color_list.clock2}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock3.name" value="{{data.resources.projects.clock3.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock3.description">{{data.resources.projects.clock3.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock3.value" data.resources.projects.clock3.type data.resources.projects.clock3.value (concat actor._id "-clock3-project") data.resources.projects.clock3.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock3.type">
+                        {{{data.size_list.clock3}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock3.color">
+                        {{{data.color_list.clock3}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock4.name" value="{{data.resources.projects.clock4.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock4.description">{{data.resources.projects.clock4.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock4.value" data.resources.projects.clock4.type data.resources.projects.clock4.value (concat actor._id "-clock4-project") data.resources.projects.clock4.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock4.type">
+                        {{{data.size_list.clock4}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock4.color">
+                        {{{data.color_list.clock4}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock5.name" value="{{data.resources.projects.clock5.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock5.description">{{data.resources.projects.clock5.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock5.value" data.resources.projects.clock5.type data.resources.projects.clock5.value (concat actor._id "-clock5-project") data.resources.projects.clock5.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock5.type">
+                        {{{data.size_list.clock5}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock5.color">
+                        {{{data.color_list.clock5}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="label-stripe-gray">
+                <p><input type="text" name="data.resources.projects.clock6.name" value="{{data.resources.projects.clock6.name}}"></p>
+              </div>
+              <div class="flexrow">
+                <div class="flex3"><textarea name="data.resources.projects.clock6.description">{{data.resources.projects.clock6.description}}</textarea></div>
+                <div class="project-clock">
+                  <div class="flex1">
+                    {{{bob-clock "data.resources.projects.clock6.value" data.resources.projects.clock6.type data.resources.projects.clock6.value (concat actor._id "-clock6-project") data.resources.projects.clock6.color }}}
+                  </div>
+                  <div class="clock-options">
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock6.type">
+                        {{{data.size_list.clock6}}}
+                      </select>
+                    </div>
+                    <div class="hp-clock">
+                      <select name="data.resources.projects.clock6.color">
+                        {{{data.color_list.clock6}}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div id="annals" class="tab flex-vertical" data-tab="annals">

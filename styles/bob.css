@@ -284,6 +284,26 @@ input[type="checkbox"]:hover {
 * .role-sheet .label-stripe a {
   margin-right: 20px;
 }
+* .role-sheet .clock-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+* .role-sheet .label-stripe-gray input[type="text"] {
+  border: unset;
+  background: unset;
+  font-family: 'Vollkorn', 'Signika', serif;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+* .role-sheet #project-clocks textarea {
+  min-height: 80px;
+}
+* .role-sheet .project-clock {
+  display: flex;
+  justify-content: flex-end;
+}
 * .label-stripe .hoverlink {
   cursor: pointer;
   transition: filter 0.1s;

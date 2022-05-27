@@ -351,7 +351,7 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
   if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) && ( Object.keys(data.data)[0] === "resources" )) {
     let item = Object.keys(data.data.resources)[0];
     let actorName = actor.name;
-    let resource, newValue, oldValue;
+    let resource, newValue, oldValue, result;
     switch ( item ) {
       case "intel":
         resource = game.i18n.localize("BITD.Intel");
@@ -382,8 +382,15 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         resource = Object.keys( data.data.resources[item] )[0];
         newValue = parseInt( data.data.resources.time[resource].value );
         oldValue = parseInt( actor.data.data.resources.time[resource].value );
-        const result = resource.replace(/([A-Z 0-9])/g, " $1");
+        result = resource.replace(/([A-Z 0-9])/g, " $1");
         resource = result.charAt(0).toUpperCase() + result.slice(1);
+        break;
+      case "projects":
+        resource = Object.keys( data.data.resources[item] )[0];
+        newValue = parseInt( data.data.resources.projects[resource].value );
+        oldValue = parseInt( actor.data.data.resources.projects[resource].value );
+        result = resource.replace(/([A-Z 0-9])/g, " $1");
+        resource = "Project " + result.charAt(0).toUpperCase() + result.slice(1);
         break;
       default:
         console.log(item, newValue, oldValue);

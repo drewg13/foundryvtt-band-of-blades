@@ -116,6 +116,10 @@
   "BITD.PersonnelShort": "Personnel",
   "BITD.PersonnelLabel": "Skilled personnel to keep the Legion operational",
 
+  "BITD.Projects": "Long-Term Projects",
+  "BITD.ProjectsShort": "Projects",
+  "BITD.ProjectsLabel": "Major improvements that take time and resources",
+
   "BITD.Actions": "Actions",
   "BITD.ActionsDetail": "After missions, perform campaign actions based on morale (ask the Marshal). Take additional campaign actions by spending supply one-for-one. Spend a supply to boost an action in addition to any other costs. You can do each action once per campaign phase (except acquire assets and long-term projects).",
   "BITD.CampaignActions": "Campaign Actions",
@@ -203,8 +207,9 @@
   "BITD.CampMorale17": "A hungry squad that resorted to foraging becomes badly ill.",
   "BITD.CampMorale18": "A deserter is caught before they can leave. Judgment must be passed.",
 
+  "BITD.Mission": "Mission",
   "BITD.Missions": "Missions",
-  "BITD.MissionHelp": "Roll 1d for Trained spies (Add 1d for Masters). Advance the mission clock according to the following results. 1-3: 1 tick and the spy is <strong>Wounded</strong>. 4/5: 2 ticks. 6: 3 ticks. Crit: 5 ticks. ",
+  "BITD.MissionHelp": "Roll 1d for Trained spies (Add 1d for Masters).<br>Advance the mission clock according to the following results.<br>1-3: 1 tick and the spy is <strong>Wounded</strong>.<br>4/5: 2 ticks.<br>6: 3 ticks.<br>Crit: 5 ticks.",
   "BITD.SMissions": "Simple Assignments",
   "BITD.SMissionsLabel": "Low-risk missions with minor benefits",
   "BITD.SMissionsDetail": "During campaign actions, you can assign spies to simple assignments. Spies on simple assignment cannot undertake long-term assignments.<ul><li><strong>Recover:</strong> The spy heals and recuperates. Remove their wounded condition.</li><li><strong>Interrogate</strong> Ask the Commander for the intel questions list. Your spy is sent on a mission and can answer one question from any list (regardless of the Commander’s intel total) whenever missions are presented by the GM.</li><li><strong>Blackmail:</strong> Spy bribes or threatens as needed. Add +1d to an acquire assets roll.</li><li><strong>Help:</strong> Spy bribes or threatens as needed. Add +1d to a long-term project roll.</li></ul>",

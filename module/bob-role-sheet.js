@@ -154,6 +154,20 @@ export class BoBRoleSheet extends BoBSheet {
       item.sheet.render(true);
     });
 
+    html.find('.materiel-add').click( async (ev) => {
+      const itemType = $(ev.currentTarget).data("mtype");
+      let mItems = await BoBHelpers.getAllItemsByType( "materiel", game );
+      let item = mItems.find( i => i.name === itemType );
+      await this.actor.createEmbeddedDocuments( "Item", [ item ] );
+    });
+
+    html.find('.personnel-add').click( async (ev) => {
+      const itemType = $(ev.currentTarget).data("mtype");
+      let mItems = await BoBHelpers.getAllItemsByType( "personnel", game );
+      let item = mItems.find( i => i.name === itemType );
+      await this.actor.createEmbeddedDocuments( "Item", [ item ] );
+    });
+
     // Update Actor
     html.find('.actor-name').click( ev => {
       const element = $(ev.currentTarget).parents(".item");

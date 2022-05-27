@@ -94,6 +94,16 @@ export class BoBActor extends Actor {
       if( data.hpClock.type === 0 ){ data.hpClock.type = 4 }
       data.size_list = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.hpClock.type, parseInt( data.hpClock.type ) );
     }
+
+    if ( actorData.type === "role" && actorData.data.type === "Quartermaster" ) {
+      data.size_list = {};
+      data.color_list = {};
+      for( let i = 1; i <= 6; i++ ) {
+        let clock = "clock" + i.toString();
+        data.size_list[clock] = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.resources.projects[clock].type, parseInt( data.resources.projects[clock].type ) );
+        data.color_list[clock] = BoBHelpers.createListOfClockColors( game.system.bobclocks.themes, data.resources.projects[clock].color, data.resources.projects[clock].color );
+      }
+    }
   }
 
   /* -------------------------------------------- */

@@ -308,7 +308,6 @@ export class BoBHelpers {
    *  html-formatted option string
    */
   static createListOfClockSizes( sizes, default_size, current_size ) {
-
     let text = ``;
 
     sizes.forEach( size => {
@@ -320,6 +319,37 @@ export class BoBHelpers {
       }
 
       text += `>${ size }</option>`;
+    } );
+
+    return text;
+
+  }
+
+  /**
+   * Creates options for faction clocks.
+   *
+   * @param {int[]} colors
+   *  array of possible clock colors
+   * @param {int} default_color
+   *  default clock color
+   * @param {int} current_color
+   *  current clock color
+   * @returns {string}
+   *  html-formatted option string
+   */
+  static createListOfClockColors( colors, default_color, current_color ) {
+
+    let text = ``;
+
+    colors.forEach( color => {
+      text += `<option value="${ color }"`;
+      if( !( current_color ) && ( color === default_color ) ) {
+        text += ` selected`;
+      } else if( color === current_color ) {
+        text += ` selected`;
+      }
+
+      text += `>${ color }</option>`;
     } );
 
     return text;

@@ -316,6 +316,50 @@
           "value": "0"
         }
       },
+      "projects": {
+        "clock1": {
+          "name": "Project 1",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        },
+        "clock2": {
+          "name": "Project 2",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        },
+        "clock3": {
+          "name": "Project 3",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        },
+        "clock4": {
+          "name": "Project 4",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        },
+        "clock5": {
+          "name": "Project 5",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        },
+        "clock6": {
+          "name": "Project 6",
+          "description": "",
+          "type": 8,
+          "color": "red",
+          "value": "0"
+        }
+      },
       "supply": {
         "value": 0,
         "max": 3,

@@ -61,3 +61,5 @@ v1.5.4  Localization fix, fix chat notify string -> int, fix console error on cr
 v1.5.5  Fix for localization of Fortune rolls
 
 v1.6.0  Remove restrictions on Specialist XP, Add UI for adding Specialist actions, fix issue with custom character art blocking class changes, add support for Zero and Extreme Effect, implement Anointed Chosen ability
+
+v1.7.0  Add simpler way to add Materiel/Personnel to Quartermaster sheet; Add Projects tab to QM sheet
