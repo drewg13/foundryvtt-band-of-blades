@@ -68,6 +68,15 @@
   </div>
   {{/if}}
 
+  {{#if (eq roll_status "extreme")}}
+    <div class="die {{roll_status}}">{{localize "BITD.RollExtremeEffect"}}</div>
+    <div class="description">
+      <p>
+        {{{localize "BITD.RollExtremeEffectDescription"}}}
+      </p>
+    </div>
+  {{/if}}
+
   {{#if (eq roll_status "great")}}
   <div class="die {{roll_status}}">{{localize "BITD.RollGreatEffect"}}</div>
   <div class="description">
@@ -95,11 +104,11 @@
   </div>
   {{/if}}
 
-  {{#if (eq roll_status "poor")}}
-  <div class="die {{roll_status}}">{{localize "BITD.RollPoorEffect"}}</div>
+  {{#if (eq roll_status "zero")}}
+  <div class="die {{roll_status}}">{{localize "BITD.RollZeroEffect"}}</div>
   <div class="description">
     <p>
-      {{{localize "BITD.RollPoorEffectDescription"}}}
+      {{{localize "BITD.RollZeroEffectDescription"}}}
     </p>
   </div>
   {{/if}}

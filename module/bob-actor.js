@@ -248,9 +248,11 @@ export class BoBActor extends Actor {
             <div class="form-group roll effect">
               <label>${game.i18n.localize('BITD.Effect')}:</label>
               <select id="fx" name="fx">
+                <option value="zero">${game.i18n.localize('BITD.EffectZero')}</option>
                 <option value="limited">${game.i18n.localize('BITD.EffectLimited')}</option>
                 <option value="standard" selected>${game.i18n.localize('BITD.EffectStandard')}</option>
                 <option value="great">${game.i18n.localize('BITD.EffectGreat')}</option>
+                <option value="extreme">${game.i18n.localize('BITD.EffectExtreme')}</option>
               </select>
             </div>
             <div class="form-group roll base-dice">
@@ -446,10 +448,10 @@ export class BoBActor extends Actor {
   }
 
   /* -------------------------------------------- */
-  
+
   /**
    * Change dice total on display
-   * @param {*} event 
+   * @param {*} event
    */
   async _onDiceModChange( event ) {
     let mod = this.value;

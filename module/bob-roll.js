@@ -89,11 +89,17 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
 
   let effect_localize;
   switch (effect) {
+    case 'zero':
+      effect_localize = 'BITD.EffectZero'
+      break;
     case 'limited':
       effect_localize = 'BITD.EffectLimited'
       break;
     case 'great':
       effect_localize = 'BITD.EffectGreat'
+      break;
+    case 'extreme':
+      effect_localize = 'BITD.EffectExtreme'
       break;
     case 'standard':
     default:
@@ -175,7 +181,7 @@ export function getFortuneRollStatus(rolls, zeromode = false) {
 
   // 1,2,3 = failure
   if (use_die <= 3) {
-    roll_status = "poor";
+    roll_status = "zero";
   } else if (use_die === 6) {
     // 6,6 - critical success
     if (prev_use_die && prev_use_die === 6) {

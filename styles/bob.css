@@ -1162,6 +1162,9 @@ input[type="checkbox"]:hover {
   font-size: large;
   margin-top: 10px;
 }
+* .bob-die-tooltip .die.extreme {
+  color: #f7f20d;
+}
 * .bob-die-tooltip .die.great,
 * .bob-die-tooltip .die.fast,
 * .bob-die-tooltip .die.engCrit,
@@ -1191,7 +1194,7 @@ input[type="checkbox"]:hover {
 * .bob-die-tooltip .die.engFail,
 * .bob-die-tooltip .die.alcFail,
 * .bob-die-tooltip .die.misFail,
-* .bob-die-tooltip .die.poor,
+* .bob-die-tooltip .die.zero,
 * .bob-die-tooltip .die.failure {
   color: red;
 }
