@@ -38,29 +38,29 @@ export class BoBItem extends Item {
               "token.img": icon
             }
           );
+        }
 
-          if( data.type === "class" ) {
+        if( data.type === "class" ) {
 
-            // adds specialist skill, if character has specialist class (non-Rookie)
-            const skill = data.data.skill;
-            const skillData = actor.data.data.attributes;
+          // adds specialist skill, if character has specialist class (non-Rookie)
+          const skill = data.data.skill;
+          const skillData = actor.data.data.attributes;
 
-            if( skill ) {
-              const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
-              const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
-              foundry.utils.mergeObject(
-                update,
-                { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
-              );
-            }
+          if( skill ) {
+            const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
+            const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
+            foundry.utils.mergeObject(
+              update,
+              { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
+            );
+          }
 
-            //remove all load items on class change
-            const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
-            if( removeLoadItems.length !== 0 ) {
-              for await( let item of removeLoadItems ) {
-                item = actor.items.get( item );
-                await item.delete();
-              }
+          //remove all load items on class change
+          const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
+          if( removeLoadItems.length !== 0 ) {
+            for await( let item of removeLoadItems ) {
+              item = actor.items.get( item );
+              await item.delete();
             }
           }
         }

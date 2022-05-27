@@ -95,7 +95,6 @@ export class BoBActorSheet extends BoBSheet {
       let html = `<div id="items-to-add">`;
 
       for( let e in skills ){
-        console.log(skills[e]);
         html += `<input id="select-item-${e}" type="radio" name="select_items" value="${e}">`;
         html += `<label class="flex-horizontal" for="select-item-${e}">`;
         html += `${game.i18n.localize(skills[e].label)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(skills[e].tip)}</span></i>`;
@@ -170,7 +169,6 @@ export class BoBActorSheet extends BoBSheet {
       await this.actor.update( { 'data.attributes.specialist.skills': { [items_to_add]: { value: '1', max: 3 } } } );
     }
 
-    console.log(el);
   }
 
 }
