@@ -41,19 +41,37 @@
     <div id="character-traits" class="flex-vertical">
       {{#if (eq actor.data.type "Chosen")}}
 
-        <div class="item-block flexrow">
-          <div class="item-class-label">{{localize "BITD.ChosenFavorType"}}</div>
-          <div class="attributes-container">
-            <div class="attribute-stats">
-              <input type="radio" id="favorType-{{actor._id}}-1" name="data.traits.favorType" value="1" {{checked (eq data.traits.favorType "1")}}>
-              <label for="favorType-{{actor._id}}-1"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[0]}}</span>
-              <input type="radio" id="favorType-{{actor._id}}-2" name="data.traits.favorType" value="2" {{checked (eq data.traits.favorType "2")}}>
-              <label for="favorType-{{actor._id}}-2"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[1]}}</span>
-              <input type="radio" id="favorType-{{actor._id}}-3" name="data.traits.favorType" value="3" {{checked (eq data.traits.favorType "3")}}>
-              <label for="favorType-{{actor._id}}-3"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[2]}}</span>
+        {{#unless (gt actor.data.anointed 0)}}
+          <div class="item-block flexrow">
+            <div class="item-class-label">{{localize "BITD.ChosenFavorType"}}</div>
+            <div class="attributes-container">
+              <div class="attribute-stats">
+                <input type="radio" id="favorType-{{actor._id}}-1" name="data.traits.favorType" value="1" {{checked (eq data.traits.favorType "1")}}>
+                <label for="favorType-{{actor._id}}-1"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[0]}}</span>
+                <input type="radio" id="favorType-{{actor._id}}-2" name="data.traits.favorType" value="2" {{checked (eq data.traits.favorType "2")}}>
+                <label for="favorType-{{actor._id}}-2"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[1]}}</span>
+                <input type="radio" id="favorType-{{actor._id}}-3" name="data.traits.favorType" value="3" {{checked (eq data.traits.favorType "3")}}>
+                <label for="favorType-{{actor._id}}-3"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[2]}}</span>
+              </div>
             </div>
           </div>
-        </div>
+        {{/unless}}
+
+        {{#if (gt actor.data.anointed 0)}}
+          <div class="item-block flexrow">
+            <div class="item-class-label">{{localize "BITD.ChosenFavorTypes"}}:</div>
+            <div class="attributes-container">
+              <div class="attribute-stats">
+                <input type="checkbox" id="favorType-{{actor._id}}-1" name="data.traits.favorType" value="1" {{checked}}>
+                <label for="favorType-{{actor._id}}-1"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[0]}}</span>
+                <input type="checkbox" id="favorType-{{actor._id}}-2" name="data.traits.favorType" value="2" {{checked}}>
+                <label for="favorType-{{actor._id}}-2"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[1]}}</span>
+                <input type="checkbox" id="favorType-{{actor._id}}-3" name="data.traits.favorType" value="3" {{checked}}>
+                <label for="favorType-{{actor._id}}-3"></label><span class="trait-label flex1">{{actor.data.favorTypes.0.[2]}}</span>
+              </div>
+            </div>
+          </div>
+        {{/if}}
 
         <div class="item-block flexrow">
           <div class="item-class-label">{{localize "BITD.ChosenFeatures"}}</div>
