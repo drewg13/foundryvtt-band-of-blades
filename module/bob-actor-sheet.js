@@ -13,7 +13,7 @@ export class BoBActorSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/actor-sheet.html",
-      width: 740,
+      width: 770,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
 	    scrollY: [".sheet"],
@@ -24,8 +24,8 @@ export class BoBActorSheet extends BoBSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  getData( options ) {
+    const data = super.getData( options );
     data.isGM = game.user.isGM;
     data.editable = data.options.editable;
     const actorData = this.actor.data.toObject(false);
@@ -89,6 +89,49 @@ export class BoBActorSheet extends BoBSheet {
 	    element.slideUp(200, () => this.render(false));
 	  });
 
+    // Add Specialist Actions
+    html.find('.skill-add-popup').click( async (ev) => {
+      const skills = foundry.utils.deepClone( this.actor.data.data.attributes.specialist.skills );
+      let html = `<div id="items-to-add">`;
+
+      for( let e in skills ){
+        console.log(skills[e]);
+        html += `<input id="select-item-${e}" type="radio" name="select_items" value="${e}">`;
+        html += `<label class="flex-horizontal" for="select-item-${e}">`;
+        html += `${game.i18n.localize(skills[e].label)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(skills[e].tip)}</span></i>`;
+        html += `</label>`;
+      }
+
+      html += `</div>`;
+
+      let options = {
+        width: "300"
+      }
+      let perms = this.actor.permission;
+
+      if ( perms >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+        let dialog = new Dialog({
+          title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.SkillsSpecialist' )} ${game.i18n.localize('BITD.Actions' )}`,
+          content: html,
+          buttons: {
+            one: {
+              icon: '<i class="fas fa-check"></i>',
+              label: game.i18n.localize('BITD.Add'),
+              callback: async () => await this.addSkillsToSheet($(document).find("#items-to-add"))
+            },
+            two: {
+              icon: '<i class="fas fa-times"></i>',
+              label: game.i18n.localize('BITD.Cancel'),
+              callback: () => false
+            }
+          },
+          default: "two"
+        }, options);
+
+        dialog.render(true);
+      }
+    });
+
     // manage active effects
     html.find(".effect-control").click(ev => onManageActiveEffect(ev, this.actor));
 	}
@@ -113,6 +156,21 @@ export class BoBActorSheet extends BoBSheet {
 
     // Set data transfer
     event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
+  }
+
+  /* -------------------------------------------- */
+
+  async addSkillsToSheet(el) {
+    let items_to_add = [];
+
+    el.find("input:checked").each(function() {
+      items_to_add.push( $(this).val() );
+    });
+    if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
+      await this.actor.update( { 'data.attributes.specialist.skills': { [items_to_add]: { value: '1', max: 3 } } } );
+    }
+
+    console.log(el);
   }
 
 }

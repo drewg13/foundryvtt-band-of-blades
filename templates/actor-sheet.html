@@ -503,11 +503,14 @@
         {{/unless}}
 
         {{#if (eq attribute_name "specialist")}}
-          {{#if (gt ../data.item_triggers.specialist 0)}}
             <div id="attributes-{{attribute_name}}" class="attribute">
               <div id="attributes-{{attribute_name}}-title" class="attributes-exp">
                 <div class="stripe">
-                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">{{localize (concat attribute.label 'Short')}}<span class="tooltiptext top">{{{localize attribute.tip}}}</span></span>
+                  <span class="attribute-label tooltip" data-roll-attribute="{{attribute_name}}">
+                    {{localize (concat attribute.label 'Short')}}
+                    <span class="tooltiptext top">{{{localize attribute.tip}}}</span>
+                  </span>
+                  <a class="skill-add-popup"><i class="fas fa-plus-square"></i></a>
                 </div>
                 <div class="stripe-tooth-body-blue">
                   {{#multiboxes attribute.exp}}
@@ -546,7 +549,6 @@
                 {{/unless}}
               {{/each}}
             </div>
-          {{/if}}
         {{/if}}
       {{/each}}
     </div>

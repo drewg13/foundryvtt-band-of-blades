@@ -791,7 +791,7 @@ input[type="checkbox"]:hover {
 * #attributes {
   display: flex;
   flex-direction: column;
-  width: 245px;
+  width: 265px;
 }
 * #attributes .stripe {
   background-color: #191813;
@@ -807,7 +807,6 @@ input[type="checkbox"]:hover {
 * #attributes .attribute-label,
 * #attributes .attribute-skill-label {
   text-transform: uppercase;
-  margin-right: 10px;
   letter-spacing: 1px;
 }
 * #attributes .attribute-skill-label {

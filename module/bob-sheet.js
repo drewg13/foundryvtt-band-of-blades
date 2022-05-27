@@ -161,7 +161,7 @@ export class BoBSheet extends ActorSheet {
     let html = `<div id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
     let options = {};
 
-    if( ( removeItems.length !== 0 ) && ( this.actor.permission >= CONST.ENTITY_PERMISSIONS.OWNER ) ) {
+    if( ( removeItems.length !== 0 ) && ( this.actor.isOwner ) ) {
         let dialog = new Dialog( {
           title: `${ game.i18n.localize( 'BITD.DeleteAllLoadout' ) }`,
           content: html,
@@ -169,7 +169,7 @@ export class BoBSheet extends ActorSheet {
             one: {
               icon: '<i class="fas fa-check"></i>',
               label: game.i18n.localize( 'BITD.Delete' ),
-              callback: async () => await this.deleteItems( removeItems )
+              callback: async () => await this.actor.deleteEmbeddedDocuments("Item", removeItems )
             },
             two: {
               icon: '<i class="fas fa-times"></i>',
@@ -210,9 +210,8 @@ _onFlagAddClick(event) {
   let options = {
     // width: "500"
   }
-	let perms = this.actor.permission;
 
-	if ( perms >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+	if ( this.actor.isOwner ) {
     let dialog = new Dialog({
       title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.' + BoBHelpers.getProperCase(item_type) )}`,
       content: html,
@@ -350,14 +349,5 @@ _onFlagAddClick(event) {
 	  }
 
     await Item.updateDocuments([update], {parent: this.document});
-  }
-
-/* -------------------------------------------- */
-
-  async deleteItems( itemList ) {
-    for await( let item of itemList ) {
-      item = this.actor.items.get( item );
-      await item.delete();
-    }
   }
 }
