@@ -10,7 +10,7 @@ export class BoBActor extends Actor {
   /** @override */
   async _preCreate(createData, options, user) {
     await super._preCreate(createData, options, user);
-
+    if( createData.img || createData.token ){ return }
     // add token default settings
     const theme = game.system.bobclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
     const updateData = {};

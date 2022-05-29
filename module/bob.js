@@ -350,6 +350,7 @@ Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
   if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) && ( Object.keys(data.data)[0] === "resources" )) {
     let item = Object.keys(data.data.resources)[0];
+    let subItem = Object.keys(Object.values(Object.entries(data.data.resources)[0][1])[0])[0];
     let actorName = actor.name;
     let resource, newValue, oldValue, result;
     switch ( item ) {
@@ -386,11 +387,11 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         resource = result.charAt(0).toUpperCase() + result.slice(1);
         break;
       case "projects":
+        if( subItem !== "value" ){ return }
         resource = Object.keys( data.data.resources[item] )[0];
         newValue = parseInt( data.data.resources.projects[resource].value );
         oldValue = parseInt( actor.data.data.resources.projects[resource].value );
-        result = resource.replace(/([A-Z 0-9])/g, " $1");
-        resource = "Project " + result.charAt(0).toUpperCase() + result.slice(1);
+        resource = actor.data.data.resources.projects[resource].name + " Project Clock";
         break;
       default:
         console.log(item, newValue, oldValue);
