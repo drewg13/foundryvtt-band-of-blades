@@ -103,7 +103,7 @@ export class BoBSheet extends ActorSheet {
           ( e.name === "Spy Network" ) ) ) {
           html += `<input id="select-item-${ e._id }" type="${ input_type }" name="select_items" value="${ e._id }">`;
           html += `<label class="flex-horizontal" for="select-item-${ e._id }">`;
-          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.data.special ) }</span></i>`;
+          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.data.description ) }</span></i>`;
           html += `</label>`;
         }
       } else if (e.type === "chosenability") {
