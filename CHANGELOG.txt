@@ -65,3 +65,5 @@ v1.6.0  Remove restrictions on Specialist XP, Add UI for adding Specialist actio
 v1.7.0  Add simpler way to add Materiel/Personnel to Quartermaster sheet; Add Projects tab to QM sheet
 
 v1.7.1  Fix icons overwriting pre-set icons on assets being imported from compendiums, improved chat notifications for QM Projects and removed chat notification setting hint text from S&V, updated Roll Options advice text
+
+v1.7.2  Role Sheet improvements, speedier tooltips
