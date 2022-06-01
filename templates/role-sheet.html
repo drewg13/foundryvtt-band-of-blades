@@ -122,7 +122,6 @@
           <a class="item" data-tab="specialists">{{localize "BITD.Specialists"}}</a>
         {{/if}}
         {{#if (eq actor.data.type "Quartermaster")}}
-          <a class="item" data-tab="personnel">{{localize "BITD.PersonnelShort"}}</a>
           <a class="item" data-tab="projects">{{localize "BITD.ProjectsShort"}}</a>
           <a class="item" data-tab="actions">{{localize "BITD.Actions"}}</a>
         {{/if}}
@@ -444,8 +443,101 @@
                 {{/if}}
               {{/each}}
             </div>
-
             <div class="item-class-label"><a class="item-add-popup" data-item-type="materiel">{{localize "BITD.AddItem"}}</a></div>
+
+              <div class="label-stripe">
+                <p><label>{{localize "BITD.Personnel"}}</label>
+                  <a class="item-add-popup" data-item-type="personnel">
+                    <i class="fas fa-plus-square"></i>
+                  </a>
+                  {{localize "BITD.PersonnelLabel"}}
+                </p>
+              </div>
+              <div id="personnel-list">
+                <div class="label-stripe-gray">
+                  <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}
+                    <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a></p>
+                </div>
+                <div class="container flex-horizontal">
+                  {{#each actor.items as |item id|}}
+                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Mercy") )}}
+                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <span class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                      <span class="center flex-horizontal">
+                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                        </span>
+                        <span class="wound-checkboxes center flex-horizontal">
+                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'wounded')}}>
+                          <label for="wounded-{{item._id}}"></label>
+                          <span>{{localize "BITD.Wounded"}}</span>
+                        </span>
+                      </span>
+                    </span>
+                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                      </div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+
+                <div class="label-stripe-gray">
+                  <p>
+                    <span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}
+                    <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
+                  </p>
+                </div>
+                <div class="container flex-horizontal">
+                  {{#each actor.items as |item id|}}
+                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Alchemist") )}}
+                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <span class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                      <span class="flex-horizontal">
+                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                          <span class="tooltiptext top">{{{item.data.description}}}</span>
+                        </span>
+                        {{#if (gt item.data.uses 0)}}
+                          <span class="uses-select">
+                            <div class="flex-horizontal small">{{{bob-clock (concat "flags.band-of-blades.items." item._id ".usages") (num (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesMax')) (str (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')) (concat item._id "-clock") "green"}}}</div>
+                            <span>{{localize "BITD.Corruption"}}</span>
+                          </span>
+                        {{/if}}
+                      </span>
+                    </span>
+                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                      </div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+
+                <div class="label-stripe-gray">
+                  <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}
+                    <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a></p>
+                </div>
+                <div class="container flex-horizontal">
+                  {{#each actor.items as |item id|}}
+                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Laborer") )}}
+                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <span class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                      <span class="center flex-horizontal">
+                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                          <span class="tooltiptext top">{{{item.data.description}}}</span>
+                        </span>
+                      </span>
+                    </span>
+                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                      </div>
+                    {{/if}}
+                  {{/each}}
+                </div>
+
+                <div class="item-class-label"><a class="item-add-popup" data-item-type="personnel">{{localize "BITD.AddItem"}}</a></div>
+              </div>
           </div>
 
         {{else if (eq actor.data.type "Spymaster")}}
@@ -493,102 +585,6 @@
             <div class="item-class-label"><a class="item-add-popup" data-item-type="spies">{{localize "BITD.AddItem"}}</a></div>
           </div>
         {{/if}}
-      </div>
-
-      <div id="personnel" class="tab flex-vertical" data-tab="personnel">
-          <div class="label-stripe">
-            <p><label>{{localize "BITD.Personnel"}}</label>
-              <a class="item-add-popup" data-item-type="personnel">
-                <i class="fas fa-plus-square"></i>
-              </a>
-              {{localize "BITD.PersonnelLabel"}}
-            </p>
-          </div>
-          <div id="personnel-list">
-            <div class="label-stripe-gray">
-              <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}
-              <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a></p>
-            </div>
-            <div class="container flex-horizontal">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Mercy") )}}
-                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
-                    <span class="item-body flex-horizontal">
-                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                      <span class="center flex-horizontal">
-                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
-                        </span>
-                        <span class="wound-checkboxes center flex-horizontal">
-                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'wounded')}}>
-                          <label for="wounded-{{item._id}}"></label>
-                          <span>{{localize "BITD.Wounded"}}</span>
-                        </span>
-                      </span>
-                    </span>
-                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                  </div>
-                {{/if}}
-              {{/each}}
-            </div>
-
-            <div class="label-stripe-gray">
-              <p>
-                <span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}
-                <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
-              </p>
-            </div>
-            <div class="container flex-horizontal">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Alchemist") )}}
-                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
-                    <span class="item-body flex-horizontal">
-                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                      <span class="flex-horizontal">
-                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
-                        </span>
-                        {{#if (gt item.data.uses 0)}}
-                          <span class="uses-select">
-                            <div class="flex-horizontal small">{{{bob-clock (concat "flags.band-of-blades.items." item._id ".usages") (num (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesMax')) (str (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')) (concat item._id "-clock") "green"}}}</div>
-                            <span>{{localize "BITD.Corruption"}}</span>
-                          </span>
-                        {{/if}}
-                      </span>
-                    </span>
-                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                  </div>
-                {{/if}}
-              {{/each}}
-            </div>
-
-            <div class="label-stripe-gray">
-              <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}
-                <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a></p>
-            </div>
-            <div class="container flex-horizontal">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Laborer") )}}
-                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
-                    <span class="item-body flex-horizontal">
-                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
-                      <span class="center flex-horizontal">
-                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
-                        </span>
-                      </span>
-                    </span>
-                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                  </div>
-                {{/if}}
-              {{/each}}
-            </div>
-
-            <div class="item-class-label"><a class="item-add-popup" data-item-type="personnel">{{localize "BITD.AddItem"}}</a></div>
-          </div>
       </div>
 
       <div id="projects" class="tab flex-vertical" data-tab="projects">
