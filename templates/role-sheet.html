@@ -249,6 +249,10 @@
 
         {{else if (eq actor.data.type "Quartermaster")}}
           <div class="label-stripe">
+            <p><label>{{localize "BITD.Resources"}}</label></p>
+          </div>
+          <div>{{{localize "BITD.Actions1Detail"}}}</div>
+          <div class="label-stripe">
             <p><label>{{localize "BITD.Supply"}}</label>{{localize "BITD.SupplyLabel"}}</p>
           </div>
           <div id="supply-list" class="list">
@@ -991,23 +995,23 @@
                     <span class="attribute-skill-label">
                       <a class="actor-name">{{squaddie.name}}</a>
                     </span>
-                    <span id="wounds-stress-{{squaddie._id}}" class="flex-horizontal">
+                    <span id="wounds-stress-{{squaddie._id}}" class="wst flex-horizontal">
                       <span class="wounds-boxes attributes-container flex-horizontal">
+                        <span>{{localize "BITD.Wounds"}}</span>
                         <input id="wounds-light-{{squaddie._id}}" disabled type="radio" name="squaddie.data.lightBox" value="{{squaddie.data.lightBox}}">
                         <label for="wounds-light-{{squaddie._id}}" style="background-color: {{squaddie.data.lightBox}};"></label>
                         <input id="wounds-medium-{{squaddie._id}}" disabled type="radio" name="squaddie.data.mediumBox" value="{{squaddie.data.mediumBox}}">
                         <label for="wounds-medium-{{squaddie._id}}" style="background-color: {{squaddie.data.mediumBox}};"></label>
                         <input id="wounds-heavy-{{squaddie._id}}" disabled type="radio" name="squaddie.data.heavyBox" value="{{squaddie.data.heavyBox}}">
                         <label for="wounds-heavy-{{squaddie._id}}" style="background-color: {{squaddie.data.heavyBox}};"></label>
-                        <span>{{localize "BITD.Wounds"}}</span>
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}} / {{str squaddie.data.stress.max}}">
                         <label for="stress-{{squaddie._id}}">{{localize "BITD.Stress"}}</label>
+                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}} / {{str squaddie.data.stress.max}}">
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="trauma-{{squaddie._id}}" type="text" disabled name="squaddie.data.trauma.value" value="{{squaddie.data.trauma.value}} / {{str squaddie.data.trauma.max}}">
                         <label for="trauma-{{squaddie._id}}">{{localize "BITD.Trauma"}}</label>
+                        <input id="trauma-{{squaddie._id}}" type="text" disabled name="squaddie.data.trauma.value" value="{{squaddie.data.trauma.value}} / {{str squaddie.data.trauma.max}}">
                       </span>
                     </span>
                   </span>
@@ -1035,21 +1039,21 @@
                     </span>
                     <span id="wounds-stress-{{specialist._id}}" class="flex-horizontal">
                       <span class="wounds-boxes attributes-container flex-horizontal">
+                        <span>{{localize "BITD.Wounds"}}</span>
                         <input id="wounds-light-{{specialist._id}}" disabled type="radio" name="specialist.data.lightBox" value="{{specialist.data.lightBox}}">
                         <label for="wounds-light-{{specialist._id}}" style="background-color: {{specialist.data.lightBox}};"></label>
                         <input id="wounds-medium-{{specialist._id}}" disabled type="radio" name="specialist.data.mediumBox" value="{{specialist.data.mediumBox}}">
                         <label for="wounds-medium-{{specialist._id}}" style="background-color: {{specialist.data.mediumBox}};"></label>
                         <input id="wounds-heavy-{{specialist._id}}" disabled type="radio" name="specialist.data.heavyBox" value="{{specialist.data.heavyBox}}">
                         <label for="wounds-heavy-{{specialist._id}}" style="background-color: {{specialist.data.heavyBox}};"></label>
-                        <span>{{localize "BITD.Wounds"}}</span>
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}} / {{str specialist.data.stress.max}}">
                         <label for="stress-{{specialist._id}}">{{localize "BITD.Stress"}}</label>
+                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}} / {{str specialist.data.stress.max}}">
                       </span>
                       <span class="stress-boxes flex-horizontal">
-                        <input id="trauma-{{specialist._id}}" type="text" disabled name="specialist.data.trauma.value" value="{{specialist.data.trauma.value}} / {{str specialist.data.trauma.max}}">
                         <label for="trauma-{{specialist._id}}">{{localize "BITD.Trauma"}}</label>
+                        <input id="trauma-{{specialist._id}}" type="text" disabled name="specialist.data.trauma.value" value="{{specialist.data.trauma.value}} / {{str specialist.data.trauma.max}}">
                       </span>
                     </span>
                   </span>
