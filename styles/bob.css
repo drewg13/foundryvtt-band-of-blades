@@ -1163,8 +1163,8 @@ input[type="checkbox"]:hover {
 * .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-  transition-delay: 1.2s;
-  transition-timing-function: linear;
+  transition-delay: 0.8s;
+  transition-timing-function: ease-out;
 }
 * .tooltip .tooltiptext.left {
   right: 105%;
