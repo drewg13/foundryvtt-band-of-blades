@@ -261,10 +261,9 @@
           </div>
 
           <div class="label-stripe">
-            <p><label>{{localize "BITD.Materiel"}}</label>
-              <a class="item-add-popup" data-item-type="materiel" data-distinct="true">
-                <i class="fas fa-plus-square"></i>
-              </a>
+            <p>
+              <label>{{localize "BITD.Materiel"}}</label>
+              <a class="item-add-popup" data-item-type="materiel" data-distinct="true"><i class="fas fa-plus-square"></i></a>
               {{localize "BITD.MaterielLabel"}}
             </p>
           </div>
@@ -443,25 +442,27 @@
                 {{/if}}
               {{/each}}
             </div>
-            <div class="item-class-label"><a class="item-add-popup" data-item-type="materiel">{{localize "BITD.AddItem"}}</a></div>
+          </div>
 
-              <div class="label-stripe">
-                <p><label>{{localize "BITD.Personnel"}}</label>
-                  <a class="item-add-popup" data-item-type="personnel">
-                    <i class="fas fa-plus-square"></i>
-                  </a>
-                  {{localize "BITD.PersonnelLabel"}}
-                </p>
-              </div>
-              <div id="personnel-list">
-                <div class="label-stripe-gray">
-                  <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}
-                    <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a></p>
-                </div>
-                <div class="container flex-horizontal">
-                  {{#each actor.items as |item id|}}
-                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Mercy") )}}
-                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+          <div class="label-stripe">
+            <p>
+              <label>{{localize "BITD.Personnel"}}</label>
+              <a class="item-add-popup" data-item-type="personnel" data-distinct="true"><i class="fas fa-plus-square"></i></a>
+              {{localize "BITD.PersonnelLabel"}}
+            </p>
+          </div>
+          <div id="personnel-list">
+            <div class="label-stripe-gray">
+              <p>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}
+                {{#if (lt actor.data.resources.mercies 3)}}
+                  <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a>
+                {{/if}}
+              </p>
+            </div>
+            <div class="container flex-horizontal">
+              {{#each actor.items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Mercy") )}}
+                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
@@ -475,23 +476,24 @@
                         </span>
                       </span>
                     </span>
-                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                      </div>
-                    {{/if}}
-                  {{/each}}
-                </div>
-
-                <div class="label-stripe-gray">
-                  <p>
-                    <span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}
-                    <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
-                  </p>
-                </div>
-                <div class="container flex-horizontal">
-                  {{#each actor.items as |item id|}}
-                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Alchemist") )}}
-                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                  </div>
+                {{/if}}
+              {{/each}}
+            </div>
+            <div class="label-stripe-gray">
+              <p>
+                <span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}
+                {{#if (lt actor.data.resources.alchemists 3)}}
+                  <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
+                {{/if}}
+              </p>
+            </div>
+            <div class="container flex-horizontal">
+              {{#each actor.items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Alchemist") )}}
+                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="flex-horizontal">
@@ -506,21 +508,24 @@
                         {{/if}}
                       </span>
                     </span>
-                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                      </div>
-                    {{/if}}
-                  {{/each}}
-                </div>
+                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                  </div>
+                {{/if}}
+              {{/each}}
+            </div>
 
-                <div class="label-stripe-gray">
-                  <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}
-                    <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a></p>
-                </div>
-                <div class="container flex-horizontal">
-                  {{#each actor.items as |item id|}}
-                    {{#if (and (eq item.type "personnel") (eq item.data.itemType "Laborer") )}}
-                      <div class="item flex-horizontal" data-item-id="{{item._id}}">
+            <div class="label-stripe-gray">
+              <p>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}
+                {{#if (lt actor.data.resources.laborers 3)}}
+                  <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a>
+                {{/if}}
+              </p>
+            </div>
+            <div class="container flex-horizontal">
+              {{#each actor.items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Laborer") )}}
+                  <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
@@ -529,15 +534,12 @@
                         </span>
                       </span>
                     </span>
-                        <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
-                        <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
-                      </div>
-                    {{/if}}
-                  {{/each}}
-                </div>
-
-                <div class="item-class-label"><a class="item-add-popup" data-item-type="personnel">{{localize "BITD.AddItem"}}</a></div>
-              </div>
+                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                  </div>
+                {{/if}}
+              {{/each}}
+            </div>
           </div>
 
         {{else if (eq actor.data.type "Spymaster")}}
