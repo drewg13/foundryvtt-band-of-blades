@@ -129,8 +129,8 @@
         <a class="item" data-tab="character-notes">{{localize "BITD.Notes"}}</a>
         {{#if isGM}}
           <a class="item" data-tab="effects">{{localize "BITD.Effects"}}</a>
+          <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
         {{/if}}
-        <a class="item" data-tab="all-character-items">{{localize "BITD.AllItems"}}</a>
       </nav>
 
       <div id="duties" class="tab flex-vertical" data-tab="duties">
@@ -599,7 +599,8 @@
           <div id="project-clocks" class="flex-vertical">
             <div>{{{localize "BITD.Actions3Detail"}}}</div>
             <div class="flex-vertical">
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock1">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock1.name" value="{{data.resources.projects.clock1.name}}"></p>
               </div>
               <div class="flexrow">
@@ -623,7 +624,8 @@
                 </div>
               </div>
 
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock2">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock2.name" value="{{data.resources.projects.clock2.name}}"></p>
               </div>
               <div class="flexrow">
@@ -647,7 +649,8 @@
                 </div>
               </div>
 
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock3">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock3.name" value="{{data.resources.projects.clock3.name}}"></p>
               </div>
               <div class="flexrow">
@@ -671,7 +674,8 @@
                 </div>
               </div>
 
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock4">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock4.name" value="{{data.resources.projects.clock4.name}}"></p>
               </div>
               <div class="flexrow">
@@ -695,7 +699,8 @@
                 </div>
               </div>
 
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock5">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock5.name" value="{{data.resources.projects.clock5.name}}"></p>
               </div>
               <div class="flexrow">
@@ -719,7 +724,8 @@
                 </div>
               </div>
 
-              <div class="label-stripe-gray">
+              <div class="label-stripe-gray project" data-project="clock6">
+                <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
                 <p><input type="text" name="data.resources.projects.clock6.name" value="{{data.resources.projects.clock6.name}}"></p>
               </div>
               <div class="flexrow">

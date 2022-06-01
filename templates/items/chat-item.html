@@ -5,14 +5,22 @@
         {{name}}
       </h3>
     </div>
-
     {{#if img}}
       <img src="{{img}}" title="{{name}}" />
+    {{/if}}
+
+    {{#if (and type color value)}}
+      <img src="/systems/band-of-blades/themes/{{color}}/{{type}}clock_{{value}}.svg" />
     {{/if}}
 
     {{#if data.description}}
       {{{data.description}}}
     {{/if}}
+
+    {{#if description}}
+      {{{description}}}
+    {{/if}}
+
 
   </div>
 </div>

@@ -197,6 +197,18 @@ export class BoBRoleSheet extends BoBSheet {
       item.sendToChat();
     });
 
+    // Post QM project to chat
+    html.find(".project-post").click( async (ev) => {
+      const element = $(ev.currentTarget).parents(".project");
+      const project = this.actor.data.data.resources.projects[ element.data("project") ];
+      const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", project);
+      const chatData = {
+        user: game.userId,
+        content: html,
+      };
+      const message = await ChatMessage.create(chatData);
+    });
+
 	  // Clear Flag
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
@@ -209,5 +221,4 @@ export class BoBRoleSheet extends BoBSheet {
 	}
 
   /* -------------------------------------------- */
-
 }

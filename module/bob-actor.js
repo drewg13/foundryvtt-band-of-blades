@@ -470,4 +470,13 @@ export class BoBActor extends Actor {
     $( "#skill-roll .total-rolled label:nth-child(2)" ).text( parseInt( base ) + parseInt( mod ) + "d" );
   }
 
+  async sendObjectToChat() {
+
+    const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", this);
+    const chatData = {
+      user: game.userId,
+      content: html,
+    };
+    const message = await ChatMessage.create(chatData);
+  }
 }
