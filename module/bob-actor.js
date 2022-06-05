@@ -18,8 +18,10 @@ export class BoBActor extends Actor {
       case "character": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
         updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-        updateData['data.trauma.list'] = ( game.system.traumaList.map( i => ( game.i18n.localize( i ) ).toLowerCase()) ).reduce( ( key, val ) => ( key[val]=false, key ), {} );
-        updateData['data.blight.list'] = ( game.system.blightList.map( i => ( game.i18n.localize( i ) ).toLowerCase()) ).reduce( ( key, val ) => ( key[val]=false, key ), {} );
+        updateData['data.trauma.list'] = game.system.traumaList;
+        updateData['data.blight.list'] = game.system.blightList;
+        // updateData['data.trauma.list'] = ( game.system.traumaList.map( i => ( game.i18n.localize( i ) ).toLowerCase()) ).reduce( ( key, val ) => ( key[val]=false, key ), {} );
+        // updateData['data.blight.list'] = ( game.system.blightList.map( i => ( game.i18n.localize( i ) ).toLowerCase()) ).reduce( ( key, val ) => ( key[val]=false, key ), {} );
         updateData['token.actorLink'] = true;
         updateData['token.name'] = createData.name;
         updateData['token.displayName'] = 50;

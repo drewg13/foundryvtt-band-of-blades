@@ -33,8 +33,8 @@ Hooks.once("init", function() {
     themes: ["black", "grey", "white", "red", "yellow", "green", "blue"],
     sizes: [ 4, 6, 8, 10, 12 ]
   };
-  game.system.traumaList = ["BITD.TraumaCold", "BITD.TraumaHaunted", "BITD.TraumaObsessed", "BITD.TraumaParanoid", "BITD.TraumaReckless", "BITD.TraumaSoft", "BITD.TraumaUnstable", "BITD.TraumaVicious"];
-  game.system.blightList = ["BITD.BlightAnathema", "BITD.BlightHost", "BITD.BlightHunger", "BITD.BlightMiasma", "BITD.BlightMutated", "BITD.BlightRage", "BITD.BlightRot", "BITD.BlightVisions"];
+  game.system.traumaList = ["cold", "haunted", "obsessed", "paranoid", "reckless", "soft", "unstable", "vicious"];
+  game.system.blightList = ["anathema", "host", "hunger", "miasma", "mutated", "rage", "rot", "visions"];
   game.BoBHelpers = BoBHelpers;
 
   CONFIG.Item.documentClass = BoBItem;
