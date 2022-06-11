@@ -126,6 +126,26 @@
     flex-shrink: 1;
     flex-basis: 0%;
 }
+* form .rollRadio input {
+  display: none;
+}
+* form .rollRadio label {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-right: 10px;
+  transition: filter 0.1s;
+  cursor: pointer;
+}
+* form div.rollRadio {
+  display: flex;
+}
+* form .rollRadio input:checked + label {
+  color: red;
+  font-weight: bold;
+  text-decoration: underline 2px;
+}
 * .fa-creative-commons-zero.nullifier,
 * .fa-plus-square {
   font-size: 14px;
@@ -279,11 +299,11 @@ input[type="checkbox"]:hover {
   font-family: 'MajorGuilty', 'serif';
   font-size: x-large;
 }
-* .role-sheet .label-stripe label {
-  margin-right: 10px;
+* [class^="label-stripe"] label {
+  margin-right: 5px;
 }
-* .role-sheet .label-stripe a {
-  margin-right: 20px;
+* a i.fas.fa-plus-square {
+  margin-right: 15px;
 }
 * .role-sheet .clock-options {
   display: flex;
@@ -555,10 +575,20 @@ input[type="checkbox"]:hover {
 * #friend-list .item-name {
 	width: 60px;
 }
+* .item-summary {
+  margin: 0px 10px 10px 10px;
+}
+* #character-traits .item-summary {
+  width: 147px;
+}
 * #upgrades .item-name,
 * #abilities .item-name,
 * #loadout .item-name {
 	width: 120px;
+}
+* #abilities .expandable,
+* #loadout .expandable {
+  width: 160px;
 }
 * #all-items .item-name {
 	width: 300px;
@@ -574,10 +604,13 @@ input[type="checkbox"]:hover {
 }
 * #friend-list .item-body,
 * #faction-items .item-body,
-* #loadout .item-body,
-* #upgrades .item-body,
-* #abilities .item-body {
+* #upgrades .item-body {
   width: auto;
+}
+* #abilities .item-body,
+* #loadout .item-body {
+  width: 440px;
+  justify-content: flex-start;
 }
 * #planet-list .item-description {
 	width: 400px;
@@ -812,7 +845,7 @@ input[type="checkbox"]:hover {
 * #attributes {
   display: flex;
   flex-direction: column;
-  width: 265px;
+  width: 275px;
 }
 * #attributes .stripe {
   background-color: #191813;
@@ -932,6 +965,19 @@ input[type="checkbox"]:hover {
   position: relative;
   /* Hide the browser's default checkbox */
 }
+* #attributes .attributes-container .usage-stats,
+* #attributes .attributes-container .attribute-stats {
+  width: 83px;
+}
+* .item-body .usage-stats {
+  display: flex;
+}
+* .role-sheet .item-body .usage-stats {
+  padding-bottom: 7px;
+}
+* #attributes .attributes-container .skill-label {
+  width: 100px;
+}
 * #morale-boxes .attributes-container label {
   height: 20px;
   width: 20px;
@@ -944,12 +990,20 @@ input[type="checkbox"]:hover {
   margin-top: 4px;
 }
 * .wounds-boxes.attributes-container label,
-* #attributes .attributes-container label {
+* #attributes .attributes-container label,
+* .item-body .usage-stats label {
   height: 12px;
   width: 12px;
 }
-* #attributes .attributes-container label {
+* #attributes .attributes-container label,
+* .item-body .usage-stats label {
   margin-top: 5px;
+}
+* #loadout-list .item-body .usage-stats label {
+  margin-top: 2px;
+}
+* #loadout-list .item div{
+  flex-grow: unset;
 }
 * .wounds-boxes.attributes-container label {
   margin-top: 7px !important;
@@ -962,6 +1016,19 @@ input[type="checkbox"]:hover {
   background-color: #191813;
   vertical-align: middle;
   transition: filter 0.1s;
+}
+* #loadout-list .item-column {
+  width: 100px;
+}
+* #attributes .attributes-container .usage-stats label,
+* .item-body .usage-stats label {
+  transform: unset;
+  border-radius: 6px;
+  border: 2px solid;
+  background-color: red;
+  vertical-align: middle;
+  transition: filter 0.1s;
+  margin-right: 2px;
 }
 * #morale-boxes .attributes-container label,
 * #attributes .attributes-container label {
@@ -987,7 +1054,8 @@ input[type="checkbox"]:hover {
   background-color: red !important;
   margin-right: 3px;
 }
-* #attributes .attributes-container label[for$="-0"] {
+* #attributes .attributes-container label[for$="-0"],
+* .item-body .usage-stats label[for$="-0"] {
   height: 5px;
   width: 5px;
   border: 1px solid;
@@ -997,17 +1065,20 @@ input[type="checkbox"]:hover {
   margin-right: 3px;
 }
 * #morale-boxes .attributes-container label:hover,
-* #attributes .attributes-container label:hover {
+* #attributes .attributes-container label:hover,
+* .item-body .usage-stats label:hover {
   filter: brightness(0.7);
   opacity: 0.7;
 }
 * .wounds-boxes.attributes-container input,
 * #morale-boxes .attributes-container input,
-* #attributes .attributes-container input {
+* #attributes .attributes-container input,
+* .item-body .usage-stats input {
   display: none;
 }
 * #morale-boxes .attributes-container input:checked ~ label,
-* #attributes .attributes-container input:checked ~ label {
+* #attributes .attributes-container input:checked ~ label,
+* .item-body .usage-stats input:checked ~ label{
   background-color: #EEEFFF;
 }
 * #morale-boxes .attributes-container input:checked + label,
@@ -1015,6 +1086,12 @@ input[type="checkbox"]:hover {
   transition: filter 0.1s;
   cursor: pointer;
   background-color: #191813;
+}
+* #attributes .attributes-container .usage-stats input:checked + label,
+* .item-body .usage-stats input:checked + label {
+  transition: filter 0.1s;
+  cursor: pointer;
+  background-color: red;
 }
 * #morale-boxes .attributes-container input:checked + label[for$="-1"],
 * #morale-boxes .attributes-container input:checked + label[for$="-2"],
@@ -1039,10 +1116,14 @@ input[type="checkbox"]:hover {
   display: flex;
 }
 * #attributes .skill-select {
-  position: absolute;
   left:160px;
   top: 1px;
   font-weight: bold;
+}
+* #attributes .skill-delete {
+  align-items: center;
+  margin-right: 0px;
+  margin-left: 2px;
 }
 * #attributes .skill-select span {
   align-items: center;
@@ -1095,8 +1176,12 @@ input[type="checkbox"]:hover {
 }
 * #name,
 * #lair,
-* #alias {
-  margin-bottom: 10px;
+* #alias,
+* #name-alias {
+  margin-bottom: 5px;
+}
+* #character-traits {
+  margin-top: 5px;
 }
 * .experience-clues-container {
   width: 340px;
@@ -1163,7 +1248,7 @@ input[type="checkbox"]:hover {
 * .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-  transition-delay: 0.8s;
+  transition-delay: 0.5s;
   transition-timing-function: ease-out;
 }
 * .tooltip .tooltiptext.left {
@@ -1171,7 +1256,6 @@ input[type="checkbox"]:hover {
 }
 * .tooltip .tooltiptext.bottom {
   top: 105%;
-  right: 75%;
 }
 * .tooltip .tooltiptext.top {
   bottom: 105%;
@@ -1495,6 +1579,7 @@ input[type="checkbox"]:hover {
   font-family: 'MajorGuilty', 'serif';
   font-size: medium;
   color: #eeefff;
+  background-color: black;
 }
 * #loadout .dropdown select:hover {
   color: red;
@@ -1567,19 +1652,13 @@ input[type="checkbox"]:hover {
 }
 * .flex-flow {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: row wrap;
 }
-* .role-sheet #squads .container.flex-flow {
-  max-height: 100px;
-}
-* .role-sheet #materiel-list .container.flex-flow {
-  max-height: 110px;
+* .role-sheet .container .item {
+  margin-right: 25px;
 }
 * .role-sheet .item-name {
   margin-right: 5px;
-}
-* .role-sheet #squads .container.flex-flow .item {
-  height: 27px;
 }
 * .role-sheet .actions-list .label-stripe-gray {
   margin-top: 10px;
@@ -1631,12 +1710,24 @@ input[type="checkbox"]:hover {
   width: 75px;
   margin-right: 5px;
 }
-* #network-list .item,
-* #spies-list .item {
-  margin-bottom: 20px;
-}
 * #mission-list .label-stripe-gray {
   margin-bottom: 0px;
+}
+* #mission-clocks .label-stripe-gray {
+  display: flex;
+  justify-content: space-between;
+}
+* #mission-clocks .label-stripe-gray .roll-die-attribute {
+  margin-top: 9px;
+}
+* #mission-clocks .spy-select select {
+  height: auto;
+}
+* #missions .total-spies {
+  margin-top: 3px;
+}
+* #missions .total-spies span {
+  margin-left: 5px;
 }
 .number-input {
   border: 0;

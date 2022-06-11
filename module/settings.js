@@ -58,4 +58,22 @@ export const registerSystemSettings = function() {
     type: Boolean,
     default: true
   });
+
+  game.settings.register("band-of-blades", "useDropdownsInRollDialog", {
+    name: "BITD.UseDropdownsInRollDialog",
+    hint: "BITD.UseDropdownsInRollDialogHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
+  game.settings.register("band-of-blades", "useDropdownsForItemUses", {
+    name: "BITD.UseDropdownsForItemUses",
+    hint: "BITD.UseDropdownsForItemUsesHint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
 };

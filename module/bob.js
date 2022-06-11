@@ -92,7 +92,7 @@ Hooks.once("init", function() {
   });
 
   // Trauma Counter
-  Handlebars.registerHelper('traumacounter', function(selected, options) {
+  Handlebars.registerHelper('traumacounter', function(selected, max, options) {
 
     let html = options.fn(this);
 
@@ -103,7 +103,7 @@ Hooks.once("init", function() {
       }
     }
 
-    if (count > 5) count = 5;
+    if (count > max) count = max;
 
     const rgx = new RegExp(' value=\"' + count + '\"');
     return html.replace(rgx, "$& checked=\"checked\"");
@@ -350,7 +350,8 @@ Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
   if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) && ( Object.keys(data.data)[0] === "resources" )) {
     let item = Object.keys(data.data.resources)[0];
-    let subItem = Object.keys(Object.values(Object.entries(data.data.resources)[0][1])[0])[0];
+    let subItem;
+    if( item === "projects") { subItem = Object.keys(Object.values(Object.entries(data.data.resources)[0][1])[0])[0]; }
     let actorName = actor.name;
     let resource, newValue, oldValue, result;
     switch ( item ) {
@@ -392,6 +393,11 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
         newValue = parseInt( data.data.resources.projects[resource].value );
         oldValue = parseInt( actor.data.data.resources.projects[resource].value );
         resource = actor.data.data.resources.projects[resource].name + " Project Clock";
+        break;
+      case "camp":
+      case "fallen":
+      case "missions":
+        item = undefined;
         break;
       default:
         console.log(item, newValue, oldValue);

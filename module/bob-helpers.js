@@ -1,3 +1,5 @@
+import { BoBActor } from "./bob-actor.js";
+
 export class BoBHelpers {
 
   /**
@@ -112,15 +114,8 @@ export class BoBHelpers {
       let name = squad + " " + i;
       let data = {
         name: name,
-        img: "systems/band-of-blades/styles/assets/icons/rookie.svg",
         type: "character",
         folder: folder,
-        token: {
-          img: "systems/band-of-blades/styles/assets/icons/rookie.svg",
-          actorLink: true,
-          name: name,
-          displayName: 50
-        },
         data: {
           class: "Rookie",
           squad: squad,
@@ -135,7 +130,7 @@ export class BoBHelpers {
       createData.push( data );
     }
 
-    let created = await Actor.createDocuments( createData );
+    let created = await BoBActor.create( createData );
 
     let marshals = game.actors.filter( a => a.data.data.type === "Marshal" ).map( a => {
       return a.id

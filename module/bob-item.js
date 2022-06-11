@@ -77,7 +77,7 @@ export class BoBItem extends Item {
     super._onCreate( data, options, userId );
     let actor = this.parent ? this.parent : null;
 
-    // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate
+    // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate, this throws errors
     if( actor && actor.data ) {
       let key = data._id;
       if( data.data.itemType === "Mercy" ) {

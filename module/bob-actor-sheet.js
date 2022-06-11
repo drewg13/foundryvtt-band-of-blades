@@ -13,7 +13,7 @@ export class BoBActorSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/actor-sheet.html",
-      width: 770,
+      width: 790,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "abilities"}],
 	    scrollY: [".sheet"],
@@ -35,6 +35,8 @@ export class BoBActorSheet extends BoBSheet {
 
     // Prepare active effects
     data.effects = prepareActiveEffectCategories(this.actor.effects);
+
+    data.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
 
     if( this.actor.type === "character" ) {
       // Calculate Load
@@ -58,6 +60,23 @@ export class BoBActorSheet extends BoBSheet {
 
     // Everything below here is only needed if the sheet is editable
     if ( !this.options.editable ) return;
+
+    // Expand item description
+    html.find('.expandable').click(ev => {
+      ev.preventDefault();
+      const li = $(ev.currentTarget).parents(".item");
+      const data = $(ev.currentTarget).data("expand");
+      // Toggle summary
+      if ( li.hasClass("expanded") ) {
+        let summary = li.parents(".summary-anchor").children(".item-summary");
+        summary.slideUp(200, () => summary.remove());
+      } else {
+        let div = $( `<div class="item-summary">${ data }</div>` );
+        li.parents(".summary-anchor").append(div.hide());
+        div.slideDown(200);
+      }
+      li.toggleClass("expanded");
+    });
 
     // Update Inventory Item
     html.find('.item-name').click(ev => {
@@ -128,6 +147,13 @@ export class BoBActorSheet extends BoBSheet {
         }, options);
 
         dialog.render(true);
+      }
+    });
+
+    html.find('.skill-delete').click( async (ev) => {
+      let skill = ev.currentTarget.parentElement.dataset.rollAttribute;
+      if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
+        await this.actor.update( { 'data.attributes.specialist.skills': { [skill]: { value: '0', max: 0 } } } );
       }
     });
 

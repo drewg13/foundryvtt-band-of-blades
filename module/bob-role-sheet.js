@@ -14,7 +14,7 @@ export class BoBRoleSheet extends BoBSheet {
     return foundry.utils.mergeObject(super.defaultOptions, {
   	  classes: [ "band-of-blades", "sheet", "actor" ],
   	  template: "systems/band-of-blades/templates/role-sheet.html",
-      width: 910,
+      width: 940,
       height: 950,
       tabs: [{navSelector: ".tabs", contentSelector: ".tab-content", initial: "duties"}],
 	    scrollY: [".sheet"]
@@ -36,6 +36,16 @@ export class BoBRoleSheet extends BoBSheet {
       let textB = b.name.toUpperCase();
       return textA.localeCompare(textB);
     });
+
+    data.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
+
+    data.foodStores = Math.min( 6, ( 3 + data.data.resources.supply.extraUses ) );
+
+    let spies = data.items.filter( s => s.type === "spies" );
+    let spiesArray = [];
+    spies.forEach( s => spiesArray.push( [ s._id, s.name ] ) );
+    data.spyList = Object.fromEntries( spiesArray );
+    data.spyList = foundry.utils.mergeObject( data.spyList, { "0": "Unassigned" } )
 
     if( data.data.type === "Marshal" ) {
       const soldiers = BoBHelpers.getAllCharactersByClass( "Soldier", game );
@@ -146,6 +156,23 @@ export class BoBRoleSheet extends BoBSheet {
 
     // Everything below here is only needed if the sheet is editable
     if ( !this.options.editable ) return;
+
+    // Expand item description
+    html.find('.expandable').click(ev => {
+      ev.preventDefault();
+      const li = $(ev.currentTarget).parents(".item");
+      const data = $(ev.currentTarget).data("expand");
+      // Toggle summary
+      if ( li.hasClass("expanded") ) {
+        let summary = li.parents(".summary-anchor").children(".item-summary");
+        summary.slideUp(200, () => summary.remove());
+      } else {
+        let div = $( `<div class="item-summary">${ data }</div>` );
+        li.parents(".summary-anchor").append(div.hide());
+        div.slideDown(200);
+      }
+      li.toggleClass("expanded");
+    });
 
     // Update Inventory Item
     html.find('.item-name').click(ev => {

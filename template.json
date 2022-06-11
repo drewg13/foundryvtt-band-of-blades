@@ -290,26 +290,31 @@
         }
       },
       "missions": {
+        "augmentSpy": "0",
         "augmentClock": {
           "name": "augmentClock",
           "type": 8,
           "value": "0"
         },
+        "expandSpy": "0",
         "expandClock": {
           "name": "expandClock",
           "type": 8,
           "value": "0"
         },
+        "trapSpy": "0",
         "trapClock": {
           "name": "trapClock",
           "type": 8,
           "value": "0"
         },
+        "recruitSpy": "0",
         "recruitClock": {
           "name": "recruitClock",
           "type": 8,
           "value": "0"
         },
+        "researchSpy": "0",
         "researchClock": {
           "name": "researchClock",
           "type": 8,

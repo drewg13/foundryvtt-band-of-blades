@@ -69,3 +69,5 @@ v1.7.1  Fix icons overwriting pre-set icons on assets being imported from compen
 v1.7.2  Role Sheet improvements, speedier tooltips
 
 v1.7.3  Fix localization of Trauma and Blight lists
+
+v1.8.0  UI updates: option to use Trauma-style buttons for Position and Effect in Roll Dialogs, add delete button for Specialist actions, option to use radio buttons instead of dropdowns for Specialist Action and Item usage trackers, fixed errors on adding items with usage dropdowns, fix Rookie squad creation, reconfigure Abilities and Items descriptions

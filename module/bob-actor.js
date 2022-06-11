@@ -18,8 +18,6 @@ export class BoBActor extends Actor {
       case "character": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
         updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-        updateData['data.trauma.list'] = game.system.traumaList;
-        updateData['data.blight.list'] = game.system.blightList;
         updateData['data.trauma.list'] = game.system.traumaList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
         updateData['data.blight.list'] = game.system.blightList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
         updateData['token.actorLink'] = true;
@@ -243,9 +241,12 @@ export class BoBActor extends Actor {
     const bonus_dice = this.getRollData().dice_amount[attribute_name].bonus;
     let total_dice = base_dice + bonus_dice;
 
-    new Dialog({
-      title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
-      content: `
+    let dropdowns = game.settings.get("band-of-blades", "useDropdownsInRollDialog");
+
+    if( dropdowns ){
+      new Dialog({
+        title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
+        content: `
         <div id="skill-roll">
 		      <h2>${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)} (${total_dice}d)</h2>
           <form>
@@ -290,27 +291,108 @@ export class BoBActor extends Actor {
 		      <div class="action-info">${game.i18n.localize('BITD.ActionsHelp')}</div>
         </div>
       `,
-      buttons: {
-        yes: {
-          icon: "<i class='fas fa-check'></i>",
-          label: game.i18n.localize('BITD.Roll'),
-          callback: async (html) => {
-            let modifier = parseInt(html.find('[name="mod"]')[0].value);
-            let position = html.find('[name="pos"]')[0].value;
-            let effect = html.find('[name="fx"]')[0].value;
-            await this.rollAttribute(attribute_name, modifier, position, effect);
-          }
+        buttons: {
+          yes: {
+            icon: "<i class='fas fa-check'></i>",
+            label: game.i18n.localize('BITD.Roll'),
+            callback: async (html) => {
+              let modifier = parseInt(html.find('[name="mod"]')[0].value);
+              let position = html.find('[name="pos"]')[0].value;
+              let effect = html.find('[name="fx"]')[0].value;
+              await this.rollAttribute(attribute_name, modifier, position, effect);
+            }
+          },
+          no: {
+            icon: "<i class='fas fa-times'></i>",
+            label: game.i18n.localize('BITD.Cancel'),
+          },
         },
-        no: {
-          icon: "<i class='fas fa-times'></i>",
-          label: game.i18n.localize('BITD.Cancel'),
+        default: "yes",
+        render: html => {
+          $("#skill-roll #mod").on( "change", this._onDiceModChange);
+        }
+      }).render(true);
+    } else {
+      new Dialog( {
+        title: `${ game.i18n.localize( 'BITD.Roll' ) } ${ game.i18n.localize( attribute_label ) }`,
+        content: `
+        <div id="skill-roll">
+		      <h2>${ game.i18n.localize( 'BITD.Roll' ) } ${ game.i18n.localize( attribute_label ) } (${ total_dice }d)</h2>
+          <form>
+            <div class="form-group roll position">
+              <label>${ game.i18n.localize( 'BITD.Position' ) }:</label>
+              <div class="rollRadio" id="pos">
+                <input type="radio" id="controlled" name="pos" value="controlled" />
+                <label for="controlled">${ game.i18n.localize( 'BITD.PositionControlled' ) }</label>
+                <input type="radio" id="risky" name="pos" value="risky" checked/>
+                <label for="risky">${ game.i18n.localize( 'BITD.PositionRisky' ) }</label>
+                <input type="radio" id="desperate" name="pos" value="desperate" />
+                <label for="desperate">${ game.i18n.localize( 'BITD.PositionDesperate' ) }</label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group roll effect">
+              <label>${ game.i18n.localize( 'BITD.Effect' ) }:</label>
+              <div class="rollRadio" id="fx">
+                <input type="radio" id="zero" name="fx" value="zero" />
+                <label for="zero">${ game.i18n.localize( 'BITD.EffectZero' ) }</label>
+                <input type="radio" id="limited" name="fx" value="limited" />
+                <label for="limited">${ game.i18n.localize( 'BITD.EffectLimited' ) }</label>
+                <input type="radio" id="standard" name="fx" value="standard" checked/>
+                <label for="standard">${ game.i18n.localize( 'BITD.EffectStandard' ) }</label>
+                <input type="radio" id="great" name="fx" value="great" />
+                <label for="great">${ game.i18n.localize( 'BITD.EffectGreat' ) }</label>
+                <input type="radio" id="extreme" name="fx" value="extreme" />
+                <label for="extreme">${ game.i18n.localize( 'BITD.EffectExtreme' ) }</label>
+              </div>
+            </div>
+            <hr>
+            <div class="form-group roll base-dice">
+              <label class="base-dice">${ game.i18n.localize( 'BITD.BaseDice' ) }: </label>
+			        <label>${ base_dice }d</label>
+            </div>
+            <div class="form-group roll bonus-dice">
+              <label class="bonus-dice">${ game.i18n.localize( 'BITD.BonusDice' ) }: </label>
+			        <label>${ bonus_dice }d</label>
+            </div>
+            <div class="form-group roll mod">
+              <label>${ game.i18n.localize( 'BITD.Modifier' ) }:</label>
+              <select id="mod" name="mod" data-base-dice="${ base_dice }">
+                ${ this.createListOfDiceMods( -3, +3, 0 ) }
+              </select>
+            </div>
+		        <div class="form-group roll total-rolled">
+              <label class="total-rolled">${ game.i18n.localize( 'BITD.TotalDice' ) }: </label>
+			        <label>${ total_dice }d</label>
+            </div>
+            <hr>
+          </form>
+		      <h2>${ game.i18n.localize( 'BITD.RollOptions' ) }</h2>
+		      <div class="action-info">${ game.i18n.localize( 'BITD.ActionsHelp' ) }</div>
+        </div>
+      `,
+        buttons: {
+          yes: {
+            icon: "<i class='fas fa-check'></i>",
+            label: game.i18n.localize( 'BITD.Roll' ),
+            callback: async( html ) => {
+              let modifier = parseInt( html.find( '[name="mod"]' )[0].value );
+              let position = $( 'input:radio[name="pos"]:checked' )[0].value;
+              let effect = $( 'input:radio[name="fx"]:checked' )[0].value;
+              await this.rollAttribute( attribute_name, modifier, position, effect );
+            }
+          },
+          no: {
+            icon: "<i class='fas fa-times'></i>",
+            label: game.i18n.localize( 'BITD.Cancel' ),
+          },
         },
-      },
-      default: "yes",
-      render: html => {
-        $("#skill-roll #mod").on( "change", this._onDiceModChange);
-      }
-    }).render(true);
+        default: "yes",
+        render: html => {
+          $( "#skill-roll #mod" ).on( "change", this._onDiceModChange );
+        }
+      } ).render( true );
+    }
   }
 
   /* -------------------------------------------- */
