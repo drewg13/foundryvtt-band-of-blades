@@ -62,7 +62,7 @@ export const registerSystemSettings = function() {
   game.settings.register("band-of-blades", "useDropdownsInRollDialog", {
     name: "BITD.UseDropdownsInRollDialog",
     hint: "BITD.UseDropdownsInRollDialogHint",
-    scope: "world",
+    scope: "client",
     config: true,
     type: Boolean,
     default: false
@@ -71,7 +71,7 @@ export const registerSystemSettings = function() {
   game.settings.register("band-of-blades", "useDropdownsForItemUses", {
     name: "BITD.UseDropdownsForItemUses",
     hint: "BITD.UseDropdownsForItemUsesHint",
-    scope: "world",
+    scope: "client",
     config: true,
     type: Boolean,
     default: false

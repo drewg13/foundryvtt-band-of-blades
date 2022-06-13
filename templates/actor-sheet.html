@@ -35,7 +35,7 @@
                     <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                     <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
                       <div>{{item.name}}</div>
-                      <span class="tooltiptext left">{{{item.data.description}}}<br />{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />{{item.data.experience_clues}}</span>
+                      <span class="tooltiptext left">{{{item.data.description}}}<br />{{{localize "BITD.ClassExpClueDescription"}}}<br />{{{localize "BITD.ClassExpClue2"}}}<br />{{{item.data.experience_clues}}}<br />{{{localize "BITD.ClassExpClue3"}}}</span>
                     </div>
                   </div>
                   <div>
@@ -335,15 +335,15 @@
             <a class="item-add-popup" data-item-type="ability" data-limiter=data.character_class><i class="fas fa-plus-square"></i></a>
           </p>
           <div id="character-experience" class="teeth-experience tooltip">
-			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i>
-              <span class="tooltiptext bottom">{{localize "BITD.ClassExpClueDescription"}}<br />{{localize "BITD.ClassExpClue2"}}<br />{{localize "BITD.ClassExpClue3"}}<br />
-                {{#each actor.items as |item id|}}
-                  {{#if (eq item.type "class")}}
-                    {{item.data.experience_clues}}
-                  {{/if}}
-                {{/each}}
-              </span>
-            </label>
+			      <label for="character-{{actor._id}}-experience-0">{{localize "BITD.PExperience"}}<i class="fab fa-creative-commons-zero nullifier"></i></label>
+            <span class="tooltiptext bottom">{{{localize "BITD.ClassExpClueDescription"}}}<br />{{{localize "BITD.ClassExpClue2"}}}<br />
+              {{#each actor.items as |item id|}}
+                {{#if (eq item.type "class")}}
+                  {{{item.data.experience_clues}}}
+                {{/if}}
+              {{/each}}
+              <br />{{{localize "BITD.ClassExpClue3"}}}
+            </span>
             {{#multiboxes data.experience}}
               <input type="radio" id="character-{{actor._id}}-experience-0" name="data.experience" value="0" dtype="Radio">
               {{#times_from_1 data.experienceMax}}

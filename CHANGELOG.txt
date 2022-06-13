@@ -71,3 +71,5 @@ v1.7.2  Role Sheet improvements, speedier tooltips
 v1.7.3  Fix localization of Trauma and Blight lists
 
 v1.8.0  UI updates: option to use Trauma-style buttons for Position and Effect in Roll Dialogs, add delete button for Specialist actions, option to use radio buttons instead of dropdowns for Specialist Action and Item usage trackers, fixed errors on adding items with usage dropdowns, fix Rookie squad creation, reconfigure Abilities and Items descriptions
+
+v1.8.1  Fixed bugs in Engagement crit results, XP triggers, Playbook XP tooltip display; Allowed dropdown settings to work on a per-client basis
