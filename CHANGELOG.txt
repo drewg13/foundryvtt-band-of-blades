@@ -75,3 +75,5 @@ v1.8.0  UI updates: option to use Trauma-style buttons for Position and Effect i
 v1.8.1  Fixed bugs in Engagement crit results, XP triggers, Playbook XP tooltip display; Allowed dropdown settings to work on a per-client basis
 
 v1.8.2  Fixed subtle error with Traits only displaying Compendium options
+
+v1.8.3  Added updated font file (by Gus) to improve support for extended Latin characters, added option to enter roll purpose for Fortune Rolls to be included in chat result, fix interactions between Elite upgrades and new Specialist action addition

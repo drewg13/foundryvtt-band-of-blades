@@ -502,7 +502,7 @@
                 <div class="attributes-container">
                   {{#multiboxes (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'value')}}
                     <div class="attribute-stats">
-                      {{#times_from_0 (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'max')}}
+                      {{#times_from_0 (lookup2 ../data.attributes.specialist.skills ../data.item_triggers.spec_skill 'maxTotal')}}
                         <input type="radio" id="attributes-{{../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}" name="data.attributes.specialist.skills.{{../../data.item_triggers.spec_skill}}.value" value="{{this}}">
                         <label for="attributes-{{../../actor._id}}-{{../../data.item_triggers.spec_skill}}-{{this}}"></label>
                       {{/times_from_0}}
@@ -542,7 +542,7 @@
                   <div class="attributes-container">
                     {{#multiboxes skill.value}}
                       <div class="attribute-stats">
-                        {{#times_from_0 skill.max}}
+                        {{#times_from_0 skill.maxTotal}}
                           <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
                           <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                         {{/times_from_0}}
@@ -586,7 +586,7 @@
                       <div class="attributes-container">
                         {{#multiboxes skill.value}}
                           <div class="attribute-stats">
-                            {{#times_from_0 skill.max}}
+                            {{#times_from_0 skill.maxTotal}}
                               <input type="radio" id="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}" name="data.attributes.{{attribute_name}}.skills.{{skill_name}}.value" value="{{this}}">
                               <label for="attributes-{{../../../actor._id}}-{{skill_name}}-{{this}}"></label>
                             {{/times_from_0}}

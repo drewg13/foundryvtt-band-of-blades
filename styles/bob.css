@@ -44,7 +44,7 @@
 }
 @font-face {
   font-family: 'MajorGuilty';
-  src: url("assets/fonts/MAJOR-__.otf");
+  src: url("assets/fonts/major-guilty-latin.otf");
 }
 @font-face {
   font-family: 'Vollkorn';
@@ -370,6 +370,15 @@ input[type="checkbox"]:hover {
   text-transform: capitalize;
   background-color: #999;
   color: #191813;
+  position: relative;
+  padding-top: 3px;
+  display: flex;
+  font-weight: bold;
+}
+* .label-stripe-chat-small-black {
+  text-transform: capitalize;
+  background-color: #191813;
+  color: #EEEFFF;
   position: relative;
   padding-top: 3px;
   display: flex;

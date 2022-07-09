@@ -45,8 +45,16 @@ export class BoBActorSheet extends BoBSheet {
         loadout += ( i.type === "item" ) ? parseInt( i.data.load ) : 0
       } );
       data.data.loadout.current = loadout;
-
       data.load_levels = { "BITD.Light": "BITD.Light", "BITD.Normal": "BITD.Normal", "BITD.Heavy": "BITD.Heavy" };
+
+      // Total any skill bonuses
+      const attributes = Object.keys( game.system.model.Actor.character.attributes );
+      attributes.forEach( a => {
+        let skills = Object.keys( game.system.model.Actor.character.attributes[a].skills );
+        skills.forEach ( s => {
+          data.data.attributes[a].skills[s].maxTotal = data.data.attributes[a].skills[s].max + data.data.attributes[a].skills[s].maxBonus;
+        })
+      })
     }
 
     return data;
