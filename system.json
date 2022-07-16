@@ -1,12 +1,24 @@
 {
-  "name": "band-of-blades",
+  "id": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "1.8.3",
-  "minimumCoreVersion": "0.8.8",
-  "compatibleCoreVersion": "9",
+  "version": "2.0.0",
+  "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
+  "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.0.0.zip",
+  "minimumCoreVersion": 10,
+  "compatibility": {
+    "minimum": 10,
+    "verified": "10.273"
+  },
   "templateVersion": 1,
-  "authors": ["megastruktur", "Andrew Garinger [agaringer#6498]"],
+  "authors": [
+    { "name": "megastruktur" },
+    {
+      "name": "Andrew Garinger",
+      "discord": "agaringer#6498"
+    }
+  ],
   "esmodules": [
     "module/bob.js"
   ],
@@ -21,129 +33,111 @@
       "path": "lang/en.json"
     }
   ],
-  "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
-  "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v1.8.3.zip",
   "packs": [
     {
       "name": "class",
       "label": "Classes",
       "system": "band-of-blades",
       "path": "./packs/classes.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "role",
       "label": "Roles",
       "system": "band-of-blades",
       "path": "./packs/roles.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "squad",
       "label": "Squads",
       "system": "band-of-blades",
       "path": "./packs/squads.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "heritage",
       "label": "Heritages",
       "system": "band-of-blades",
       "path": "./packs/heritages.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "trait",
       "label": "Traits",
       "system": "band-of-blades",
       "path": "./packs/traits.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "item",
       "label": "Items",
       "system": "band-of-blades",
       "path": "./packs/items.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "materiel",
       "label": "Materiel",
       "system": "band-of-blades",
       "path": "./packs/materiel.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "personnel",
       "label": "Personnel",
       "system": "band-of-blades",
       "path": "./packs/personnel.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "ability",
       "label": "Abilities",
       "system": "band-of-blades",
       "path": "./packs/abilities.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "chosen",
       "label": "Chosen/Broken",
       "system": "band-of-blades",
       "path": "./packs/chosen.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "chosenability",
       "label": "Chosen/Broken Abilities",
       "system": "band-of-blades",
       "path": "./packs/chosenabilities.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "spies",
       "label": "Spies",
       "system": "band-of-blades",
       "path": "./packs/spies.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "network",
       "label": "Spy Network",
       "system": "band-of-blades",
       "path": "./packs/network.db",
-      "type": "Item",
-      "entity": "Item"
+      "type": "Item"
     },
     {
       "name": "minion",
       "label": "Undead Armies",
       "system": "band-of-blades",
       "path": "./packs/minions.db",
-      "type": "Actor",
-      "entity": "Actor"
+      "type": "Actor"
     },
     {
       "name": "missions",
       "label": "Mission Tables",
       "system": "band-of-blades",
       "path": "./packs/missions.db",
-      "type": "RollTable",
-      "entity": "RollTable"
+      "type": "RollTable"
     }
   ]
 }

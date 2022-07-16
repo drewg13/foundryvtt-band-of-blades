@@ -38,6 +38,7 @@
   "BITD.RoleReputation": "Reputation (Choose 1):",
   "BITD.RolePersonality": "Personality (Choose 1-2):",
   "BITD.RoleLook": "Look (Choose 1-3):",
+  "BITD.Trait": "Trait",
   "BITD.Traits": "Traits",
   "BITD.TitleDeleteItem": "Delete item",
   "BITD.TitlePostItem": "Post item",

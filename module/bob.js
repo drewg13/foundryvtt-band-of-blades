@@ -24,7 +24,7 @@ window.BoBHelpers = BoBHelpers;
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 Hooks.once("init", function() {
-  console.log(`Initializing Band of Blades System`);
+  console.log(`Initializing ${game.system.id} System`);
 
   game.bob = {
     dice: bobRoll
@@ -82,9 +82,15 @@ Hooks.once("init", function() {
     if (typeof selected !== 'undefined') {
       selected.forEach(selected_value => {
         if (selected_value !== false) {
-          const escapedValue = RegExp.escape(Handlebars.escapeExpression(selected_value));
-          const rgx = new RegExp(' value=\"' + escapedValue + '\"');
-          html = html.replace(rgx, "$& checked=\"checked\"");
+          let escapedValue = RegExp.escape(Handlebars.escapeExpression(selected_value));
+          let rgx = new RegExp(' value=\"' + escapedValue + '\"');
+          let oldHtml = html;
+          html = html.replace(rgx, "$& checked");
+          while( ( oldHtml === html ) && ( escapedValue >= 0 ) ){
+            escapedValue--;
+            rgx = new RegExp(' value=\"' + escapedValue + '\"');
+            html = html.replace(rgx, "$& checked");
+          }
         }
       });
     }
@@ -106,7 +112,7 @@ Hooks.once("init", function() {
     if (count > max) count = max;
 
     const rgx = new RegExp(' value=\"' + count + '\"');
-    return html.replace(rgx, "$& checked=\"checked\"");
+    return html.replace(rgx, "$& checked");
 
   });
 
@@ -203,19 +209,6 @@ Hooks.once("init", function() {
     return accum;
   });
 
-  // Concat helper
-  // https://gist.github.com/adg29/f312d6fab93652944a8a1026142491b1
-  // Usage: (concat 'first 'second')
-  Handlebars.registerHelper('concat', function() {
-    let outStr = '';
-    for(let arg in arguments){
-        if(typeof arguments[arg]!='object'){
-            outStr += arguments[arg];
-        }
-    }
-    return outStr;
-  });
-
   Handlebars.registerHelper('add', function(a, b) {
     return (a + b);
   });
@@ -226,6 +219,19 @@ Hooks.once("init", function() {
 
   Handlebars.registerHelper('pcase', function(a) {
     return BoBHelpers.getProperCase( a );
+  });
+
+  // Concat helper
+  // https://gist.github.com/adg29/f312d6fab93652944a8a1026142491b1
+  // Usage: (concat 'first 'second')
+  Handlebars.registerHelper('concat', function() {
+    let outStr = '';
+    for(let arg in arguments){
+      if(typeof arguments[arg]!='object'){
+        outStr += arguments[arg];
+      }
+    }
+    return outStr;
   });
 
   /**
@@ -278,13 +284,13 @@ Hooks.once("init", function() {
     html += `<label class="clock-zero-label" for="clock-0-${uniq_id}}"><i class="fab fa-creative-commons-zero nullifier"></i></label>`;
     html += `<div id="bob-clock-${uniq_id}" class="bob-clock clock-${type} clock-${type}-${current_value}" style="background-image:url('/systems/band-of-blades/themes/${theme}/${type}clock_${current_value}.svg');">`;
 
-    let zero_checked = (parseInt(current_value) === 0) ? 'checked="checked"' : '';
-    html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" name="${parameter_name}" ${zero_checked}>`;
+    let zero_checked = (parseInt(current_value) === 0) ? 'checked' : '';
+    html += `<input type="radio" value="0" id="clock-0-${uniq_id}}" data-dtype="String" name="${parameter_name}" ${zero_checked}>`;
 
     for (let i = 1; i <= parseInt(type); i++) {
-      let checked = (parseInt(current_value) === i) ? 'checked="checked"' : '';
+      let checked = (parseInt(current_value) === i) ? 'checked' : '';
       html += `
-        <input data-resource="clock" type="radio" value="${i}" id="clock-${i}-${uniq_id}" name="${parameter_name}" ${checked}>
+        <input data-resource="clock" type="radio" value="${i}" id="clock-${i}-${uniq_id}" data-dtype="String" name="${parameter_name}" ${checked}>
         <label for="clock-${i}-${uniq_id}"></label>
       `;
     }
@@ -325,21 +331,12 @@ Hooks.on("renderSceneControls", (app, html) => {
   dice_roller.on( "click", async function() {
     await simpleRollPopup();
   })
-  if( isNewerVersion( game.version, '9.220' ) ) {
-    html.children().first().append( dice_roller );
-  } else {
-    html.append( dice_roller );
-  }
-});
-
-//For Clocks UI
-Hooks.once("init", () => {
-  log(`Init ${game.data.system.id}`);
+  html.children().first().append( dice_roller );
 });
 
 // re-render the Marshal sheet after updating any squad sheets to catch changes made
 Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
-  let marshals = game.actors.filter( a => a.data.data.type === "Marshal" ).map( a => { return a.id } );
+  let marshals = game.actors.filter( a => a.system.type === "Marshal" ).map( a => { return a.id } );
   marshals.forEach( m => {
     game.actors.get( m ).sheet.render(false);
   });
@@ -348,51 +345,51 @@ Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
 
 // Send Role resource changes to chat
 Hooks.on("preUpdateActor", (actor, data, options, userId) => {
-  if ( ( actor.data.type === "role" ) && ( Object.keys(data)[0] === "data" ) && ( Object.keys(data.data)[0] === "resources" )) {
-    let item = Object.keys(data.data.resources)[0];
+  if ( ( actor.type === "role" ) && ( Object.keys(data)[0] === "system" ) && ( Object.keys(data.system)[0] === "resources" )) {
+    let item = Object.keys(data.system.resources)[0];
     let subItem;
-    if( item === "projects") { subItem = Object.keys(Object.values(Object.entries(data.data.resources)[0][1])[0])[0]; }
+    if( item === "projects") { subItem = Object.keys(Object.values(Object.entries(data.system.resources)[0][1])[0])[0]; }
     let actorName = actor.name;
     let resource, newValue, oldValue, result;
     switch ( item ) {
       case "intel":
         resource = game.i18n.localize("BITD.Intel");
-        newValue = parseInt( data.data.resources[item] );
-        oldValue = parseInt( actor.data.data.resources[item] );
+        newValue = parseInt( data.system.resources[item] );
+        oldValue = parseInt( actor.system.resources[item] );
         break;
       case "pressure":
         resource = game.i18n.localize("BITD.Pressure");
-        newValue = parseInt( data.data.resources[item] );
-        oldValue = parseInt( actor.data.data.resources[item] );
+        newValue = parseInt( data.system.resources[item] );
+        oldValue = parseInt( actor.system.resources[item] );
         break;
       case "morale":
         resource = game.i18n.localize("BITD.Morale");
-        newValue = parseInt( data.data.resources[item] );
-        oldValue = parseInt( actor.data.data.resources[item] );
+        newValue = parseInt( data.system.resources[item] );
+        oldValue = parseInt( actor.system.resources[item] );
         break;
       case "engagement":
         resource = game.i18n.localize("BITD.Engagement");
-        newValue = parseInt( data.data.resources[item] );
-        oldValue = parseInt( actor.data.data.resources[item] );
+        newValue = parseInt( data.system.resources[item] );
+        oldValue = parseInt( actor.system.resources[item] );
         break;
       case "supply":
         resource = game.i18n.localize("BITD.Supply");
-        newValue = parseInt( data.data.resources[item].value );
-        oldValue = parseInt( actor.data.data.resources[item].value );
+        newValue = parseInt( data.system.resources[item].value );
+        oldValue = parseInt( actor.system.resources[item].value );
         break;
       case "time":
-        resource = Object.keys( data.data.resources[item] )[0];
-        newValue = parseInt( data.data.resources.time[resource].value );
-        oldValue = parseInt( actor.data.data.resources.time[resource].value );
+        resource = Object.keys( data.system.resources[item] )[0];
+        newValue = parseInt( data.system.resources.time[resource].value );
+        oldValue = parseInt( actor.system.resources.time[resource].value );
         result = resource.replace(/([A-Z 0-9])/g, " $1");
         resource = result.charAt(0).toUpperCase() + result.slice(1);
         break;
       case "projects":
         if( subItem !== "value" ){ return }
-        resource = Object.keys( data.data.resources[item] )[0];
-        newValue = parseInt( data.data.resources.projects[resource].value );
-        oldValue = parseInt( actor.data.data.resources.projects[resource].value );
-        resource = actor.data.data.resources.projects[resource].name + " Project Clock";
+        resource = Object.keys( data.system.resources[item] )[0];
+        newValue = parseInt( data.system.resources.projects[resource].value );
+        oldValue = parseInt( actor.system.resources.projects[resource].value );
+        resource = actor.system.resources.projects[resource].name + " Project Clock";
         break;
       case "camp":
       case "fallen":

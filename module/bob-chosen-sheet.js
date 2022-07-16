@@ -24,32 +24,35 @@ export class BoBChosenSheet extends BoBSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async getData() {
-    const data = super.getData();
-    data.isGM = game.user.isGM;
-    data.editable = data.options.editable;
-    const actorData = this.actor.data.toObject(false);
-    data.actor = actorData;
-    data.data = actorData.data;
-    data.items = actorData.items.sort(function(a, b) {
+  async getData( options ) {
+    const superData = super.getData( options );
+    const sheetData = superData.data;
+    //sheetData.document = superData.actor;
+    sheetData.owner = superData.owner;
+    sheetData.editable = superData.editable;
+    sheetData.isGM = game.user.isGM;
+
+    // Prepare active effects
+    sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
+
+    sheetData.items = superData.items.sort(function(a, b) {
       let textA = a.name.toUpperCase();
       let textB = b.name.toUpperCase();
       return textA.localeCompare(textB);
     });
 
-    if( data.data.favor !== "" ){
-      data.data.favorTypes = [];
-      data.data.favorTypes.push( data.data.favor.split(",") );
+    if( sheetData.system.favor !== "" ){
+      sheetData.system.favorTypes = [];
+      sheetData.system.favorTypes.push( sheetData.system.favor.split(",") );
     }
-    if( data.data.features !== "" ){
-      data.data.featureTypes = [];
-      data.data.featureTypes.push( data.data.features.split(",") );
+    if( sheetData.system.features !== "" ){
+      sheetData.system.featureTypes = [];
+      sheetData.system.featureTypes.push( sheetData.system.features.split(",") );
     }
 
-    // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
-    return data;
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -73,7 +76,6 @@ export class BoBChosenSheet extends BoBSheet {
       const element = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(element.data("itemId"));
       if( item ) { await item.delete(); }
-      //await this.actor.deleteEmbeddedDocuments("Item", [item.id]);
       element.slideUp(200, () => this.render(false));
     });
 

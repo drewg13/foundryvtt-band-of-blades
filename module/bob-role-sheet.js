@@ -24,55 +24,59 @@ export class BoBRoleSheet extends BoBSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  async getData() {
-    const data = super.getData();
-    data.isGM = game.user.isGM;
-    data.editable = data.options.editable;
-    const actorData = this.actor.data.toObject(false);
-    data.actor = actorData;
-    data.data = actorData.data;
-    data.items = actorData.items.sort(function(a, b) {
+  async getData( options ) {
+    const superData = super.getData( options );
+    const sheetData = superData.data;
+    //sheetData.document = superData.actor;
+    sheetData.owner = superData.owner;
+    sheetData.editable = superData.editable;
+    sheetData.isGM = game.user.isGM;
+
+    // Prepare active effects
+    sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
+
+    sheetData.items = superData.items.sort(function(a, b) {
       let textA = a.name.toUpperCase();
       let textB = b.name.toUpperCase();
       return textA.localeCompare(textB);
     });
 
-    data.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
+    sheetData.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
 
-    data.foodStores = Math.min( 6, ( 3 + data.data.resources.supply.extraUses ) );
+    sheetData.foodStores = Math.min( 6, ( 3 + sheetData.system.resources.supply.extraUses ) );
 
-    let spies = data.items.filter( s => s.type === "spies" );
+    let spies = sheetData.items.filter( s => s.type === "spies" );
     let spiesArray = [];
     spies.forEach( s => spiesArray.push( [ s._id, s.name ] ) );
-    data.spyList = Object.fromEntries( spiesArray );
-    data.spyList = foundry.utils.mergeObject( data.spyList, { "0": "Unassigned" } )
+    sheetData.spyList = Object.fromEntries( spiesArray );
+    sheetData.spyList = foundry.utils.mergeObject( sheetData.spyList, { "0": "Unassigned" } )
 
-    if( data.data.type === "Marshal" ) {
+    if( sheetData.system.type === "Marshal" ) {
       const soldiers = BoBHelpers.getAllCharactersByClass( "Soldier", game );
       const rookies = BoBHelpers.getAllCharactersByClass( "Rookie", game );
-      data.squaddies = [ ...rookies, ...soldiers ];
-      const nonSquaddies = game.actors.filter( ( { id: id1 } ) => !data.squaddies.some( ( { _id: id2 } ) => id2 === id1 ) );
+      sheetData.squaddies = [ ...rookies, ...soldiers ];
+      const nonSquaddies = game.actors.filter( ( { id: id1 } ) => !sheetData.squaddies.some( ( { _id: id2 } ) => id2 === id1 ) );
       const specialists = nonSquaddies.filter( s => s.type === "character" );
-      data.specialists = specialists.map( s => {
-        return s.data
+      sheetData.specialists = specialists.map( s => {
+        return s
       } );
-      data.squaddies.forEach( s => {
+      sheetData.squaddies.forEach( s => {
         let heavy, medium, light = "white";
-        if( s.data.harm.heavy.one === "" ) {
+        if( s.system.harm.heavy.one === "" ) {
           heavy = "white";
         } else {
           heavy = "black";
         }
-        if( ( s.data.harm.medium.one === "" ) && ( s.data.harm.medium.two === "" ) ) {
+        if( ( s.system.harm.medium.one === "" ) && ( s.system.harm.medium.two === "" ) ) {
           medium = "white";
-        } else if( ( s.data.harm.medium.one === "" ) || ( s.data.harm.medium.two === "" ) ) {
+        } else if( ( s.system.harm.medium.one === "" ) || ( s.system.harm.medium.two === "" ) ) {
           medium = "red";
         } else {
           medium = "black";
         }
-        if( ( s.data.harm.light.one === "" ) && ( s.data.harm.light.two === "" ) ) {
+        if( ( s.system.harm.light.one === "" ) && ( s.system.harm.light.two === "" ) ) {
           light = "white";
-        } else if( ( s.data.harm.light.one === "" ) || ( s.data.harm.light.two === "" ) ) {
+        } else if( ( s.system.harm.light.one === "" ) || ( s.system.harm.light.two === "" ) ) {
           light = "red";
         } else {
           light = "black";
@@ -81,7 +85,7 @@ export class BoBRoleSheet extends BoBSheet {
         foundry.utils.mergeObject(
           s,
           {
-            "data": {
+            "system": {
               "heavyBox": heavy,
               "mediumBox": medium,
               "lightBox": light
@@ -89,23 +93,23 @@ export class BoBRoleSheet extends BoBSheet {
           }
         );
       } );
-      data.specialists.forEach( s => {
+      sheetData.specialists.forEach( s => {
         let heavy, medium, light;
-        if( s.data.harm.heavy.one !== "" ) {
+        if( s.system.harm.heavy.one !== "" ) {
           heavy = "black";
         } else {
           heavy = "white";
         }
-        if( ( s.data.harm.medium.one !== "" ) && ( s.data.harm.medium.two !== "" ) ) {
+        if( ( s.system.harm.medium.one !== "" ) && ( s.system.harm.medium.two !== "" ) ) {
           medium = "black";
-        } else if( ( s.data.harm.medium.one !== "" ) || ( s.data.harm.medium.two !== "" ) ) {
+        } else if( ( s.system.harm.medium.one !== "" ) || ( s.system.harm.medium.two !== "" ) ) {
           medium = "red";
         } else {
           medium = "white";
         }
-        if( ( s.data.harm.light.one !== "" ) && ( s.data.harm.light.two !== "" ) ) {
+        if( ( s.system.harm.light.one !== "" ) && ( s.system.harm.light.two !== "" ) ) {
           light = "black";
-        } else if( ( s.data.harm.light.one !== "" ) || ( s.data.harm.light.two !== "" ) ) {
+        } else if( ( s.system.harm.light.one !== "" ) || ( s.system.harm.light.two !== "" ) ) {
           light = "red";
         } else {
           light = "white";
@@ -114,7 +118,7 @@ export class BoBRoleSheet extends BoBSheet {
         foundry.utils.mergeObject(
           s,
           {
-            "data": {
+            "system": {
               "heavyBox": heavy,
               "mediumBox": medium,
               "lightBox": light
@@ -122,30 +126,30 @@ export class BoBRoleSheet extends BoBSheet {
           }
         );
       } )
-      data.squads = await BoBHelpers.getAllItemsByType( "squad", game );
+      sheetData.squads = await BoBHelpers.getAllItemsByType( "squad", game );
       const specTypes = await BoBHelpers.getAllItemsByType( "class", game );
-      data.specialistTypes = specTypes.filter( t => ( t.name !== "Rookie" ) && ( t.name !== "Soldier" ) );
+      sheetData.specialistTypes = specTypes.filter( t => ( t.name !== "Rookie" ) && ( t.name !== "Soldier" ) );
     }
 
-    if( data.data.type === "Lorekeeper" ) {
-      data.fallenLength = Object.keys( data.data.resources.fallen ).length;
-      data.fallenBlocks = Math.ceil( ( data.fallenLength + 1 ) / 4 ) - 1;
-      if( data.data.resources.fallen[( data.fallenLength - 1 )] !== "" ) {
+    if( sheetData.system.type === "Lorekeeper" ) {
+      sheetData.fallenLength = Object.keys( sheetData.system.resources.fallen ).length;
+      sheetData.fallenBlocks = Math.ceil( ( sheetData.fallenLength + 1 ) / 4 ) - 1;
+      if( sheetData.system.resources.fallen[( sheetData.fallenLength - 1 )] !== "" ) {
         foundry.utils.mergeObject(
-          data.data.resources.fallen,
-          { [ data.fallenLength ]: "" }
+          sheetData.system.resources.fallen,
+          { [ sheetData.fallenLength ]: "" }
         );
       }
     }
 
-    if( data.data.type === "Spymaster" ) {
-      data.data.spies = BoBHelpers.getActorItemsByType( this.actor.id, "spies" ).length;
+    if( sheetData.system.type === "Spymaster" ) {
+      sheetData.system.spies = BoBHelpers.getActorItemsByType( this.actor.id, "spies" ).length;
     }
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
 
-    return data;
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -227,7 +231,7 @@ export class BoBRoleSheet extends BoBSheet {
     // Post QM project to chat
     html.find(".project-post").click( async (ev) => {
       const element = $(ev.currentTarget).parents(".project");
-      const project = this.actor.data.data.resources.projects[ element.data("project") ];
+      const project = this.actor.system.resources.projects[ element.data("project") ];
       const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", project);
       const chatData = {
         user: game.userId,

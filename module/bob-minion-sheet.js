@@ -23,20 +23,20 @@ export class BoBMinionSheet extends BoBSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData() {
-    const data = super.getData();
-    data.isGM = game.user.isGM;
-    data.editable = data.options.editable;
-    const actorData = this.actor.data.toObject(false);
-    data.actor = actorData;
-    data.data = actorData.data;
-    data.items = actorData.items;
+  async getData( options ) {
+    const superData = super.getData( options );
+    const sheetData = superData.data;
+    //sheetData.document = superData.actor;
+    sheetData.owner = superData.owner;
+    sheetData.editable = superData.editable;
+    sheetData.isGM = game.user.isGM;
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
 
+    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
-    return data;
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -60,7 +60,6 @@ export class BoBMinionSheet extends BoBSheet {
       const element = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(element.data("itemId"));
       if( item ) { await item.delete(); }
-      //await this.actor.deleteEmbeddedDocuments("Item", [item.id]);
       element.slideUp(200, () => this.render(false));
     });
 

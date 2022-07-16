@@ -21,7 +21,7 @@ export class BoBHelpers {
     // If the Item has the exact same name - remove it from list.
     // Remove Duplicate items from the array.
     actor.items.forEach( i => {
-      let has_double = ( item_data.type === i.data.type );
+      let has_double = ( item_data.type === i.type );
       if( ( ( i.name === item_data.name ) || ( should_be_distinct && has_double ) ) && !( allowed_types.includes( item_data.type ) ) && ( item_data._id !== i.id ) ) {
         dupe_list.push( i.id );
       }
@@ -41,24 +41,24 @@ export class BoBHelpers {
    *   data of actor to add abilities to
    */
   static async addDefaultAbilities( item_data, actor ) {
-
-    let def_abilities = item_data.data.def_abilities || {};
+console.log(item_data)
+    let def_abilities = item_data.system.def_abilities || {};
     let abil_list = def_abilities.split( ', ' );
     let item_type = "";
     let items_to_add = [];
 
-    if( actor.data.type === "character" ) {
+    if( actor.type === "character" ) {
       item_type = "ability";
-    } else if( actor.data.type === "role" ) {
+    } else if( actor.type === "role" ) {
       item_type = "network";
-    } else if( actor.data.type === "chosen" ) {
+    } else if( actor.type === "chosen" ) {
       item_type = "chosenability";
     } else {
       return
     }
 
     let abilities = actor.items.filter( a => a.type === item_type ).map( e => {
-      return e.data.name
+      return e.name
     } );
     let items = await BoBHelpers.getAllItemsByType( item_type, game );
 
@@ -132,7 +132,7 @@ export class BoBHelpers {
 
     let created = await BoBActor.create( createData );
 
-    let marshals = game.actors.filter( a => a.data.data.type === "Marshal" ).map( a => {
+    let marshals = game.actors.filter( a => a.system.type === "Marshal" ).map( a => {
       return a.id
     } );
     marshals.forEach( m => {
@@ -157,7 +157,7 @@ export class BoBHelpers {
   static async getAllItemsByType( item_type, game ) {
 
     let game_items = game.items.filter( e => e.type === item_type ).map( e => {
-      return e.data.toObject()
+      return e.toObject()
     } ) || [];
     let pack = game.packs.find( e => e.metadata.name === item_type );
     let compendium_content;
@@ -165,7 +165,7 @@ export class BoBHelpers {
     compendium_content = await pack.getDocuments();
 
     let compendium_items = compendium_content.map( k => {
-      return k.data.toObject()
+      return k.toObject()
     } ) || [];
     compendium_items = compendium_items.filter( a => game_items.filter( b => a.name === b.name && a.name === b.name ).length === 0 );
 
@@ -191,8 +191,8 @@ export class BoBHelpers {
    *   an array of copy-safe actor objects of the specified type in the game world
    */
   static getAllActorsByType( actor_type, game ) {
-    return game.actors.filter( e => e.data.type === actor_type ).map( e => {
-      return e.data.toObject()
+    return game.actors.filter( e => e.type === actor_type ).map( e => {
+      return e.toObject()
     } ) || [];
   }
 
@@ -201,7 +201,7 @@ export class BoBHelpers {
   /**
    * Returns an array of character objects matching the class passed which are present in the game world
    *
-   * @param {string} class
+   * @param {string} actor_class
    *   the character class of interest
    * @param {Object} game
    *   current game world object
@@ -209,8 +209,8 @@ export class BoBHelpers {
    *   an array of raw ActorData objects of the specified class in the game world
    */
   static getAllCharactersByClass( actor_class, game ) {
-    return game.actors.filter( e => e.data.data.class === actor_class ).map( e => {
-      return e.data
+    return game.actors.filter( e => e.system.class === actor_class ).map( e => {
+      return e
     } ) || [];
   }
 
@@ -228,7 +228,7 @@ export class BoBHelpers {
    */
   static getActorItemsByType( actorId, itemType ) {
     let actor = game.actors.get( actorId );
-    return actor.data.items.filter( i => i.type === itemType ).map( i => i.id ) || [];
+    return actor.items.filter( i => i.type === itemType ).map( i => i.id ) || [];
   }
 
   /* -------------------------------------------- */

@@ -18,28 +18,30 @@ export class BoBItemSheet extends ItemSheet {
 
   /* -------------------------------------------- */
 
-/** @override */
-  getData() {
-    const data = super.getData();
-	  data.isGM = game.user.isGM;
-		data.editable = data.options.editable;
-		const itemData = data.data;
-    data.item = itemData;
-		data.data = itemData.data;
+  /** @override */
+  async getData(options) {
+  const superData = super.getData( options );
+  const sheetData = superData.data;
 
-    // Prepare Active Effects
-    data.effects = prepareActiveEffectCategories(this.item.effects);
+  sheetData.isGM = game.user.isGM;
+  sheetData.owner = superData.owner;
+  sheetData.editable = superData.editable;
 
-		return data;
+  // Prepare Active Effects
+  sheetData.effects = prepareActiveEffectCategories(this.document.effects);
+
+  sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+
+  return sheetData;
   }
 
   /** @override */
   get template() {
     const path = "systems/band-of-blades/templates/items";
     let simple_item_types = ["background", "heritage", "squad"];
-    let template_name = `${this.item.data.type}`;
+    let template_name = `${this.item.type}`;
 
-    if (simple_item_types.indexOf(this.item.data.type) >= 0) {
+    if (simple_item_types.indexOf(this.item.type) >= 0) {
       template_name = "simple";
     }
 
@@ -56,7 +58,7 @@ export class BoBItemSheet extends ItemSheet {
     if (!this.options.editable) return;
 
     html.find(".effect-control").click(ev => {
-      if ( this.item.isOwned ) return ui.notifications.warn(game.i18n.localize("BITD.EffectWarning"))
+      if ( this.isOwned ) return ui.notifications.warn(game.i18n.localize("BITD.EffectWarning"))
       onManageActiveEffect(ev, this.item)
     });
   }
