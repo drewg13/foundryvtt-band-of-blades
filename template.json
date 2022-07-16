@@ -25,7 +25,7 @@
     },
     "trauma": {
       "max": 1,
-      "value": "0",
+      "value": 0,
       "name": "BITD.Trauma",
       "list": [0]
     },
@@ -36,7 +36,7 @@
     },
     "blight": {
       "max": 4,
-      "value": "0",
+      "value": 0,
       "name": "BITD.Blight",
       "list": [0]
     },

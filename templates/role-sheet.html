@@ -2,26 +2,26 @@
 
   <section id="name-alias" class="flex-vertical">
     <div id="name-role" class="flex-horizontal">
-      <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+      <img src="{{img}}" data-edit="img" title="{{name}}" height="100" width="100"/>
 
       <div class="grow-two flex-center">
         <div id="name" class="item-block">
-          <label class="item-class-label" for="character-{{actor._id}}-name">{{localize "BITD.Name"}}</label>
-          <input type="text" id="character-{{actor._id}}-name" name="name" value="{{actor.name}}">
+          <label class="item-class-label" for="character-{{_id}}-name">{{localize "BITD.Name"}}</label>
+          <input type="text" id="character-{{_id}}-name" name="name" value="{{name}}">
         </div>
 
   		  <div class="item-block flex-horizontal">
           <div class="item-class-label">
             <a class="item-add-popup" data-distinct="true" data-item-type="role">{{localize "BITD.Role"}}</a>
           </div>
-          {{#each actor.items as |item id|}}
+          {{#each items as |item id|}}
             {{#if (eq item.type "role")}}
               <div class="item flex-horizontal" data-item-id="{{item._id}}">
                 <div class="item-body center flex-horizontal">
                   <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                   <div class="attribute-skill-label tooltip" data-roll-attribute="{{item.name}}">
                     <a class="item-name">{{item.name}}</a>
-                    <span class="tooltiptext">{{{item.data.description}}}</span>
+                    <span class="tooltiptext">{{{item.system.description}}}</span>
                   </div>
                 </div>
                 <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
@@ -34,15 +34,16 @@
     </div>
 
     <div id="character-traits" class="flex-vertical">
-      {{#if actor.data.type}}
+      {{#if system.type}}
         <div class="item-block flexrow">
           <div class="item-class-label flex1">{{localize "BITD.RoleHeritage"}}</div>
           <div class="attributes-container flex3">
-            {{#multiboxes data.traits.heritage}}
+            {{#multiboxes system.traits.heritage}}
               <div class="attribute-stats">
+                <input type="radio" id="heritage-{{_id}}-0" data-dtype="String" name="system.traits.heritage" value="0">
                 {{#times_from_1 5}}
-                  <input type="radio" id="heritage-{{../actor._id}}-{{this}}" name="data.traits.heritage" value="{{this}}">
-                  <label for="heritage-{{../actor._id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring "BITD.RoleHeritage" this)}}</span>
+                  <input type="radio" id="heritage-{{../_id}}-{{this}}" data-dtype="String" name="system.traits.heritage" value="{{this}}">
+                  <label for="heritage-{{../_id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring "BITD.RoleHeritage" this)}}</span>
                 {{/times_from_1}}
               </div>
             {{/multiboxes}}
@@ -51,11 +52,12 @@
         <div class="item-block flexrow">
           <div class="item-class-label flex1">{{localize "BITD.RoleReputation"}}</div>
           <div class="attributes-container flex3">
-            {{#multiboxes data.traits.reputation}}
+            {{#multiboxes system.traits.reputation}}
               <div class="attribute-stats">
+                <input type="radio" id="reputation-{{_id}}-0" data-dtype="String" name="system.traits.reputation" value="0">
                 {{#times_from_1 5}}
-                  <input type="radio" id="reputation-{{../actor._id}}-{{this}}" name="data.traits.reputation" value="{{this}}">
-                  <label for="reputation-{{../actor._id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." ../actor.data.type) "Reputation") this)}}</span>
+                  <input type="radio" id="reputation-{{../_id}}-{{this}}" data-dtype="String" name="system.traits.reputation" value="{{this}}">
+                  <label for="reputation-{{../_id}}-{{this}}"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." ../system.type) "Reputation") this)}}</span>
                 {{/times_from_1}}
               </div>
             {{/multiboxes}}
@@ -66,16 +68,16 @@
           <div class="item-class-label flex1">{{localize "BITD.RolePersonality"}}</div>
           <div class="attributes-container flex3">
             <div class="attribute-stats">
-              <input type="checkbox" id="personality-{{actor._id}}-1" name="data.traits.personality.one" value="one" {{checked data.traits.personality.one}}>
-              <label for="personality-{{actor._id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 1)}}</span>
-              <input type="checkbox" id="personality-{{actor._id}}-2" name="data.traits.personality.two" value="two" {{checked data.traits.personality.two}}>
-              <label for="personality-{{actor._id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 2)}}</span>
-              <input type="checkbox" id="personality-{{actor._id}}-3" name="data.traits.personality.three" value="three" {{checked data.traits.personality.three}}>
-              <label for="personality-{{actor._id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 3)}}</span>
-              <input type="checkbox" id="personality-{{actor._id}}-4" name="data.traits.personality.four" value="four" {{checked data.traits.personality.four}}>
-              <label for="personality-{{actor._id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 4)}}</span>
-              <input type="checkbox" id="personality-{{actor._id}}-5" name="data.traits.personality.five" value="five" {{checked data.traits.personality.five}}>
-              <label for="personality-{{actor._id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Personality") 5)}}</span>
+              <input type="checkbox" id="personality-{{_id}}-1" data-dtype="Boolean" name="system.traits.personality.one" value="one" {{checked system.traits.personality.one}}>
+              <label for="personality-{{_id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Personality") 1)}}</span>
+              <input type="checkbox" id="personality-{{_id}}-2" data-dtype="Boolean" name="system.traits.personality.two" value="two" {{checked system.traits.personality.two}}>
+              <label for="personality-{{_id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Personality") 2)}}</span>
+              <input type="checkbox" id="personality-{{_id}}-3" data-dtype="Boolean" name="system.traits.personality.three" value="three" {{checked system.traits.personality.three}}>
+              <label for="personality-{{_id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Personality") 3)}}</span>
+              <input type="checkbox" id="personality-{{_id}}-4" data-dtype="Boolean" name="system.traits.personality.four" value="four" {{checked system.traits.personality.four}}>
+              <label for="personality-{{_id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Personality") 4)}}</span>
+              <input type="checkbox" id="personality-{{_id}}-5" data-dtype="Boolean" name="system.traits.personality.five" value="five" {{checked system.traits.personality.five}}>
+              <label for="personality-{{_id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Personality") 5)}}</span>
             </div>
           </div>
         </div>
@@ -84,16 +86,16 @@
           <div class="item-class-label flex1">{{localize "BITD.RoleLook"}}</div>
           <div class="attributes-container flex3">
             <div class="attribute-stats">
-              <input type="checkbox" id="look-{{actor._id}}-1" name="data.traits.look.one" value="one" {{checked data.traits.look.one}}>
-              <label for="look-{{actor._id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 1)}}</span>
-              <input type="checkbox" id="look-{{actor._id}}-2" name="data.traits.look.two" value="two" {{checked data.traits.look.two}}>
-              <label for="look-{{actor._id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 2)}}</span>
-              <input type="checkbox" id="look-{{actor._id}}-3" name="data.traits.look.three" value="three" {{checked data.traits.look.three}}>
-              <label for="look-{{actor._id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 3)}}</span>
-              <input type="checkbox" id="look-{{actor._id}}-4" name="data.traits.look.four" value="four" {{checked data.traits.look.four}}>
-              <label for="look-{{actor._id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 4)}}</span>
-              <input type="checkbox" id="look-{{actor._id}}-5" name="data.traits.look.five" value="five" {{checked data.traits.look.five}}>
-              <label for="look-{{actor._id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." actor.data.type) "Look") 5)}}</span>
+              <input type="checkbox" id="look-{{_id}}-1" data-dtype="Boolean" name="system.traits.look.one" value="one" {{checked system.traits.look.one}}>
+              <label for="look-{{_id}}-1"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Look") 1)}}</span>
+              <input type="checkbox" id="look-{{_id}}-2" data-dtype="Boolean" name="system.traits.look.two" value="two" {{checked system.traits.look.two}}>
+              <label for="look-{{_id}}-2"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Look") 2)}}</span>
+              <input type="checkbox" id="look-{{_id}}-3" data-dtype="Boolean" name="system.traits.look.three" value="three" {{checked system.traits.look.three}}>
+              <label for="look-{{_id}}-3"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Look") 3)}}</span>
+              <input type="checkbox" id="look-{{_id}}-4" data-dtype="Boolean" name="system.traits.look.four" value="four" {{checked system.traits.look.four}}>
+              <label for="look-{{_id}}-4"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Look") 4)}}</span>
+              <input type="checkbox" id="look-{{_id}}-5" data-dtype="Boolean" name="system.traits.look.five" value="five" {{checked system.traits.look.five}}>
+              <label for="look-{{_id}}-5"></label><span class="trait-label flex1">{{localize (lookupstring (concat (lookupstring "BITD." system.type) "Look") 5)}}</span>
             </div>
           </div>
         </div>
@@ -106,21 +108,21 @@
       {{!-- Nav menu --}}
       <nav class="tabs flex-horizontal">
         <a class="item" data-tab="duties">{{localize "BITD.Duties"}}</a>
-        {{#unless (or (eq actor.data.type "Lorekeeper") (eq actor.data.type "Spymaster"))}}
+        {{#unless (or (eq system.type "Lorekeeper") (eq system.type "Spymaster"))}}
           <a class="item" data-tab="resources">{{localize "BITD.Resources"}}</a>
         {{/unless}}
-        {{#if (eq actor.data.type "Lorekeeper")}}
+        {{#if (eq system.type "Lorekeeper")}}
           <a class="item" data-tab="annals">{{localize "BITD.AnnalsShort"}}</a>
           <a class="item" data-tab="camp">{{localize "BITD.CampShort"}}</a>
         {{/if}}
-        {{#if (eq actor.data.type "Spymaster")}}
+        {{#if (eq system.type "Spymaster")}}
           <a class="item" data-tab="missions">{{localize "BITD.Missions"}}</a>
         {{/if}}
-        {{#if (eq actor.data.type "Marshal")}}
+        {{#if (eq system.type "Marshal")}}
           <a class="item" data-tab="squads">{{localize "BITD.Squads"}}</a>
           <a class="item" data-tab="specialists">{{localize "BITD.Specialists"}}</a>
         {{/if}}
-        {{#if (eq actor.data.type "Quartermaster")}}
+        {{#if (eq system.type "Quartermaster")}}
           <a class="item" data-tab="projects">{{localize "BITD.ProjectsShort"}}</a>
           <a class="item" data-tab="actions">{{localize "BITD.Actions"}}</a>
         {{/if}}
@@ -136,21 +138,21 @@
           <p><label>{{localize "BITD.Duties"}}</label>{{localize "BITD.DutiesLabel"}}</p>
         </div>
         <div id="duties-list" class="list">
-          {{{localize (concat (lookupstring "BITD." actor.data.type) "Duties")}}}
+          {{{localize (concat (lookupstring "BITD." system.type) "Duties")}}}
         </div>
       </div>
 
       <div id="resources" class="tab flex-vertical" data-tab="resources">
-        {{#if (eq actor.data.type "Commander")}}
+        {{#if (eq system.type "Commander")}}
           <div class="label-stripe">
             <p><label class="roll-die-attribute rollable-text" data-roll-attribute="pressure">{{localize "BITD.Pressure"}}</label>{{localize "BITD.PressureLabel"}}</p>
           </div>
           <div id="pressure-list" class="list">
             <div class="flex-horizontal number-input">
-              <button {{#if (eq data.resources.pressure 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-              <input id="pressure-{{actor._id}}" type="number" name="data.resources.pressure" value="{{data.resources.pressure}}">
+              <button {{#if (eq system.resources.pressure 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="pressure-{{_id}}" type="number" name="system.resources.pressure" value="{{system.resources.pressure}}">
               <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              <label for="pressure-{{actor._id}}">{{{localize "BITD.PressureDetail"}}}</label>
+              <label for="pressure-{{_id}}">{{{localize "BITD.PressureDetail"}}}</label>
             </div>
           </div>
 
@@ -161,11 +163,11 @@
             <div id="time-clocks" class="flex-vertical">
               <div>{{localize "BITD.TimeDetail"}}</div>
               <div class="gradient-stripe-time flex-horizontal">
-                <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock1.value" data.resources.time.timeClock1.type data.resources.time.timeClock1.value (concat actor._id "-clock-one") "grey"}}}</div>
+                <div class="flex-horizontal normal">{{{bob-clock "system.resources.time.timeClock1.value" system.resources.time.timeClock1.type system.resources.time.timeClock1.value (concat _id "-clock-one") "grey"}}}</div>
                 <div class="flex-vertical"><p class="caps" style="color:yellow;">{{localize "BITD.Time1"}}</p><p style="color:yellow;">{{localize "BITD.Time2"}}</p></div>
-                <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock2.value" data.resources.time.timeClock2.type data.resources.time.timeClock2.value (concat actor._id "-clock-two") "yellow"}}}</div>
+                <div class="flex-horizontal normal">{{{bob-clock "system.resources.time.timeClock2.value" system.resources.time.timeClock2.type system.resources.time.timeClock2.value (concat _id "-clock-two") "yellow"}}}</div>
                 <div class="flex-vertical"><p class="caps" style="color:red;">{{localize "BITD.Time3"}}</p><p style="color:red;">{{localize "BITD.Time4"}}</p></div>
-                <div class="flex-horizontal normal">{{{bob-clock "data.resources.time.timeClock3.value" data.resources.time.timeClock3.type data.resources.time.timeClock3.value (concat actor._id "-clock-three") "red"}}}</div>
+                <div class="flex-horizontal normal">{{{bob-clock "system.resources.time.timeClock3.value" system.resources.time.timeClock3.type system.resources.time.timeClock3.value (concat _id "-clock-three") "red"}}}</div>
               </div>
             </div>
           </div>
@@ -175,42 +177,42 @@
           </div>
           <div id="intel-list" class="list">
             <div class="flex-horizontal number-input">
-              <button {{#if (eq data.resources.intel 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-              <input id="intel-{{actor._id}}" type="number" name="data.resources.intel" value="{{data.resources.intel}}">
+              <button {{#if (eq system.resources.intel 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="intel-{{_id}}" type="number" name="system.resources.intel" value="{{system.resources.intel}}">
               <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              <label for="intel-{{actor._id}}">{{{localize "BITD.IntelDetail"}}}</label>
+              <label for="intel-{{_id}}">{{{localize "BITD.IntelDetail"}}}</label>
             </div>
             <br />
             <div class="flex-vertical">
               <div class="flex-horizontal">
                 <span>{{{localize "BITD.IntelQuestions0"}}}</span>
-                {{#if (gt data.resources.intel 0)}}
+                {{#if (gt system.resources.intel 0)}}
                   <span>{{{localize "BITD.IntelQuestions1"}}}</span>
                 {{/if}}
               </div>
               <div class="flex-horizontal">
-                {{#if (gt data.resources.intel 1)}}
+                {{#if (gt system.resources.intel 1)}}
                   <span>{{{localize "BITD.IntelQuestions2"}}}</span>
                 {{/if}}
-                {{#if (gt data.resources.intel 2)}}
+                {{#if (gt system.resources.intel 2)}}
                   <span>{{{localize "BITD.IntelQuestions3"}}}</span>
                 {{/if}}
               </div>
             </div>
           </div>
 
-        {{else if (eq actor.data.type "Marshal")}}
+        {{else if (eq system.type "Marshal")}}
           <div id="morale" class="label-stripe">
             <p><label>{{localize "BITD.Morale"}}</label>{{localize "BITD.MoraleLabel"}}</p>
           </div>
           <div id="morale-list" class="list">
             <div id="morale-boxes" class="flex-vertical">
               <div class="gradient-stripe-morale flex-horizontal">
-                {{#multiboxes data.resources.morale}}
+                {{#multiboxes system.resources.morale}}
                   <div class="attributes-container">
                     {{#times_from_0 10}}
-                      <input type="radio" id="morale-{{../actor._id}}-{{this}}" name="data.resources.morale" value="{{this}}">
-                      <label for="morale-{{../actor._id}}-{{this}}"></label>
+                      <input type="radio" id="morale-{{../_id}}-{{this}}" data-dtype="String" name="system.resources.morale" value="{{this}}">
+                      <label for="morale-{{../_id}}-{{this}}"></label>
                     {{/times_from_0}}
                   </div>
                 {{/multiboxes}}
@@ -224,10 +226,10 @@
           </div>
           <div id="engagement-list" class="list">
             <div class="flex-horizontal number-input">
-              <button {{#if (eq data.resources.engagement 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-              <input id="engagement-{{actor._id}}" type="number" name="data.resources.engagement" value="{{data.resources.engagement}}">
+              <button {{#if (eq system.resources.engagement 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="engagement-{{_id}}" type="number" name="system.resources.engagement" value="{{system.resources.engagement}}">
               <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              <label for="engagement-{{actor._id}}">{{{localize "BITD.EngagementDetail"}}}</label>
+              <label for="engagement-{{_id}}">{{{localize "BITD.EngagementDetail"}}}</label>
             </div>
             <div class="">
               {{{localize "BITD.EngagementGeneral"}}}
@@ -246,7 +248,7 @@
             </div>
           </div>
 
-        {{else if (eq actor.data.type "Quartermaster")}}
+        {{else if (eq system.type "Quartermaster")}}
           <div class="label-stripe">
             <p><label>{{localize "BITD.Resources"}}</label></p>
           </div>
@@ -256,10 +258,10 @@
           </div>
           <div id="supply-list" class="list">
             <div class="flex-horizontal number-input">
-              <button {{#if (eq data.resources.supply.value 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
-              <input id="supply-{{actor._id}}" type="number" name="data.resources.supply.value" value="{{data.resources.supply.value}}">
-              <button {{#if (gteq data.resources.supply.value data.resources.supply.max)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
-              <label for="supply-{{actor._id}}">{{{localize "BITD.SupplyDetail"}}}{{data.resources.supply.max}}{{{localize "BITD.SupplyDetail2"}}}</label>
+              <button {{#if (eq system.resources.supply.value 0)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input id="supply-{{_id}}" type="number" name="system.resources.supply.value" value="{{system.resources.supply.value}}">
+              <button {{#if (gteq system.resources.supply.value system.resources.supply.max)}}disabled {{/if}}onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+              <label for="supply-{{_id}}">{{{localize "BITD.SupplyDetail"}}}{{system.resources.supply.max}}{{{localize "BITD.SupplyDetail2"}}}</label>
             </div>
           </div>
 
@@ -279,28 +281,28 @@
             </div>
             <div>{{localize "BITD.MaterielDetail"}}</div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Food Stores"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Food Stores"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
                                 {{#times_from_0 @root/foodStores}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -323,28 +325,28 @@
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Black Shot"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Black Shot"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
-                                {{#times_from_0 item.data.uses}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -367,28 +369,28 @@
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Horses"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Horses"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
-                                {{#times_from_0 item.data.uses}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -411,28 +413,28 @@
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Religious Supplies"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Religious Supplies"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
-                                {{#times_from_0 item.data.uses}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -455,28 +457,28 @@
               </p>
             </div>
             <div class="container flex">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Siege Weapons"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Siege Weapons"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
-                                {{#times_from_0 item.data.uses}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -499,28 +501,28 @@
               </p>
             </div>
             <div class="container flex">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "materiel") (eq item.data.itemType "Supply Cart"))}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Supply Cart"))}}
                   <span class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           {{#if @root/dropdowns}}
                             <span class="uses-select">
                               <span>{{localize "BITD.Uses"}}</span>
-                              {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
-                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../actor.flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
                               {{/if}}
                             </span>
                           {{else}}
                             <div class="usage-stats">
-                              {{#multiboxes (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')}}
-                                {{#times_from_0 item.data.uses}}
-                                  <input type="radio" id="usages-{{item._id}}-{{this}}" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
                                   <label for="usages-{{item._id}}-{{this}}"></label>
                                 {{/times_from_0}}
                               {{/multiboxes}}
@@ -548,23 +550,23 @@
             <div class="label-stripe-gray">
               <p>
                 <label>{{localize "BITD.Mercies"}}  &mdash;  {{localize "BITD.MerciesLabel"}}</label>
-                {{#if (lt actor.data.resources.mercies 3)}}
+                {{#if (lt system.resources.mercies 3)}}
                   <a class="personnel-add" data-mtype="Mercy"><i class="fas fa-plus-square"></i></a>
                 {{/if}}
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Mercy") )}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.system.itemType "Mercy") )}}
                   <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext">{{{item.data.description}}}</span>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
                         <span class="wound-checkboxes center flex-horizontal">
-                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'wounded')}}>
+                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../flags.band-of-blades.items item._id 'wounded')}}>
                           <label for="wounded-{{item._id}}"></label>
                           <span>{{localize "BITD.Wounded"}}</span>
                         </span>
@@ -579,24 +581,24 @@
             <div class="label-stripe-gray">
               <p>
                 <label><span class="roll-die-attribute rollable-text" data-roll-attribute="alchemists">{{localize "BITD.Alchemists"}}</span>  &mdash;  {{localize "BITD.AlchemistsLabel"}}</label>
-                {{#if (lt actor.data.resources.alchemists 3)}}
+                {{#if (lt system.resources.alchemists 3)}}
                   <a class="personnel-add" data-mtype="Alchemist"><i class="fas fa-plus-square"></i></a>
                 {{/if}}
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Alchemist") )}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.system.itemType "Alchemist") )}}
                   <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext top">{{{item.data.description}}}</span>
+                          <span class="tooltiptext top">{{{item.system.description}}}</span>
                         </span>
-                        {{#if (gt item.data.uses 0)}}
+                        {{#if (gt item.system.uses 0)}}
                           <span class="uses-select">
-                            <div class="flex-horizontal small">{{{bob-clock (concat "flags.band-of-blades.items." item._id ".usages") (num (lookup2 ../actor.flags.band-of-blades.items item._id 'usagesMax')) (str (lookup2 ../actor.flags.band-of-blades.items item._id 'usages')) (concat item._id "-clock") "green"}}}</div>
+                            <div class="flex-horizontal small">{{{bob-clock (concat "flags.band-of-blades.items." item._id ".usages") (num (lookup2 ../flags.band-of-blades.items item._id 'usagesMax')) (str (lookup2 ../flags.band-of-blades.items item._id 'usages')) (concat item._id "-clock") "green"}}}</div>
                             <span>{{localize "BITD.Corruption"}}</span>
                           </span>
                         {{/if}}
@@ -612,20 +614,20 @@
             <div class="label-stripe-gray">
               <p>
                 <label>{{localize "BITD.Laborers"}}  &mdash;  {{localize "BITD.LaborersLabel"}}</label>
-                {{#if (lt actor.data.resources.laborers 3)}}
+                {{#if (lt system.resources.laborers 3)}}
                   <a class="personnel-add" data-mtype="Laborer"><i class="fas fa-plus-square"></i></a>
                 {{/if}}
               </p>
             </div>
             <div class="container flex-flow">
-              {{#each actor.items as |item id|}}
-                {{#if (and (eq item.type "personnel") (eq item.data.itemType "Laborer") )}}
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "personnel") (eq item.system.itemType "Laborer") )}}
                   <div class="item flex-horizontal" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip"><a class="item-name">{{item.name}}</a>
-                          <span class="tooltiptext top">{{{item.data.description}}}</span>
+                          <span class="tooltiptext top">{{{item.system.description}}}</span>
                         </span>
                       </span>
                     </span>
@@ -649,23 +651,23 @@
             <div class="flex-vertical">
               <div class="label-stripe-gray project" data-project="clock1">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock1.name" value="{{data.resources.projects.clock1.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock1.name" value="{{system.resources.projects.clock1.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock1.description">{{data.resources.projects.clock1.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock1.description">{{system.resources.projects.clock1.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock1.value" data.resources.projects.clock1.type data.resources.projects.clock1.value (concat actor._id "-clock1-project") data.resources.projects.clock1.color }}}
+                    {{{bob-clock "system.resources.projects.clock1.value" system.resources.projects.clock1.type system.resources.projects.clock1.value (concat _id "-clock1-project") system.resources.projects.clock1.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock1.type">
-                        {{{data.size_list.clock1}}}
+                      <select name="system.resources.projects.clock1.type">
+                        {{{system.size_list.clock1}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock1.color">
-                        {{{data.color_list.clock1}}}
+                      <select name="system.resources.projects.clock1.color">
+                        {{{system.color_list.clock1}}}
                       </select>
                     </div>
                   </div>
@@ -674,23 +676,23 @@
 
               <div class="label-stripe-gray project" data-project="clock2">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock2.name" value="{{data.resources.projects.clock2.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock2.name" value="{{system.resources.projects.clock2.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock2.description">{{data.resources.projects.clock2.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock2.description">{{system.resources.projects.clock2.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock2.value" data.resources.projects.clock2.type data.resources.projects.clock2.value (concat actor._id "-clock2-project") data.resources.projects.clock2.color }}}
+                    {{{bob-clock "system.resources.projects.clock2.value" system.resources.projects.clock2.type system.resources.projects.clock2.value (concat _id "-clock2-project") system.resources.projects.clock2.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock2.type">
-                        {{{data.size_list.clock2}}}
+                      <select name="system.resources.projects.clock2.type">
+                        {{{system.size_list.clock2}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock2.color">
-                        {{{data.color_list.clock2}}}
+                      <select name="system.resources.projects.clock2.color">
+                        {{{system.color_list.clock2}}}
                       </select>
                     </div>
                   </div>
@@ -699,23 +701,23 @@
 
               <div class="label-stripe-gray project" data-project="clock3">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock3.name" value="{{data.resources.projects.clock3.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock3.name" value="{{system.resources.projects.clock3.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock3.description">{{data.resources.projects.clock3.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock3.description">{{system.resources.projects.clock3.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock3.value" data.resources.projects.clock3.type data.resources.projects.clock3.value (concat actor._id "-clock3-project") data.resources.projects.clock3.color }}}
+                    {{{bob-clock "system.resources.projects.clock3.value" system.resources.projects.clock3.type system.resources.projects.clock3.value (concat _id "-clock3-project") system.resources.projects.clock3.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock3.type">
-                        {{{data.size_list.clock3}}}
+                      <select name="system.resources.projects.clock3.type">
+                        {{{system.size_list.clock3}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock3.color">
-                        {{{data.color_list.clock3}}}
+                      <select name="system.resources.projects.clock3.color">
+                        {{{system.color_list.clock3}}}
                       </select>
                     </div>
                   </div>
@@ -724,23 +726,23 @@
 
               <div class="label-stripe-gray project" data-project="clock4">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock4.name" value="{{data.resources.projects.clock4.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock4.name" value="{{system.resources.projects.clock4.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock4.description">{{data.resources.projects.clock4.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock4.description">{{system.resources.projects.clock4.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock4.value" data.resources.projects.clock4.type data.resources.projects.clock4.value (concat actor._id "-clock4-project") data.resources.projects.clock4.color }}}
+                    {{{bob-clock "system.resources.projects.clock4.value" system.resources.projects.clock4.type system.resources.projects.clock4.value (concat _id "-clock4-project") system.resources.projects.clock4.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock4.type">
-                        {{{data.size_list.clock4}}}
+                      <select name="system.resources.projects.clock4.type">
+                        {{{system.size_list.clock4}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock4.color">
-                        {{{data.color_list.clock4}}}
+                      <select name="system.resources.projects.clock4.color">
+                        {{{system.color_list.clock4}}}
                       </select>
                     </div>
                   </div>
@@ -749,23 +751,23 @@
 
               <div class="label-stripe-gray project" data-project="clock5">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock5.name" value="{{data.resources.projects.clock5.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock5.name" value="{{system.resources.projects.clock5.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock5.description">{{data.resources.projects.clock5.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock5.description">{{system.resources.projects.clock5.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock5.value" data.resources.projects.clock5.type data.resources.projects.clock5.value (concat actor._id "-clock5-project") data.resources.projects.clock5.color }}}
+                    {{{bob-clock "system.resources.projects.clock5.value" system.resources.projects.clock5.type system.resources.projects.clock5.value (concat _id "-clock5-project") system.resources.projects.clock5.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock5.type">
-                        {{{data.size_list.clock5}}}
+                      <select name="system.resources.projects.clock5.type">
+                        {{{system.size_list.clock5}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock5.color">
-                        {{{data.color_list.clock5}}}
+                      <select name="system.resources.projects.clock5.color">
+                        {{{system.color_list.clock5}}}
                       </select>
                     </div>
                   </div>
@@ -774,23 +776,23 @@
 
               <div class="label-stripe-gray project" data-project="clock6">
                 <p style="margin-top: 11px;"><a class="item-control project-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a></p>
-                <p><input type="text" name="data.resources.projects.clock6.name" value="{{data.resources.projects.clock6.name}}"></p>
+                <p><input type="text" name="system.resources.projects.clock6.name" value="{{system.resources.projects.clock6.name}}"></p>
               </div>
               <div class="flexrow">
-                <div class="flex3"><textarea name="data.resources.projects.clock6.description">{{data.resources.projects.clock6.description}}</textarea></div>
+                <div class="flex3"><textarea name="system.resources.projects.clock6.description">{{system.resources.projects.clock6.description}}</textarea></div>
                 <div class="project-clock">
                   <div class="flex1">
-                    {{{bob-clock "data.resources.projects.clock6.value" data.resources.projects.clock6.type data.resources.projects.clock6.value (concat actor._id "-clock6-project") data.resources.projects.clock6.color }}}
+                    {{{bob-clock "system.resources.projects.clock6.value" system.resources.projects.clock6.type system.resources.projects.clock6.value (concat _id "-clock6-project") system.resources.projects.clock6.color }}}
                   </div>
                   <div class="clock-options">
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock6.type">
-                        {{{data.size_list.clock6}}}
+                      <select name="system.resources.projects.clock6.type">
+                        {{{system.size_list.clock6}}}
                       </select>
                     </div>
                     <div class="hp-clock">
-                      <select name="data.resources.projects.clock6.color">
-                        {{{data.color_list.clock6}}}
+                      <select name="system.resources.projects.clock6.color">
+                        {{{system.color_list.clock6}}}
                       </select>
                     </div>
                   </div>
@@ -809,10 +811,10 @@
         {{#times_from_0 fallenBlocks}}
           <div class="flexrow">
             <div class="flex1">
-              {{#each ../data.resources.fallen as |fallen findex|}}
+              {{#each ../system.resources.fallen as |fallen findex|}}
                 {{#if (or (and (gteq findex (mult ../this 4) ) (lt findex (mult (add ../this 1) 4 ) ) ) (and @last (notNum ../this) (lt findex 4)))}}
-                  <input type="text" id="fallen-{{../../actor._id}}-name-{{findex}}" name="data.resources.fallen.{{findex}}" value="{{fallen}}" placeholder="Name">
-                  <label style="display:none;" class="fallen-label" for="fallen-{{../../actor._id}}-name-{{findex}}"></label>
+                  <input type="text" id="fallen-{{../../_id}}-name-{{findex}}" name="system.resources.fallen.{{findex}}" value="{{fallen}}" placeholder="Name">
+                  <label style="display:none;" class="fallen-label" for="fallen-{{../../_id}}-name-{{findex}}"></label>
                 {{/if}}
               {{/each}}
             </div>
@@ -857,10 +859,10 @@
           {{#times_from_x 1 6}}
           <tr class="high-morale">
             <td>
-              <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+              <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
             </td>
             <td>
-              <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+              <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
             </td>
           </tr>
           {{/times_from_x}}
@@ -874,21 +876,21 @@
           {{#times_from_x 7 11}}
             <tr class="medium-morale">
               <td>
-                <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+                <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
               </td>
               <td>
-                <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+                <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
               </td>
             </tr>
           {{/times_from_x}}
           <tr class="medium-morale">
             <td>
-              <input type="checkbox" id="camp-{{actor._id}}-12-one" name="data.resources.camp.12.one" {{checked data.resources.camp.12.one }}>
-              <input type="checkbox" id="camp-{{actor._id}}-12-two" name="data.resources.camp.12.two" {{checked data.resources.camp.12.two }}>
+              <input type="checkbox" id="camp-{{_id}}-12-one" name="system.resources.camp.12.one" {{checked system.resources.camp.12.one }}>
+              <input type="checkbox" id="camp-{{_id}}-12-two" name="system.resources.camp.12.two" {{checked system.resources.camp.12.two }}>
             </td>
             <td>
-              <label for="camp-{{actor._id}}-12-one">{{localize "BITD.CampMorale12"}}</label>
-              <label for="camp-{{actor._id}}-12-two" style="display:none;"></label>
+              <label for="camp-{{_id}}-12-one">{{localize "BITD.CampMorale12"}}</label>
+              <label for="camp-{{_id}}-12-two" style="display:none;"></label>
             </td>
           </tr>
           <tr>
@@ -901,43 +903,43 @@
           {{#times_from_x 13 15}}
             <tr class="low-morale">
               <td>
-                <input type="checkbox" id="camp-{{../actor._id}}-{{this}}" name="data.resources.camp.{{this}}" {{checked (lookup ../data.resources.camp this)}}>
+                <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
               </td>
               <td>
-                <label for="camp-{{../actor._id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
+                <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
               </td>
             </tr>
           {{/times_from_x}}
           <tr class="low-morale">
             <td>
-              <input type="checkbox" id="camp-{{actor._id}}-16-one" name="data.resources.camp.16.one" {{checked data.resources.camp.16.one }}>
-              <input type="checkbox" id="camp-{{actor._id}}-16-two" name="data.resources.camp.16.two" {{checked data.resources.camp.16.two }}>
+              <input type="checkbox" id="camp-{{_id}}-16-one" name="system.resources.camp.16.one" {{checked system.resources.camp.16.one }}>
+              <input type="checkbox" id="camp-{{_id}}-16-two" name="system.resources.camp.16.two" {{checked system.resources.camp.16.two }}>
             </td>
             <td>
-              <label for="camp-{{actor._id}}-16-one">{{localize "BITD.CampMorale16"}}</label>
-              <label for="camp-{{actor._id}}-16-two" style="display:none;"></label>
-            </td>
-          </tr>
-          <tr class="low-morale">
-            <td>
-              <input type="checkbox" id="camp-{{actor._id}}-17-one" name="data.resources.camp.17.one" {{checked data.resources.camp.17.one }}>
-              <input type="checkbox" id="camp-{{actor._id}}-17-two" name="data.resources.camp.17.two" {{checked data.resources.camp.17.two }}>
-            </td>
-            <td>
-              <label for="camp-{{actor._id}}-17-one">{{localize "BITD.CampMorale17"}}</label>
-              <label for="camp-{{actor._id}}-17-two" style="display:none;"></label>
+              <label for="camp-{{_id}}-16-one">{{localize "BITD.CampMorale16"}}</label>
+              <label for="camp-{{_id}}-16-two" style="display:none;"></label>
             </td>
           </tr>
           <tr class="low-morale">
             <td>
-              <input type="checkbox" id="camp-{{actor._id}}-18-one" name="data.resources.camp.18.one" {{checked data.resources.camp.18.one }}>
-              <input type="checkbox" id="camp-{{actor._id}}-18-two" name="data.resources.camp.18.two" {{checked data.resources.camp.18.two }}>
-              <input type="checkbox" id="camp-{{actor._id}}-18-three" name="data.resources.camp.18.three" {{checked data.resources.camp.18.three }}>
+              <input type="checkbox" id="camp-{{_id}}-17-one" name="system.resources.camp.17.one" {{checked system.resources.camp.17.one }}>
+              <input type="checkbox" id="camp-{{_id}}-17-two" name="system.resources.camp.17.two" {{checked system.resources.camp.17.two }}>
             </td>
             <td>
-              <label for="camp-{{../actor._id}}-18-one">{{localize "BITD.CampMorale18"}}</label>
-              <label for="camp-{{../actor._id}}-18-two" style="display:none;"></label>
-              <label for="camp-{{../actor._id}}-18-three" style="display:none;"></label>
+              <label for="camp-{{_id}}-17-one">{{localize "BITD.CampMorale17"}}</label>
+              <label for="camp-{{_id}}-17-two" style="display:none;"></label>
+            </td>
+          </tr>
+          <tr class="low-morale">
+            <td>
+              <input type="checkbox" id="camp-{{_id}}-18-one" name="system.resources.camp.18.one" {{checked system.resources.camp.18.one }}>
+              <input type="checkbox" id="camp-{{_id}}-18-two" name="system.resources.camp.18.two" {{checked system.resources.camp.18.two }}>
+              <input type="checkbox" id="camp-{{_id}}-18-three" name="system.resources.camp.18.three" {{checked system.resources.camp.18.three }}>
+            </td>
+            <td>
+              <label for="camp-{{../_id}}-18-one">{{localize "BITD.CampMorale18"}}</label>
+              <label for="camp-{{../_id}}-18-two" style="display:none;"></label>
+              <label for="camp-{{../_id}}-18-three" style="display:none;"></label>
             </td>
           </tr>
         </table>
@@ -951,33 +953,33 @@
               <i class="fas fa-plus-square"></i>
             </a>
             {{{localize "BITD.SpiesLabel"}}}
-            <div class="total-spies" {{#if (gt actor.data.spies data.resources.spies)}}style="color:red;"{{/if}}>
-              {{actor.data.spies}} / {{data.resources.spies}}
+            <div class="total-spies" {{#if (gt system.spies system.resources.spies)}}style="color:red;"{{/if}}>
+              {{system.spies}} / {{system.resources.spies}}
               <span>{{localize "BITD.MaxSpies"}}</span>
             </div>
           </p>
         </div>
         <div id="spies-list">
           <div class="container flex-vertical">
-            {{#each actor.items as |item id|}}
+            {{#each items as |item id|}}
               {{#if (eq item.type "spies")}}
                 <div class="flex-vertical summary-anchor">
                   <div class="item flex-vertical" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
-                        <span class="tooltip expandable" data-expand="{{{item.data.special}}}">
+                        <span class="tooltip expandable" data-expand="{{{item.system.special}}}">
                           <a>{{item.name}}</a>
                         </span>
                         <span class="wound-checkboxes center flex-horizontal">
-                          <input id="master-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.master" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'master')}}>
+                          <input id="master-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.master" {{checked (lookup2 ../flags.band-of-blades.items item._id 'master')}}>
                           <label for="master-{{item._id}}"></label>
-                          {{#if (lookup2 ../actor.flags.band-of-blades.items item._id 'master')}}
+                          {{#if (lookup2 ../flags.band-of-blades.items item._id 'master')}}
                             <span>{{localize "BITD.Master"}}</span>
                           {{else}}
                             <span>{{localize "BITD.Trained"}}</span>
                           {{/if}}
-                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../actor.flags.band-of-blades.items item._id 'wounded')}}>
+                          <input id="wounded-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.wounded" {{checked (lookup2 ../flags.band-of-blades.items item._id 'wounded')}}>
                           <label for="wounded-{{item._id}}"></label>
                           <span>{{localize "BITD.Wounded"}}</span>
                         </span>
@@ -1000,14 +1002,14 @@
         </div>
         <div id="network-list">
           <div class="container flex-vertical">
-            {{#each actor.items as |item id|}}
+            {{#each items as |item id|}}
               {{#if (eq item.type "network")}}
                 <div class="flex-vertical summary-anchor">
                   <div class="item flex-vertical" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
-                        <span class="tooltip expandable" data-expand="{{{item.data.description}}}">
+                        <span class="tooltip expandable" data-expand="{{{item.system.description}}}">
                           <a>{{item.name}}</a>
                         </span>
                       </span>
@@ -1035,56 +1037,56 @@
                 <p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.AugmentLabel"}}</p>
                 <p class="spy-select">
                   <span>{{localize "BITD.AssignedSpy"}}</span>
-                  <select id="spyuses-augment-{{actor._id}}" name="data.resources.missions.augmentSpy">{{selectOptions spyList selected=data.resources.missions.augmentSpy localize=true}}</select>
+                  <select id="spyuses-augment-{{_id}}" name="system.resources.missions.augmentSpy">{{selectOptions spyList selected=system.resources.missions.augmentSpy localize=true}}</select>
                 </p>
               </div>
               <div class="flexrow">
                 <div class="flex3"><p>{{{localize "BITD.AugmentDetail"}}}</p></div>
-                <div class="flex1">{{{bob-clock "data.resources.missions.augmentClock.value" data.resources.missions.augmentClock.type data.resources.missions.augmentClock.value (concat actor._id "-clock-augment") "red"}}}</div>
+                <div class="flex1">{{{bob-clock "system.resources.missions.augmentClock.value" system.resources.missions.augmentClock.type system.resources.missions.augmentClock.value (concat _id "-clock-augment") "red"}}}</div>
               </div>
               <div class="label-stripe-gray">
                 <p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.ExpandLabel"}}</p>
                 <p class="spy-select">
                   <span>{{localize "BITD.AssignedSpy"}}</span>
-                  <select id="spyuses-expand-{{actor._id}}" name="data.resources.missions.expandSpy">{{selectOptions spyList selected=data.resources.missions.expandSpy localize=true}}</select>
+                  <select id="spyuses-expand-{{_id}}" name="system.resources.missions.expandSpy">{{selectOptions spyList selected=system.resources.missions.expandSpy localize=true}}</select>
                 </p>
               </div>
               <div class="flexrow">
                 <div class="flex3"><p>{{{localize "BITD.ExpandDetail"}}}</p></div>
-                <div class="flex1">{{{bob-clock "data.resources.missions.expandClock.value" data.resources.missions.expandClock.type data.resources.missions.expandClock.value (concat actor._id "-clock-expand") "red"}}}</div>
+                <div class="flex1">{{{bob-clock "system.resources.missions.expandClock.value" system.resources.missions.expandClock.type system.resources.missions.expandClock.value (concat _id "-clock-expand") "red"}}}</div>
               </div>
               <div class="label-stripe-gray">
                 <p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.TrapLabel"}}</p>
                 <p class="spy-select">
                   <span>{{localize "BITD.AssignedSpy"}}</span>
-                  <select id="spyuses-trap-{{actor._id}}" name="data.resources.missions.trapSpy">{{selectOptions spyList selected=data.resources.missions.trapSpy localize=true}}</select>
+                  <select id="spyuses-trap-{{_id}}" name="system.resources.missions.trapSpy">{{selectOptions spyList selected=system.resources.missions.trapSpy localize=true}}</select>
                 </p>
               </div>
               <div class="flexrow">
                 <div class="flex3"><p>{{{localize "BITD.TrapDetail"}}}</p></div>
-                <div class="flex1">{{{bob-clock "data.resources.missions.trapClock.value" data.resources.missions.trapClock.type data.resources.missions.trapClock.value (concat actor._id "-clock-trap") "red"}}}</div>
+                <div class="flex1">{{{bob-clock "system.resources.missions.trapClock.value" system.resources.missions.trapClock.type system.resources.missions.trapClock.value (concat _id "-clock-trap") "red"}}}</div>
               </div>
               <div class="label-stripe-gray">
                 <p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.RecruitLabel"}}</p>
                 <p class="spy-select">
                   <span>{{localize "BITD.AssignedSpy"}}</span>
-                  <select id="spyuses-recruit-{{actor._id}}" name="data.resources.missions.recruitSpy">{{selectOptions spyList selected=data.resources.missions.recruitSpy localize=true}}</select>
+                  <select id="spyuses-recruit-{{_id}}" name="system.resources.missions.recruitSpy">{{selectOptions spyList selected=system.resources.missions.recruitSpy localize=true}}</select>
                 </p>
               </div>
               <div class="flexrow">
                 <div class="flex3"><p>{{{localize "BITD.RecruitDetail"}}}</p></div>
-                <div class="flex1">{{{bob-clock "data.resources.missions.recruitClock.value" data.resources.missions.recruitClock.type data.resources.missions.recruitClock.value (concat actor._id "-clock-recruit") "red"}}}</div>
+                <div class="flex1">{{{bob-clock "system.resources.missions.recruitClock.value" system.resources.missions.recruitClock.type system.resources.missions.recruitClock.value (concat _id "-clock-recruit") "red"}}}</div>
               </div>
               <div class="label-stripe-gray">
                 <p class="roll-die-attribute rollable-text" data-roll-attribute="mission">{{localize "BITD.ResearchLabel"}}</p>
                 <p class="spy-select">
                   <span>{{localize "BITD.AssignedSpy"}}</span>
-                  <select id="spyuses-research-{{actor._id}}" name="data.resources.missions.researchSpy">{{selectOptions spyList selected=data.resources.missions.researchSpy localize=true}}</select>
+                  <select id="spyuses-research-{{_id}}" name="system.resources.missions.researchSpy">{{selectOptions spyList selected=system.resources.missions.researchSpy localize=true}}</select>
                 </p>
               </div>
               <div class="flexrow">
                 <div class="flex3"><p>{{{localize "BITD.ResearchDetail"}}}</p></div>
-                <div class="flex1">{{{bob-clock "data.resources.missions.researchClock.value" data.resources.missions.researchClock.type data.resources.missions.researchClock.value (concat actor._id "-clock-research") "red"}}}</div>
+                <div class="flex1">{{{bob-clock "system.resources.missions.researchClock.value" system.resources.missions.researchClock.type system.resources.missions.researchClock.value (concat _id "-clock-research") "red"}}}</div>
               </div>
             </div>
           </div>
@@ -1108,7 +1110,7 @@
           </div>
           <div class="container flex-flow">
             {{#each ../squaddies as |squaddie lindex|}}
-              {{#if (eq squaddie.data.squad squad.name)}}
+              {{#if (eq squaddie.system.squad squad.name)}}
                 <span class="item flex-horizontal" data-item-id="{{squaddie._id}}">
                   <span class="item-body flex-left">
                     <img src="{{squaddie.img}}" title="{{squaddie.name}}" width="24" height="24"/>
@@ -1116,22 +1118,32 @@
                       <a class="actor-name">{{squaddie.name}}</a>
                     </span>
                     <span id="wounds-stress-{{squaddie._id}}" class="wst flex-horizontal">
-                      <span class="wounds-boxes attributes-container flex-horizontal">
-                        <span>{{localize "BITD.Wounds"}}</span>
-                        <input id="wounds-light-{{squaddie._id}}" disabled type="radio" name="squaddie.data.lightBox" value="{{squaddie.data.lightBox}}">
-                        <label for="wounds-light-{{squaddie._id}}" style="background-color: {{squaddie.data.lightBox}};"></label>
-                        <input id="wounds-medium-{{squaddie._id}}" disabled type="radio" name="squaddie.data.mediumBox" value="{{squaddie.data.mediumBox}}">
-                        <label for="wounds-medium-{{squaddie._id}}" style="background-color: {{squaddie.data.mediumBox}};"></label>
-                        <input id="wounds-heavy-{{squaddie._id}}" disabled type="radio" name="squaddie.data.heavyBox" value="{{squaddie.data.heavyBox}}">
-                        <label for="wounds-heavy-{{squaddie._id}}" style="background-color: {{squaddie.data.heavyBox}};"></label>
-                      </span>
-                      <span class="stress-boxes flex-horizontal">
-                        <label for="stress-{{squaddie._id}}">{{localize "BITD.Stress"}}</label>
-                        <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.data.stress.value" value="{{squaddie.data.stress.value}} / {{str squaddie.data.stress.max}}">
-                      </span>
-                      <span class="stress-boxes flex-horizontal">
-                        <label for="trauma-{{squaddie._id}}">{{localize "BITD.Trauma"}}</label>
-                        <input id="trauma-{{squaddie._id}}" type="text" disabled name="squaddie.data.trauma.value" value="{{squaddie.data.trauma.value}} / {{str squaddie.data.trauma.max}}">
+                      <span class="flex-vertical">
+                        <span class="flex-horizontal">
+                          <span class="wounds-boxes attributes-container flex-horizontal">
+                              <span>{{localize "BITD.Wounds"}}</span>
+                              <input id="wounds-light-{{squaddie._id}}" disabled type="radio" data-dtype="String" name="squaddie.system.lightBox" value="{{squaddie.system.lightBox}}">
+                              <label for="wounds-light-{{squaddie._id}}" style="background-color: {{squaddie.system.lightBox}};"></label>
+                              <input id="wounds-medium-{{squaddie._id}}" disabled type="radio" data-dtype="String" name="squaddie.system.mediumBox" value="{{squaddie.system.mediumBox}}">
+                              <label for="wounds-medium-{{squaddie._id}}" style="background-color: {{squaddie.system.mediumBox}};"></label>
+                              <input id="wounds-heavy-{{squaddie._id}}" disabled type="radio" data-dtype="String" name="squaddie.system.heavyBox" value="{{squaddie.system.heavyBox}}">
+                              <label for="wounds-heavy-{{squaddie._id}}" style="background-color: {{squaddie.system.heavyBox}};"></label>
+                          </span>
+                          <span class="stress-boxes flex-horizontal">
+                            <label for="stress-{{squaddie._id}}">{{localize "BITD.Stress"}}</label>
+                            <input id="stress-{{squaddie._id}}" type="text" disabled name="squaddie.system.stress.value" value="{{squaddie.system.stress.value}} / {{str squaddie.system.stress.max}}">
+                          </span>
+                        </span>
+                        <span class="flex-horizontal">
+                          <span class="stress-boxes flex-horizontal">
+                             <label for="trauma-{{squaddie._id}}">{{localize "BITD.Trauma"}}</label>
+                             <input id="trauma-{{squaddie._id}}" type="text" disabled name="squaddie.system.trauma.value" value="{{squaddie.system.trauma.value}} / {{str squaddie.system.trauma.max}}">
+                          </span>
+                          <span class="stress-boxes flex-horizontal">
+                             <label for="blight-{{squaddie._id}}">{{localize "BITD.Blight"}}</label>
+                             <input id="blight-{{squaddie._id}}" type="text" disabled name="squaddie.system.blight.value" value="{{squaddie.system.blight.value}} / {{str squaddie.system.blight.max}}">
+                          </span>
+                        </span>
                       </span>
                     </span>
                   </span>
@@ -1150,7 +1162,7 @@
           <div class="label-stripe-gray">{{specType.name}}  &mdash;  {{localize (concat "BITD." (lookup specType 'name') "Label")}}</div>
           <div class="container flex-flow">
             {{#each ../specialists as |specialist lindex|}}
-              {{#if (eq specialist.data.class specType.name)}}
+              {{#if (eq specialist.system.class specType.name)}}
                 <span class="item flex-horizontal" data-item-id="{{specialist._id}}">
                   <span class="item-body flex-left">
                     <img src="{{specialist.img}}" title="{{specialist.name}}" width="24" height="24"/>
@@ -1158,22 +1170,32 @@
                       <a class="actor-name">{{specialist.name}}</a>
                     </span>
                     <span id="wounds-stress-{{specialist._id}}" class="flex-horizontal">
-                      <span class="wounds-boxes attributes-container flex-horizontal">
-                        <span>{{localize "BITD.Wounds"}}</span>
-                        <input id="wounds-light-{{specialist._id}}" disabled type="radio" name="specialist.data.lightBox" value="{{specialist.data.lightBox}}">
-                        <label for="wounds-light-{{specialist._id}}" style="background-color: {{specialist.data.lightBox}};"></label>
-                        <input id="wounds-medium-{{specialist._id}}" disabled type="radio" name="specialist.data.mediumBox" value="{{specialist.data.mediumBox}}">
-                        <label for="wounds-medium-{{specialist._id}}" style="background-color: {{specialist.data.mediumBox}};"></label>
-                        <input id="wounds-heavy-{{specialist._id}}" disabled type="radio" name="specialist.data.heavyBox" value="{{specialist.data.heavyBox}}">
-                        <label for="wounds-heavy-{{specialist._id}}" style="background-color: {{specialist.data.heavyBox}};"></label>
-                      </span>
-                      <span class="stress-boxes flex-horizontal">
-                        <label for="stress-{{specialist._id}}">{{localize "BITD.Stress"}}</label>
-                        <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.data.stress.value" value="{{specialist.data.stress.value}} / {{str specialist.data.stress.max}}">
-                      </span>
-                      <span class="stress-boxes flex-horizontal">
-                        <label for="trauma-{{specialist._id}}">{{localize "BITD.Trauma"}}</label>
-                        <input id="trauma-{{specialist._id}}" type="text" disabled name="specialist.data.trauma.value" value="{{specialist.data.trauma.value}} / {{str specialist.data.trauma.max}}">
+                      <span class="flex-vertical">
+                        <span class="flex-horizontal">
+                          <span class="wounds-boxes attributes-container flex-horizontal">
+                            <span>{{localize "BITD.Wounds"}}</span>
+                            <input id="wounds-light-{{specialist._id}}" disabled type="radio" data-dtype="String" name="specialist.system.lightBox" value="{{specialist.system.lightBox}}">
+                            <label for="wounds-light-{{specialist._id}}" style="background-color: {{specialist.system.lightBox}};"></label>
+                            <input id="wounds-medium-{{specialist._id}}" disabled type="radio" data-dtype="String" name="specialist.system.mediumBox" value="{{specialist.system.mediumBox}}">
+                            <label for="wounds-medium-{{specialist._id}}" style="background-color: {{specialist.system.mediumBox}};"></label>
+                            <input id="wounds-heavy-{{specialist._id}}" disabled type="radio" data-dtype="String" name="specialist.system.heavyBox" value="{{specialist.system.heavyBox}}">
+                            <label for="wounds-heavy-{{specialist._id}}" style="background-color: {{specialist.system.heavyBox}};"></label>
+                          </span>
+                          <span class="stress-boxes flex-horizontal">
+                            <label for="stress-{{specialist._id}}">{{localize "BITD.Stress"}}</label>
+                            <input id="stress-{{specialist._id}}" type="text" disabled name="specialist.system.stress.value" value="{{specialist.system.stress.value}} / {{str specialist.system.stress.max}}">
+                          </span>
+                        </span>
+                        <span class="flex-horizontal">
+                          <span class="stress-boxes flex-horizontal">
+                            <label for="trauma-{{specialist._id}}">{{localize "BITD.Trauma"}}</label>
+                            <input id="trauma-{{specialist._id}}" type="text" disabled name="specialist.system.trauma.value" value="{{specialist.system.trauma.value}} / {{str specialist.system.trauma.max}}">
+                          </span>
+                          <span class="stress-boxes flex-horizontal">
+                            <label for="blight-{{specialist._id}}">{{localize "BITD.Blight"}}</label>
+                            <input id="blight-{{specialist._id}}" type="text" disabled name="specialist.system.blight.value" value="{{specialist.system.blight.value}} / {{str specialist.system.blight.max}}">
+                          </span>
+                        </span>
                       </span>
                     </span>
                   </span>
@@ -1219,7 +1241,7 @@
           <p><label>{{localize "BITD.Notes"}}</label></p>
         </div>
         <div class="description">
-          {{{editor content=data.notes target="data.notes" button=true owner=owner editable=editable}}}
+          {{{editor system.notes target="system.notes" button=true owner=owner editable=editable}}}
           {{#if editable}}
             <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
           {{/if}}
@@ -1239,7 +1261,7 @@
         <div class="label-stripe">
           <p><label>{{localize "BITD.AllItems"}}</label></p>
         </div>
-        {{#each actor.items as |item id|}}
+        {{#each items as |item id|}}
           <div class="item flex-horizontal" data-item-id="{{item._id}}">
             <div class="item-body item-sheet-open flex-horizontal">
               <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>

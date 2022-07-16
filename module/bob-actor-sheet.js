@@ -1,4 +1,3 @@
-
 import { BoBSheet } from "./bob-sheet.js";
 import {onManageActiveEffect, prepareActiveEffectCategories} from "./effects.js";
 
@@ -24,40 +23,42 @@ export class BoBActorSheet extends BoBSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  getData( options ) {
-    const data = super.getData( options );
-    data.isGM = game.user.isGM;
-    data.editable = data.options.editable;
-    const actorData = this.actor.data.toObject(false);
-    data.actor = actorData;
-    data.data = actorData.data;
-    data.items = actorData.items;
+  async getData( options ) {
+    const superData = super.getData( options );
+    const sheetData = superData.data;
+    //sheetData.document = superData.actor;
+    sheetData.owner = superData.owner;
+    sheetData.editable = superData.editable;
+    sheetData.isGM = game.user.isGM;
 
     // Prepare active effects
-    data.effects = prepareActiveEffectCategories(this.actor.effects);
+    sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
 
-    data.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
+    sheetData.dropdowns = game.settings.get("band-of-blades", "useDropdownsForItemUses");
 
-    if( this.actor.type === "character" ) {
+    if( sheetData.type === "character" ) {
       // Calculate Load
       let loadout = 0;
-      data.items.forEach( i => {
-        loadout += ( i.type === "item" ) ? parseInt( i.data.load ) : 0
+      sheetData.items.forEach( i => {
+        loadout += ( i.type === "item" ) ? parseInt( i.system.load ) : 0
       } );
-      data.data.loadout.current = loadout;
-      data.load_levels = { "BITD.Light": "BITD.Light", "BITD.Normal": "BITD.Normal", "BITD.Heavy": "BITD.Heavy" };
+      sheetData.loadout = sheetData.loadout || {};
+      sheetData.system.loadout.current = loadout;
+      sheetData.load_levels = { "BITD.Light": "BITD.Light", "BITD.Normal": "BITD.Normal", "BITD.Heavy": "BITD.Heavy" };
 
       // Total any skill bonuses
       const attributes = Object.keys( game.system.model.Actor.character.attributes );
       attributes.forEach( a => {
         let skills = Object.keys( game.system.model.Actor.character.attributes[a].skills );
         skills.forEach ( s => {
-          data.data.attributes[a].skills[s].maxTotal = data.data.attributes[a].skills[s].max + data.data.attributes[a].skills[s].maxBonus;
+          sheetData.system.attributes[a].skills[s].maxTotal = sheetData.system.attributes[a].skills[s].max + sheetData.system.attributes[a].skills[s].maxBonus;
         })
       })
     }
 
-    return data;
+    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+
+    return sheetData;
   }
 
   /* -------------------------------------------- */
@@ -103,10 +104,10 @@ export class BoBActorSheet extends BoBSheet {
     });
 
     // Post item to chat
-    html.find(".item-post").click((ev) => {
+    html.find(".item-post").click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(element.data("itemId"));
-      item.sendToChat();
+      await item.sendToChat();
     });
 
 	  // Clear Flag
@@ -117,8 +118,8 @@ export class BoBActorSheet extends BoBSheet {
 	  });
 
     // Add Specialist Actions
-    html.find('.skill-add-popup').click( async (ev) => {
-      const skills = foundry.utils.deepClone( this.actor.data.data.attributes.specialist.skills );
+    html.find('.skill-add-popup').click( async () => {
+      const skills = foundry.utils.deepClone( this.actor.system.attributes.specialist.skills );
       let html = `<div id="items-to-add">`;
 
       for( let e in skills ){
@@ -133,9 +134,8 @@ export class BoBActorSheet extends BoBSheet {
       let options = {
         width: "300"
       }
-      let perms = this.actor.permission;
 
-      if ( perms >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+      if ( this.actor.isOwner ) {
         let dialog = new Dialog({
           title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.SkillsSpecialist' )} ${game.i18n.localize('BITD.Actions' )}`,
           content: html,
@@ -160,8 +160,8 @@ export class BoBActorSheet extends BoBSheet {
 
     html.find('.skill-delete').click( async (ev) => {
       let skill = ev.currentTarget.parentElement.dataset.rollAttribute;
-      if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-        await this.actor.update( { 'data.attributes.specialist.skills': { [skill]: { value: '0', max: 0 } } } );
+      if ( this.actor.isOwner ) {
+        await this.actor.update( { 'system.attributes.specialist.skills': { [skill]: { value: '0', max: 0 } } } );
       }
     });
 
@@ -178,7 +178,7 @@ export class BoBActorSheet extends BoBSheet {
 
     // Create drag data
     const dragData = {
-      actorId: this.actor.id
+      actorId: this.actor._id
     };
 
     // Owned Items
@@ -199,8 +199,8 @@ export class BoBActorSheet extends BoBSheet {
     el.find("input:checked").each(function() {
       items_to_add.push( $(this).val() );
     });
-    if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
-      await this.actor.update( { 'data.attributes.specialist.skills': { [items_to_add]: { value: '1', max: 3 } } } );
+    if ( this.actor.isOwner ) {
+      await this.actor.update( { 'system.attributes.specialist.skills': { [items_to_add]: { value: '1', max: 3 } } } );
     }
 
   }

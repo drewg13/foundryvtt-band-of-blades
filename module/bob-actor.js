@@ -14,61 +14,67 @@ export class BoBActor extends Actor {
     // add token default settings
     const theme = game.system.bobclocks.themes[ game.settings.get( "band-of-blades", "defaultClockTheme" ) ];
     const updateData = {};
+    createData.prototypeToken = createData.prototypeToken || {};
     switch ( createData.type ) {
       case "character": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/rookie.svg";
-        updateData['data.trauma.list'] = game.system.traumaList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
-        updateData['data.blight.list'] = game.system.blightList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
-        updateData['token.actorLink'] = true;
-        updateData['token.name'] = createData.name;
-        updateData['token.displayName'] = 50;
+        updateData['prototypeToken.texture'] = createData.prototypeToken.texture || {};
+        updateData['prototypeToken.texture.src'] = createData.prototypeToken.texture?.src || "systems/band-of-blades/styles/assets/icons/rookie.svg";
+        updateData['system.trauma.list'] = game.system.traumaList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
+        updateData['system.blight.list'] = game.system.blightList.reduce( ( key, val ) => ( key[val]=false, key ), {} );
+        updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.name'] = createData.name;
+        updateData['prototypeToken.displayName'] = 50;
         const playbookXP = game.settings.get( "band-of-blades", "defaultPlaybookXPBarSize" );
         const attributeXP = game.settings.get( "band-of-blades", "defaultAttributeXPBarSize" );
 
         if( playbookXP ) {
-          updateData['data.experienceMax'] = playbookXP;
+          updateData['system.experienceMax'] = playbookXP;
         }
         if( attributeXP ) {
           const attributes = Object.keys( game.system.model.Actor.character.attributes );
-          attributes.forEach( a => updateData['data.attributes.'+ a + '.expMax'] = attributeXP );
+          attributes.forEach( a => updateData['system.attributes.'+ a + '.expMax'] = attributeXP );
         }
         break;
       }
       case "role": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/role.svg";
-        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/role.svg";
-        updateData['token.actorLink'] = true;
-        updateData['token.name'] = createData.name;
-        updateData['token.displayName'] = 50;
+        updateData['prototypeToken.texture'] = createData.prototypeToken.texture || {};
+        updateData['prototypeToken.texture.src'] = createData.prototypeToken.texture?.src || "systems/band-of-blades/styles/assets/icons/role.svg";
+        updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.name'] = createData.name;
+        updateData['prototypeToken.displayName'] = 50;
         break;
       }
       case "chosen": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/chosen.svg";
-        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/chosen.svg";
-        updateData['token.actorLink'] = true;
-        updateData['token.name'] = createData.name;
-        updateData['token.displayName'] = 50;
+        updateData['prototypeToken.texture'] = createData.prototypeToken.texture || {};
+        updateData['prototypeToken.texture.src'] = createData.prototypeToken.texture?.src || "systems/band-of-blades/styles/assets/icons/chosen.svg";
+        updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.name'] = createData.name;
+        updateData['prototypeToken.displayName'] = 50;
         break;
       }
       case "minion": {
         updateData['img'] = "systems/band-of-blades/styles/assets/icons/minion.svg";
-        updateData['token.img'] = "systems/band-of-blades/styles/assets/icons/minion.svg";
-        updateData['token.actorLink'] = true;
-        updateData['token.name'] = createData.name;
-        updateData['token.displayName'] = 50;
+        updateData['prototypeToken.texture'] = createData.prototypeToken.texture || {};
+        updateData['prototypeToken.texture.src'] = createData.prototypeToken.texture?.src || "systems/band-of-blades/styles/assets/icons/minion.svg";
+        updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.name'] = createData.name;
+        updateData['prototypeToken.displayName'] = 50;
         break;
       }
       case "\uD83D\uDD5B clock": {
         updateData['img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
-        updateData['token.img'] = "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
-        updateData['token.actorLink'] = true;
-        updateData['token.name'] = createData.name;
-        updateData['token.displayName'] = 50;
+        updateData['prototypeToken.texture'] = createData.prototypeToken.texture || {};
+        updateData['prototypeToken.texture.src'] = createData.prototypeToken.texture?.src || "systems/band-of-blades/themes/" + theme + "/4clock_0.svg";
+        updateData['prototypeToken.actorLink'] = true;
+        updateData['prototypeToken.name'] = createData.name;
+        updateData['prototypeToken.displayName'] = 50;
         break;
       }
     }
-    await this.data.update( updateData );
+    await this.updateSource( updateData );
 
   }
 
@@ -86,22 +92,19 @@ export class BoBActor extends Actor {
   prepareData() {
     super.prepareData();
 
-    const actorData = this.data;
-    const data = actorData.data;
-
-    if (actorData.type === "minion") {
-      if( !data.hpClock.value ){ data.hpClock.value = 0 }
-      if( data.hpClock.type === 0 ){ data.hpClock.type = 4 }
-      data.size_list = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.hpClock.type, parseInt( data.hpClock.type ) );
+    if (this.type === "minion") {
+      if( !this.system.hpClock.value ){ this.system.hpClock.value = 0 }
+      if( this.system.hpClock.type === 0 ){ this.system.hpClock.type = 4 }
+      this.system.size_list = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, this.system.hpClock.type, parseInt( this.system.hpClock.type ) );
     }
 
-    if ( actorData.type === "role" && actorData.data.type === "Quartermaster" ) {
-      data.size_list = {};
-      data.color_list = {};
+    if ( this.type === "role" && this.system.type === "Quartermaster" ) {
+      this.system.size_list = {};
+      this.system.color_list = {};
       for( let i = 1; i <= 6; i++ ) {
         let clock = "clock" + i.toString();
-        data.size_list[clock] = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, data.resources.projects[clock].type, parseInt( data.resources.projects[clock].type ) );
-        data.color_list[clock] = BoBHelpers.createListOfClockColors( game.system.bobclocks.themes, data.resources.projects[clock].color, data.resources.projects[clock].color );
+        this.system.size_list[clock] = BoBHelpers.createListOfClockSizes( game.system.bobclocks.sizes, this.system.resources.projects[clock].type, parseInt( this.system.resources.projects[clock].type ) );
+        this.system.color_list[clock] = BoBHelpers.createListOfClockColors( game.system.bobclocks.themes, this.system.resources.projects[clock].color, this.system.resources.projects[clock].color );
       }
     }
   }
@@ -111,23 +114,21 @@ export class BoBActor extends Actor {
   /** @override */
   prepareDerivedData() {
     super.prepareDerivedData();
-    const actorData = this.data;
-    const data = actorData.data;
 
-    if( ( actorData.type === "role" ) && ( data.resources.supply.extraUses > 0 ) ) {
+    if( ( this.type === "role" ) && ( this.system.resources.supply.extraUses > 0 ) ) {
       let foodItems = [];
-      actorData.items.forEach( i => {
-        if( i.data.data.itemType === "Food Stores" ) {
+      this.items.forEach( i => {
+        if( i.system.itemType === "Food Stores" ) {
           foodItems.push( i.id );
         }
       })
       foodItems.forEach( f => {
-        if( actorData.flags['band-of-blades'].items[f] ) {
-          const increase = data.resources.supply.extraUses;
-          actorData.flags['band-of-blades'].items[f].usagesMax = String( parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ) + increase );
-          for( let i = ( Math.max( ...Object.keys( actorData.flags['band-of-blades'].items[f].usagesArray ).map( n => Number(n) ) ) + 1 ); i < ( parseInt( actorData.flags['band-of-blades'].items[f].usagesMax ) + 1 ); i++ ) {
+        if( this.flags['band-of-blades'].items[f] ) {
+          const increase = this.system.resources.supply.extraUses;
+          this.flags['band-of-blades'].items[f].usagesMax = String( parseInt( this.flags['band-of-blades'].items[f].usagesMax ) + increase );
+          for( let i = ( Math.max( ...Object.keys( this.flags['band-of-blades'].items[f].usagesArray ).map( n => Number(n) ) ) + 1 ); i < ( parseInt( this.flags['band-of-blades'].items[f].usagesMax ) + 1 ); i++ ) {
             foundry.utils.mergeObject(
-              actorData.flags['band-of-blades'].items[f].usagesArray,
+              this.flags['band-of-blades'].items[f].usagesArray,
               { [i]: String( i ) }
             )
           }
@@ -135,14 +136,14 @@ export class BoBActor extends Actor {
       })
     }
 
-    if ( actorData.type === "character" ) {
+    if ( this.type === "character" ) {
       //sets up array of values for specialist skill uses tracking dropdown
       const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
       let skillArray = {};
       let skillVal = 0;
       spec_skills.forEach( s => {
-        data.attributes.specialist.skills[s].usagesArray = {};
-        skillVal = data.attributes.specialist.skills[s].value;
+        this.system.attributes.specialist.skills[s].usagesArray = {};
+        skillVal = this.system.attributes.specialist.skills[s].value;
         if( skillVal ) {
           for( let i = skillVal; i >= 0; i-- ) {
             foundry.utils.mergeObject(
@@ -150,22 +151,34 @@ export class BoBActor extends Actor {
               { [i]: String(i) }
             );
           }
-          data.attributes.specialist.skills[s].usagesArray = skillArray;
+          this.system.attributes.specialist.skills[s].usagesArray = skillArray;
           skillVal = 0;
           skillArray = {};
         }
       })
+      let traumaCount = 0;
+      Object.keys( this.system.trauma.list ).forEach( t => {
+        if( this.system.trauma.list[t] ){ traumaCount++ }
+      })
+      this.system.trauma.value = traumaCount;
+
+      let blightCount = 0;
+      Object.keys( this.system.blight.list ).forEach( b => {
+        if( this.system.blight.list[b] ){ blightCount++ }
+      })
+      this.system.blight.value = blightCount;
+
     }
   }
 
 
   /** @override */
   getRollData() {
-    const data = super.getRollData();
+    const rollData = super.getRollData();
 
-    data.dice_amount = this.getAttributeDiceToThrow();
+    rollData.dice_amount = this.getAttributeDiceToThrow();
 
-    return data;
+    return rollData;
   }
 
   /* -------------------------------------------- */
@@ -177,17 +190,17 @@ export class BoBActor extends Actor {
     // Calculate Dice to throw.
     let dice_amount = {};
 
-	  switch (this.data.type) {
+	  switch (this.type) {
 	    case 'character':
-	      for (const a in this.data.data.attributes) {
+	      for (const a in this.system.attributes) {
           dice_amount[a] = {
             "value": 0,
             "bonus": 0
           };
 
-          for( const s in this.data.data.attributes[a].skills ) {
+          for( const s in this.system.attributes[a].skills ) {
             dice_amount[s] = {
-              "value": parseInt( this.data.data.attributes[a].skills[s]['value'][0] ),
+              "value": parseInt( this.system.attributes[a].skills[s]['value'][0] ),
               "bonus": 0
             }
 
@@ -197,27 +210,27 @@ export class BoBActor extends Actor {
             }
 
             // add resistance bonus dice
-            if( this.data.data.attributes[a].bonus ) {
-              dice_amount[a].bonus = this.data.data.attributes[a].bonus;
+            if( this.system.attributes[a].bonus ) {
+              dice_amount[a].bonus = this.system.attributes[a].bonus;
             }
           }
         }
         // add specialist action to insight resistance dice
-        if( this.data.data.item_triggers.specialist ) {
+        if( parseInt( this.system.attributes.specialist.skills[this.system.item_triggers.spec_skill]?.value ) > 0 ) {
           dice_amount.insight.value++;
         }
 	      break;
       case 'role':
         dice_amount.pressure = {
-          "value": this.data.data.resources.pressure,
+          "value": this.system.resources.pressure,
           "bonus": 0
         };
         dice_amount.engagement = {
-          "value": this.data.data.resources.engagement,
+          "value": this.system.resources.engagement,
           "bonus": 0
         };
         dice_amount.alchemists = {
-          "value": this.data.items.filter( a => a.name === "Alchemist" ).length,
+          "value": this.items.filter( a => a.name === "Alchemist" ).length,
           "bonus": 0
         };
         dice_amount.mission = {
@@ -468,9 +481,9 @@ export class BoBActor extends Actor {
     const attributes = Object.keys( game.system.model.Actor.character.attributes );
     if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
     if ( attribute_name !== "" ) {
-      let roll_data = this.getRollData();
-      dice_amount += roll_data.dice_amount[attribute_name].value;
-      dice_amount += roll_data.dice_amount[attribute_name].bonus;
+      let rollData = this.getRollData();
+      dice_amount += rollData.dice_amount[attribute_name].value;
+      dice_amount += rollData.dice_amount[attribute_name].bonus;
     }
     else {
       dice_amount = 1;
@@ -490,7 +503,7 @@ export class BoBActor extends Actor {
 
     let text = '';
     let attributes, attribute, skill;
-    attributes = this.data.data.data.attributes;
+    attributes = this.system.attributes;
 
     for ( attribute in attributes ) {
 

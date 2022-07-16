@@ -22,12 +22,12 @@ export class BoBItem extends Item {
         }
       }
 
-      if( ( ( data.type === "class" ) || ( data.type === "role" ) || ( data.type === "chosen" ) ) && ( data.data.def_abilities !== "" ) ) {
+      if( ( ( data.type === "class" ) || ( data.type === "role" ) || ( data.type === "chosen" ) ) && ( data.system.def_abilities !== "" ) ) {
         await BoBHelpers.addDefaultAbilities( data, actor );
       }
 
       if( ( data.type === "class" ) || ( data.type === "role" ) ) {
-        let update = { _id: actor.id };
+        let update = { _id: actor._id };
         // set actor icon for new class, if icon is already class icon or mystery man to avoid resetting custom art
         if( ( actor.img.slice( 0, 43 ) === "systems/band-of-blades/styles/assets/icons/" ) || ( actor.img === "icons/svg/mystery-man.svg" ) ) {
           const icon = data.img;
@@ -35,7 +35,7 @@ export class BoBItem extends Item {
             update,
             {
               img: icon,
-              "token.img": icon
+              "prototypeToken.texture.src": icon
             }
           );
         }
@@ -43,20 +43,20 @@ export class BoBItem extends Item {
         if( data.type === "class" ) {
 
           // adds specialist skill, if character has specialist class (non-Rookie)
-          const skill = data.data.skill;
-          const skillData = actor.data.data.attributes;
+          const skill = data.system.skill;
+          const skillData = actor.system.attributes;
 
           if( skill ) {
             const value = parseInt( skillData.specialist.skills[skill].value ) > 1 ? skillData.specialist.skills[skill].value : "1";
             const max = parseInt( skillData.specialist.skills[skill].max ) > 3 ? skillData.specialist.skills[skill].max : 3;
             foundry.utils.mergeObject(
               update,
-              { data: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
+              { system: { attributes: { specialist: { skills: { [skill]: { value: value, max: max } } } } } }
             );
           }
 
           //remove all load items on class change
-          const removeLoadItems = BoBHelpers.getActorItemsByType( actor.id, "item" );
+          const removeLoadItems = BoBHelpers.getActorItemsByType( actor._id, "item" );
           if( removeLoadItems.length !== 0 ) {
             for await( let item of removeLoadItems ) {
               item = actor.items.get( item );
@@ -78,15 +78,15 @@ export class BoBItem extends Item {
     let actor = this.parent ? this.parent : null;
 
     // Create actor flags for consumable uses dropdowns on sheet, in OnCreate because id is not set until after preCreate, this throws errors
-    if( actor && actor.data ) {
+    if( actor && actor.system ) {
       let key = data._id;
-      if( data.data.itemType === "Mercy" ) {
+      if( data.system.itemType === "Mercy" ) {
         await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
       } else if( data.type === "spies" ) {
         await actor.setFlag( "band-of-blades", "items." + key + ".wounded", false );
-        await actor.setFlag( "band-of-blades", "items." + key + ".master", data.data.master );
-      } else if( parseInt( data.data.uses ) ) {
-        let itemVal = parseInt( data.data.uses );
+        await actor.setFlag( "band-of-blades", "items." + key + ".master", data.system.master );
+      } else if( parseInt( data.system.uses ) ) {
+        let itemVal = parseInt( data.system.uses );
         let itemArray = {};
         if( itemVal ) {
           for( let i = 0; i <= itemVal; i++ ) {
@@ -97,12 +97,12 @@ export class BoBItem extends Item {
           }
           await actor.setFlag( "band-of-blades", "items." + key + ".usagesArray", itemArray );
         }
-        if( data.data.itemType === "Alchemist" ) {
+        if( data.system.itemType === "Alchemist" ) {
           await actor.setFlag( "band-of-blades", "items." + key + ".usages", "0" );
         } else {
-          await actor.setFlag( "band-of-blades", "items." + key + ".usages", data.data.uses );
+          await actor.setFlag( "band-of-blades", "items." + key + ".usages", data.system.uses );
         }
-        await actor.setFlag( "band-of-blades", "items." + key + ".usagesMax", data.data.uses );
+        await actor.setFlag( "band-of-blades", "items." + key + ".usagesMax", data.system.uses );
       }
     }
   }
@@ -113,14 +113,12 @@ export class BoBItem extends Item {
   async _onDelete( options, userId ) {
     if( userId === game.user.id ) {
       const actor = this.parent ? this.parent : null;
-      const actorData = actor?.data;
-      const data = this.data;
 
       // Delete related flags on item delete
       if ( actor !== null ) {
-        let itemFlag = actor?.getFlag( "band-of-blades", "items." + this.data._id ) || {};
+        let itemFlag = actor?.getFlag( "band-of-blades", "items." + this._id ) || {};
         if( itemFlag ) {
-          let deleted = await actor?.unsetFlag( "band-of-blades", "items." + this.data._id );
+          let deleted = await actor?.unsetFlag( "band-of-blades", "items." + this._id );
         }
       }
     }
@@ -133,15 +131,11 @@ export class BoBItem extends Item {
   prepareData() {
     super.prepareData();
 
-    const item_data = this.data;
-    const data = item_data.data;
-
-
   };
 
   async sendToChat() {
-    const itemData = this.data.toObject();
-    if (itemData.img.includes("/mystery-man")) {
+    const itemData = this.toObject();
+    if ( itemData.img.includes("/mystery-man") ) {
       itemData.img = null;
     }
     const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", itemData);

@@ -40,83 +40,83 @@ export class BoBSheet extends ActorSheet {
     items.forEach(e => {
       let addition_price_load = ``;
 
-      if (typeof e.data.load !== "undefined") {
-        addition_price_load += `(${e.data.load})`
-      } else if (typeof e.data.price !== "undefined") {
-        addition_price_load += `(${e.data.price})`
+      if (typeof e.system.load !== "undefined") {
+        addition_price_load += `(${e.system.load})`
+      } else if (typeof e.system.price !== "undefined") {
+        addition_price_load += `(${e.system.price})`
       }
 
       if (e.type === "trait") {
-		    if ( e.data.class === this.actor.data.data.heritage ) {
+		    if ( e.system.class === this.actor.system.heritage ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "ability") {
-		    if ( ( e.data.class === this.actor.data.data.class ) || ( ( e.data.class === "General" ) && ( ( this.actor.data.data.class !== "Rookie") && ( this.actor.data.data.class !== "" ) ) ) ) {
+		    if ( ( e.system.class === this.actor.system.class ) || ( ( e.system.class === "General" ) && ( ( this.actor.system.class !== "Rookie") && ( this.actor.system.class !== "" ) ) ) ) {
 			    html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			    html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+			    html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
 			    html += `</label>`;
 		    }
 	    } else if (e.type === "item") {
-		    if ( ( ( e.data.class === this.actor.data.data.class ) && ( ( ( e.data.load_type === game.i18n.localize("BITD.Light") ) || ( e.data.load_type === "Utility" ) ) ||
-          ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) && ( this.actor.data.data.loadout?.selected_load_level === "BITD.Normal" ) ) ||
-          ( ( ( e.data.load_type === game.i18n.localize("BITD.Normal") ) || ( e.data.load_type === game.i18n.localize("BITD.Heavy") ) ) && ( this.actor.data.data.loadout?.selected_load_level === "BITD.Heavy" ) ) ) ) ||
-          ( ( this.actor.data.data.item_triggers?.grenadier === 1 ) && ( e.data.class === "Grenadier") ) ||
-          ( ( this.actor.data.data.item_triggers?.crimson === 1 ) && ( e.data.class === "Crimson") ) ||
-          ( ( this.actor.data.data.item_triggers?.chemist === 1 ) && ( e.data.class === "Chemist") ) ||
-          ( ( this.actor.data.data.item_triggers?.pious === 1 ) && ( e.data.class === "Pious") )) {
+		    if ( ( ( e.system.class === this.actor.system.class ) && ( ( ( e.system.load_type === game.i18n.localize("BITD.Light") ) || ( e.system.load_type === "Utility" ) ) ||
+          ( ( e.system.load_type === game.i18n.localize("BITD.Normal") ) && ( this.actor.system.loadout?.selected_load_level === "BITD.Normal" ) ) ||
+          ( ( ( e.system.load_type === game.i18n.localize("BITD.Normal") ) || ( e.system.load_type === game.i18n.localize("BITD.Heavy") ) ) && ( this.actor.system.loadout?.selected_load_level === "BITD.Heavy" ) ) ) ) ||
+          ( ( this.actor.system.item_triggers?.grenadier === 1 ) && ( e.system.class === "Grenadier") ) ||
+          ( ( this.actor.system.item_triggers?.crimson === 1 ) && ( e.system.class === "Crimson") ) ||
+          ( ( this.actor.system.item_triggers?.chemist === 1 ) && ( e.system.class === "Chemist") ) ||
+          ( ( this.actor.system.item_triggers?.pious === 1 ) && ( e.system.class === "Pious") )) {
 			      html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			      html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+			      html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
 			      html += `</label>`;
 		    }
       } else if (e.type === "materiel") {
-        if ( ( ( ( this.actor.data.data.resources.carts < 3 ) && ( e.data.itemType === "Supply Cart" ) ) || ( e.data.itemType !== "Supply Cart" ) ) &&
-          ( ( ( this.actor.data.data.resources.siege < 3 ) && ( e.data.itemType === "Siege Weapons" ) ) || ( e.data.itemType !== "Siege Weapons" ) ) ) {
+        if ( ( ( ( this.actor.system.resources.carts < 3 ) && ( e.system.itemType === "Supply Cart" ) ) || ( e.system.itemType !== "Supply Cart" ) ) &&
+          ( ( ( this.actor.system.resources.siege < 3 ) && ( e.system.itemType === "Siege Weapons" ) ) || ( e.system.itemType !== "Siege Weapons" ) ) ) {
           html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
           html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
           html += `</label>`;
         }
       } else if (e.type === "personnel") {
-        if ( ( ( ( this.actor.data.data.resources.laborers < 3 ) && ( e.data.itemType === "Laborer" ) ) || ( e.data.itemType !== "Laborer" ) ) &&
-          ( ( ( this.actor.data.data.resources.alchemists < 3 ) && ( e.data.itemType === "Alchemist" ) ) || ( e.data.itemType !== "Alchemist" ) ) &&
-          ( ( ( this.actor.data.data.resources.mercies < 3 ) && ( e.data.itemType === "Mercy" ) ) || ( e.data.itemType !== "Mercy" ) ) ) {
+        if ( ( ( ( this.actor.system.resources.laborers < 3 ) && ( e.system.itemType === "Laborer" ) ) || ( e.system.itemType !== "Laborer" ) ) &&
+          ( ( ( this.actor.system.resources.alchemists < 3 ) && ( e.system.itemType === "Alchemist" ) ) || ( e.system.itemType !== "Alchemist" ) ) &&
+          ( ( ( this.actor.system.resources.mercies < 3 ) && ( e.system.itemType === "Mercy" ) ) || ( e.system.itemType !== "Mercy" ) ) ) {
           html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
           html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
           html += `</label>`;
         }
       } else if ( e.type === "spies" ) {
-        if( !this.actor.data.items.map( i => { return i.name } ).includes( e.name ) ) {
+        if( !this.actor.items.map( i => { return i.name } ).includes( e.name ) ) {
           html += `<input id="select-item-${ e._id }" type="${ input_type }" name="select_items" value="${ e._id }">`;
           html += `<label class="flex-horizontal" for="select-item-${ e._id }">`;
-          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.data.special ) }</span></i>`;
+          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.system.special ) }</span></i>`;
           html += `</label>`;
         }
       } else if ( e.type === "network" ) {
-        if( !this.actor.data.items.map( i => { return i.name } ).includes( e.name ) &&
-          ( ( this.actor.data.items.map( i => { return i.name } ).includes( e.data.requirements ) ) ||
+        if( !this.actor.items.map( i => { return i.name } ).includes( e.name ) &&
+          ( ( this.actor.items.map( i => { return i.name } ).includes( e.system.requirements ) ) ||
           ( e.name === "Spy Network" ) ) ) {
           html += `<input id="select-item-${ e._id }" type="${ input_type }" name="select_items" value="${ e._id }">`;
           html += `<label class="flex-horizontal" for="select-item-${ e._id }">`;
-          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.data.description ) }</span></i>`;
+          html += `${ game.i18n.localize( e.name ) } <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${ game.i18n.localize( e.system.description ) }</span></i>`;
           html += `</label>`;
         }
       } else if (e.type === "chosenability") {
-        if ( e.data.class === this.actor.data.name ) {
+        if ( e.system.class === this.actor.name ) {
           html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
           html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+          html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
           html += `</label>`;
         }
 	    } else {
 			  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
 			  html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-			  html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.description)}</span></i>`;
+			  html += `${game.i18n.localize(e.name)} ${addition_price_load} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.description)}</span></i>`;
 			  html += `</label>`;
 	    }
     });
@@ -126,9 +126,8 @@ export class BoBSheet extends ActorSheet {
     let options = {
       // width: "500"
     }
-    let perms = this.actor.permission;
 
-		if ( perms >= CONST.ENTITY_PERMISSIONS.OWNER ) {
+		if ( this.actor.isOwner ) {
       let dialog = new Dialog({
         title: `${game.i18n.localize('BITD.Add')} ${game.i18n.localize('BITD.' + BoBHelpers.getProperCase(item_type) )}`,
         content: html,
@@ -157,7 +156,7 @@ export class BoBSheet extends ActorSheet {
     event.preventDefault();
     const item_type = $(event.currentTarget).data("itemType")
 
-    let removeItems = BoBHelpers.getActorItemsByType( this.actor.id, item_type );
+    let removeItems = BoBHelpers.getActorItemsByType( this.actor._id, item_type );
     let html = `<div id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
     let options = {};
 
@@ -200,7 +199,7 @@ _onFlagAddClick(event) {
 	  if (e.type === item_type) {
   	  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;
       html += `<label class="flex-horizontal" for="select-item-${e._id}">`;
-      html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.data.designation)}</span></i>`;
+      html += `${game.i18n.localize(e.name)} <i class="tooltip fas fa-question-circle"><span class="tooltiptext left">${game.i18n.localize(e.system.designation)}</span></i>`;
       html += `</label>`;
 	  }
   });
@@ -243,7 +242,7 @@ _onFlagAddClick(event) {
     el.find("input:checked").each(function() {
 		  items_to_add.push(items.find(e => e._id === $(this).val()));
     });
-    if (this.document.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
+    if ( this.actor.isOwner ) {
 		  await this.actor.createEmbeddedDocuments("Item", items_to_add);
 	  }
   }
@@ -251,14 +250,14 @@ _onFlagAddClick(event) {
   /* -------------------------------------------- */
 
   async addFlagsToSheet(item_type, el) {
-	  let items = await BoBHelpers.getAllActorsByType(item_type, game);
+	  let items = BoBHelpers.getAllActorsByType(item_type, game);
 	  let items_to_add = [];
 
     el.find("input:checked").each(function() {
 		  items_to_add.push(items.find(e => e._id === $(this).val()));
     });
 
-    if (this.actor.permission >= CONST.ENTITY_PERMISSIONS.OWNER) {
+    if ( this.actor.isOwner ) {
 	    await this.actor.setFlag("band-of-blades", item_type, items_to_add);
 	  }
   }
@@ -305,7 +304,7 @@ _onFlagAddClick(event) {
 	  const world_items = await BoBHelpers.getAllItemsByType(item_type, game);
 
 	  //find all items of type attached to actor
-	  let curr_items = this.actor.data.items.filter(i => i.type === item_type);
+	  let curr_items = this.actor.items.filter(i => i.type === item_type);
 
 	  //find all items in world, but not attached to actor
 	  const add_items = world_items.filter(({ name: id1 }) => !curr_items.some(({ name: id2 }) => id2 === id1));
@@ -316,9 +315,9 @@ _onFlagAddClick(event) {
 	  const delete_items = rem_items.map( i => i.id );
 
     //delete all items attached to actor, but not in world
-	  await this.document.deleteEmbeddedDocuments("Item", delete_items);
+	  await this.actor.deleteEmbeddedDocuments("Item", delete_items);
 	  //attach any new items
-	  await this.document.createEmbeddedDocuments("Item", add_items);
+	  await this.actor.createEmbeddedDocuments("Item", add_items);
   }
 
 /* -------------------------------------------- */
@@ -334,20 +333,20 @@ _onFlagAddClick(event) {
 	  }
 
 	  if ( update_type === "heat" ) {
-		  update = {_id: item_id, data:{heat:{value: update_value}}};
+		  update = {_id: item_id, system:{heat:{value: update_value}}};
 	  } else if ( update_type === "wanted" ) {
-		  update = {_id: item_id, data:{wanted:{value: update_value}}};
+		  update = {_id: item_id, system:{wanted:{value: update_value}}};
 	  } else if ( update_type === "status" ) {
-	  	update = {_id: item_id, data:{status:{value: update_value}}};
+	  	update = {_id: item_id, system:{status:{value: update_value}}};
 	  } else if (update_type === "jobs" ) {
-	  	update = {_id: item_id, data:{jobs:{value: update_value}}};
+	  	update = {_id: item_id, system:{jobs:{value: update_value}}};
 	  } else if (update_type === "is_damaged" ) {
-	  	update = {_id: item_id, data:{is_damaged: update_value}};
+	  	update = {_id: item_id, system:{is_damaged: update_value}};
 	  } else {
 	  	console.log("update attempted for type undefined in bob-sheet.js onUpdateBoxClick function");
 		  return;
 	  }
 
-    await Item.updateDocuments([update], {parent: this.document});
+    await Item.updateDocuments([update], {parent: this});
   }
 }

@@ -17,11 +17,11 @@ const DEFAULT_TOKEN = {
 
 export class BoBClockSheet extends ActorSheet {
   static get defaultOptions() {
-    const supportedSystem = getSystemMapping(game.data.system.id);
+    const supportedSystem = getSystemMapping(game.system.id);
     return foundry.utils.mergeObject(
       super.defaultOptions,
       {
-        classes: ["clocks", "sheet", `clocks-system-${game.data.system.id}`, "actor", "npc"],
+        classes: ["clocks", "sheet", `clocks-system-${game.system.id}`, "actor", "npc"],
         template: "systems/band-of-blades/templates/bob-clock-sheet.html",
         width: 360,
         height: 550,
@@ -38,16 +38,16 @@ export class BoBClockSheet extends ActorSheet {
 */
   constructor (...args) {
     super(...args);
-    this._system = getSystemMapping(game.data.system.id);
+    this._system = getSystemMapping(game.system.id);
   }
 
   get system () {
     return this._system;
   }
 
-  getData () {
+  getData (options) {
     let clock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
-    const data = foundry.utils.mergeObject(super.getData(), {
+    const data = foundry.utils.mergeObject(super.getData(options), {
       clock: {
         progress: clock.progress,
         size: clock.size,
@@ -145,7 +145,7 @@ export default {
   let t = canvas.tokens.get(token.id);
   let a = game.actors.get(token.actorId);
 
-  if( !a?.data?.flags['band-of-blades']?.clocks ) {
+  if( !a?.flags['band-of-blades']?.clocks ) {
     return false;
   }
 
@@ -157,7 +157,7 @@ export default {
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new BoBClock(a.data.flags['band-of-blades'].clocks);
+    const oldClock = new BoBClock(a.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
@@ -220,7 +220,7 @@ export default {
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
 
-    const oldClock = new BoBClock(a.data.flags['band-of-blades'].clocks);
+    const oldClock = new BoBClock(a.flags['band-of-blades'].clocks);
     let newClock;
 
     const target = event.target.classList.contains("control-icon")
