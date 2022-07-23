@@ -1,12 +1,14 @@
 {
   "id": "band-of-blades",
+  "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
   "version": "2.0.0",
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
   "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.0.0.zip",
-  "minimumCoreVersion": 10,
+  "minimumCoreVersion": "10",
+  "compatibleCoreVersion": "10",
   "compatibility": {
     "minimum": 10,
     "verified": "10.273"
