@@ -79,3 +79,5 @@ v1.8.2  Fixed subtle error with Traits only displaying Compendium options
 v1.8.3  Added updated font file (by Gus) to improve support for extended Latin characters, added option to enter roll purpose for Fortune Rolls to be included in chat result, fix interactions between Elite upgrades and new Specialist action addition
 
 v2.0.0  v10 release, drop support for older versions, add Blight tracking to Marshal sheet, better balance to Clock Tiles UI
+
+v2.0.1  Temp fix for Rookie actions not saving
