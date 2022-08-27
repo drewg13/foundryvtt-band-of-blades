@@ -859,7 +859,7 @@
           {{#times_from_x 1 6}}
           <tr class="high-morale">
             <td>
-              <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
             </td>
             <td>
               <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
@@ -876,7 +876,7 @@
           {{#times_from_x 7 11}}
             <tr class="medium-morale">
               <td>
-                <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
+                <input type="checkbox" data-dType="Boolean" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
               </td>
               <td>
                 <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
@@ -885,8 +885,8 @@
           {{/times_from_x}}
           <tr class="medium-morale">
             <td>
-              <input type="checkbox" id="camp-{{_id}}-12-one" name="system.resources.camp.12.one" {{checked system.resources.camp.12.one }}>
-              <input type="checkbox" id="camp-{{_id}}-12-two" name="system.resources.camp.12.two" {{checked system.resources.camp.12.two }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-12-one" name="system.resources.camp.12.one" {{checked system.resources.camp.12.one }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-12-two" name="system.resources.camp.12.two" {{checked system.resources.camp.12.two }}>
             </td>
             <td>
               <label for="camp-{{_id}}-12-one">{{localize "BITD.CampMorale12"}}</label>
@@ -903,7 +903,7 @@
           {{#times_from_x 13 15}}
             <tr class="low-morale">
               <td>
-                <input type="checkbox" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
+                <input type="checkbox" data-dType="Boolean" id="camp-{{../_id}}-{{this}}" name="system.resources.camp.{{this}}" {{checked (lookup ../system.resources.camp this)}}>
               </td>
               <td>
                 <label for="camp-{{../_id}}-{{this}}">{{localize (concat "BITD.CampMorale" this)}}</label>
@@ -912,8 +912,8 @@
           {{/times_from_x}}
           <tr class="low-morale">
             <td>
-              <input type="checkbox" id="camp-{{_id}}-16-one" name="system.resources.camp.16.one" {{checked system.resources.camp.16.one }}>
-              <input type="checkbox" id="camp-{{_id}}-16-two" name="system.resources.camp.16.two" {{checked system.resources.camp.16.two }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-16-one" name="system.resources.camp.16.one" {{checked system.resources.camp.16.one }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-16-two" name="system.resources.camp.16.two" {{checked system.resources.camp.16.two }}>
             </td>
             <td>
               <label for="camp-{{_id}}-16-one">{{localize "BITD.CampMorale16"}}</label>
@@ -922,8 +922,8 @@
           </tr>
           <tr class="low-morale">
             <td>
-              <input type="checkbox" id="camp-{{_id}}-17-one" name="system.resources.camp.17.one" {{checked system.resources.camp.17.one }}>
-              <input type="checkbox" id="camp-{{_id}}-17-two" name="system.resources.camp.17.two" {{checked system.resources.camp.17.two }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-17-one" name="system.resources.camp.17.one" {{checked system.resources.camp.17.one }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-17-two" name="system.resources.camp.17.two" {{checked system.resources.camp.17.two }}>
             </td>
             <td>
               <label for="camp-{{_id}}-17-one">{{localize "BITD.CampMorale17"}}</label>
@@ -932,9 +932,9 @@
           </tr>
           <tr class="low-morale">
             <td>
-              <input type="checkbox" id="camp-{{_id}}-18-one" name="system.resources.camp.18.one" {{checked system.resources.camp.18.one }}>
-              <input type="checkbox" id="camp-{{_id}}-18-two" name="system.resources.camp.18.two" {{checked system.resources.camp.18.two }}>
-              <input type="checkbox" id="camp-{{_id}}-18-three" name="system.resources.camp.18.three" {{checked system.resources.camp.18.three }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-18-one" name="system.resources.camp.18.one" {{checked system.resources.camp.18.one }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-18-two" name="system.resources.camp.18.two" {{checked system.resources.camp.18.two }}>
+              <input type="checkbox" data-dType="Boolean" id="camp-{{_id}}-18-three" name="system.resources.camp.18.three" {{checked system.resources.camp.18.three }}>
             </td>
             <td>
               <label for="camp-{{../_id}}-18-one">{{localize "BITD.CampMorale18"}}</label>

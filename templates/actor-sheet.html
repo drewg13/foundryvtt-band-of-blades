@@ -167,7 +167,7 @@
           <div class="tooltip">
             <span class="tooltiptext bottom">{{{localize (concat "BITD.Trauma" (pcase @key) "Tip")}}}</span>
             <label>
-              <input type="checkbox" name="system.trauma.list.{{@key}}" value="{{this}}" {{checked (lookup ../system.trauma.list @key)}}>
+              <input type="checkbox" data-dType="Boolean" name="system.trauma.list.{{@key}}" value="{{this}}" {{checked (lookup ../system.trauma.list @key)}}>
               <span class="checkmark">{{localize (concat "BITD.Trauma" (pcase @key))}}</span>
             </label>
           </div>
@@ -209,7 +209,7 @@
           <div class="tooltip">
             <span class="tooltiptext bottom">{{{localize (concat "BITD.Blight" (pcase @key) "Tip")}}}</span>
             <label>
-              <input type="checkbox" name="system.blight.list.{{@key}}" value="{{this}}" {{checked (lookup ../system.blight.list @key)}}>
+              <input type="checkbox" data-dType="Boolean" name="system.blight.list.{{@key}}" value="{{this}}" {{checked (lookup ../system.blight.list @key)}}>
               <span class="checkmark">{{localize (concat "BITD.Blight" (pcase @key))}}</span>
             </label>
           </div>

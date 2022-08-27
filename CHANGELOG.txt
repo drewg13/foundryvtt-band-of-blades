@@ -81,3 +81,5 @@ v1.8.3  Added updated font file (by Gus) to improve support for extended Latin c
 v2.0.0  v10 release, drop support for older versions, add Blight tracking to Marshal sheet, better balance to Clock Tiles UI
 
 v2.0.1  Temp fix for Rookie actions not saving
+
+v2.0.2  Fix for Trauma/Blight checkbox validation issues
