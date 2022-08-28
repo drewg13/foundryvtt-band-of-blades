@@ -161,10 +161,7 @@
           <p><label>{{localize "BITD.Notes"}}</label></p>
         </div>
         <div class="description">
-          {{{editor system.notes target="system.notes" button=true owner=owner editable=editable}}}
-          {{#if editable}}
-            <button type="submit" name="submit"><i class="fas fa-feather-alt"></i> {{localize "JOURNAL.Submit"}}</button>
-          {{/if}}
+          {{editor system.notes target="system.notes" engine="prosemirror" collaborate=false button=true owner=owner editable=editable}}
         </div>
       </div>
 
