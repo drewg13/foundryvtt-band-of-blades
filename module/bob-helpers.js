@@ -41,7 +41,7 @@ export class BoBHelpers {
    *   data of actor to add abilities to
    */
   static async addDefaultAbilities( item_data, actor ) {
-console.log(item_data)
+
     let def_abilities = item_data.system.def_abilities || {};
     let abil_list = def_abilities.split( ', ' );
     let item_type = "";
@@ -61,13 +61,15 @@ console.log(item_data)
       return e.name
     } );
     let items = await BoBHelpers.getAllItemsByType( item_type, game );
-
     let trim_abil_list = abil_list.filter( x => !abilities.includes( x ) );
     trim_abil_list.forEach( i => {
-      items_to_add.push( items.find( e => ( e.name === i ) ) );
+      if( items.find( e => ( e.name === i ) ) !== undefined ) {
+        items_to_add.push( items.find( e => ( e.name === i ) ) );
+      } else {
+        ui.notifications.warn( game.i18n.localize("BITD.AddUpgradesWarn") )
+      }
     } );
-    //let update = items_to_add.map( item => item.toObject() );
-    //await Item.createDocuments( update, { parent: this.actor } )
+
     await actor.createEmbeddedDocuments( "Item", items_to_add );
   }
 

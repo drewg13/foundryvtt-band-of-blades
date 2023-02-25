@@ -403,8 +403,8 @@
   "BITD.Notes": "Notes",
   "BITD.AllItems": "All Items",
   "BITD.SpecialAbilities": "Special Abilities",
-  "BITD.AddUpgrades": "Default upgrades/gear to add to sheet during creation",
-
+  "BITD.AddUpgrades": "Default upgrades/gear to add to sheet during creation (comma-separated, must match item names exactly)",
+  "BITD.AddUpgradesWarn": "A listed default upgrade for this class was not found, check that they exists and names match exactly.",
 
   "BITD.Roll": "Roll",
   "BITD.RollFailure": "Failure",
