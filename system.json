@@ -3,15 +3,15 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.0.2.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.0.3.zip",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "10",
   "compatibility": {
     "minimum": 10,
-    "verified": "10.279"
+    "verified": "10.291"
   },
   "templateVersion": 1,
   "authors": [

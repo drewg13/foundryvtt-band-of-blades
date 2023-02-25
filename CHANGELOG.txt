@@ -83,3 +83,5 @@ v2.0.0  v10 release, drop support for older versions, add Blight tracking to Mar
 v2.0.1  Temp fix for Rookie actions not saving
 
 v2.0.2  Fix for Trauma/Blight checkbox validation issues
+
+v2.0.3  UI improvements to Class editing
