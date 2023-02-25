@@ -399,6 +399,7 @@
   "BITD.ClassExpClue5": "Mark 1 xp per threat of the highest threat opponent.",
   "BITD.ClassExpClue6": "Specialists on secondary missions mark 2 xp for surviving.",
   "BITD.ClassExpClueDescription": "At the end of each session, for each item below, mark 1 xp in any xp tracker:",
+  "BITD.ClassSpecificExpClue": "Class Specific XP Trigger",
   "BITD.Abilities": "Abilities",
   "BITD.Notes": "Notes",
   "BITD.AllItems": "All Items",
