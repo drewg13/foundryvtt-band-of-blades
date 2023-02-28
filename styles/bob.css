@@ -186,7 +186,7 @@ input[type="checkbox"]:hover {
 * td {
   padding: 5px;
 }
-* .band-of-blades section {
+* section {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
