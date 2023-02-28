@@ -56,11 +56,8 @@
 * .flex {
   display: flex;
 }
-* header {
+* .band-of-blades header {
   margin-bottom: 10px;
-}
-* ul {
-  list-style: none;
 }
 .resource-chat-notification table tr td.value {
   font-weight: bold;
@@ -189,25 +186,25 @@ input[type="checkbox"]:hover {
 * td {
   padding: 5px;
 }
-* section {
+* .band-of-blades section {
   margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-* section > *:not(.label-stripe) {
+* .band-of-blades section > *:not(.label-stripe) {
   margin-right: 10px;
 }
-* section > *:not(.label-stripe):last-child {
+* .band-of-blades section > *:not(.label-stripe):last-child {
   margin-right: 0px;
 }
-* section .grow-one {
+* .band-of-blades section .grow-one {
   flex-grow: 1;
 }
-* section .grow-two {
+* .band-of-blades section .grow-two {
   flex-grow: 2;
 }
-* section.experience {
+* .band-of-blades section.experience {
   margin-bottom: 0px;
   justify-content: center;
 }

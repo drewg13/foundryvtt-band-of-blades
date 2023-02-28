@@ -85,3 +85,5 @@ v2.0.1  Temp fix for Rookie actions not saving
 v2.0.2  Fix for Trauma/Blight checkbox validation issues
 
 v2.0.3  UI improvements to Class editing
+
+v2.0.4  Fix bulleted list CSS namespace
