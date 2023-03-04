@@ -3,10 +3,10 @@
   "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
-  "version": "2.0.5",
+  "version": "2.1.0",
   "url": "https://github.com/drewg13/foundryvtt-band-of-blades/",
   "manifest": "https://raw.githubusercontent.com/drewg13/foundryvtt-band-of-blades/main/system.json",
-  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.0.5.zip",
+  "download": "https://github.com/drewg13/foundryvtt-band-of-blades/archive/v2.1.0.zip",
   "minimumCoreVersion": "10",
   "compatibleCoreVersion": "10",
   "compatibility": {
@@ -140,6 +140,13 @@
       "system": "band-of-blades",
       "path": "./packs/missions.db",
       "type": "RollTable"
+    },
+    {
+      "name": "macros",
+      "label": "System Macros",
+      "system": "band-of-blades",
+      "path": "./packs/system-macros.db",
+      "type": "Macro"
     }
   ]
 }

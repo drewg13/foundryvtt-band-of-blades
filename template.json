@@ -246,6 +246,15 @@
             "value": "0",
             "usagesIndex": "0",
             "usagesArray": "0"
+          },
+          "custom": {
+            "label": "BITD.SkillsCustom",
+            "tip": "BITD.SkillsCustomTip",
+            "max": 0,
+            "maxBonus": 0,
+            "value": "0",
+            "usagesIndex": "0",
+            "usagesArray": "0"
           }
         }
       }

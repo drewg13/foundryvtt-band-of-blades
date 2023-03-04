@@ -532,6 +532,11 @@
   "BITD.SkillsScroungeTip": "When you Scrounge, you repurpose the environment around you to find shelter or useful items.  Each use gets you shelter for an evening or one load of supplies for the squad.",
   "BITD.SkillsWeave": "Weave",
   "BITD.SkillsWeaveTip": "When you Weave, you invoke arcane powers to change the world around you at great risk.  Each use can also allow you to identify an artifact or sense the divine.",
+  "BITD.SkillsCustom": "Custom",
+  "BITD.SkillsCustomTip": "Custom Skill",
+  "BITD.CustomLabel": "New Custom Action Name",
+  "BITD.CustomTip": "New Custom Action Description",
+  "BITD.ChangeCustomAction": "Change Custom Specialist Action",
 
   "BITD.PExperience": "Playbook XP ",
   "BITD.CExperience": "Crew XP ",

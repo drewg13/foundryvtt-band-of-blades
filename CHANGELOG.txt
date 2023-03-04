@@ -89,3 +89,6 @@ v2.0.3  UI improvements to Class editing
 v2.0.4  Fix bulleted list CSS namespace
 
 v2.0.5  Fix bad CSS edit
+
+v2.1.0  Add support and macro for custom specialist actions
+
