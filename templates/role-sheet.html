@@ -1159,7 +1159,7 @@
           <p><label>{{localize "BITD.Specialists"}}</label>{{localize "BITD.SpecialistsLabel"}}</p>
         </div>
         {{#each specialistTypes as |specType sindex|}}
-          <div class="label-stripe-gray">{{specType.name}}  &mdash;  {{localize (concat "BITD." (lookup specType 'name') "Label")}}</div>
+          <div class="label-stripe-gray">{{specType.name}}  &mdash;  {{specType.system.label}}</div>
           <div class="container flex-flow">
             {{#each ../specialists as |specialist lindex|}}
               {{#if (eq specialist.system.class specType.name)}}

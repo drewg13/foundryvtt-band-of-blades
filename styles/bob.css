@@ -110,6 +110,7 @@
 }
 * .sheet img {
   margin-right: 3px;
+  margin-top: 4px;
 }
 * .sheet section {
   margin-bottom: unset;
@@ -1642,8 +1643,9 @@ input[type="checkbox"]:hover {
   display: flex;
 }
 * .role-sheet .item-body.flex-left .attribute-skill-label {
-  min-width: 120px;
+  width: 120px;
   margin-top: 3px;
+  margin-right: 10px;
 }
 * .role-sheet #squads span {
   margin-right: 5px;

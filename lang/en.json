@@ -64,12 +64,7 @@
   "BITD.Squad": "Squad",
   "BITD.Duties": "Duties",
   "BITD.DutiesLabel": "During the game, do the following:",
-
-  "BITD.HeavyLabel": "assault and supply missions",
-  "BITD.MedicLabel": "assault and religious missions",
-  "BITD.OfficerLabel": "religious and supply missions",
-  "BITD.ScoutLabel": "recon and supply missions",
-  "BITD.SniperLabel": "assault and recon missions",
+  "BITD.MissionTypes": "Recommended mission types for specialists on Marshal sheet",
 
   "BITD.Pressure": "Pressure",
   "BITD.PressureLabel": "A measure of how surrounded you are by undead",
