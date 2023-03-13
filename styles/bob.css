@@ -852,7 +852,7 @@ input[type="checkbox"]:hover {
 * #attributes {
   display: flex;
   flex-direction: column;
-  width: 275px;
+  width: auto;
 }
 * #attributes .stripe {
   background-color: #191813;
@@ -873,6 +873,9 @@ input[type="checkbox"]:hover {
 * #attributes .attribute-skill-label {
   font-weight: bold;
   margin-top: 3px;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  min-width: 110px;
 }
 * #attributes .attributes-exp {
   position: relative;
@@ -974,7 +977,7 @@ input[type="checkbox"]:hover {
 }
 * #attributes .attributes-container .usage-stats,
 * #attributes .attributes-container .attribute-stats {
-  width: 83px;
+  width: 75px;
 }
 * .item-body .usage-stats {
   display: flex;
@@ -983,7 +986,7 @@ input[type="checkbox"]:hover {
   padding-bottom: 7px;
 }
 * #attributes .attributes-container .skill-label {
-  width: 100px;
+  width: auto;
 }
 * #morale-boxes .attributes-container label {
   height: 20px;
