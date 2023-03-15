@@ -95,3 +95,5 @@ v2.1.0  Add support and macro for custom specialist actions
 v2.1.1  Improvements to Marshal sheet and class mission types
 
 v2.1.2  Improvements to Attributes CSS to facilitate translated content
+
+v2.1.3  More CSS fixes, fixed Specialist XP tracker to respect expMax value
