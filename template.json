@@ -3,6 +3,7 @@
   "types": ["character", "role", "chosen", "minion", "\uD83D\uDD5B clock"],
   "character": {
     "alias": "",
+    "deceased": false,
     "look": "",
     "class": "",
     "heritage": "",

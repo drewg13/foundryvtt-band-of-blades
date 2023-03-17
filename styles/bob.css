@@ -740,10 +740,14 @@ input[type="checkbox"]:hover {
   width: 100%;
   font-weight: bold;
 }
-* .armor-checkboxes {
+* .armor-checkboxes,
+* .deceased {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+* .deceased {
+  margin-top: 10px;
 }
 * #harm-armor td.healing-checkboxes {
   display: flex;
@@ -753,11 +757,15 @@ input[type="checkbox"]:hover {
   display: flex;
 }
 * .wound-checkboxes input[type=checkbox],
-* #harm-armor .healing-checkboxes input[type=checkbox] {
+* .deceased input[type=checkbox],
+* #harm-armor .healing-checkboxes input[type=checkbox],
+* #harm-armor #character-armor-uses input[type=checkbox] {
   display:none;
 }
 * .wound-checkboxes label,
-* #harm-armor .healing-checkboxes label {
+* .deceased label,
+* #harm-armor .healing-checkboxes label,
+* #harm-armor #character-armor-uses label {
   height: 15px;
   width: 15px;
   border: 2px solid;
@@ -768,31 +776,15 @@ input[type="checkbox"]:hover {
   margin: 2px;
 }
 * .wound-checkboxes label:hover,
-* #harm-armor .healing-checkboxes label:hover {
-  filter: brightness(0.7);
-  opacity: 0.7;
-}
-* .wound-checkboxes input:checked + label,
-* #harm-armor .healing-checkboxes input:checked + label {
-  background-color: #191813;
-}
-* #harm-armor #character-armor-uses label {
-  height: 15px;
-  width: 15px;
-  /* border-radius: 50%; */
-  border: 2px solid;
-  background-color: #EEEFFF;
-  vertical-align: middle;
-  transition: filter 0.1s;
-  cursor: pointer;
-}
+* .deceased label:hover,
+* #harm-armor .healing-checkboxes label:hover,
 * #harm-armor #character-armor-uses label:hover {
   filter: brightness(0.7);
   opacity: 0.7;
 }
-* #harm-armor #character-armor-uses input {
-  display: none;
-}
+* .wound-checkboxes input:checked + label,
+* .deceased input:checked + label,
+* #harm-armor .healing-checkboxes input:checked + label,
 * #harm-armor #character-armor-uses input:checked + label {
   background-color: #191813;
 }
@@ -853,7 +845,7 @@ input[type="checkbox"]:hover {
   display: flex;
   flex-direction: column;
   width: auto;
-  min-width: 270px;
+  min-width: 288px;
 }
 * #attributes .stripe {
   background-color: #191813;
@@ -982,7 +974,7 @@ input[type="checkbox"]:hover {
   width: 52px;
 }
 * #attributes .attributes-container .attribute-stats {
-  width: 62px;
+  width: 80px;
 }
 * .item-body .usage-stats {
   display: flex;

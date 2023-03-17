@@ -54,6 +54,8 @@
   "BITD.Wounds": "Wounds",
   "BITD.Type": "Type",
   "BITD.Threat": "Threat",
+  "BITD.Deceased": "Deceased",
+  "BITD.DeceasedTip": "Controls whether this character appears on the Marshal Squad/Specialist tabs",
 
   "BITD.Resources": "Resources",
   "BITD.Squads": "Squads",
