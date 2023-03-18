@@ -964,12 +964,13 @@
             {{#each items as |item id|}}
               {{#if (eq item.type "spies")}}
                 <div class="flex-vertical summary-anchor">
-                  <div class="item flex-vertical" data-item-id="{{item._id}}">
+                  <div class="item flex-vertical {{#if item.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip expandable" data-expand="{{{item.system.special}}}">
                           <a>{{item.name}}</a>
+                          <span class="tooltiptext">{{{item.system.special}}}</span>
                         </span>
                         <span class="wound-checkboxes center flex-horizontal">
                           <input id="master-{{item._id}}" type="checkbox" name="flags.band-of-blades.items.{{item._id}}.master" {{checked (lookup2 ../flags.band-of-blades.items item._id 'master')}}>
@@ -988,6 +989,11 @@
                       <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
                     </span>
                   </div>
+                  {{#if item.isExpanded}}
+                    <div class="item-summary">
+                      {{{item.system.special}}}
+                    </div>
+                  {{/if}}
                 </div>
               {{/if}}
             {{/each}}
@@ -1005,18 +1011,24 @@
             {{#each items as |item id|}}
               {{#if (eq item.type "network")}}
                 <div class="flex-vertical summary-anchor">
-                  <div class="item flex-vertical" data-item-id="{{item._id}}">
+                  <div class="item flex-vertical {{#if item.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
                     <span class="item-body flex-horizontal">
                       <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                       <span class="center flex-horizontal">
                         <span class="tooltip expandable" data-expand="{{{item.system.description}}}">
                           <a>{{item.name}}</a>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
                         </span>
                       </span>
                       <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
                       <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
                     </span>
                   </div>
+                  {{#if item.isExpanded}}
+                    <div class="item-summary">
+                      {{{item.system.description}}}
+                    </div>
+                  {{/if}}
                 </div>
               {{/if}}
             {{/each}}

@@ -7,6 +7,13 @@ import {onManageActiveEffect, prepareActiveEffectCategories} from "./effects.js"
  */
 export class BoBActorSheet extends BoBSheet {
 
+  /**
+   * IDs for items on the sheet that have been expanded.
+   * @type {Set<string>}
+   * @protected
+   */
+  _expanded = new Set();
+
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
@@ -56,6 +63,9 @@ export class BoBActorSheet extends BoBSheet {
       })
     }
 
+    sheetData.items.forEach( i => {
+      i.isExpanded = this._expanded.has(i._id);
+    });
     sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
     return sheetData;
@@ -74,15 +84,18 @@ export class BoBActorSheet extends BoBSheet {
     html.find('.expandable').click(ev => {
       ev.preventDefault();
       const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("item-id"));
       const data = $(ev.currentTarget).data("expand");
       // Toggle summary
       if ( li.hasClass("expanded") ) {
         let summary = li.parents(".summary-anchor").children(".item-summary");
         summary.slideUp(200, () => summary.remove());
+        this._expanded.delete(item.id);
       } else {
         let div = $( `<div class="item-summary">${ data }</div>` );
         li.parents(".summary-anchor").append(div.hide());
         div.slideDown(200);
+        this._expanded.add(item.id);
       }
       li.toggleClass("expanded");
     });

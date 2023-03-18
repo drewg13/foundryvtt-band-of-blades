@@ -116,7 +116,7 @@
               {{#if (eq item.type "trait")}}
                 <div class="flex-vertical summary-anchor">
                   <div class="flex-vertical">
-                    <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <div class="item flex-horizontal {{#if item.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
                       <div class="item-body flex-horizontal">
                         <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                         <div class="attribute-skill-label expandable tooltip" data-expand="{{{item.system.shortdesc}}}" data-roll-attribute="{{item.name}}">
@@ -130,6 +130,11 @@
                       </div>
                     </div>
                   </div>
+                  {{#if item.isExpanded}}
+                    <div class="item-summary">
+                      {{{item.system.shortdesc}}}
+                    </div>
+                  {{/if}}
                 </div>
               {{/if}}
             {{/each}}
@@ -365,7 +370,7 @@
           {{#each items as |item id|}}
             {{#if (eq item.type "ability")}}
               <div class="flex-vertical summary-anchor">
-                <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item flex-horizontal {{#if item.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
                   <div class="item-body flex-horizontal">
                     <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
 				            <div class="tooltip expandable" data-expand="{{{item.system.description}}}">
@@ -378,6 +383,11 @@
                     <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
                   </div>
                 </div>
+                {{#if item.isExpanded}}
+                  <div class="item-summary">
+                    {{{item.system.description}}}
+                  </div>
+                {{/if}}
               </div>
             {{/if}}
           {{/each}}
@@ -403,7 +413,7 @@
           {{#each items as |item id|}}
             {{#if (eq item.type "item")}}
               <div class="flex-vertical summary-anchor">
-                <div class="item flex-horizontal" data-item-id="{{item._id}}">
+                <div class="item flex-horizontal {{#if item.isExpanded}}expanded{{/if}}" data-item-id="{{item._id}}">
                   <div class="item-body flex-horizontal">
                     <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
                     <div class="tooltip expandable" data-expand="{{{item.system.description}}}">
@@ -435,6 +445,11 @@
                     <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
                   </div>
                 </div>
+                {{#if item.isExpanded}}
+                  <div class="item-summary">
+                    {{{item.system.description}}}
+                  </div>
+                {{/if}}
               </div>
             {{/if}}
           {{/each}}
