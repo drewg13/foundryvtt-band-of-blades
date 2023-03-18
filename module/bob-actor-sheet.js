@@ -84,18 +84,18 @@ export class BoBActorSheet extends BoBSheet {
     html.find('.expandable').click(ev => {
       ev.preventDefault();
       const li = $(ev.currentTarget).parents(".item");
-      const item = this.actor.items.get(li.data("item-id"));
+      const itemId = li.data("item-id");
       const data = $(ev.currentTarget).data("expand");
       // Toggle summary
       if ( li.hasClass("expanded") ) {
         let summary = li.parents(".summary-anchor").children(".item-summary");
         summary.slideUp(200, () => summary.remove());
-        this._expanded.delete(item.id);
+        this._expanded.delete(itemId);
       } else {
         let div = $( `<div class="item-summary">${ data }</div>` );
         li.parents(".summary-anchor").append(div.hide());
         div.slideDown(200);
-        this._expanded.add(item.id);
+        this._expanded.add(itemId);
       }
       li.toggleClass("expanded");
     });
