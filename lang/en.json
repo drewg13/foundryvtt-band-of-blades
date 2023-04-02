@@ -153,6 +153,8 @@
   "BITD.SiegeWeaponsLabel": "Weapons of mass destruction",
   "BITD.SupplyCart": "Supply Carts",
   "BITD.SupplyCartLabel": "Critical for logistics",
+  "BITD.OtherResources": "Other Resources",
+  "BITD.OtherResourcesLabel": "Special or unique resources",
 
   "BITD.Annals": "The Annals of the Legion",
   "BITD.AnnalsShort": "Annals",

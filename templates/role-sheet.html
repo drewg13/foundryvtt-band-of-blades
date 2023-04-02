@@ -537,6 +537,51 @@
                 {{/if}}
               {{/each}}
             </div>
+
+            <div class="label-stripe-gray">
+              <p>
+                <label>{{localize "BITD.OtherResources"}}  &mdash;  {{localize "BITD.OtherResourcesLabel"}}</label>
+                <a class="materiel-add" data-mtype="Other"><i class="fas fa-plus-square"></i></a>
+              </p>
+            </div>
+            <div class="container flex-flow">
+              {{#each items as |item id|}}
+                {{#if (and (eq item.type "materiel") (eq item.system.itemType "Other"))}}
+                  <span class="item flex-horizontal" data-item-id="{{item._id}}">
+                    <span class="item-body flex-horizontal">
+                      <img src="{{item.img}}" title="{{item.name}}" width="24" height="24"/>
+                      <span class="center flex-horizontal">
+                        <span class="tooltip"><a class="item-name">{{item.name}}</a>
+                          <span class="tooltiptext">{{{item.system.description}}}</span>
+                        </span>
+                        {{#if (gt item.system.uses 0)}}
+                          {{#if @root/dropdowns}}
+                            <span class="uses-select">
+                              <span>{{localize "BITD.Uses"}}</span>
+                              {{#if (lookup2 ../flags.band-of-blades.items item._id 'usagesArray')}}  {{!-- Needed because array is created in onCreate() after first pass of sheet re-render and array can't be created in preCreate() --}}
+                                <select id="itemuses-{{item._id}}" name="flags.band-of-blades.items.{{item._id}}.usages" data-dtype="String">{{selectOptions (lookup2 ../flags.band-of-blades.items item._id 'usagesArray') selected=(lookup2 ../flags.band-of-blades.items item._id 'usages') localize=true}}</select>
+                              {{/if}}
+                            </span>
+                          {{else}}
+                            <div class="usage-stats">
+                              {{#multiboxes (lookup2 ../flags.band-of-blades.items item._id 'usages')}}
+                                {{#times_from_0 item.system.uses}}
+                                  <input type="radio" id="usages-{{item._id}}-{{this}}" data-dtype="String" name="flags.band-of-blades.items.{{item._id}}.usages" value="{{this}}">
+                                  <label for="usages-{{item._id}}-{{this}}"></label>
+                                {{/times_from_0}}
+                              {{/multiboxes}}
+                            </div>
+                          {{/if}}
+                        {{/if}}
+                      </span>
+                    </span>
+                    <a class="item-control item-delete" title="{{localize 'BITD.TitleDeleteItem'}}"><i class="fas fa-trash"></i></a>
+                    <a class="item-control item-post" title="{{localize 'BITD.TitlePostItem'}}"><i class="fas fa-comment"></i></a>
+                  </span>
+                {{/if}}
+              {{/each}}
+            </div>
+
           </div>
 
           <div class="label-stripe">
