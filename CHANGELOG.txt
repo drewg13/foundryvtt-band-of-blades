@@ -103,3 +103,5 @@ v2.1.4  More CSS fixes, added Deceased status to character sheet
 v2.2.0  Persistent expandable item descriptions, shamelessly borrowed from DND5e system
 
 v2.3.0  Add "Other" category to QM Resources tab
+
+v2.3.1  Clarify some specialist action hover text, fix incorrect Grit hover text
