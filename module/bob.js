@@ -306,6 +306,9 @@ Hooks.once("init", function() {
  */
 Hooks.once("ready", function() {
 
+  // default map note visibility to on, for journal entries with proper permissions
+  game.settings.settings.get("core.notesDisplayToggle").default = true;
+
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => BoBHelpers.createBoBMacro(data, slot));
 
