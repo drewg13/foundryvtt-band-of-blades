@@ -1,4 +1,5 @@
-FoundryVTT Band of Blades
+##FoundryVTT Band of Blades##
+
 
 An attempt to adapt the Blades in the Dark system created by megastruktur to Band of Blades
 
@@ -9,6 +10,7 @@ You DO NOT need to import any items out of the compendiums in order to use them.
 Recommended Modules
 
 Forien's Easy Polls (for helping players make a final decision)
+
 Tabletop RPG Music
 
 Usage
