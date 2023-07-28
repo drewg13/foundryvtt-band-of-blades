@@ -1,4 +1,8 @@
-##FoundryVTT Band of Blades##
+# FoundryVTT Band of Blades
+<p>
+  <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/drewg13/foundryvtt-band-of-blades">
+  <img alt="GitHub downloads (latest)" src="https://img.shields.io/github/downloads/drewg13/foundryvtt-band-of-blades/latest/system.zip">
+</p>
 
 
 An attempt to adapt the Blades in the Dark system created by megastruktur to Band of Blades
