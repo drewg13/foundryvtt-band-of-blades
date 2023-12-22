@@ -112,18 +112,20 @@ export class BoBClockSheet extends ActorSheet {
 
     // update associated tokens
     const tokens = actor.getActiveTokens();
-    let update = [];
-    let tokenObj = {};
-    for (const t of tokens) {
-      tokenObj = {
-        _id: t.id,
-        name: actor.name,
-        img: clock.image.img,
-        actorLink: true
-      };
-      update.push(tokenObj);
+    if( tokens.length !== 0 ) {
+      let update = [];
+      let tokenObj = {};
+      for( const t of tokens ) {
+        tokenObj = {
+          _id: t.id,
+          name: actor.name,
+          img: clock.image.img,
+          actorLink: true
+        };
+        update.push( tokenObj );
+      }
+      await TokenDocument.updateDocuments( update, { parent: game.scenes.current } );
     }
-    await TokenDocument.updateDocuments(update, {parent: game.scenes.current});
     // update the Actor
     const persistObj = await this.system.persistClockToActor({ actor, clock });
     const visualObj = {
@@ -201,17 +203,19 @@ export default {
 
     update = [];
     const tokens = a.getActiveTokens();
-    for (const t of tokens) {
-      tokenObj = {
-        _id: t.id,
-        name: a.name,
-        img: newClock.image.img,
-        flags: newClock.flags,
-        actorLink: true
-      };
-      update.push(tokenObj);
+    if( tokens.length !== 0 ) {
+      for( const t of tokens ) {
+        tokenObj = {
+          _id: t.id,
+          name: a.name,
+          img: newClock.image.img,
+          flags: newClock.flags,
+          actorLink: true
+        };
+        update.push( tokenObj );
+      }
+      await TokenDocument.updateDocuments( update, { parent: game.scenes.current } );
     }
-    await TokenDocument.updateDocuments(update, {parent: game.scenes.current});
   });
 
 
@@ -263,17 +267,19 @@ export default {
     await Actor.updateDocuments(update);
     update = [];
     const tokens = a.getActiveTokens();
-    for (const t of tokens) {
-      tokenObj = {
-        _id: t.id,
-        name: a.name,
-        img: newClock.image.img,
-        flags: newClock.flags,
-        actorLink: true
-      };
-      update.push(tokenObj);
+    if( tokens.length !== 0 ) {
+      for( const t of tokens ) {
+        tokenObj = {
+          _id: t.id,
+          name: a.name,
+          img: newClock.image.img,
+          flags: newClock.flags,
+          actorLink: true
+        };
+        update.push( tokenObj );
+      }
+      await TokenDocument.updateDocuments( update, { parent: game.scenes.current } );
     }
-    await TokenDocument.updateDocuments(update, {parent: game.scenes.current});
   });
 return true;
 }}

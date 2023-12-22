@@ -107,3 +107,7 @@ v2.3.0  Add "Other" category to QM Resources tab
 v2.3.1  Clarify some specialist action hover text, fix incorrect Grit hover text
 
 v2.3.2  Default Map Notes Visibility to true, V11 compatibility
+
+v2.3.3  Testing automated release
+
+v2.3.4  Fix Clock Actors when no active scene
