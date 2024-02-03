@@ -1222,7 +1222,7 @@
           <div class="container flex-flow">
             {{#each ../specialists as |specialist lindex|}}
               {{#if (not specialist.system.deceased)}}
-                {{#if (eq specialist.system.class specType.name)}}
+                {{#if (eq specialist.system.class specType.system.class)}}
                   <span class="item flex-horizontal" data-item-id="{{specialist._id}}">
                     <span class="item-body flex-left">
                       <img src="{{specialist.img}}" title="{{specialist.name}}" width="24" height="24"/>

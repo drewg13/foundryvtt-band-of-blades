@@ -63,7 +63,7 @@ export class BoBRoleSheet extends BoBSheet {
       const rookies = BoBHelpers.getAllCharactersByClass( "Rookie", game );
       sheetData.squaddies = [ ...rookies, ...soldiers ];
       const nonSquaddies = game.actors.filter( ( { id: id1 } ) => !sheetData.squaddies.some( ( { _id: id2 } ) => id2 === id1 ) );
-      const specialists = nonSquaddies.filter( s => s.type === "character" );
+      const specialists = nonSquaddies.filter( s => ( s.type === "character" ) && ( s.system.class !== "" ) );
       sheetData.specialists = specialists.map( s => {
         return s
       } );
@@ -135,7 +135,7 @@ export class BoBRoleSheet extends BoBSheet {
       } )
       sheetData.squads = await BoBHelpers.getAllItemsByType( "squad", game );
       const specTypes = await BoBHelpers.getAllItemsByType( "class", game );
-      sheetData.specialistTypes = specTypes.filter( t => ( t.name !== "Rookie" ) && ( t.name !== "Soldier" ) );
+      sheetData.specialistTypes = specTypes.filter( t => ( t.system.class !== "Rookie" ) && ( t.system.class !== "Soldier" ) );
     }
 
     if( sheetData.system.type === "Lorekeeper" ) {

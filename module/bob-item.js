@@ -41,7 +41,6 @@ export class BoBItem extends Item {
         }
 
         if( data.type === "class" ) {
-
           // adds specialist skill, if character has specialist class (non-Rookie)
           const skill = data.system.skill;
           const skillData = actor.system.attributes;
