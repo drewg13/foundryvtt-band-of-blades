@@ -202,14 +202,14 @@ export class BoBRoleSheet extends BoBSheet {
     html.find('.materiel-add').click( async (ev) => {
       const itemType = $(ev.currentTarget).data("mtype");
       let mItems = await BoBHelpers.getAllItemsByType( "materiel", game );
-      let item = mItems.find( i => i.name === itemType );
+      let item = mItems.find( i => i.system.itemType === itemType );
       await this.actor.createEmbeddedDocuments( "Item", [ item ] );
     });
 
     html.find('.personnel-add').click( async (ev) => {
       const itemType = $(ev.currentTarget).data("mtype");
       let mItems = await BoBHelpers.getAllItemsByType( "personnel", game );
-      let item = mItems.find( i => i.name === itemType );
+      let item = mItems.find( i => i.system.itemType === itemType );
       await this.actor.createEmbeddedDocuments( "Item", [ item ] );
     });
 
