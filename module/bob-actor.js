@@ -390,8 +390,8 @@ export class BoBActor extends Actor {
             label: game.i18n.localize( 'BITD.Roll' ),
             callback: async( html ) => {
               let modifier = parseInt( html.find( '[name="mod"]' )[0].value );
-              let position = $( 'input:radio[name="pos"]:checked' )[0].value;
-              let effect = $( 'input:radio[name="fx"]:checked' )[0].value;
+              let position = html.find( 'input:radio[name="pos"]:checked' )[0].value;
+              let effect = html.find( 'input:radio[name="fx"]:checked' )[0].value;
               await this.rollAttribute( attribute_name, modifier, position, effect );
             }
           },
@@ -478,6 +478,7 @@ export class BoBActor extends Actor {
   async rollAttribute( attribute_name = "", additional_dice_amount = 0, position, effect ) {
 
     let dice_amount = 0;
+    let speaker_name = this.name;
     const attributes = Object.keys( game.system.model.Actor.character.attributes );
     if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
     if ( attribute_name !== "" ) {
@@ -490,7 +491,7 @@ export class BoBActor extends Actor {
     }
     dice_amount += additional_dice_amount;
 
-    await bobRoll( dice_amount, attribute_name, position, effect );
+    await bobRoll( dice_amount, attribute_name, position, effect, "", speaker_name );
   }
 
   /* -------------------------------------------- */

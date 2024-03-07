@@ -5,8 +5,9 @@
  * @param {string} position
  * @param {string} effect
  * @param {string} purpose
+ * @param {string} speaker_name
  */
-export async function bobRoll( dice_amount, attribute_name = "", position = "risky", effect = "standard", purpose = "") {
+export async function bobRoll( dice_amount, attribute_name = "", position = "risky", effect = "standard", purpose = "", speaker_name = "") {
 
   let zeromode = false;
 
@@ -16,7 +17,7 @@ export async function bobRoll( dice_amount, attribute_name = "", position = "ris
   let r = new Roll( `${dice_amount}d6`, {} );
 
   await r.evaluate({async: true});
-  await showChatRollMessage( r, zeromode, attribute_name, position, effect, purpose );
+  await showChatRollMessage( r, zeromode, attribute_name, position, effect, purpose, speaker_name );
 }
 
 /**
@@ -28,10 +29,12 @@ export async function bobRoll( dice_amount, attribute_name = "", position = "ris
  * @param {string} position
  * @param {string} effect
  * @param {string} purpose
+ * @param {string} speaker_name
  */
-async function showChatRollMessage(r, zeromode, attribute_name = "", position = "", effect = "", purpose = "") {
+async function showChatRollMessage(r, zeromode, attribute_name = "", position = "", effect = "", purpose = "", speaker_name= "") {
 
   let speaker = ChatMessage.getSpeaker();
+  if( speaker_name ) { speaker.alias = speaker_name }
   let attribute_label;
   if ( attribute_name === "fortune" ){
     attribute_label = game.i18n.localize( "BITD.Fortune" );
