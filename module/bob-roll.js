@@ -16,7 +16,7 @@ export async function bobRoll( dice_amount, attribute_name = "", position = "ris
 
   let r = new Roll( `${dice_amount}d6`, {} );
 
-  await r.evaluate({async: true});
+  await r.evaluate();
   await showChatRollMessage( r, zeromode, attribute_name, position, effect, purpose, speaker_name );
 }
 
@@ -45,7 +45,7 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
 
   // Retrieve Roll status.
   let roll_status;
-  let resistance_rolls = Object.keys( game.system.model.Actor.character.attributes );
+  let resistance_rolls = Object.keys( game.model.Actor.character.attributes );
   if( resistance_rolls[resistance_rolls.length - 1] === "specialist" ) { resistance_rolls.pop(); }
   let stress_result = 0;
   let stress_result_display = 0;
@@ -116,11 +116,11 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
   let messageData = {
     speaker: speaker,
     content: result,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
     roll: r
   }
 
-  await CONFIG.ChatMessage.documentClass.create(messageData, {});
+  await ChatMessage.implementation.create(messageData, {});
 }
 
 /**

@@ -115,3 +115,5 @@ v2.3.4  Fix Clock Actors when no active scene
 v2.4.0  V11 only, fixes for ease of translation with Babele
 
 v2.4.1  Ported fixes from @Bit-Fisto from scum-and-villainy
+
+v2.5.0  V12 only fixes

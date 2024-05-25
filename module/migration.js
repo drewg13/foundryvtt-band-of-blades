@@ -62,7 +62,7 @@ function _migrateActor(actor) {
   let updateData = {}
 
   // Migrate Skills
-  const attributes = game.system.model.Actor.character.attributes;
+  const attributes = game.model.Actor.character.attributes;
   for ( let attribute_name of Object.keys(actor.data.attributes || {}) ) {
 
     // Insert attribute label
@@ -82,7 +82,7 @@ function _migrateActor(actor) {
         if (Array.isArray(skill_tmp)) {
           updateData[`data.attributes.${attribute_name}.skills.${skill_name}.value`] = [skill_tmp[0]];
         }
-        
+
       }
     }
   }

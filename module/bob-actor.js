@@ -32,7 +32,7 @@ export class BoBActor extends Actor {
           updateData['system.experienceMax'] = playbookXP;
         }
         if( attributeXP ) {
-          const attributes = Object.keys( game.system.model.Actor.character.attributes );
+          const attributes = Object.keys( game.model.Actor.character.attributes );
           attributes.forEach( a => updateData['system.attributes.'+ a + '.expMax'] = attributeXP );
         }
         break;
@@ -138,7 +138,7 @@ export class BoBActor extends Actor {
 
     if ( this.type === "character" ) {
       //sets up array of values for specialist skill uses tracking dropdown
-      const spec_skills = Object.keys( game.system.model.Actor.character.attributes.specialist.skills );
+      const spec_skills = Object.keys( game.model.Actor.character.attributes.specialist.skills );
       let skillArray = {};
       let skillVal = 0;
       spec_skills.forEach( s => {
@@ -479,7 +479,7 @@ export class BoBActor extends Actor {
 
     let dice_amount = 0;
     let speaker_name = this.name;
-    const attributes = Object.keys( game.system.model.Actor.character.attributes );
+    const attributes = Object.keys( game.model.Actor.character.attributes );
     if( attributes[attributes.length - 1] === "specialist" ) { attributes.pop(); }
     if ( attribute_name !== "" ) {
       let rollData = this.getRollData();

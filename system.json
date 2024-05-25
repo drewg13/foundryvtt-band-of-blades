@@ -8,8 +8,8 @@
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "compatibility": {
-    "minimum": 11,
-    "verified": 11.315
+    "minimum": 12,
+    "verified": 12.324
   },
   "templateVersion": 1,
   "authors": [
@@ -38,112 +38,112 @@
       "name": "class",
       "label": "Classes",
       "system": "band-of-blades",
-      "path": "./packs/classes.db",
+      "path": "./packs/classes",
       "type": "Item"
     },
     {
       "name": "role",
       "label": "Roles",
       "system": "band-of-blades",
-      "path": "./packs/roles.db",
+      "path": "./packs/roles",
       "type": "Item"
     },
     {
       "name": "squad",
       "label": "Squads",
       "system": "band-of-blades",
-      "path": "./packs/squads.db",
+      "path": "./packs/squads",
       "type": "Item"
     },
     {
       "name": "heritage",
       "label": "Heritages",
       "system": "band-of-blades",
-      "path": "./packs/heritages.db",
+      "path": "./packs/heritages",
       "type": "Item"
     },
     {
       "name": "trait",
       "label": "Traits",
       "system": "band-of-blades",
-      "path": "./packs/traits.db",
+      "path": "./packs/traits",
       "type": "Item"
     },
     {
       "name": "item",
       "label": "Items",
       "system": "band-of-blades",
-      "path": "./packs/items.db",
+      "path": "./packs/items",
       "type": "Item"
     },
     {
       "name": "materiel",
       "label": "Materiel",
       "system": "band-of-blades",
-      "path": "./packs/materiel.db",
+      "path": "./packs/materiel",
       "type": "Item"
     },
     {
       "name": "personnel",
       "label": "Personnel",
       "system": "band-of-blades",
-      "path": "./packs/personnel.db",
+      "path": "./packs/personnel",
       "type": "Item"
     },
     {
       "name": "ability",
       "label": "Abilities",
       "system": "band-of-blades",
-      "path": "./packs/abilities.db",
+      "path": "./packs/abilities",
       "type": "Item"
     },
     {
       "name": "chosen",
       "label": "Chosen/Broken",
       "system": "band-of-blades",
-      "path": "./packs/chosen.db",
+      "path": "./packs/chosen",
       "type": "Item"
     },
     {
       "name": "chosenability",
       "label": "Chosen/Broken Abilities",
       "system": "band-of-blades",
-      "path": "./packs/chosenabilities.db",
+      "path": "./packs/chosenabilities",
       "type": "Item"
     },
     {
       "name": "spies",
       "label": "Spies",
       "system": "band-of-blades",
-      "path": "./packs/spies.db",
+      "path": "./packs/spies",
       "type": "Item"
     },
     {
       "name": "network",
       "label": "Spy Network",
       "system": "band-of-blades",
-      "path": "./packs/network.db",
+      "path": "./packs/network",
       "type": "Item"
     },
     {
       "name": "minion",
       "label": "Undead Armies",
       "system": "band-of-blades",
-      "path": "./packs/minions.db",
+      "path": "./packs/minions",
       "type": "Actor"
     },
     {
       "name": "missions",
       "label": "Mission Tables",
       "system": "band-of-blades",
-      "path": "./packs/missions.db",
+      "path": "./packs/missions",
       "type": "RollTable"
     },
     {
       "name": "macros",
       "label": "System Macros",
       "system": "band-of-blades",
-      "path": "./packs/system-macros.db",
+      "path": "./packs/system-macros",
       "type": "Macro"
     }
   ]

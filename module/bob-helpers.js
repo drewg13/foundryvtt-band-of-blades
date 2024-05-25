@@ -118,7 +118,7 @@ export class BoBHelpers {
         name: name,
         type: "character",
         folder: folder,
-        data: {
+        system: {
           class: "Rookie",
           squad: squad,
           "attributes.prowess.skills.maneuver.value": "1",
@@ -263,19 +263,19 @@ export class BoBHelpers {
     let attributeObj = {};
     let skills = [];
 
-    const attributes = Object.keys( game.system.model.Actor.character.attributes );
+    const attributes = Object.keys( game.model.Actor.character.attributes );
     if( attributes[attributes.length - 1] === "specialist" ) {
       attributes.pop();
     }
     attributes.forEach( a => {
       skills.push( a );
-      Object.keys( game.system.model.Actor.character.attributes[a].skills ).forEach( s => {
+      Object.keys( game.model.Actor.character.attributes[a].skills ).forEach( s => {
         skills.push( s );
       } )
     } );
 
     if( skills.indexOf( attribute_name ) !== -1 ) {
-      attributeObj = game.system.model.Actor.character.attributes;
+      attributeObj = game.model.Actor.character.attributes;
     } else {
       return game.i18n.localize( "BITD." + BoBHelpers.getProperCase( attribute_name ) );
     }

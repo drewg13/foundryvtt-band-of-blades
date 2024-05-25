@@ -53,7 +53,7 @@ export class BoBClockSheet extends ActorSheet {
         size: clock.size,
         theme: clock.theme,
         image: {
-          url: clock.image.img,
+          url: clock.image.texture.src,
           width: clock.image.widthSheet,
           height: clock.image.heightSheet
         },
@@ -119,7 +119,7 @@ export class BoBClockSheet extends ActorSheet {
         tokenObj = {
           _id: t.id,
           name: actor.name,
-          img: clock.image.img,
+          "texture.src": newClock.image.texture.src,
           actorLink: true
         };
         update.push( tokenObj );
@@ -129,9 +129,9 @@ export class BoBClockSheet extends ActorSheet {
     // update the Actor
     const persistObj = await this.system.persistClockToActor({ actor, clock });
     const visualObj = {
-      img: clock.image.img,
+      img: clock.image.texture.src,
       token: {
-        img: clock.image.img,
+        texture: { src: clock.image.texture.src },
         ...DEFAULT_TOKEN
       }
     };
@@ -188,9 +188,9 @@ export default {
       };
 
 	  const visualObj = {
-        img: newClock.image.img,
+        img: newClock.image.texture.src,
         token: {
-          img: newClock.image.img,
+          texture: { src: newClock.image.texture.src },
           ...DEFAULT_TOKEN
         }
       };
@@ -208,7 +208,7 @@ export default {
         tokenObj = {
           _id: t.id,
           name: a.name,
-          img: newClock.image.img,
+          "texture.src": newClock.image.texture.src,
           flags: newClock.flags,
           actorLink: true
         };
@@ -253,9 +253,9 @@ export default {
       };
 
 	  const visualObj = {
-        img: newClock.image.img,
+        img: newClock.image.texture.src,
         token: {
-          img: newClock.image.img,
+          texture: { src: newClock.image.texture.src },
           ...DEFAULT_TOKEN
         }
     };
@@ -272,7 +272,7 @@ export default {
         tokenObj = {
           _id: t.id,
           name: a.name,
-          img: newClock.image.img,
+          "texture.src": newClock.image.texture.src,
           flags: newClock.flags,
           actorLink: true
         };

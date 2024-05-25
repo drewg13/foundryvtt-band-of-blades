@@ -66,7 +66,7 @@ export class BoBMinionSheet extends BoBSheet {
 	  // Clear Flag
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-      await this.actor.setFlag("band-of-blades", element.data("itemType"), "");
+      await this.actor.setFlag("band-of-blades", element.data("itemType"), null);
 	    element.slideUp(200, () => this.render(false));
 	  });
 

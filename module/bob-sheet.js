@@ -271,11 +271,11 @@ _onFlagAddClick(event) {
   async _onRollAttributeDieClick(event) {
 
     const attribute_name = $(event.currentTarget).data("rollAttribute");
-    const att_obj = game.system.model.Actor.character.attributes;
+    const att_obj = game.model.Actor.character.attributes;
     const resistance = Object.keys( att_obj );
     let actions = [];
     resistance.forEach( a => {
-      let skill_obj = game.system.model.Actor.character.attributes[a].skills;
+      let skill_obj = game.model.Actor.character.attributes[a].skills;
       actions.push( Object.keys( skill_obj ) );
     })
     actions = actions.flat();

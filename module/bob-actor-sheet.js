@@ -54,9 +54,9 @@ export class BoBActorSheet extends BoBSheet {
       sheetData.load_levels = { "BITD.Light": "BITD.Light", "BITD.Normal": "BITD.Normal", "BITD.Heavy": "BITD.Heavy" };
 
       // Total any skill bonuses
-      const attributes = Object.keys( game.system.model.Actor.character.attributes );
+      const attributes = Object.keys( game.model.Actor.character.attributes );
       attributes.forEach( a => {
-        let skills = Object.keys( game.system.model.Actor.character.attributes[a].skills );
+        let skills = Object.keys( game.model.Actor.character.attributes[a].skills );
         skills.forEach ( s => {
           sheetData.system.attributes[a].skills[s].maxTotal = sheetData.system.attributes[a].skills[s].max + sheetData.system.attributes[a].skills[s].maxBonus;
         })
@@ -126,7 +126,7 @@ export class BoBActorSheet extends BoBSheet {
 	  // Clear Flag
 	  html.find('.flag-delete').click( async (ev) => {
       const element = $(ev.currentTarget).parents(".item");
-      await this.actor.setFlag("band-of-blades", element.data("itemType"), "");
+      await this.actor.setFlag("band-of-blades", element.data("itemType"), null);
 	    element.slideUp(200, () => this.render(false));
 	  });
 
