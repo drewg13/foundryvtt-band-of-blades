@@ -8,7 +8,7 @@
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "compatibility": {
-    "minimum": 12,
+    "minimum": 11,
     "verified": 12.324
   },
   "templateVersion": 1,
