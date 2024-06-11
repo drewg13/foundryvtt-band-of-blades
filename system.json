@@ -9,7 +9,13 @@
   "download": "#{DOWNLOAD}#",
   "compatibility": {
     "minimum": 11,
-    "verified": 12.324
+    "verified": 12.327
+  },
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "html", "json", "js"],
+      "paths": ["module", "templates", "lang", "styles"]
+    }
   },
   "templateVersion": 1,
   "authors": [

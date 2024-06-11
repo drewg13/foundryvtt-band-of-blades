@@ -164,12 +164,12 @@ export class BoBHelpers {
     let pack = game.packs.find( e => e.metadata.name === item_type );
     let compendium_content;
 
-    compendium_content = await pack.getDocuments();
+    compendium_content = await pack?.getDocuments();
 
-    let compendium_items = compendium_content.map( k => {
+    let compendium_items = compendium_content?.map( k => {
       return k.toObject()
     } ) || [];
-    compendium_items = compendium_items.filter( a => game_items.filter( b => a.name === b.name && a.name === b.name ).length === 0 );
+    compendium_items = compendium_items?.filter( a => game_items.filter( b => a.name === b.name && a.name === b.name ).length === 0 );
 
     let list_of_items = game_items.concat( compendium_items ) || [];
     list_of_items.sort( function( a, b ) {
