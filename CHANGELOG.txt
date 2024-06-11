@@ -119,3 +119,5 @@ v2.4.1  Ported fixes from @Bit-Fisto from scum-and-villainy
 v2.5.0  V12 only fixes
 
 v2.5.1  Re-enable V11 support
+
+v2.6.0  Add Roll method indicator support
