@@ -119,7 +119,7 @@ export class BoBClockSheet extends ActorSheet {
         tokenObj = {
           _id: t.id,
           name: actor.name,
-          "texture.src": newClock.image.texture.src,
+          texture: { src: clock.image.texture.src },
           actorLink: true
         };
         update.push( tokenObj );
@@ -208,7 +208,7 @@ export default {
         tokenObj = {
           _id: t.id,
           name: a.name,
-          "texture.src": newClock.image.texture.src,
+          texture: { src: newClock.image.texture.src },
           flags: newClock.flags,
           actorLink: true
         };
@@ -272,7 +272,7 @@ export default {
         tokenObj = {
           _id: t.id,
           name: a.name,
-          "texture.src": newClock.image.texture.src,
+          texture: { src: newClock.image.texture.src },
           flags: newClock.flags,
           actorLink: true
         };
