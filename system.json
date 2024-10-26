@@ -17,7 +17,6 @@
       "paths": ["module", "templates", "lang", "styles"]
     }
   },
-  "templateVersion": 1,
   "authors": [
     { "name": "megastruktur" },
     {
