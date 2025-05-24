@@ -50,7 +50,7 @@ export class BoBChosenSheet extends BoBSheet {
       sheetData.system.featureTypes.push( sheetData.system.features.split(",") );
     }
 
-    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+    sheetData.system.description = await foundry.applications.ux.TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
     return sheetData;
   }

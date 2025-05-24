@@ -117,12 +117,11 @@ async function showChatRollMessage(r, zeromode, attribute_name = "", position = 
       effect_localize = 'BITD.EffectStandard'
   }
 
-  let result = await renderTemplate("systems/band-of-blades/templates/bob-roll.html", {rolls: rolls, method: method, roll_status: roll_status, attribute_label: attribute_label, position: position, position_localize: position_localize, effect: effect, effect_localize: effect_localize, stress_result_display: stress_result_display, vice_result: vice_result, zeromode: zeromode, purpose: purpose});
+  let result = await foundry.applications.handlebars.renderTemplate("systems/band-of-blades/templates/bob-roll.html", {rolls: rolls, method: method, roll_status: roll_status, attribute_label: attribute_label, position: position, position_localize: position_localize, effect: effect, effect_localize: effect_localize, stress_result_display: stress_result_display, vice_result: vice_result, zeromode: zeromode, purpose: purpose});
 
   let messageData = {
     speaker: speaker,
     content: result,
-    type: CONST.CHAT_MESSAGE_TYPES.ROLL,
     rolls: [r]
   }
 
@@ -383,7 +382,7 @@ export async function simpleRollPopup() {
       <h2>${game.i18n.localize("BITD.FortuneRoll")}</h2>
       <p>${game.i18n.localize("BITD.RollTokenDescription")}</p>
       <form>
-        <div class="form-group">
+        <div class="band-of-blades form-group">
           <div class="flex-vertical">
             <div>
               <label>${game.i18n.localize("BITD.RollNumberOfDice")}:</label>

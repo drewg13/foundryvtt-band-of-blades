@@ -66,7 +66,7 @@ export class BoBActorSheet extends BoBSheet {
     sheetData.items.forEach( i => {
       i.isExpanded = this._expanded.has(i._id);
     });
-    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+    sheetData.system.description = await foundry.applications.ux.TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
     return sheetData;
   }
@@ -133,7 +133,7 @@ export class BoBActorSheet extends BoBSheet {
     // Add Specialist Actions
     html.find('.skill-add-popup').click( async () => {
       const skills = foundry.utils.deepClone( this.actor.system.attributes.specialist.skills );
-      let html = `<div id="items-to-add">`;
+      let html = `<div class="band-of-blades" id="items-to-add">`;
 
       for( let e in skills ){
         html += `<input id="select-item-${e}" type="radio" name="select_items" value="${e}">`;

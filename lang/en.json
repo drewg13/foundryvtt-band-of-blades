@@ -578,5 +578,10 @@
   "BITD.UseDropdownsInRollDialog": "Use dropdowns in Roll dialogs:",
   "BITD.UseDropdownsInRollDialogHint": "Use dropdowns instead of radio-button-style selectors for Position and Effect in Roll Dialogs",
   "BITD.UseDropdownsForItemUses": "Use dropdowns for Item and Ability Uses:",
-  "BITD.UseDropdownsForItemUsesHint": "Use dropdowns instead of radio-button-style selectors for Item and Ability uses tracking"
+  "BITD.UseDropdownsForItemUsesHint": "Use dropdowns instead of radio-button-style selectors for Item and Ability uses tracking",
+
+  "BITD.IncrementClock": "Increment Clock",
+  "BITD.DecrementClock": "Decrement Clock",
+  "BITD.CycleClockSize": "Cycle Clock Size",
+  "BITD.CycleClockTheme": "Cycle Clock Theme"
 }

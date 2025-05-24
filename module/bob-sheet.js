@@ -3,7 +3,7 @@
  * @extends {ActorSheet}
  */
 
-export class BoBSheet extends ActorSheet {
+export class BoBSheet extends foundry.appv1.sheets.ActorSheet {
 
   /* -------------------------------------------- */
 
@@ -31,7 +31,7 @@ export class BoBSheet extends ActorSheet {
     }
 
 	  let items = await BoBHelpers.getAllItemsByType(item_type, game);
-    let html = `<div id="items-to-add">`;
+    let html = `<div class="band-of-blades" id="items-to-add">`;
 
 	  if( item_type === "class" ) {
 	    html += `<div class="class-help">${game.i18n.localize('BITD.ClassWarning')}</div>`;
@@ -157,7 +157,7 @@ export class BoBSheet extends ActorSheet {
     const item_type = $(event.currentTarget).data("itemType")
 
     let removeItems = BoBHelpers.getActorItemsByType( this.actor._id, item_type );
-    let html = `<div id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
+    let html = `<div class="band-of-blades" id="delete-dialog">Are you sure you want to delete all loadout items?</div>`;
     let options = {};
 
     if( ( removeItems.length !== 0 ) && ( this.actor.isOwner ) ) {
@@ -194,7 +194,7 @@ _onFlagAddClick(event) {
   }
 
 	let items = BoBHelpers.getAllActorsByType(item_type, game);
-  let html = `<div id="items-to-add">`;
+  let html = `<div class="band-of-blades" id="items-to-add">`;
   items.forEach(e => {
 	  if (e.type === item_type) {
   	  html += `<input id="select-item-${e._id}" type="${input_type}" name="select_items" value="${e._id}">`;

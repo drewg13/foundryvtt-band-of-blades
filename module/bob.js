@@ -47,14 +47,14 @@ Hooks.once("init", function() {
   preloadHandlebarsTemplates();
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBRoleSheet, { types: ["role"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBChosenSheet, { types: ["chosen"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBMinionSheet, { types: ["minion"], makeDefault: true });
-  Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
-  Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
+  foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+  foundry.documents.collections.Actors.registerSheet("band-of-blades", BoBActorSheet, { types: ["character"], makeDefault: true });
+  foundry.documents.collections.Actors.registerSheet("band-of-blades", BoBRoleSheet, { types: ["role"], makeDefault: true });
+  foundry.documents.collections.Actors.registerSheet("band-of-blades", BoBChosenSheet, { types: ["chosen"], makeDefault: true });
+  foundry.documents.collections.Actors.registerSheet("band-of-blades", BoBMinionSheet, { types: ["minion"], makeDefault: true });
+  foundry.documents.collections.Actors.registerSheet("band-of-blades", BoBClockSheet, { types: ["\uD83D\uDD5B clock"], makeDefault: true });
+  foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+  foundry.documents.collections.Items.registerSheet("band-of-blades", BoBItemSheet, {makeDefault: true});
 
   // allow Handlebars lookups to use variables for initial key and return subvalues
   Handlebars.registerHelper("lookup2", function(object, property, subproperty, options) {
@@ -328,15 +328,6 @@ Hooks.once("ready", function() {
  * Hooks
  */
 
-// getSceneControlButtons
-Hooks.on("renderSceneControls", (app, html) => {
-  let dice_roller = $('<li class="scene-control" title="Dice Roll"><i class="fas fa-dice"></i></li>');
-  dice_roller.on( "click", async function() {
-    await simpleRollPopup();
-  })
-  html.children().first().append( dice_roller );
-});
-
 // re-render the Marshal sheet after updating any squad sheets to catch changes made
 Hooks.on("renderBoBActorSheet", (sheet, html, options) => {
   let marshals = game.actors.filter( a => a.system.type === "Marshal" ).map( a => { return a.id } );
@@ -410,6 +401,13 @@ Hooks.on("preUpdateActor", (actor, data, options, userId) => {
 });
 
 Hooks.on("getSceneControlButtons", (controls) => {
+  controls.tokens.tools.bobdice = {
+    name: "bobdice",
+    title: "Dice Roller",
+    icon: "fas fa-dice",
+    onChange: () => simpleRollPopup(),
+    button: true
+  };
   ClockTiles.getSceneControlButtons(controls);
 });
 

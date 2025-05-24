@@ -15,7 +15,7 @@ const DEFAULT_TOKEN = {
   actorLink: true
 };
 
-export class BoBClockSheet extends ActorSheet {
+export class BoBClockSheet extends foundry.appv1.sheets.ActorSheet {
   static get defaultOptions() {
     const supportedSystem = getSystemMapping(game.system.id);
     return foundry.utils.mergeObject(
@@ -47,10 +47,18 @@ export class BoBClockSheet extends ActorSheet {
 
   getData (options) {
     let clock = new BoBClock(this.system.loadClockFromActor({ actor: this.document }));
+    const sizesObject = {};
+    BoBClock.sizes.forEach((item) => {
+      sizesObject[item] = String(item);
+    });
+    const themesObject = {};
+    BoBClock.themes.forEach((item) => {
+      themesObject[item] = String(item);
+    });
     const data = foundry.utils.mergeObject(super.getData(options), {
       clock: {
         progress: clock.progress,
-        size: clock.size,
+        size: String(clock.size),
         theme: clock.theme,
         image: {
           url: clock.image.texture.src,
@@ -58,10 +66,10 @@ export class BoBClockSheet extends ActorSheet {
           height: clock.image.heightSheet
         },
         settings: {
-          sizes: BoBClock.sizes,
-          themes: BoBClock.themes
+          sizes: sizesObject,
+          themes: themesObject
         },
-		    flags: clock.flags
+        flags: clock.flags
       }
     });
     data.editable = data.options.editable;
@@ -151,10 +159,11 @@ export default {
     return false;
   }
 
-  const button1HTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-button1.html');
-  const button2HTML = await renderTemplate('systems/band-of-blades/templates/bob-clock-button2.html');
+  const button1HTML = await foundry.applications.handlebars.renderTemplate('systems/band-of-blades/templates/bob-clock-button1.html');
+  const button2HTML = await foundry.applications.handlebars.renderTemplate('systems/band-of-blades/templates/bob-clock-button2.html');
 
-  html.find("div.left").append(button1HTML).click(async (event) => {
+  html.querySelector("div.left").insertAdjacentHTML('beforeend', button1HTML);
+  html.querySelector("div.left").addEventListener('click', async (event) => {
     log("HUD Clicked")
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
@@ -165,7 +174,11 @@ export default {
     const target = event.target.classList.contains("control-icon")
       ? event.target
       : event.target.parentElement;
-      if (target.classList.contains("cycle-size")) {
+      if (target.classList.contains("progress-up")) {
+        newClock = oldClock.increment();
+      } else if (target.classList.contains("progress-down")) {
+        newClock = oldClock.decrement();
+      } else if (target.classList.contains("cycle-size")) {
         newClock = oldClock.cycleSize();
       } else if (target.classList.contains("cycle-theme")) {
         newClock = oldClock.cycleTheme();
@@ -219,7 +232,8 @@ export default {
   });
 
 
-  html.find("div.right").append(button2HTML).click(async (event) => {
+  html.querySelector("div.right").insertAdjacentHTML('beforeend', button2HTML);
+  html.querySelector("div.right").addEventListener('click', async (event) => {
     log("HUD Clicked")
     // re-get in case there has been an update
     t = canvas.tokens.get(token.id);
@@ -234,6 +248,10 @@ export default {
         newClock = oldClock.increment();
       } else if (target.classList.contains("progress-down")) {
         newClock = oldClock.decrement();
+      } else if (target.classList.contains("cycle-size")) {
+        newClock = oldClock.cycleSize();
+      } else if (target.classList.contains("cycle-theme")) {
+        newClock = oldClock.cycleTheme();
       } else if (target.dataset.action) {
 		    return;
       } else {

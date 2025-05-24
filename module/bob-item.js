@@ -137,7 +137,7 @@ export class BoBItem extends Item {
     if ( itemData.img.includes("/mystery-man") ) {
       itemData.img = null;
     }
-    const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", itemData);
+    const html = await foundry.applications.handlebars.renderTemplate("systems/band-of-blades/templates/items/chat-item.html", itemData);
     const chatData = {
       user: game.userId,
       content: html,

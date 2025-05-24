@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "@babel/core": "^7.17.8",
+    "@babel/eslint-parser": "^7.17.0",
+    "babel-preset-env": "^0.0.0",
+    "eslint": "^8.12.0"
+  },
+  "dependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "fs": "^0.0.1-security",
+    "js-yaml": "^4.1.0",
+    "path": "^0.12.7"
+  },
+  "scripts": {
+    "createSymlinks": "node ./tools/create-symlinks.mjs",
+    "postinstall": "npm run createSymlinks"
+  }
+}

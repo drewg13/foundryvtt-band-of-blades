@@ -260,7 +260,7 @@ export class BoBActor extends Actor {
       new Dialog({
         title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
         content: `
-        <div id="skill-roll">
+        <div class="band-of-blades" id="skill-roll">
 		      <h2>${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)} (${total_dice}d)</h2>
           <form>
             <div class="form-group roll position">
@@ -329,7 +329,7 @@ export class BoBActor extends Actor {
       new Dialog( {
         title: `${ game.i18n.localize( 'BITD.Roll' ) } ${ game.i18n.localize( attribute_label ) }`,
         content: `
-        <div id="skill-roll">
+        <div class="band-of-blades" id="skill-roll">
 		      <h2>${ game.i18n.localize( 'BITD.Roll' ) } ${ game.i18n.localize( attribute_label ) } (${ total_dice }d)</h2>
           <form>
             <div class="form-group roll position">
@@ -424,7 +424,7 @@ export class BoBActor extends Actor {
     new Dialog({
       title: `${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)}`,
       content: `
-        <div id="skill-roll">
+        <div class="band-of-blades" id="skill-roll">
 		      <h2>${game.i18n.localize('BITD.Roll')} ${game.i18n.localize(attribute_label)} (${total_dice}d)</h2>
           <form>
             <div class="form-group roll base-dice">
@@ -570,7 +570,7 @@ export class BoBActor extends Actor {
 
   async sendObjectToChat() {
 
-    const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", this);
+    const html = await foundry.applications.handlebars.renderTemplate("systems/band-of-blades/templates/items/chat-item.html", this);
     const chatData = {
       user: game.userId,
       content: html,

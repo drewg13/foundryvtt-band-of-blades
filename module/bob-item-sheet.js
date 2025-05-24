@@ -5,7 +5,7 @@
 
 import {onManageActiveEffect, prepareActiveEffectCategories} from "./effects.js";
 
-export class BoBItemSheet extends ItemSheet {
+export class BoBItemSheet extends foundry.appv1.sheets.ItemSheet {
 
   /** @override */
 	static get defaultOptions() {
@@ -30,7 +30,7 @@ export class BoBItemSheet extends ItemSheet {
   // Prepare Active Effects
   sheetData.effects = prepareActiveEffectCategories(this.document.effects);
 
-  sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+  sheetData.system.description = await foundry.applications.ux.TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
   return sheetData;
   }

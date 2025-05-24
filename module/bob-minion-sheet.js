@@ -34,7 +34,7 @@ export class BoBMinionSheet extends BoBSheet {
     // Prepare active effects
     sheetData.effects = prepareActiveEffectCategories(this.actor.effects);
 
-    sheetData.system.description = await TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
+    sheetData.system.description = await foundry.applications.ux.TextEditor.enrichHTML(sheetData.system.description, {secrets: sheetData.owner, async: true});
 
     return sheetData;
   }

@@ -246,7 +246,7 @@ export class BoBRoleSheet extends BoBSheet {
     html.find(".project-post").click( async (ev) => {
       const element = $(ev.currentTarget).parents(".project");
       const project = this.actor.system.resources.projects[ element.data("project") ];
-      const html = await renderTemplate("systems/band-of-blades/templates/items/chat-item.html", project);
+      const html = await foundry.applications.handlebars.renderTemplate("systems/band-of-blades/templates/items/chat-item.html", project);
       const chatData = {
         user: game.userId,
         content: html,

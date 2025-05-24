@@ -4,7 +4,7 @@
  * @return {Promise}
  */
 export const preloadHandlebarsTemplates = async function() {
-  return loadTemplates([
+  return foundry.applications.handlebars.loadTemplates([
 
     // Shared Partials
     "systems/band-of-blades/templates/parts/active-effects.html",

@@ -1,6 +1,7 @@
 .gitignore
 /.idea/*
 /band-of-blades.lock
-/package.json
 /package-lock.json
 /node_modules
+/foundry
+/foundry-config.yaml

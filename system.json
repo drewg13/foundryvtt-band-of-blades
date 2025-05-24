@@ -1,6 +1,5 @@
 {
   "id": "band-of-blades",
-  "name": "band-of-blades",
   "title": "Band of Blades",
   "description": "Band of Blades game system.",
   "version": "#{VERSION}#",
@@ -8,8 +7,8 @@
   "manifest": "#{MANIFEST}#",
   "download": "#{DOWNLOAD}#",
   "compatibility": {
-    "minimum": 11,
-    "verified": 12.327
+    "minimum": 13,
+    "verified": 13.344
   },
   "flags": {
     "hotReload": {
