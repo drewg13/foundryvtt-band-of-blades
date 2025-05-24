@@ -123,3 +123,5 @@ v2.5.1  Re-enable V11 support
 v2.6.0  Add Roll method indicator support
 
 v2.6.1  Fix clock actor sheets
+
+v3.0.0  Updates for V13, EOL for V11/V12
