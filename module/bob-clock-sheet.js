@@ -126,7 +126,7 @@ export class BoBClockSheet extends foundry.appv1.sheets.ActorSheet {
         tokenObj = {
           _id: t.id,
           name: actor.name,
-          prototypeToken: { texture: { src: clock.image.texture.src } },
+          texture: { src: clock.image.texture.src },
           actorLink: true
         };
         update.push( tokenObj );
@@ -181,25 +181,25 @@ export default {
         newClock = oldClock.cycleSize();
       } else if (target.classList.contains("cycle-theme")) {
         newClock = oldClock.cycleTheme();
-	    } else if (target.dataset.action) {
-		    return;
+      } else if (target.dataset.action) {
+        return;
       } else {
         return error("ERROR: Unknown TokenHUD Button");
       }
 
-	  const persistObj = {
+      const persistObj = {
         flags: {
           "band-of-blades": {
-		        clocks: {
+            clocks: {
               progress: newClock.progress,
               size: newClock.size,
               theme: newClock.theme
             }
           }
-		    }
+        }
       };
 
-	  const visualObj = {
+      const visualObj = {
         img: newClock.image.texture.src,
         prototypeToken: {
           texture: { src: newClock.image.texture.src },
@@ -252,30 +252,30 @@ export default {
       } else if (target.classList.contains("cycle-theme")) {
         newClock = oldClock.cycleTheme();
       } else if (target.dataset.action) {
-		    return;
+        return;
       } else {
         return error("ERROR: Unknown TokenHUD Button");
       }
 
-	  const persistObj = {
+      const persistObj = {
         flags: {
           "band-of-blades": {
-		        clocks: {
+            clocks: {
               progress: newClock.progress,
               size: newClock.size,
               theme: newClock.theme
             }
           }
-		    }
+        }
       };
 
-	  const visualObj = {
+      const visualObj = {
         img: newClock.image.texture.src,
         prototypeToken: {
           texture: { src: newClock.image.texture.src },
           ...DEFAULT_TOKEN
         }
-    };
+      };
 
     let newObj = foundry.utils.mergeObject(visualObj, persistObj);
     let tokenObj = {};
