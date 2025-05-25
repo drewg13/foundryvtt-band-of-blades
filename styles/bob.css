@@ -50,7 +50,7 @@
   font-family: 'Vollkorn';
   src: url("assets/fonts/Vollkorn-VariableFont_wght.ttf");
 }
-*:not(.icon, .fa, .fas, .far, .fa-solid, .fab) {
+*:not(i, button) {
 	font-family: 'Vollkorn', 'Signika', serif;
 }
 * .band-of-blades .flex {
