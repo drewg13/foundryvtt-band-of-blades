@@ -40,6 +40,9 @@ Hooks.once("init", function() {
   CONFIG.Item.documentClass = BoBItem;
   CONFIG.Actor.documentClass = BoBActor;
 
+  // disable token ruler
+  CONFIG.Token.rulerClass = null;
+
   // Register System Settings
   registerSystemSettings();
 
